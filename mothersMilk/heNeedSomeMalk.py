@@ -9,7 +9,6 @@ from sys import exit
 milkBuckets = {}
 
 with open('malk.txt') as buckets:
-
     for line in buckets.readlines():
         line = [int(i) for i in line.rstrip().split()]
         milkBuckets['A'] = [line[0], 0]
@@ -18,6 +17,7 @@ with open('malk.txt') as buckets:
 
 
 def pour(pouring: 'bucket id', pouree: 'another bucket id', currStates: dict):
+    print(currStates is referenceBucket)
     firstBucket = currStates[pouring]
     secondBucket = currStates[pouree]
     while firstBucket[-1] != 0:  # pours until first empty or second full
@@ -31,7 +31,11 @@ def pour(pouring: 'bucket id', pouree: 'another bucket id', currStates: dict):
 
 
 possValues = []
-statesInLine = Queue()
-statesInLine.put(pour('C', 'A', dict(milkBuckets)))
-statesInLine.put(pour('C', 'B', milkBuckets.copy()))
-print(statesInLine.get()); print(statesInLine.get())
+referenceBucket = milkBuckets.copy()
+
+statesInLine = Queue()  # sets up the first two nodes for bfs
+statesInLine.put(pour('C', 'A', milkBuckets))
+milkBuckets = referenceBucket.copy()
+statesInLine.put(pour('C', 'B', milkBuckets))
+print(statesInLine.get())
+print(statesInLine.get())
