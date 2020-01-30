@@ -50,11 +50,7 @@ while not foundAllStates:  # does a bfs through all possible states
                 possValues.append(poss['C'][-1])
     statesInLine = inLine  # pushes all the inLine states into the processing line
 
-<<<<<<< HEAD
-print(possValues)
-=======
 with open('outputs.txt', 'w') as written:
     possValues.sort()
     written.write(' '.join([str(x) for x in possValues]))
     written.write('\n')
->>>>>>> 7994decb976021215f49e6161b27db8b708452bb
