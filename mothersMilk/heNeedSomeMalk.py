@@ -34,16 +34,23 @@ possValues = [pour('C', 'B', milkBuckets)['C'][-1]]  # an easy possible value
 statesInLine = [pour('C', 'A', milkBuckets), pour('C', 'B', milkBuckets)]  # sets up the first two nodes for bfs
 
 visitedStates = deepcopy(statesInLine)
-for i in range(10):  # does a bfs through all possible states
+foundAllStates = False
+while not foundAllStates:  # does a bfs through all possible states
+    foundAllStates = True
     inLine = []
     for state in statesInLine:  # one node will be linked to others if it's accessible through a single pour
         for pourComb in permutations(['A', 'B', 'C'], 2):
             poss = pour(pourComb[0], pourComb[1], state)
             if poss not in visitedStates:
                 inLine.append(poss)
+                visitedStates.append(poss)
+                foundAllStates = False
             if poss['A'][-1] == 0 and poss['C'][-1] not in possValues:
                 print(poss['C'][-1], state, poss)
                 possValues.append(poss['C'][-1])
     statesInLine = inLine  # pushes all the inLine states into the processing line
 
-print(possValues)
+with open('outputs.txt', 'w') as written:
+    possValues.sort()
+    written.write(' '.join([str(x) for x in possValues]))
+    written.write('\n')
