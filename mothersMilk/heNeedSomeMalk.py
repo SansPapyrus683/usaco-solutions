@@ -3,8 +3,8 @@ ID: kevinsh4
 TASK: milk3
 LANG: PYTHON3
 """
-from queue import Queue
 from copy import deepcopy
+from itertools import permutations
 
 milkBuckets = {}
 
@@ -21,20 +21,29 @@ def pour(pouring: 'bucket id', pouree: 'another bucket id', currStates: dict):
     firstBucket = currStates[pouring].copy()
     secondBucket = currStates[pouree].copy()
     while firstBucket[-1] != 0:  # pours until first empty or second full
-        firstBucket[-1] -= 1
-        secondBucket[-1] += 1
         if secondBucket[0] == secondBucket[-1]:
             break
+        firstBucket[-1] -= 1
+        secondBucket[-1] += 1
     nextStates[pouring] = firstBucket
     nextStates[pouree] = secondBucket
     return nextStates
 
 
-possValues = []
+possValues = [pour('C', 'B', milkBuckets)['C'][-1]]  # an easy possible value
 statesInLine = [pour('C', 'A', milkBuckets), pour('C', 'B', milkBuckets)]  # sets up the first two nodes for bfs
 
 visitedStates = deepcopy(statesInLine)
-while True:  # does a bfs through all possible states
+for i in range(10):  # does a bfs through all possible states
     inLine = []
     for state in statesInLine:  # one node will be linked to others if it's accessible through a single pour
-        pass
+        for pourComb in permutations(['A', 'B', 'C'], 2):
+            poss = pour(pourComb[0], pourComb[1], state)
+            if poss not in visitedStates:
+                inLine.append(poss)
+            if poss['A'][-1] == 0 and poss['C'][-1] not in possValues:
+                print(poss['C'][-1], state, poss)
+                possValues.append(poss['C'][-1])
+    statesInLine = inLine  # pushes all the inLine states into the processing line
+
+print(possValues)
