@@ -46,7 +46,6 @@ while not foundAllStates:  # does a bfs through all possible states
                 visitedStates.append(poss)
                 foundAllStates = False
             if poss['A'][-1] == 0 and poss['C'][-1] not in possValues:
-                print(poss['C'][-1], state, poss)
                 possValues.append(poss['C'][-1])
     statesInLine = inLine  # pushes all the inLine states into the processing line
 
