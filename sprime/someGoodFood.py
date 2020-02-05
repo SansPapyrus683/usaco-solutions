@@ -11,5 +11,11 @@ def primeCheck(n: int) -> bool:
 
 cowPrimes = []
 oneDigPrimes = [2, 3, 5, 7]  # we'll build up from these one digit primes
+allDigits = [i for i in range(0, 10)]
 for p in oneDigPrimes:
-    primeBuild = []
+    primeBuild = p
+    while len(str(primeBuild)) != stampLen:
+        for dig in allDigits:
+            if primeCheck(10*primeBuild + dig):
+                pass  # so far valid
+
