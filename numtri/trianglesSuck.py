@@ -13,11 +13,11 @@ with open('pascalsOrNo.txt') as read:
             rowNum = int(line.rstrip())
 
 for r in range(rowNum - 1, -1, -1):  # iterate through the rows backwards
-    if r == rowNum - 1:
+    if r == rowNum - 1:  # we don't process the bottom one
         continue
     for i in range(r+1):
         if triangle[r+1][i] < triangle[r+1][i+1]:
-            triangle[r][i] += triangle[r+1][i+1]
+            triangle[r][i] += triangle[r+1][i+1]  # adds the greater number from the bottom to the current one
         else:
             triangle[r][i] += triangle[r+1][i]  # if they were the same, it doesn't really matter which one we choose
 

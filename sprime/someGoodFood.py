@@ -1,3 +1,8 @@
+"""
+ID: kevinsh4
+TASK: sprime
+LANG: PYTHON3
+"""
 from math import sqrt
 from itertools import count, islice
 
@@ -9,13 +14,16 @@ def primeCheck(n: int) -> bool:
     return n > 1 and all(n % i for i in islice(count(2), int(sqrt(n) - 1)))
 
 
-cowPrimes = []
-oneDigPrimes = [2, 3, 5, 7]  # we'll build up from these one digit primes
-allDigits = [i for i in range(0, 10)]
-for p in oneDigPrimes:
-    primeBuild = p
-    while len(str(primeBuild)) != stampLen:
-        for dig in allDigits:
-            if primeCheck(10*primeBuild + dig):
-                pass  # so far valid
+primeDigits = tuple([i for i in range(10) if i % 2 and i != 5])
+primeProcess = [2, 3, 5, 7]  # start with a bunch of one digit primes (soon to be)
+for i in range(stampLen - 1):  # we already have one digit, so just stampLen - 1
+    promisingPrimes = []  # our "queue"
+    for process in primeProcess:
+        for dig in primeDigits:
+            if primeCheck(10 * process + dig):  # if adding the digit is still valid for the req
+                promisingPrimes.append(10 * process + dig)
+    primeProcess = promisingPrimes
 
+
+with open('outputs.txt', 'w') as written:
+    written.write('\n'.join([str(i) for i in primeProcess]) + '\n')
