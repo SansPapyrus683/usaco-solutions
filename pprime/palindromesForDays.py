@@ -3,8 +3,8 @@ ID: kevinsh4
 TASK: pprime
 LANG: PYTHON3
 """
-from math import sqrt, ceil
-from itertools import count, islice, permutations
+from math import sqrt
+from itertools import count, islice
 
 with open('inputtupin.txt') as inp:
     minVal, maxVal = [int(i) for i in inp.read().rstrip().split()]
@@ -15,24 +15,27 @@ def primeCheck(n: int) -> bool:  # same one i used for sprime
     return n > 1 and all(n % i for i in islice(count(2), int(sqrt(n) - 1)))
 
 
-digits = [i for i in range(10)]
-toCheck = []
-for l in palLengths:
-    print('processing length %i' % l)
-    if l != 1:
-        digPerms = permutations(digits * l, ceil(l/2))
-    else:
-        digPerms = [[2], [3], [5], [7]]
-    if l % 2:  # odd number of digits
-        for pal in digPerms:  # this is just the structure of a palindrome
-            if l == 1:
-                actualPal = int(pal[0])  # TODO: make the for pal in digPerms loop the main loop and do the digit test
-                                        # then
-            else:
-                actualPal = int(''.join([str(i) for i in pal + pal[1::-1]]))
-            if l == 7:
-                print(actualPal)
-    else:  # even number of digits
-        for pal in digPerms:
-            actualPal = int(''.join([str(i) for i in pal + pal[::-1]]))
+def getPalindrome():
+    yield 0
+    for digits in count(1):
+        first = 10 ** ((digits - 1) // 2)
+        for s in map(str, range(first, 10 * first)):
+            yield int(s + s[-(digits % 2) - 1::-1])
 
+
+def allPalindromes(minP, maxP):
+    palindromeGenerator = getPalindrome()
+    palindromeList = []
+    for palindrome in palindromeGenerator:
+        if palindrome > maxP:
+            break
+        if palindrome < minP:
+            continue
+        palindromeList.append(palindrome)
+    return palindromeList
+
+
+written = open('outputs.txt', 'w')
+for pal in allPalindromes(minVal, maxVal):
+    if primeCheck(pal):
+        written.write(str(pal) + '\n')
