@@ -4,11 +4,12 @@ TASK: castle
 LANG: PYTHON3
 """
 from itertools import combinations
+from sys import exit
 
-written = open('outputs.txt', 'w')
+written = open('castle.out', 'w')
 castle = []
 walls = {}
-with open('holyMusicStops.txt') as read:
+with open('castle.in') as read:
     for v, row in enumerate(read):
         if v != 0:
             for x, col in enumerate(row.rstrip().split()):
@@ -37,7 +38,7 @@ def findRoomNeighbors(cell):
         if p in walls[cell]:
             killList.append(p)
             if p[0] not in (0, maxHeight + 1) and p[1] not in (0, maxWidth + 1):  # make sure it's not the border walls
-                cellWalls.append(tuple(sorted((cell, p))))  # there's a wall between the curr cell and this cell (p)
+                cellWalls.append(tuple(sorted((cell, p))))
 
     for target in killList:
         poss.remove(target)
