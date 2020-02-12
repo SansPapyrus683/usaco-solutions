@@ -91,6 +91,6 @@ for bigRoom in combinedSizes:
 for v, wall in enumerate(optimalWalls):  # now i just change it to be associated with cells instead of walls
     optimalWalls[v] = [wall[0], 'E'] if wall[0][1] != wall[1][1] else [wall[1], 'N']  # left-right or up-down wall
 
-optimalWalls.sort()
 westest = [w for w in optimalWalls if w[0][0] == max([i[0][0] for i in optimalWalls])]
-written.write()
+southest = [w for w in westest if w[0][1] == min([i[0][1] for i in westest])][0]
+written.write(str(southest[0][0]) + ' ' + str(southest[0][1]) + ' ' + southest[1] + '\n')
