@@ -3,13 +3,10 @@ ID: kevinsh4
 TASK: castle
 LANG: PYTHON3
 """
-from itertools import combinations
-from sys import exit
-
-written = open('castle.out', 'w')
+written = open('outputs.txt', 'w')
 castle = []
 walls = {}
-with open('castle.in') as read:
+with open('holyMusicStops.txt') as read:
     for v, row in enumerate(read):
         if v != 0:
             for x, col in enumerate(row.rstrip().split()):
@@ -65,15 +62,16 @@ for mini in paintedCastle:
 written.write(str(color - 1) + '\n' + str(biggestSize) + '\n')  # color - 1 because after the last room, it's still +1
 bigRooms = {}
 for cellWalls in walls.items():
-    print('going thru a wall')
     for pair in [(cellWalls[0], w) for w in cellWalls[1]]:
         if not{maxWidth, 0}.intersection({i[1] for i in pair}) and not{maxHeight, 0}.intersection({i[0] for i in pair}):
             if paintedCastle[pair[0]] != paintedCastle[pair[1]]:
                 bigRooms[pair] = sizePaints[paintedCastle[pair[0]]] + sizePaints[paintedCastle[pair[1]]]
 
+optimalSize = max(i for i in bigRooms.values())
 written.write(str(max(i for i in bigRooms.values())) + '\n')
-optimalWalls = [p for p in bigRooms if bigRooms[p] == max(i for i in bigRooms.values())]
-for v, wall in enumerate(optimalWalls):  # now i just change it to be associated with cells instead of walls
+optimalWalls = [p for p in bigRooms if bigRooms[p] == optimalSize]
+print('yea')
+for v, wall in enumerate(optimalWalls):  # THIS PROCESS TAKES THE LONGEST
     optimalWalls[v] = [wall[0], 'E'] if wall[0][1] != wall[1][1] else [wall[1], 'N']  # left-right or up-down wall
 
 westest = [w for w in optimalWalls if w[0][1] == min([i[0][1] for i in optimalWalls])]
