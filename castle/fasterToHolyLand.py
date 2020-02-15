@@ -3,6 +3,8 @@ ID: kevinsh4
 TASK: castle
 LANG: PYTHON3
 """
+from sys import exit
+
 written = open('outputs.txt', 'w')
 castle = []
 walls = {}
@@ -70,10 +72,21 @@ for cellWalls in walls.items():
 optimalSize = max(i for i in bigRooms.values())
 written.write(str(max(i for i in bigRooms.values())) + '\n')
 optimalWalls = [p for p in bigRooms if bigRooms[p] == optimalSize]
-print('yea')
-for v, wall in enumerate(optimalWalls):  # THIS PROCESS TAKES THE LONGEST
-    optimalWalls[v] = [wall[0], 'E'] if wall[0][1] != wall[1][1] else [wall[1], 'N']  # left-right or up-down wall
+wallCells = set()  # cells that have an optimal wall next to them
+primeForOutput = {}
+for w in optimalWalls:
+    if w[0][1] != w[1][1]:  # the cells are in a left-right orientation
+        wallCells.add(w[0])
+        primeForOutput[w[0]] = 'E'
+    else:  # the cells are in a top-down orientation
+        wallCells.add(w[1])
+        primeForOutput[w[1]] = 'N'
 
-westest = [w for w in optimalWalls if w[0][1] == min([i[0][1] for i in optimalWalls])]
-southest = [w for w in westest if w[0][0] == max([i[0][0] for i in westest])][0]
-written.write(str(southest[0][0]) + ' ' + str(southest[0][1]) + ' ' + southest[1] + '\n')
+for x in range(1, maxWidth):
+    for y in range(maxHeight - 1, 0, -1):
+        if (y, x) in wallCells:
+            if ((y, x), (y-1, x)) in optimalWalls:  # might, just might it be a top-down?
+                written.write(str(y) + ' ' + str(x) + ' N\n')
+                exit()
+            written.write(str(y) + ' ' + str(x) + ' ' + primeForOutput[(y, x)] + '\n')
+            exit()
