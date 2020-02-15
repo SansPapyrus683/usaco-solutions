@@ -85,7 +85,7 @@ for w in optimalWalls:
 for x in range(1, maxWidth):
     for y in range(maxHeight - 1, 0, -1):
         if (y, x) in wallCells:
-            if ((y, x), (y-1, x)) in optimalWalls:  # might, just might it be a top-down?
+            if ((y, x), (y-1, x)) in optimalWalls:  # might, just might it be a top-down? we prioritize those
                 written.write(str(y) + ' ' + str(x) + ' N\n')
                 exit()
             written.write(str(y) + ' ' + str(x) + ' ' + primeForOutput[(y, x)] + '\n')
