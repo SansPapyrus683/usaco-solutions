@@ -11,7 +11,7 @@ with open('inputtupin.txt') as inp:
     palLengths = [i for i in range(len(str(minVal)), len(str(maxVal)) + 1)]
 
 
-def primeCheck(n: int) -> bool:  # same one i used for sprime
+def primeCheck(n: int) -> bool:  # same one y used for sprime
     return n > 1 and all(n % i for i in islice(count(2), int(sqrt(n) - 1)))
 
 

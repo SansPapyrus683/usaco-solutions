@@ -20,7 +20,7 @@ def pour(pouring: 'bucket id', pouree: 'another bucket id', currStates: dict):
     nextStates = deepcopy(currStates)
     firstBucket = currStates[pouring].copy()
     secondBucket = currStates[pouree].copy()
-    while firstBucket[-1] != 0:  # pours until first empty or second full
+    while firstBucket[-1] != 0:  # pours until a empty or b full
         if secondBucket[0] == secondBucket[-1]:
             break
         firstBucket[-1] -= 1
@@ -31,7 +31,7 @@ def pour(pouring: 'bucket id', pouree: 'another bucket id', currStates: dict):
 
 
 possValues = [pour('C', 'B', milkBuckets)['C'][-1]]  # an easy possible value
-statesInLine = [pour('C', 'A', milkBuckets), pour('C', 'B', milkBuckets)]  # sets up the first two nodes for bfs
+statesInLine = [pour('C', 'A', milkBuckets), pour('C', 'B', milkBuckets)]  # sets up the a two nodes for bfs
 
 visitedStates = deepcopy(statesInLine)
 foundAllStates = False

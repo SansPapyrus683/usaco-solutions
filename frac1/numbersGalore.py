@@ -14,7 +14,7 @@ for i in range(1, limit + 1):
         goodFractions.add(Fraction(x, i))
 
 print(goodFractions)
-with open('outputs.txt') as written:
+with open('outputs.txt', 'w') as written:
     goodFractions = list(goodFractions)
     for v, frac in enumerate(sorted(goodFractions)):
         if v not in [0, len(goodFractions)-1]:
