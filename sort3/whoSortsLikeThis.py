@@ -16,7 +16,6 @@ for key in buckets:
     buckets[key] = list(filter(lambda k: k != key, buckets[key]))
 
 exchange = 0
-print(buckets)
 for b in buckets:
     for otherB in [y for y in buckets if y != b]:
         val, otherVal = b, otherB  # the supposed vals they're supposed to have
@@ -26,7 +25,6 @@ for b in buckets:
                         exchange += 1
                         buckets[b][v], buckets[otherB][stillV] = False, False  # two sorted elements, mark them so yea
                         break
-print(buckets)
 
 for key in buckets:
     buckets[key] = list(filter(lambda k: k, buckets[key]))  # get all the False's out
@@ -38,8 +36,6 @@ for v, i in enumerate(newPlaces):
         newPlaces[v] = False
 newPlaces = list(filter(lambda k: k, newPlaces))  # again, remove any things that correspond with sorted
 
-print(newPlaces)
-print(exchange)
 for n in [1, 2]:  # now we just brute force sort, starting with ones and moving on to twos
     for v, i in enumerate(newPlaces):
         startIndex = 0 if n == 1 else newPlaces.count(n)
@@ -50,8 +46,6 @@ for n in [1, 2]:  # now we just brute force sort, starting with ones and moving 
                     newPlaces[x] = n
                     break
             exchange += 1
-    print(newPlaces, exchange)
 
 with open('outputs.txt', 'w') as written:
-    print(exchange)
     written.write(str(exchange) + '\n')
