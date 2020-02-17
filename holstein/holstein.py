@@ -3,6 +3,7 @@ ID: kevinsh4
 TASK: holstein
 LANG: PYTHON3
 """
+# i just try every possible combination of scoops and stops when one satisfies the req
 from itertools import combinations
 from sys import exit
 
@@ -31,7 +32,7 @@ for vitCombNum in range(1, scoopNumber):
             scoop = vitamins[scoop]
             for vit in scoop:
                 currScoop[vit] += scoop[vit]
-        for vit in currScoop:
+        for vit in currScoop:  # test for validity
             if not currScoop[vit] >= requirements[vit]:
                 break
         else:
