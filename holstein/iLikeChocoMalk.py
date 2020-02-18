@@ -25,12 +25,12 @@ with open('strawberryGoodToo.txt') as read:
             scoopNumber += 1
 
 for vitCombNum in range(1, scoopNumber):
-    for scoopComb in combinations(vitamins, vitCombNum):
+    for scoopComb in combinations(vitamins, vitCombNum):  # try for all scoop combs
         currScoop = rawVitamins.copy()
         for scoop in scoopComb:
             scoop = vitamins[scoop]
             for vit in scoop:
-                currScoop[vit] += scoop[vit]
+                currScoop[vit] += scoop[vit]  # just sees the amt of vitamins that will be made
         for vit in currScoop:
             if not currScoop[vit] >= requirements[vit]:
                 break
