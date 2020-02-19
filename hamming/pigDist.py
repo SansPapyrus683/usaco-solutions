@@ -13,7 +13,7 @@ with open('whosHammingAnyways.txt') as read:
             hamDist = i
 
 
-def hamming(a, b):
+def hamming(a, b):  # outputs hamming dist between two numbers (base 10)
     first, second = [int(i) for i in str(bin(a)[2:])], [int(i) for i in str(bin(b)[2:])]
     conformLen = max(len(i) for i in [first, second])
     for n in first, second:
@@ -26,23 +26,21 @@ def hamming(a, b):
     return hamCount
 
 
-def chunks(lst, n):
+def chunks(lst, n):  # just for formatting output
     for i in range(0, len(lst), n):
         yield lst[i: i + n]
 
 
 codewords = []
-for i in range(codeNum):
-    for x in range(2**bitLen):
+for i in range(codeNum):  # only generate the amt of codewords specified
+    for x in range(2**bitLen):  # for each number in the range of the bit length the problem gives
         for testAgainst in codewords:
-            if not hamming(x, testAgainst) >= hamDist:
+            if not hamming(x, testAgainst) >= hamDist:  # checks if this codeword is valid against all the previous ones
                 break
         else:
-            codewords.append(x)
+            codewords.append(x)  # add if valid
             break
 
-
-print(codewords)
 with open('outputs.txt', 'w') as written:
     for chunk in chunks(codewords, 10):
         written.write(' '.join([str(s) for s in chunk]) + '\n')
