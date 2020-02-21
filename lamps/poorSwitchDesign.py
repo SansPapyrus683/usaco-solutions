@@ -3,8 +3,6 @@ ID: kevinsh4
 TASK: lamps
 LANG: PYTHON3
 """
-from collections import defaultdict
-
 with open('nintendoSwitch.txt') as read:
     for lineNum, line in enumerate(read):
         if lineNum == 0:
@@ -19,7 +17,7 @@ with open('nintendoSwitch.txt') as read:
 
 goodStates = set()
 frontier = [lamps]
-cachedN = {}
+cachedN = {}  # cached neighbors
 
 def stateNeighbors(currStates):
     global cachedN
@@ -28,7 +26,7 @@ def stateNeighbors(currStates):
     second = list(currStates)
     third = list(currStates)
     fourth = list(currStates)
-    for v, l in enumerate(currStates):
+    for v, l in enumerate(currStates):  # make all the switch lists in one iteration
         if (v + 1) % 2:
             second[v] = not l
             third[v] = l
@@ -39,7 +37,7 @@ def stateNeighbors(currStates):
             fourth[v] = not l
         else:
             fourth[v] = l
-
+    # below line caches the results because the program goes through many neighbors many times
     cachedN[currStates] = (tuple(not l for l in currStates), tuple(second), tuple(third), tuple(fourth))
     return tuple(not l for l in currStates), tuple(second), tuple(third), tuple(fourth)
 
@@ -51,7 +49,6 @@ for c in range(offOnTimes):  # do the actual switching and stuff
     frontier = list(set(inLine))
 
 
-print(frontier)
 for arrangement in frontier:
     for req in onLamps:  # test for validity of lamp states
         if not arrangement[req]:
