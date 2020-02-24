@@ -12,8 +12,8 @@ for i in range(1, upToNum + 1):
 
 del numbers[-1]  # don't need the last '' after the 7
 frontier = [numbers]
-currIndex = 1
-for i in range(upToNum - 1):
+currIndex = 1  # the index to replace with
+for i in range(upToNum - 1):  # generate all possible combinatiosn of +, -, and abstain
     inLine = []
     for arrangement in frontier:
         onePoss = arrangement.copy()
@@ -26,12 +26,11 @@ for i in range(upToNum - 1):
 
 goodOnes = []
 for poss in frontier:
-    if eval(''.join(poss)) == 0:
+    if eval(''.join(poss)) == 0:  # eval breaks the game lol
         for v, s in enumerate(poss):
             if s == '':
                 poss[v] = ' '
         goodOnes.append(''.join(poss))
-        print(''.join(poss))
 
 goodOnes.sort()
 with open('outputs.txt', 'w') as written:
