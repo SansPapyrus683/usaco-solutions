@@ -1,5 +1,5 @@
 # USACOSucks
-so this is my USACO repo  
+so this is my USACO repo with all the solutions  
 don't ask where the other problems went  
 so i deleted the rest of them  
 mostly because their code was unreadable even to me  
