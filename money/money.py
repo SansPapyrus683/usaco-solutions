@@ -5,7 +5,7 @@ LANG: PYTHON3
 """
 # followed the tutorial over here: https://www.mathblog.dk/project-euler-31-combinations-english-currency-denominations/
 coins = []
-with open('cowsNotPigs.txt') as read:
+with open('money.in') as read:
     for v, line in enumerate(read):
         if v == 0:
             amtToMake = int(line.rstrip().split()[1])
@@ -26,5 +26,5 @@ for c in coins:
         if 0 <= (v - c):
             wayToArray[v] += wayToArray[v-c]
 
-with open('outputs.txt', 'w') as written:
+with open('money.out', 'w') as written:
     written.write(str(wayToArray[amtToMake]) + '\n')
