@@ -37,12 +37,15 @@ for target in killList:
     prefixes.remove(target)
 
 currBuild = prefixes.copy()
-print(currBuild)
 maxLen = 0
+for prePre in currBuild:
+    if molecule[:len(prePre)] == prePre and len(prePre) > maxLen:
+        maxLen = len(prePre)
+
 while currBuild:  # go until all the current builds are invalid
     inLine = []
     for b in currBuild:
-        if molecule[:len(b)] == b and len(b) > maxLen:  # check for validity (initial) and all that stuff
+        if len(b) > maxLen:  # check for validity (initial) and all that stuff
             maxLen = len(b)
         for s in prefixes:
             if b + s == molecule[:len(b + s)]:  # add only if valid
