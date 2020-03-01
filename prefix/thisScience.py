@@ -4,6 +4,7 @@ TASK: prefix
 LANG: PYTHON3
 ok um uh this approach doesnt work either
 frick me
+im actually bad
 """
 prefixes = set()
 molecule = ''
@@ -20,7 +21,6 @@ with open('bioTrash.txt') as read:
             molecule += line.rstrip()
 
 validDict = {i: False for i in range(len(molecule))}
-expressibleList = []
 for p in prefixes:
     if molecule[:len(p)] == p:
         validDict[len(p) - 1] = True
