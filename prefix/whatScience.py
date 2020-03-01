@@ -2,8 +2,12 @@
 ID: kevinsh4
 TASK: prefix
 LANG: PYTHON3
+
+this one is bad, it only passes 5 of the 6 test cases
+but its more intuitive so i still included it here
+or i just cant let go of my code
+you decide
 """
-from sys import exit
 prefixes = set()
 molecule = ''
 with open('bioTrash.txt') as read:
@@ -18,39 +22,22 @@ with open('bioTrash.txt') as read:
         else:
             molecule += line.rstrip()
 
-prefixBuilds = prefixes.copy()  # eliminating all the prefixes that can be built up by others
-visited = set()
-while prefixBuilds:
-    inLine = []
-    for p in prefixBuilds:
-        for otherP in prefixes:
-            if p + otherP not in visited and len(p + otherP) <= max(len(s) for s in prefixes):
-                visited.add(p + otherP)
-                inLine.append(p + otherP)
-    prefixBuilds = inLine
-
-killList = []
-for p in prefixes:
-    if p in visited:
-        killList.append(p)
-for target in killList:
-    prefixes.remove(target)
-
 currBuild = prefixes.copy()
 maxLen = 0
-for prePre in currBuild:
-    if molecule[:len(prePre)] == prePre and len(prePre) > maxLen:
-        maxLen = len(prePre)
 
 while currBuild:  # go until all the current builds are invalid
     inLine = []
     for b in currBuild:
-        if len(b) > maxLen:  # check for validity (initial) and all that stuff
-            maxLen = len(b)
         for s in prefixes:
             if b + s == molecule[:len(b + s)]:  # add only if valid
                 inLine.append(b + s)
+    if not inLine:  # if there were no valid prefixes, which means we've constructed the longest
+        for prePre in currBuild:  # do an initial check for the valid prefixes and all that in case nothing is valid
+            if molecule[:len(prePre)] == prePre and len(prePre) > maxLen:
+                print(prePre)
+                maxLen = len(prePre)
     currBuild = inLine
 
 with open('outputs.txt', 'w') as written:
+    print(maxLen)
     written.write(str(maxLen) + '\n')
