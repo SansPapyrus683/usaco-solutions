@@ -34,10 +34,8 @@ while currBuild:  # go until all the current builds are invalid
     if not inLine:  # if there were no valid prefixes, which means we've constructed the longest
         for prePre in currBuild:  # do an initial check for the valid prefixes and all that in case nothing is valid
             if molecule[:len(prePre)] == prePre and len(prePre) > maxLen:
-                print(prePre)
                 maxLen = len(prePre)
     currBuild = inLine
 
 with open('outputs.txt', 'w') as written:
-    print(maxLen)
     written.write(str(maxLen) + '\n')

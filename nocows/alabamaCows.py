@@ -3,10 +3,10 @@ ID: kevinsh4
 TASK: nocows
 LANG: PYTHON3
 """
+from collections import defaultdict
+
 with open('banjos.txt') as read:
     cowNum, genNum = [int(c) for c in read.read().rstrip().split()]
 
-def cowNeighbors(gen, cowNum):  # like array indexes- stats at 0 and all that
-    return [gen + 1, cowNum]
-
-pedigree = [[False] * 2**i for i in range(genNum)]  # no cow in the gen space = False, cow = True
+allCowTrees = defaultdict(lambda: defaultdict())  # depth -> number of nodes -> number of trees constructible
+allCowTrees[1][1] = 1
