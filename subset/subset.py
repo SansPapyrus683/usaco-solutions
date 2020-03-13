@@ -8,7 +8,7 @@ ok so this algo needs some 'splaining to do
 so here's the amount of ways for a subset of N to sum up to each of the natural numbers:
 if N was 1, it can sum up to 0 in 1 way, and 1 in another way
 if N was 2, it can sum up to 0 in 1 way, 1 in 1 way, 2 in 1 way, and 3 in 1 way
-here's a table:
+here's a treeTable:
 N   0   1   2   3   4   5   6   7   8   9   10
 1|   1   1
 2|   1   1   1   1

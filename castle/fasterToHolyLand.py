@@ -75,7 +75,7 @@ optimalWalls = [p for p in bigRooms if bigRooms[p] == optimalSize]
 wallCells = set()  # cells that have an optimal wall next to them
 primeForOutput = {}
 for w in optimalWalls:
-    if w[0][1] != w[1][1]:  # the cells are in a left-right orientation
+    if w[0][1] != w[1][1]:  # the cells are in a other-right orientation
         wallCells.add(w[0])
         primeForOutput[w[0]] = 'E'
     else:  # the cells are in a top-down orientation
