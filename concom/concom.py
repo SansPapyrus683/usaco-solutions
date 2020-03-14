@@ -5,11 +5,8 @@ LANG: PYTHON3
 """
 from collections import defaultdict
 from itertools import permutations
-from sys import exit, setrecursionlimit
-from copy import deepcopy
-setrecursionlimit(10)
 
-with open('capitalismBeLike.txt') as read:
+with open('concom.in') as read:
     owned = defaultdict(lambda: defaultdict(lambda: int()))  # owned[a][b] will give how much a owns of b
     companies = set()
     for v, line in enumerate(read):
@@ -19,14 +16,13 @@ with open('capitalismBeLike.txt') as read:
             companies.add(int(line[0]))
             companies.add(int(line[1]))
     owned = {i: dict(owned[i]) for i in owned}
-    asdf = deepcopy(owned)
 
 prevFound = {}  # do some caching bc why not
 
 
-def sharesOwned(controller: int, subject: int, comeFrom=set()) -> int:  # more like check control but you get the idea
-    # print('checking for %i and %i' % (controller, subject))
-    # print({i: dict(owned[i]) for i in owned})
+def sharesOwned(controller: int, subject: int, comeFrom: set) -> int:  # more like check control but you get the idea
+    print('checking for %i and %i' % (controller, subject))
+    print({i: dict(owned[i]) for i in owned})
     if (controller, subject) in prevFound:
         return prevFound[(controller, subject)]
 
@@ -42,15 +38,13 @@ def sharesOwned(controller: int, subject: int, comeFrom=set()) -> int:  # more l
     prevFound[(controller, subject)] = ownAmt
     return ownAmt
 
-"""print(sharesOwned(11, 1))
-print(sharesOwned(11, 2))
-exit()"""
+
 controlledPairs = []
 for stockEx in permutations(companies, 2):
-    print('checking for %i and %i' % (stockEx[0], stockEx[1]))
+    print(stockEx)
     if sharesOwned(stockEx[0], stockEx[1], set()) > 50:
         controlledPairs.append(stockEx)
 
-with open('outputs.txt', 'w') as written:
+with open('concom.out', 'w') as written:
     for pair in controlledPairs:
         written.write(str(pair[0]) + ' ' + str(pair[1]) + '\n')
