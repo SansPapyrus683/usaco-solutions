@@ -14,7 +14,6 @@ with open('concom.in') as read:
             owned[int(line[0])][int(line[1])] = int(line[2])
             companies.add(int(line[0]))
             companies.add(int(line[1]))
-    owned = {i: dict(owned[i]) for i in owned}  # change it back to normal version
 
 prevFound = {}  # do some caching bc why not
 
