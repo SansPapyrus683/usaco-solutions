@@ -18,7 +18,7 @@ with open('capitalismBeLike.txt') as read:
 prevFound = {}  # do some caching bc why not
 
 
-def findOwns(company):
+def findOwns(company):  # does simply bfs to figure out what others this company owns
     global owned
     visited = {company}
     frontier = [company]
@@ -27,19 +27,19 @@ def findOwns(company):
     while frontier:
         for c in frontier:
             for share in owned[c]:
-                sharesOwned[share] += owned[c][share]
+                sharesOwned[share] += owned[c][share]  # add all shares that the company even remotely controls
 
         inLine = []
         for possPuppet in sharesOwned:
             if sharesOwned[possPuppet] > 50 and possPuppet not in visited:
-                visited.add(possPuppet)
+                visited.add(possPuppet)  # only search through puppet if puppet is controlled
                 inLine.append(possPuppet)
         frontier = inLine
     return [i for i in sharesOwned if sharesOwned[i] > 50 and i != company]
 
 ownedPairs = []
 for co in companies:
-    ownedPairs.extend([(co, o) for o in findOwns(co)])
+    ownedPairs.extend([(co, o) for o in findOwns(co)])  # just go through all companies, see how many they own
 
 ownedPairs.sort()
 with open('outputs.txt', 'w') as written:
