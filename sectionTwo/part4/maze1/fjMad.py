@@ -45,7 +45,6 @@ for target in killList:
 visited = set(frontier)
 expansionCount = 0
 while frontier:
-    print(frontier)
     inLine = []
     for p in frontier:
         for n in findNeighbors(p):
