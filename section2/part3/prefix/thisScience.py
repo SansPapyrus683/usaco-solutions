@@ -2,10 +2,9 @@
 ID: kevinsh4
 TASK: prefix
 LANG: PYTHON3
-ok um uh this approach doesnt work either
-frick me
-im actually bad
 """
+# TOO SLOW
+# JUST A PYTHON IMPLEMENTATION OF THEIR GOSH DARN APPROACH
 prefixes = set()
 molecule = ''
 with open('bioTrash.txt') as read:
