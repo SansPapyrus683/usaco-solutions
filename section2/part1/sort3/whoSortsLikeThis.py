@@ -40,7 +40,7 @@ for n in [1, 2]:  # now we just brute force sort, starting with ones and moving 
     for v, i in enumerate(newPlaces):
         startIndex = 0 if n == 1 else newPlaces.count(n)
         if i == n and not startIndex <= v < startIndex + newPlaces.count(n):  # if this # is out of place
-            for x in range(startIndex, startIndex + newPlaces.count(n)):  # finding valid places to put the num
+            for x in range(startIndex, startIndex + newPlaces.count(n)):  # finding valid places to put the n
                 if newPlaces[x] != n:
                     newPlaces[v] = newPlaces[x]  # doing the actual exchange
                     newPlaces[x] = n

@@ -15,10 +15,12 @@ with open('loScores.txt') as read:
         else:
             problems.append([int(i) for i in reversed(line.split())])  # [minutes, points]
 
-bestPoints = defaultdict(lambda: 0)
-for p in problems:
-    for t in range(p[0], timeLimit + 1):
-        bestPoints[t] = max(bestPoints[t], bestPoints[t - p[0]] + p[1])
+def calcBest(limit, probList):
+    bestPoints = defaultdict(lambda: 0)
+    for p in probList:
+        for t in range(p[0], limit + 1):
+            bestPoints[t] = max([bestPoints[t], bestPoints[t - p[0]] + p[1]])
+    return bestPoints
 
 with open('outputs.txt', 'w') as written:
-    written.write(str(max(bestPoints.values())) + '\n')
+    written.write(str(max(calcBest(timeLimit, problems).values())) + '\n')
