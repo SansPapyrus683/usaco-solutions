@@ -14,12 +14,12 @@ with open('whyHumble.txt') as read:
 def humble(n, primes):
     h = [1] * (n + 1)  # n + 1 because the first element will be like [1 ....]
     primeCounters = {p: p for p in primes}  # and 1 isn't a humble
-    expCounters = {p: 0 for p in primes}
+    expCounters = {p: 0 for p in primes}  # adding the 1 just makes computing simpler
     for n in range(1, n+1):
         h[n] = min(primeCounters.values())
         for p, c in primeCounters.items():
             if c == h[n]:
-                expCounters[p] += 1
+                expCounters[p] += 1  # exp here means exponent, not experience
                 primeCounters[p] = p * h[expCounters[p]]
     return h[-1]
 
