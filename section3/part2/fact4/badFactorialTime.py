@@ -3,17 +3,12 @@ ID: kevinsh4
 TASK: fact4
 LANG: PYTHON3
 """
-with open('bigBigBigO.txt') as read:
+with open('bigBigBigO.txt') as read:  # i just realized i made a sans reference
     theFact = int(read.read())
 
-twoCount, currTwoPower = 0, 2
 fiveCount, currFivePower = 0, 5
 
-while theFact//currTwoPower > 0:
-    twoCount += theFact//currTwoPower
-    currTwoPower *= 2
-
-while theFact//currFivePower > 0:
+while theFact//currFivePower > 0:  # these two loops get how many zeroes there are in the factorial
     fiveCount += theFact//currFivePower
     currFivePower *= 5
 
