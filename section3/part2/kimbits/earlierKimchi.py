@@ -3,12 +3,13 @@ ID: kevinsh4
 TASK: kimbits
 LANG: PYTHON3
 """
+# (documentation on other file)
 import operator as op  # this file is if for you're running earlier versions of python (i mean pre 3.8)
 from functools import reduce  # THE FUTURE IS NOW, OLD MAN.
 
 with open('notThatIveEatenIt.txt') as read:
     length, oneBitNum, nthBitThing = [int(i) for i in read.read().split()]
-    nthBitThing -= 1  # -1 because arrays start at 0 and the problem doesn't have the set start @ 0
+    nthBitThing -= 1
 
 def ncr(n, r):
     r = min(r, n-r)
