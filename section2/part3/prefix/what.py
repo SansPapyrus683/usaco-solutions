@@ -5,10 +5,9 @@ LANG: PYTHON3
 """
 # TOO SLOW
 # JUST A PYTHON IMPLEMENTATION OF THEIR GOSH DARN APPROACH
-# TODO: somehow fix this horrible code
 prefixes = set()
 molecule = ''
-with open('bioTrash.txt') as read:
+with open('prefix.in') as read:
     detectPrefix = True
     for v, line in enumerate(read):
         if line.rstrip() == '.':
@@ -34,7 +33,7 @@ def getValid(thePrefixes, hugeMolecule):
                 validDict[upTo] = True
     return validDict
 
-with open('outputs.txt', 'w') as written:
+with open('prefix.out', 'w') as written:
     try:
         written.write(str(max(p[0] for p in getValid(prefixes, molecule).items() if p[1]) + 1) + '\n')
     except ValueError:
