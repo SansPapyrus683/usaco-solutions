@@ -27,7 +27,7 @@ distances = {i: dict(distances[i]) for i in distances}
 
 joined = set()
 fields = []  # these two for loops precompute the distances and the fields
-for loc in connection.keys():  # figure out all the fields so i can figure out what the heck to even join
+for loc in connection.keys():  # figure out what group the fields in in so i can figure out the heck to even join
     if loc in joined:  # already joined, so skip
         continue
     frontier = Queue()
@@ -47,7 +47,7 @@ for loc in connection.keys():  # figure out all the fields so i can figure out w
 def diameter(field: tuple) -> tuple:  # calculates diameter of field lol
     initialDist = defaultdict(lambda: defaultdict(lambda: float('inf')))
     for p in field:  # pastures that are directly connected
-        initialDist[p][p] = 0  # so apparently these two for-loops together is called the Floyd-Warshall algorithm
+        initialDist[p][p] = 0  # so apparently these two giant for-loops together is called the Floyd-Warshall algorithm
         for n in connection[p]:  # given a graph, it finds the shortest path between all nodes
             initialDist[n][p] = initialDist[p][n] = 0 if n == p else distances[n][p]
 

@@ -27,11 +27,10 @@ def findBarn(cowPos):
     while frontier:  # dijkstra's or smth idk
         inLine = []
         for current in frontier:  # also is adapted from this:
-            if cowPos == 'R':
-                pass
             # https://www.redblobgames.com/pathfinding/a-star/introduction.html
             if current == 'Z':
                 break
+
             for neighbor in distances[current]:
                 newCost = costs[current] + distances[current][neighbor]
 
@@ -40,7 +39,6 @@ def findBarn(cowPos):
                     inLine.append(neighbor)
                     came_from[neighbor] = current
         frontier = inLine
-
     return costs['Z']
 
 wayHome = {}
