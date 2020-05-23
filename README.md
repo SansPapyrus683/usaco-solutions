@@ -4,6 +4,7 @@ don't ask where the other problems in section one went
 i deleted the rest of them  
 mostly because their code was unreadable even to me  
 so i just deleted it  
-and i am not doing that s*** all over again  
-you might notice that the names are wack  
-well that's because either im way too lazy to change the names, or that i want you to read the code and actually look at it
+and i am not doing that crap all over again  
+also, some of them don't actually work  
+so if you were looking to leech off me, too bad  
+the problem is always that they run too slow
