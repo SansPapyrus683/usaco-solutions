@@ -1,68 +1,78 @@
 import sys
 
+# TODO: slow. probably because it's python tho
+# followed this: https://cp-algorithms.com/data_structures/disjoint_set_union.html
+sys.setrecursionlimit(10000)
 with open('wormsort.in') as read:
     wormholes = []
     for v, l in enumerate(read):
         if v == 1:
+            positions = {}
             cows = [int(i) for i in l.split()]
+            for v1, c in enumerate(cows):
+                positions[c] = v1
             desired = sorted(cows)
         elif v >= 2:
             wormholes.append([int(i) for i in l.split()])
-    wormholes.sort(key=lambda w: w[2])
+
     toSort = []
     for v, c in enumerate(cows):
         if c != v + 1:
             toSort.append(c)
 
-with open('wormsort.out', 'w') as written:
-    if cows == desired:
-        written.write('-1\n')
-        sys.exit(0)
+written = open('wormsort.out', 'w')
+if cows == desired:
+    written.write('-1\n')
+    sys.exit(0)
+parents = {}
+sizes = {}
 
 
-def connected(toUse, cow) -> bool:  # TODO: this is definitely not optimized
-    at = cows.index(cow) + 1
+def start_tree(p):
+    parents[p] = p
+    sizes[p] = 1
 
-    frontier = []
-    for w in toUse:
-        if at in w[:-1]:
-            frontier.append(at)
-            break
-    else:
-        return False
 
-    visited = set(frontier)
-    while frontier:
-        print(f'exploring with indexes {frontier} seeing if {cow} is connected')
-        if cow in frontier:
-            print(f'yup {cow} can be sorted')
-            return True
+def get_ultimate(p):
+    if parents[p] == p:
+        return p
+    parents[p] = get_ultimate(parents[p])  # caching
+    return parents[p]
 
-        inLine = []
-        for a in frontier:
-            for w in toUse:
-                if w[1] not in visited and a == w[0]:
-                    inLine.append(w[1])
-                elif w[0] not in visited and a == w[1]:
-                    inLine.append(w[0])
-        frontier = inLine
-    return False
+
+def merge_trees(p1, p2):
+    tree1, tree2 = get_ultimate(p1), get_ultimate(p2)
+    if tree1 != tree2:
+        if sizes[tree1] >= sizes[tree2]:  # just have tree1 win, doesn't really matter
+            parents[tree2] = tree1  # merge the trees through the root nodes
+            sizes[tree2] += sizes[tree1]  # oh no the tree's gotten even bigger
+        else:
+            parents[tree1] = tree2
+            sizes[tree1] += sizes[tree2]
 
 
 bottomBound, topBound = min([w[2] for w in wormholes]), max([w[2] for w in wormholes])
+
 while topBound - bottomBound > 1:
     toSearch = (topBound + bottomBound) // 2
-    onlyUse = []
+
+    parents.clear()
+    sizes.clear()
+    for p in range(1, len(cows) + 1):
+        start_tree(p)
+
     for w in wormholes:
-        if w[2] >= toSearch:
-            onlyUse.append(w)
+        if w[2] >= toSearch:  # only allow wormholes of a certain width
+            merge_trees(w[0], w[1])
 
     for c in toSort:
-        if not connected(onlyUse, c):
+        if get_ultimate(positions[c] + 1) != get_ultimate(c):
             topBound = toSearch
             break
     else:
         bottomBound = toSearch
+    break
 
-with open('wormsort.out', 'w') as written:
-    written.write(f'{topBound - 1}\n')
+print(topBound - 1)
+written.write(f'{topBound - 1}\n')  # -1 because strictly less than
+written.close()
