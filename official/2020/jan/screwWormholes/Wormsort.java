@@ -2,6 +2,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+// TODO: bruh this is too slow for the last few test cases as well
 public class Wormsort {
     public static HashMap<Integer, Integer> parents = new HashMap<>();
     public static HashMap<Integer, Integer> sizes = new HashMap<>();
