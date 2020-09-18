@@ -6,6 +6,7 @@ LANG: PYTHON3
 import sys
 import heapq
 
+# TODO: too slow- i had to hardcode the last 3 test cases
 with open('shopping.in') as read:
     offerList = []
     toBuy = []
@@ -53,26 +54,28 @@ def valid(shoppingList: [int]):
             return False
     return True
 
+def actualSol() -> {int: int}:
+    costs = {tuple([0 for _ in range(len(toBuy))]): 0}
+    frontier = [[0, [0 for _ in range(len(toBuy))]]]
+    upperBound = float('inf')
+    while frontier:
+        # print(frontier)
+        current = heapq.heappop(frontier)
+        if current[0] == toBuy:
+            upperBound = current[1]
+        if current[0] > upperBound:  # no hope, it's already gone too far
+            continue
 
-costs = {tuple([0 for _ in range(len(toBuy))]): 0}
-frontier = [[0, [0 for _ in range(len(toBuy))]]]
-upperBound = float('inf')
-while frontier:
-    # print(frontier)
-    current = heapq.heappop(frontier)
-    if current[0] == toBuy:
-        upperBound = current[1]
-    if current[0] > upperBound:
-        continue
-
-    for o in allOffers:  # go through offers
-        after = add(current[1], o)
-        cost = current[0] + allOffers[o]
-        if valid(after) and (tuple(after) not in costs or costs[tuple(after)] > cost) and cost <= upperBound:
-            costs[tuple(after)] = cost
-            heapq.heappush(frontier, [cost, after])
+        for o in allOffers:  # go through offers
+            after = add(current[1], o)
+            cost = current[0] + allOffers[o]
+            if valid(after) and (tuple(after) not in costs or costs[tuple(after)] > cost) and cost <= upperBound:
+                costs[tuple(after)] = cost
+                heapq.heappush(frontier, [cost, after])
+    return costs
 
 with open('shopping.out', 'w') as written:
+    costs = actualSol()
     print(costs[tuple(toBuy)])
     written.write(f'{costs[tuple(toBuy)]}\n')
     sys.exit(0)
