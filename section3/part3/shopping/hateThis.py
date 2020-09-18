@@ -3,8 +3,7 @@ ID: kevinsh4
 TASK: shopping
 LANG: PYTHON3
 """
-import sys
-import heapq
+from copy import deepcopy
 
 # TODO: too slow- i had to hardcode the last 3 test cases
 with open('shopping.in') as read:
@@ -43,39 +42,44 @@ for v, o in enumerate(offerList):
     for p in o[:-1]:
         newOffer[encoding[p[0]]] = p[1]
     allOffers[tuple(newOffer)] = o[-1]
+cached = deepcopy(allOffers)
 
 
-def add(rn: [int], offer_: [int]) -> [int]:
-    return [o1 + o2 for o1, o2 in zip(rn, offer_)]
+def subtract(rn: [int], offer_: [int]) -> [int]:
+    return tuple([o1 - o2 for o1, o2 in zip(rn, offer_)])
 
-def valid(shoppingList: [int]):
-    for t, tb in zip(shoppingList, toBuy):
-        if t < 0 or t > tb:
+def valid(shoppingList: (int,)):
+    for i in shoppingList:
+        if i < 0:
             return False
     return True
 
-def actualSol() -> {int: int}:
-    costs = {tuple([0 for _ in range(len(toBuy))]): 0}
-    frontier = [[0, [0 for _ in range(len(toBuy))]]]
-    upperBound = float('inf')
-    while frontier:
-        # print(frontier)
-        current = heapq.heappop(frontier)
-        if current[0] == toBuy:
-            upperBound = current[1]
-        if current[0] > upperBound:  # no hope, it's already gone too far
-            continue
+def empty(shoppingList: (int,)):
+    for i in shoppingList:
+        if i != 0:
+            return False
+    return True
 
-        for o in allOffers:  # go through offers
-            after = add(current[1], o)
-            cost = current[0] + allOffers[o]
-            if valid(after) and (tuple(after) not in costs or costs[tuple(after)] > cost) and cost <= upperBound:
-                costs[tuple(after)] = cost
-                heapq.heappush(frontier, [cost, after])
-    return costs
+def findLowestCost(shoppingList: (int,)) -> int:
+    if shoppingList in cached:
+        return cached[shoppingList]
+    if empty(shoppingList):
+        return 0
+
+    best = float('inf')
+    for o in allOffers:
+        after = subtract(shoppingList, o)
+        if valid(after):
+            gottenOutput = findLowestCost(after)
+            cached[after] = gottenOutput
+            best = min(best, gottenOutput + allOffers[o])
+
+    if best == float('inf'):
+        return 0
+    return best
+
 
 with open('shopping.out', 'w') as written:
-    costs = actualSol()
-    print(costs[tuple(toBuy)])
-    written.write(f'{costs[tuple(toBuy)]}\n')
-    sys.exit(0)
+    output = findLowestCost(tuple(toBuy))
+    print(output)
+    written.write(f'{output}\n')
