@@ -1,3 +1,0 @@
-YOU ARE BAD AT DYNAMIC PROGRAMMING
-KNAPSACK = DYNAMIC
-ask lxnn what was the heuristic again
