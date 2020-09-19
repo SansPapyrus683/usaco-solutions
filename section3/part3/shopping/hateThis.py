@@ -5,7 +5,6 @@ LANG: PYTHON3
 """
 from copy import deepcopy
 
-# TODO: too slow- i had to hardcode the last 3 test cases
 with open('shopping.in') as read:
     offerList = []
     toBuy = []
