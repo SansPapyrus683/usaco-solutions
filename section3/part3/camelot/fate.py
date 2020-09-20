@@ -21,6 +21,7 @@ for v, p in enumerate(knightPos):
 kingPos = knightPos[0]
 del knightPos[0]
 cachedDistances = defaultdict(dict)
+cachedNeighbors = {}
 
 
 def kingCalc(kingAt, goToPos) -> int:
@@ -29,6 +30,8 @@ def kingCalc(kingAt, goToPos) -> int:
 
 
 def knightNeighbors(currPos):
+    if currPos in cachedNeighbors:
+        return cachedNeighbors[currPos]
     maybePossible = [
         (currPos[0] + 2, currPos[1] + 1), (currPos[0] + 1, currPos[1] + 2),
         (currPos[0] - 1, currPos[1] - 2), (currPos[0] - 2, currPos[1] - 1),
@@ -39,19 +42,26 @@ def knightNeighbors(currPos):
     for p in maybePossible:
         if 0 <= p[0] < cols and 0 <= p[1] < rows:
             actuallyPossible.append(p)
+    cachedNeighbors[currPos] = actuallyPossible
     return actuallyPossible
 
 
 def knightCalc(knightPos, goToPos) -> int:
+    if goToPos in cachedDistances[knightPos]:
+        return cachedDistances[knightPos][goToPos]
+
     visited = set()
     frontier = {knightPos}
     movesTaken = 0
     while frontier:
         inLine = set()
         for p_ in frontier:
+            if p_ not in cachedDistances[knightPos]:
+                cachedDistances[knightPos][p_] = movesTaken
+                cachedDistances[p_][knightPos] = movesTaken
             if p_ == goToPos:  # knights should be able to reach every square of the board
-                cachedDistances[knightPos][goToPos] = movesTaken
                 return movesTaken
+
             for n in knightNeighbors(p_):
                 if n not in visited:
                     inLine.add(n)
