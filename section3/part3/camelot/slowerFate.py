@@ -2,7 +2,7 @@
 ID: kevinsh4
 TASK: camelot
 LANG: PYTHON3
-NOTE: this one goes faster but it isn't guaranteed to produce the
+NOTE: this one is slow but it's guaranteed to give the correct answer
 """
 import time
 
@@ -31,13 +31,8 @@ letterLegend = {l: n for n, l in enumerate('ABCDEFGHIJKLMNOPQRSTUVWXYZ')}
 for v, p in enumerate(knightPos):
     knightPos[v] = (letterLegend[p[0]], int(p[1]) - 1)  # zero based indexing for the win bois
 kingPos = knightPos[0]
-# assumes that they all meet in the middle somewhere (incorrect)
-knightAverage = (sum([k[0] for k in knightPos]) // len(knightPos), sum([k[1] for k in knightPos]) // len(knightPos))
 del knightPos[0]
 bounds = 2
-colBounds = (clamp(knightAverage[0] - bounds, 0, cols), clamp(knightAverage[0] + bounds, 0, cols))
-rowBounds = (clamp(knightAverage[1] - bounds, 0, rows), clamp(knightAverage[1] + bounds, 0, rows))
-
 distances = {(c, r): {(c_, r_): float('inf') for c_ in range(cols) for r_ in range(rows)}
              for c in range(cols) for r in range(rows)}
 cachedNeighbors = {}
@@ -86,8 +81,8 @@ def knightExpand(knightPos):
 
 def meetingBruteForce() -> int:
     best = float('inf')
-    for c in range(*colBounds):
-        for r in range(*rowBounds):
+    for c in range(cols):
+        for r in range(rows):
             best = min(best, pickupBruteForce((c, r)))
     if best == float('inf'):
         return 0
@@ -113,7 +108,7 @@ def whichKnightBruteForce(meetingPos, pickupPos) -> int:
         defTravelled += direct
     return defTravelled + minDetour
 
-
+# asdf = time.perf_counter()
 for r in range(rows):  # precalculate all the distances
     for c in range(cols):  # 0.1
         knightExpand((c, r))
