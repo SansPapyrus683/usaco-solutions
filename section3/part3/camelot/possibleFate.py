@@ -6,7 +6,8 @@ LANG: PYTHON3
 import time
 from queue import Queue
 
-# TODO: this one doesn't work but it's just here if you want the python version
+# TODO: this one doesn't work but it's just here if you want a python implementation
+# it's different from the java one but idk and idc anymore
 timeStart = time.perf_counter()
 with open('camelot.in') as read:
     knightPos = []
