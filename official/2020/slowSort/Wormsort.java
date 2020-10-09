@@ -55,7 +55,7 @@ public class Wormsort {
                     merge(w[0], w[1]);
                 }
             }
-            //System.out.println(Arrays.toString(parents));
+
             for (int[] ts: toSort) {
                 if (getUltimate(ts[0]) != getUltimate(ts[1])) {  // test if this cow can still be sorted
                     goodToGo = false;
