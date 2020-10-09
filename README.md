@@ -8,4 +8,5 @@ and i am not doing that crap all over again
 also, some of them don't actually work  
 so if you were looking to leech off me, too bad  
 the problem is always that they run too slow  
-also, yes ik that the convention is snake_case for python, but idrc, it was too late when i learned about that
+also, yes ik that the convention is snake_case for python, but idrc, it was too late when i learned about that  
+and yes some of the names are weird while others are normal
