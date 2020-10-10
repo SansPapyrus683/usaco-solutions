@@ -4,6 +4,7 @@ import java.io.*;
 public class MooTube {
     static int vidNum;
     static ArrayList<int[]>[] neighbors;
+    static long[] times = new long[3];
 
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
@@ -37,7 +38,7 @@ public class MooTube {
             written.println(a);
         }
         written.close();
-        System.out.println(Arrays.toString(answers));
+        // System.out.println(Arrays.toString(answers));
         System.out.printf("ok so it took around %s milliseconds%n", System.currentTimeMillis() - start);
     }
 
