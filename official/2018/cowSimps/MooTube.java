@@ -37,14 +37,14 @@ public class MooTube {
             written.println(a);
         }
         written.close();
-        // System.out.println(Arrays.toString(answers));
+        System.out.println(Arrays.toString(answers));
         System.out.printf("ok so it took around %s milliseconds%n", System.currentTimeMillis() - start);
     }
 
     static int ytRecommendations(int threshold, int start) {  // ngl yt's recommendations are actually pretty good
         int vidsRecced = 0;
         ArrayDeque<Integer> frontier = new ArrayDeque<>();
-        boolean[] traversed = new boolean[vidNum + 1];
+        boolean[] traversed = new boolean[vidNum + 1];  // again, index 1 won't be used
         frontier.add(start);
         traversed[start] = true;
 
