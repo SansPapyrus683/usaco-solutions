@@ -38,7 +38,7 @@ public class MooTube {
             written.println(a);
         }
         written.close();
-        // System.out.println(Arrays.toString(answers));
+        System.out.println(Arrays.toString(answers));
         System.out.printf("ok so it took around %s milliseconds%n", System.currentTimeMillis() - start);
     }
 
