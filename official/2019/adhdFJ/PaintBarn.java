@@ -1,29 +1,53 @@
-import java.util.*;
 import java.io.*;
 
 public class PaintBarn {
-    static int[][][] rectangles;
+    static final int BARN_WIDTH = 1000;
     static int requirement;
+    static int[][] startEnds = new int[BARN_WIDTH][BARN_WIDTH];
 
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
-        Reader read = new Reader("paintbarn.in");
-        rectangles = new int[read.nextInt()][2][2];
+        PaintReader read = new PaintReader("paintbarn.in");
+        int rectNum = read.nextInt();
         requirement = read.nextInt();
-        for (int i = 0; i < rectangles.length; i++) {
-            rectangles[i] = new int[][] {{read.nextInt(), read.nextInt()}, {read.nextInt(), read.nextInt()}};
+        for (int i = 0; i < rectNum; i++) {
+            int[][] rect = new int[][] {{read.nextInt(), read.nextInt()}, {read.nextInt(), read.nextInt()}};
+            int startX = rect[0][0];
+            int endX = rect[1][0];
+            for (int y = rect[0][1]; y < rect[1][1]; y++) {
+                startEnds[y][startX]++;  // the start
+                startEnds[y][endX]--;  // the end
+            }
         }
+
+        int kAreaAmt = 0;
+        for (int r = 0; r < BARN_WIDTH; r++) {
+            int currIncrement = 0;
+            int[] increments = startEnds[r];
+            for (int c = 0; c < BARN_WIDTH; c++) {
+                if (currIncrement == requirement) {
+                    // System.out.printf("%s %s%n", r, c);
+                    kAreaAmt++;
+                }
+                currIncrement += increments[c];
+            }
+        }
+
+        PrintWriter written = new PrintWriter(new FileWriter(new File("paintbarn.out")));
+        written.println(kAreaAmt);
+        written.close();
+        System.out.println(kAreaAmt);
         System.out.printf("took around %d milliseconds", System.currentTimeMillis() - start);
     }
 }
 
-class Reader {
+class PaintReader {
     final private int BUFFER_SIZE = 1 << 16;
     private DataInputStream din;
     private byte[] buffer;
     private int bufferPointer, bytesRead;
 
-    public Reader(String file_name) throws IOException {
+    public PaintReader(String file_name) throws IOException {
         din = new DataInputStream(new FileInputStream(file_name));
         buffer = new byte[BUFFER_SIZE];
         bufferPointer = bytesRead = 0;

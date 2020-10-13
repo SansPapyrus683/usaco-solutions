@@ -4,7 +4,7 @@ import java.io.*;
 public class Lemonade {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
-        Reader read = new Reader("lemonade.in");
+        LemonReader read = new LemonReader("lemonade.in");
         int[] cows = new int[read.nextInt()];
         for (int i = 0; i < cows.length; i++) {
             cows[i] = read.nextInt();
@@ -35,13 +35,13 @@ public class Lemonade {
     }
 }
 
-class Reader {
+class LemonReader {
     final private int BUFFER_SIZE = 1 << 16;
     private DataInputStream din;
     private byte[] buffer;
     private int bufferPointer, bytesRead;
 
-    public Reader(String file_name) throws IOException {
+    public LemonReader(String file_name) throws IOException {
         din = new DataInputStream(new FileInputStream(file_name));
         buffer = new byte[BUFFER_SIZE];
         bufferPointer = bytesRead = 0;

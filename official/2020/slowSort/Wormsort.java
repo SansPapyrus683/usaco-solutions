@@ -8,7 +8,7 @@ public class Wormsort {
     static int[][] wormholes;
     public static void main(String[] args) throws IOException {
         var start = System.currentTimeMillis();
-        Reader read = new Reader("wormsort.in");
+        WormReader read = new WormReader("wormsort.in");
         PrintWriter written = new PrintWriter(new FileWriter(new File("wormsort.out")));
         int cowNum = read.nextInt();
         int wormholeNum = read.nextInt();
@@ -97,13 +97,13 @@ public class Wormsort {
     }
 }
 
-class Reader {
+class WormReader {
     final private int BUFFER_SIZE = 1 << 16;
     private DataInputStream din;
     private byte[] buffer;
     private int bufferPointer, bytesRead;
 
-    public Reader(String file_name) throws IOException {
+    public WormReader(String file_name) throws IOException {
         din = new DataInputStream(new FileInputStream(file_name));
         buffer = new byte[BUFFER_SIZE];
         bufferPointer = bytesRead = 0;

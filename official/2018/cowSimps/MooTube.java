@@ -8,7 +8,7 @@ public class MooTube {
 
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
-        Reader read = new Reader("mootube.in");
+        YTReader read = new YTReader("mootube.in");
         vidNum  = read.nextInt();
         int queryNum = read.nextInt();
         neighbors = new ArrayList[vidNum + 1];  // INDEX 0 WILL NOT BE USED
@@ -63,13 +63,13 @@ public class MooTube {
     }
 }
 
-class Reader {
+class YTReader {
     final private int BUFFER_SIZE = 1 << 16;
     private DataInputStream din;
     private byte[] buffer;
     private int bufferPointer, bytesRead;
 
-    public Reader(String file_name) throws IOException {
+    public YTReader(String file_name) throws IOException {
         din = new DataInputStream(new FileInputStream(file_name));
         buffer = new byte[BUFFER_SIZE];
         bufferPointer = bytesRead = 0;

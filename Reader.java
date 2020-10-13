@@ -3,7 +3,9 @@ import java.io.*;
 /**
  * so uh here's the reader class i use for some of the problems
  * it's p fast and i just copied it off geeksforgeeks lol
- * **/
+ * i renmae it in every single thing because of intellij's project config and stuff like that
+ * maybe there's an easier way to do this?
+ **/
 public class Reader {
     final private int BUFFER_SIZE = 1 << 16;
     private DataInputStream din;
