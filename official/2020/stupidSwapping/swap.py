@@ -1,3 +1,4 @@
+# 2020 jan bronze
 with open('swap.in') as read:
     for v, line in enumerate(read):
         if v == 0:

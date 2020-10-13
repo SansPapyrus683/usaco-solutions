@@ -2,14 +2,13 @@ import java.io.*;
 
 public class PaintBarn {
     static final int BARN_WIDTH = 1000;
-    static int requirement;
-    static int[][] startEnds = new int[BARN_WIDTH][BARN_WIDTH];
 
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         PaintReader read = new PaintReader("paintbarn.in");
         int rectNum = read.nextInt();
-        requirement = read.nextInt();
+        int requirement = read.nextInt();
+        int[][] startEnds = new int[BARN_WIDTH][BARN_WIDTH];
         for (int i = 0; i < rectNum; i++) {
             int[][] rect = new int[][] {{read.nextInt(), read.nextInt()}, {read.nextInt(), read.nextInt()}};
             int startX = rect[0][0];

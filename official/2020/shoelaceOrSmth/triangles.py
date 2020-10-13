@@ -1,6 +1,7 @@
 """
 look, i have no idea how this works
 i guess it's something about the degenerate triangles but otherwise idk
+2020 feb bronze
 """
 
 from itertools import combinations

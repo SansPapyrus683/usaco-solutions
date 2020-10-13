@@ -1,6 +1,7 @@
 import java.io.*;
 import java.util.*;
 
+// 2019 gold december (it took two whole weeks lol)
 public class MilkVisits {
 
     static final long MAX_DEPTH = 100000;

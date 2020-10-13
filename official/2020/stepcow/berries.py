@@ -1,3 +1,4 @@
+# 2020 jan silver
 with open('berries.in') as read:
     for v, l in enumerate(read):
         if v == 0:
