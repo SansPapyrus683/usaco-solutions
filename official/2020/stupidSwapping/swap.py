@@ -19,10 +19,8 @@ for i in range(1, cowNumber + 1):
             currPos = BSlice[1] - (currPos - BSlice[0])
         positions.append(currPos)
         if positions.count(currPos) == 2:  # we've reached a cycle
-            # print(positions)
             del positions[-1]
             afterPos[positions[swapTimes % len(positions) - 1] - 1] = i  # the two minus one's are bc of array indexes
-            # print(afterPos)
             break
 
 with open('swap.out', 'w') as written:
