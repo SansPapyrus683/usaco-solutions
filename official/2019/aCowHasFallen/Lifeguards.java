@@ -1,6 +1,7 @@
 import java.util.*;
 import java.io.*;
 
+// 2018 silver jan
 public class Lifeguards {
     // A COW HAS FALLEN INTO THE POOL IN FARMER JOHN'S FARM!
     static int[][] shifts;
