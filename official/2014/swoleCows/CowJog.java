@@ -18,7 +18,7 @@ public class CowJog {
         for (int i = 0; i < cows.length; i++) {
             simulationCows[i] = cows[i].clone();
         }
-        ArrayList<int[]> groups = new ArrayList<>(Arrays.asList(simulationCows.clone()));
+        ArrayList<int[]> groups = new ArrayList<>(Arrays.asList(simulationCows.clone()));  // why the heck not
 
         int[] catchupTimes = new int[cows.length];
         int timeLeft = time;
