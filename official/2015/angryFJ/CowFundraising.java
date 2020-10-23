@@ -18,13 +18,9 @@ public class CowFundraising {
         ArrayList<int[]> coveredIntervals = new ArrayList<>();
         for (Cow c : cows) {
             int[] inFrontTimes = new int[] {(-c.x - 1) * c.speed, -c.x * c.speed};  // x is always negative dw
-            //arrayListArray(coveredIntervals);
-            //System.out.println(Arrays.toString(inFrontTimes));
-            //System.out.println(c);
             boolean blocked = false;
             for (int[] i : coveredIntervals) {  // assumes that intervals are all at least like 1 "unit" apart
                 if (i[0] <= inFrontTimes[0] && inFrontTimes[1] <= i[1]) {
-                    //System.out.println("blocked");
                     blocked = true;
                     break;
                 }
@@ -33,7 +29,6 @@ public class CowFundraising {
                 seen.add(c);
                 insertIntoIntervals(coveredIntervals, inFrontTimes);
             }
-            //System.out.println();
         }
 
         PrintWriter written = new PrintWriter(new FileOutputStream("stampede.out"));
