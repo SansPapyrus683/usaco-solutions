@@ -1,6 +1,7 @@
 import java.io.*;
 import java.util.*;
 
+// 2015 feb silver
 public class Censor {
     static long[] hashPowers = new long[1000000];
     static final long mod = (long) (Math.pow(10, 9)) + 9;
@@ -14,7 +15,7 @@ public class Censor {
             nowPower = (nowPower * power) % mod;
         }
 
-        BufferedReader read = new BufferedReader(new FileReader(new File("censor.in")));
+        BufferedReader read = new BufferedReader(new FileReader("censor.in"));
         String toCensor = read.readLine();  // remember kids, nothing happened on june 4th 1989
         String badWord = read.readLine();
 
@@ -48,7 +49,7 @@ public class Censor {
             long currViewHash = (prevHashCodes[index] - prevHashCodes[headIndex]) % mod;
             currViewHash += currViewHash >= 0 ? 0 : mod;  // java's modulus function sucks butt
             if (currViewHash == (badHashCode * hashPowers[headIndex]) % mod) {  // no divisibility issues now ha
-                index -= badWord.length();
+                index -= badWord.length();  // reset the pointer back to "checkpoint"? idk
             }
         }
         return new String(Arrays.copyOfRange(all, 0, index));
