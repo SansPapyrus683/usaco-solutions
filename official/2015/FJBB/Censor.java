@@ -24,7 +24,7 @@ public class Censor {
         written.println(after);
         written.close();
         System.out.println(after);
-        System.out.printf("our great leader fj says it took %d ms so it did", System.currentTimeMillis() - start);
+        System.out.printf("our great leader fj says it took %d ms so it did%n", System.currentTimeMillis() - start);
     }
 
     static long hashConcat(long rnHashVal, int nowStrLen, long toAdd) {

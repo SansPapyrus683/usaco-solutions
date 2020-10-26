@@ -3,8 +3,6 @@ import java.util.*;
 
 /**
  * 2015 feb silver (seriously how do cows throw like they have frickin hooves)
- * ik the game is like hoofball but th you do in that game
- * also i seriously doubt fj knows what "excitement" is
  * ok so anyways we have each team as sorta a "node" and we know all the pairwise distances (=score when they play)
  * what we wanna do is make a "maximum spanning tree" so that max score's achieved
  * node's parent = what they lose to, so a node beats all it's children
@@ -41,15 +39,16 @@ public class Superbull {
         for (int i = 0; i < teams.length - 1; i++) {
             int nodeToAdd = -1;
             for (int t : teams) {
+                // if we haven't explored this & it's a better node than the prev one we got
                 if (!played.get(t) && (nodeToAdd == -1 || distToTree.get(t) > distToTree.get(nodeToAdd))) {
                     nodeToAdd = t;
                 }
             }
 
-            played.put(nodeToAdd, true);
+            played.put(nodeToAdd, true);  // ok add to tree & update total distance
             weightSoFar += distToTree.get(nodeToAdd);
             for (int t : teams) {
-                if (!played.get(t)) {
+                if (!played.get(t)) {  // update distances to tree
                     distToTree.put(t, Math.max(distToTree.get(t), t ^ nodeToAdd));
                 }
             }
