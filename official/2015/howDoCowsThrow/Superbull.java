@@ -9,7 +9,6 @@ import java.util.*;
  * so then prim's ez clap
  * */
 public class Superbull {
-    static final int MAX_TEAMS = 2000;
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("superbull.in"));

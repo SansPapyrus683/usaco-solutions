@@ -1,6 +1,7 @@
 import java.io.*;
 import java.util.*;
 
+// 2015 us open silver
 public class BGM {
     static final int mod = 7;
     public static void main(String[] args) throws IOException {
@@ -39,10 +40,7 @@ public class BGM {
                                 long oMul = options[varToNum.get('O')][o];
                                 for (int m = 0; m < mod; m++) {
                                     long mMul = options[varToNum.get('M')][m];
-                                    boolean valid =  // check if the thing is actually divisible
-                                            (b + 2 * e + 2 * s + i) % 7 == 0 ||
-                                            (g + o + e + s) % 7 == 0 || (m + 2 * o) % 7 == 0;
-                                    if (valid) {
+                                    if (((b + 2 * e + 2 * s + i) * (g + o + e + s) * (m + 2 * o)) % 7 == 0) {
                                         total += bMul * eMul * sMul * iMul * gMul * oMul * mMul;
                                     }
                                 }
