@@ -1,6 +1,5 @@
 import java.io.*;
 import java.util.*;
-import java.util.stream.Stream;
 
 // 2014 jan silver i think (if i name this ccski intellij has a seizure)
 public class SkiTime {
@@ -9,7 +8,6 @@ public class SkiTime {
     static int checkpointNum = 0;
     static boolean[][] checkpoints;
     static Point randomCheckpoint;
-    static long asdf = 0;
 
     static class Point {
         public int x;
@@ -27,31 +25,37 @@ public class SkiTime {
         width = Integer.parseInt(dimensions[0]);
         length = Integer.parseInt(dimensions[1]);
         hills = new int[width][length];
+        int upperBound = 0;
+        int lowerBound = (int) Math.pow(10, 9);
+        int answer = -1;
 
         for (int i = 0; i < hills.length; i++) {
             StringTokenizer row = new StringTokenizer(read.readLine());
             for (int c = 0; c < length; c++) {
                 hills[i][c] = Integer.parseInt(row.nextToken());
+                upperBound = Math.max(upperBound, hills[i][c]);  // the upperbound can only be SO large as the max hill
+                lowerBound = Math.min(lowerBound, hills[i][c]);  // same for the lower bound
             }
+        }
+        if (lowerBound == upperBound) {  // if all the hills are the same, just do 0 (i hate edge cases)
+            answer = 0;
         }
 
         checkpoints = new boolean[width][length];
-        for (int i = 0; i < hills.length; i++) {
+        for (int r = 0; r < hills.length; r++) {
             StringTokenizer row = new StringTokenizer(read.readLine());
             for (int c = 0; c < length; c++) {
-                checkpoints[i][c] = Integer.parseInt(row.nextToken()) == 1;
-                if (checkpoints[i][c]) {
-                    if (randomCheckpoint == null) {
-                        randomCheckpoint = new Point(i, c);
+                checkpoints[r][c] = Integer.parseInt(row.nextToken()) == 1;
+                if (checkpoints[r][c]) {
+                    if (randomCheckpoint == null) {  // doesn't matter which cp we pick
+                        randomCheckpoint = new Point(r, c);
                     }
                     checkpointNum++;
                 }
             }
         }
 
-        int lowerBound = 0;
-        int upperBound = (int) Math.pow(10, 9);
-        while (upperBound > lowerBound) {
+        while (upperBound > lowerBound) {  // just binary search for the difficulty
             int toSearch = (upperBound + lowerBound) / 2;
             if (validWithDifficulty(toSearch)) {
                 upperBound = toSearch - 1;
@@ -60,13 +64,14 @@ public class SkiTime {
             }
         }
         // binary search do be like this tho
-        int answer = validWithDifficulty(lowerBound) ? lowerBound : lowerBound + 1;
+        if (answer == -1) {  // if it wasn't that 0 we set earlier
+            answer = validWithDifficulty(lowerBound) ? lowerBound : lowerBound + 1;
+        }
 
         PrintWriter written = new PrintWriter(new FileOutputStream("ccski.out"));
         written.println(answer);  // or upperBound - 1, both work
         written.close();
         System.out.println(answer);
-        System.out.println(asdf / Math.pow(10, 9));
         System.out.printf("grand total of %d ms ok buddy%n", System.currentTimeMillis() - start);
     }
 
@@ -106,6 +111,6 @@ public class SkiTime {
                 frontier.add(new Point(y - 1, x));
             }
         }
-        return gottenCheckpoints >= checkpointNum;  // handles the 1 checkpoint edge case
+        return gottenCheckpoints >= checkpointNum;  // i mean ==, >=, both work
     }
 }
