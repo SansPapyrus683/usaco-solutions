@@ -8,7 +8,7 @@ public class SkiTime {
     static int[][] hills;
     static int checkpointNum = 0;
     static boolean[][] checkpoints;
-    static Point randomCheckpoint;
+    static int[] randomCheckpoint;
 
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
@@ -40,7 +40,7 @@ public class SkiTime {
                 checkpoints[r][c] = Integer.parseInt(row.nextToken()) == 1;
                 if (checkpoints[r][c]) {
                     if (randomCheckpoint == null) {  // doesn't matter which cp we pick
-                        randomCheckpoint = new Point(r, c);
+                        randomCheckpoint = new int[] {r, c};
                     }
                     checkpointNum++;
                 }
@@ -68,50 +68,45 @@ public class SkiTime {
     }
 
     static boolean validWithDifficulty(int diff) {
-        Point current = randomCheckpoint;  // doesn't matter which cp we use honestly
-        int gottenCheckpoints = 0;
-        ArrayDeque<Point> frontier = new ArrayDeque<>();
+        int[] start = randomCheckpoint;  // doesn't matter which cp we use honestly
+        int checkpointsLeft = checkpointNum;
+        ArrayDeque<int[]> frontier = new ArrayDeque<>();
         boolean[][] visited = new boolean[width][length];
-        frontier.add(current);
-        visited[current.y][current.x] = true;
+        frontier.add(start);
+        visited[start[0]][start[1]] = true;
 
         while (!frontier.isEmpty()) {
-            current = frontier.pop();
-            int x = current.x;
-            int y = current.y;
+            int[] current = frontier.pop();
+            int x = current[1];
+            int y = current[0];
             if (checkpoints[y][x]) {
-                gottenCheckpoints++;
+                checkpointsLeft--;
+                if (checkpointsLeft == 0) {
+                    return true;
+                }
             }
             /* yes, this is a really hacky implementation.
              yes, i am absolutely ashamed of such blasphemy.
-             but it runs under the limit, so here it stays. */
+             but it runs under the limit, so here it stays.
+             (anyways this tries all the possible neighbors and checks if they're valid) */
             int currElevation = hills[y][x];
             if (x + 1 < length && Math.abs(currElevation - hills[y][x+1]) <= diff && !visited[y][x+1]) {
                 visited[y][x+1] = true;
-                frontier.add(new Point(y, x + 1));
+                frontier.add(new int[] {y, x + 1});
             }
             if (x - 1 >= 0 && Math.abs(currElevation - hills[y][x-1]) <= diff && !visited[y][x-1]) {
                 visited[y][x-1] = true;
-                frontier.add(new Point(y, x- 1));
+                frontier.add(new int[] {y, x - 1});
             }
             if (y + 1 < width && Math.abs(currElevation - hills[y+1][x]) <= diff && !visited[y+1][x]) {
                 visited[y+1][x] = true;
-                frontier.add(new Point(y + 1, x));
+                frontier.add(new int[] {y + 1, x});
             }
             if (y - 1 >= 0 && Math.abs(currElevation - hills[y-1][x]) <= diff && !visited[y-1][x]) {
                 visited[y-1][x] = true;
-                frontier.add(new Point(y - 1, x));
+                frontier.add(new int[] {y - 1, x});
             }
         }
-        return gottenCheckpoints >= checkpointNum;  // i mean ==, >=, both work
-    }
-}
-
-class Point {
-    public int x;
-    public int y;
-    public Point(int y, int x) {
-        this.x = x;
-        this.y = y;
+        return checkpointsLeft <= 0;
     }
 }
