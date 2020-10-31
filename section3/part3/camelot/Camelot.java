@@ -41,19 +41,21 @@ public class Camelot {
         read.close();
         kingPos = knightPos.remove(0);
 
-        for (int c = 0; c < cols; c++) {
+        for (int c = 0; c < cols; c++) {  // calculate all distances (through a knight) too all other distances
             for (int r = 0; r < rows; r++) {
                 knightExpand(new int[] {c, r});
             }
         }
 
+        // note that it always isn't worth it for the king to travel like more than 2 distances
+        // if it did then a knight can always to the job in equal or lesser moves
         int kingColStart = Math.max(kingPos[0] - kingPickupDist, 0);
         int kingColEnd = Math.min(kingPos[0] + kingPickupDist, cols);
         int kingRowStart = Math.max(kingPos[1] - kingPickupDist, 0);
         int kingRowEnd = Math.min(kingPos[1] + kingPickupDist, rows);
 
         int best = Integer.MAX_VALUE;
-        for (int c = 0; c < cols; c++) {
+        for (int c = 0; c < cols; c++) {  // go through all meeting positions
             for (int r = 0; r < rows; r++) {
                 int haveToTravel = 0;
                 for (int[] kn : knightPos) {
@@ -61,7 +63,7 @@ public class Camelot {
                 }
                 // cp and rp are column pickup and row pickup respectively
                 int minDetour = kingCalc(kingPos, new int[] {c, r});
-                for (int cp = kingColStart; cp < kingColEnd; cp++) {
+                for (int cp = kingColStart; cp < kingColEnd; cp++) {  // go through all pickup positions
                     for (int rp = kingRowStart; rp < kingRowEnd; rp++) {
                         for (int[] kn : knightPos) {
                             int detour = distances[kn[1]][kn[0]][rp][cp] + kingCalc(kingPos, new int[] {cp, rp}) +
@@ -78,6 +80,7 @@ public class Camelot {
         PrintWriter written = new PrintWriter("camelot.out");
         written.println(best);
         written.close();
+        System.out.println(best);
         System.out.printf("time taken (ms): %s%n", System.currentTimeMillis() - start);
     }
 
@@ -114,7 +117,7 @@ public class Camelot {
         return thing;
     }
 
-    static void knightExpand(int[] pos) {
+    static void knightExpand(int[] pos) {  // calculates distances & updates the distances variable w/ it
         int[] nPos = Arrays.copyOf(pos, 3);
         Queue<int[]> frontier = new LinkedList<>();
         int[][] costs = new int[rows][cols];
