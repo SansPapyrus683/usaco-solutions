@@ -1,5 +1,6 @@
 import java.io.*;
 
+// 2019 feb silver
 public class PaintBarn {
     static final int BARN_WIDTH = 1000;
 
