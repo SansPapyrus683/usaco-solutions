@@ -27,16 +27,15 @@ public class CowRoute {
                 }
             }
         }
-
         long[][] travelCosts = new long[1000][planeNum + 1];  // the actual money it takes
         long[][] moveCosts = new long[1000][planeNum + 1];  // min amount of city jumps it takes
         for (int i = 0; i < 1000; i++) {
             Arrays.fill(travelCosts[i], Long.MAX_VALUE);
             Arrays.fill(moveCosts[i], Long.MAX_VALUE);
         }
-        Queue<long[]> frontier = new PriorityQueue<>((a, b) -> {
+        PriorityQueue<long[]> frontier = new PriorityQueue<>((a, b) -> {
             if (travelCosts[(int) a[0]][(int) a[1]] != travelCosts[(int) b[0]][(int) b[1]]) {
-                return (int) (travelCosts[(int) a[0]][(int) a[1]] - travelCosts[(int) b[0]][(int) b[1]]);
+                return travelCosts[(int) a[0]][(int) a[1]] - travelCosts[(int) b[0]][(int) b[1]] < 0 ? -1 : 1;
             }
             return (int) (moveCosts[(int) a[0]][(int) a[1]] - moveCosts[(int) b[0]][(int) b[1]]);
         });
@@ -57,6 +56,7 @@ public class CowRoute {
                 minCostMovement = moveCosts[curr[0]][curr[1]];
                 break;
             }
+
             long rnCost = travelCosts[curr[0]][curr[1]];
             long rnMoveCost = moveCosts[curr[0]][curr[1]] + 1;
             for (int[] n : canGoTo[curr[0]]) {
