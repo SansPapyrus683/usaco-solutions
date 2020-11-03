@@ -13,7 +13,7 @@ public class FairPhoto {
         cows = new int[cowNum][2];
         for (int c = 0; c < cowNum; c++) {
             StringTokenizer unparsed = new StringTokenizer(read.readLine());
-            // white = -1, spotted = 1
+            // white = -1, spotted = 1 (it's this way so the binary search below works)
             cows[c] = new int[] {Integer.parseInt(unparsed.nextToken()), unparsed.nextToken().equals("W") ? -1 : 1};
         }
         Arrays.sort(cows, Comparator.comparingInt(c -> c[0]));

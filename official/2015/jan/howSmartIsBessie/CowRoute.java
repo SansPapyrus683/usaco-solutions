@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.*;
 import java.util.stream.Stream;
 
-// 2015 jan silver (fails for 7 oof)
+// 2015 jan silver (fails for 6 oof)
 public class CowRoute {
     public static void main(String[] args) throws IOException {
         long timeStart = System.currentTimeMillis();
@@ -23,7 +23,7 @@ public class CowRoute {
             }
             for (int i = 0; i < path.length; i++) {
                 if (i + 1 < path.length) {  // if statement because of the end
-                    canGoTo[path[i]].add(new int[] {path[i + 1], p, cost});
+                    canGoTo[path[i]].add(new int[] {path[i + 1], p, cost});  // the city, plane id, and cost
                 }
             }
         }
@@ -35,22 +35,21 @@ public class CowRoute {
             Arrays.fill(moveCosts[i], Long.MAX_VALUE);
         }
         Queue<long[]> frontier = new PriorityQueue<>((a, b) -> {
-            if (a[0] != b[0]) {  // first compare the actual costs
-                return (int) (a[0] - b[0]);
-            } else {  // if 0, then compare the steps taken to get to the costs
-                return (int) (a[3] - b[3]);
+            if (travelCosts[(int) a[0]][(int) a[1]] != travelCosts[(int) b[0]][(int) b[1]]) {
+                return (int) (travelCosts[(int) a[0]][(int) a[1]] - travelCosts[(int) b[0]][(int) b[1]]);
             }
+            return (int) (moveCosts[(int) a[0]][(int) a[1]] - moveCosts[(int) b[0]][(int) b[1]]);
         });
-        frontier.add(new long[] {0L, (long) start, planeNum, 0L});  // priority, pos, plane id, moves taken
+        frontier.add(new long[] {(long) start, planeNum});  // city num and plane id
         travelCosts[start][planeNum] = 0;  // there actually is no route planeNum (bc 0 indexing)
         moveCosts[start][planeNum] = 0;  // im using it to just indicate no plane has been got on yet
 
         long minCost = Long.MAX_VALUE;
         long minCostMovement = Long.MAX_VALUE;
         while (!frontier.isEmpty()) {
-            long[] got = Arrays.copyOfRange(frontier.poll(), 1, 4);
-            int[] curr = new int[3];
-            for (int i = 0; i < 3; i++) {
+            long[] got = frontier.poll();
+            int[] curr = new int[2];
+            for (int i = 0; i < 2; i++) {
                 curr[i] = (int) got[i];
             }
             if (curr[0] == end) {
@@ -58,18 +57,16 @@ public class CowRoute {
                 minCostMovement = moveCosts[curr[0]][curr[1]];
                 break;
             }
+            long rnCost = travelCosts[curr[0]][curr[1]];
+            long rnMoveCost = moveCosts[curr[0]][curr[1]] + 1;
             for (int[] n : canGoTo[curr[0]]) {
-                long cost = curr[1] == n[1] ? travelCosts[curr[0]][curr[1]] :
-                                              travelCosts[curr[0]][curr[1]] + n[2];
+                long cost = rnCost;
+                cost += curr[1] != n[1] ? n[2] : 0;
                 if (cost < travelCosts[n[0]][n[1]] ||
-                        (travelCosts[n[0]][n[1]] == cost && curr[2] + 1 < moveCosts[n[0]][n[1]])) {
-                    System.out.printf("going from %s to %s, which costs %s          (it initially cost %s & %s moves)%n",
-                            Arrays.toString(curr),
-                            Arrays.toString(new long[] {(long) n[0], (long) n[1], curr[2] + 1}),
-                            cost, travelCosts[n[0]][n[1]], moveCosts[n[0]][n[1]]);
+                        (travelCosts[n[0]][n[1]] == cost && rnMoveCost < moveCosts[n[0]][n[1]])) {
                     travelCosts[n[0]][n[1]] = cost;
-                    moveCosts[n[0]][n[1]] = curr[2] + 1;
-                    frontier.add(new long[] {cost, (long) n[0], (long) n[1], curr[2] + 1});
+                    moveCosts[n[0]][n[1]] = rnMoveCost;
+                    frontier.add(new long[] {(long) n[0], (long) n[1]});
                 }
             }
         }
