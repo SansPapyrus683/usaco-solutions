@@ -2,6 +2,7 @@ import java.io.*;
 import java.util.*;
 import java.util.stream.Stream;
 
+// 2014 mar silver
 public class Lazy {
     static int side;
     static int[][] soFar;

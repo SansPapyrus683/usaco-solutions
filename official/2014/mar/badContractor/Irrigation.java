@@ -3,7 +3,7 @@ import java.util.*;
 
 // 2014 mar silver
 public class Irrigation {
-    static final int maxBound = 1001;
+    static final int MAX_BOUND = 1001;
     public static void main(String[] args) throws IOException {
         long timeStart = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("irrigation.in"));
@@ -21,8 +21,8 @@ public class Irrigation {
          * invalid distances are represented with MAX_VALUE
          */
         int cost = 0;
-        boolean[][] used = new boolean[maxBound][maxBound];  // many of them won't be used, but that's ok
-        int[][] distToTree = new int[maxBound][maxBound];
+        boolean[][] used = new boolean[MAX_BOUND][MAX_BOUND];  // many of them won't be used, but that's ok
+        int[][] distToTree = new int[MAX_BOUND][MAX_BOUND];
 
         int[] start = fields[0];
         used[start[0]][start[1]] = true;
@@ -60,7 +60,7 @@ public class Irrigation {
         written.println(cost);
         written.close();
         System.out.println(cost);
-        System.out.printf("yes, my lord. it took %d ms for the code to run.", System.currentTimeMillis() - timeStart);
+        System.out.printf("yes, my lord. it took %d ms for the code to run.%n", System.currentTimeMillis() - timeStart);
     }
 
     static int cost(int[] f1, int[] f2) {
