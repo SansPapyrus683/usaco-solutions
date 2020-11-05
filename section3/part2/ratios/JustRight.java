@@ -35,7 +35,7 @@ public class JustRight {
             }
         }
 
-        PrintWriter written = new PrintWriter("outputs.txt");
+        PrintWriter written = new PrintWriter("stamps.out");
         if (answer != null) {
             written.printf("%s %s %s %s%n", answer[0], answer[1], answer[2], answer[3]);
             System.out.printf("%s %s %s %s%n", answer[0], answer[1], answer[2], answer[3]);
