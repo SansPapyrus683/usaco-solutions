@@ -4,6 +4,7 @@ TASK: ratios
 LANG: JAVA
 */
 import java.io.*;
+import java.util.Arrays;
 import java.util.stream.Stream;
 
 public class JustRight {
@@ -26,7 +27,10 @@ public class JustRight {
         bruteForce:
         for (int f1 = 0; f1 < MAX_RATIO; f1++) {
             for (int f2 = 0; f2 < MAX_RATIO; f2++) {
-                for (int f3 = 0; f3 < MAX_RATIO && (f1 != 0 || f2 != 0 || f3 != 0); f3++) {
+                for (int f3 = 0; f3 < MAX_RATIO; f3++) {
+                    if (Arrays.equals(new int[] {f1, f2, f3}, new int[] {0, 0, 0})) {
+                        continue;
+                    }
                     if (goalRatio(new int[] {f1, f2, f3}) != -1) {
                         answer = new int[] {f1, f2, f3, goalRatio(new int[] {f1, f2, f3})};
                         break bruteForce;
