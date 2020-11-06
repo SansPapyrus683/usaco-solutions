@@ -29,8 +29,8 @@ public class Stamps {
         minToMake[0] = 0;
         for (int s : stamps) {
             for (int v = 0; v < minToMake.length; v++) {
-                // check if either a. that value already used up all the stamps or b. adding that is actually impossible (out of bounds)
-                if (minToMake[v] == maxStamps || !(0 <= v + s && v + s <= maxStamps * stamps.get(stamps.size() - 1))) {
+                // check if that value either can't be made or just alr used up all the stamps
+                if (minToMake[v] >= maxStamps) {
                     continue;
                 }
                 minToMake[v + s] = Math.min(minToMake[v + s], minToMake[v] + 1);
