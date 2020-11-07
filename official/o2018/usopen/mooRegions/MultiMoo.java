@@ -33,11 +33,16 @@ public class MultiMoo {
         }
 
         int maxDoubleSize = 0;
+        bruteForce:
         for (int r = 0; r < side; r++) {
             for (int c = 0; c < side; c++) {
                 for (int[] n : neighbors(r, c)) {
                     if (board[r][c] != board[n[0]][n[1]]) {
                         maxDoubleSize = Math.max(maxDoubleSize, twoRegionSize(new int[] {r, c}, n));
+                        // this optimization is essentially worthless but it makes it pass the test cases so what the hell
+                        if (maxDoubleSize == (int) Math.pow(side, 2)) {
+                            break bruteForce;
+                        }
                     }
                 }
             }
