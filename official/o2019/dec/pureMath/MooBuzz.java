@@ -1,5 +1,4 @@
 import java.io.*;
-import java.util.*;
 
 // 2019 dec silver (i swear this problem is just pure math)
 public class MooBuzz {
