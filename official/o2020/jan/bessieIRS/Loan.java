@@ -13,23 +13,25 @@ public class Loan {
             throw new IllegalArgumentException("invalid input (according to the problem)");
         }
 
+        long validSoFar = -1;
         long lowerBound = 1;
         long upperBound = (long) Math.pow(10, 12);
-        while (lowerBound < upperBound) {
-            long toSearch = (lowerBound + upperBound + 1) / 2;
+        while (lowerBound <= upperBound) {
+            long toSearch = (lowerBound + upperBound) / 2;
             boolean validX = paidBeforeDeadline(milkOwed, deadline, dayReq, toSearch);
             if (validX) {
-                lowerBound = toSearch;
+                lowerBound = toSearch + 1;
+                validSoFar = toSearch;
             } else {
                 upperBound = toSearch - 1;
             }
         }
 
         PrintWriter written = new PrintWriter("loan.out");
-        written.println(lowerBound);
+        written.println(validSoFar);
         written.close();
-        System.out.println(lowerBound);
-        System.out.printf("for you, it took %d ms... acceptable.", System.currentTimeMillis() - start);
+        System.out.println(validSoFar);
+        System.out.printf("for you, it took %d ms... acceptable.%n", System.currentTimeMillis() - start);
     }
 
     static boolean paidBeforeDeadline(long milkOwed, long deadline, long dayReq, long xVal) {
