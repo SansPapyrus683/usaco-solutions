@@ -7,13 +7,11 @@ bessies_cards.sort()
 
 points = 0
 for c in elsies_cards:
+    # binsearch for the lowest card that bessie can play that's larger than elsie's
     supposed_card_loc = bisect_right(bessies_cards, c)
-    if supposed_card_loc >= len(bessies_cards):
+    if supposed_card_loc >= len(bessies_cards):  # larger than all card? screw this
         continue
-    card_to_play = bessies_cards[supposed_card_loc]
     points += 1
-    if supposed_card_loc == len(bessies_cards) - 1:
-        break
     del bessies_cards[supposed_card_loc]
 
 with open('highcard.out', 'w') as written:
