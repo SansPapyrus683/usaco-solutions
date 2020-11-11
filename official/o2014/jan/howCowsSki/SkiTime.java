@@ -7,7 +7,7 @@ import java.util.*;
  * 2014 jan silver i think (if i name this ccski intellij has a seizure)
  * just a disclaimer i mean
  * there's a boolean called inGeneral
- * if you set it to fales, it'll def run on the grader but it'll fail for some test cases
+ * if you set it to false, it'll def run on the grader but it'll fail for some test cases
  * if you leave it as true, it'll go for all test cases but it might fail on the grader
  */
 public class SkiTime {
