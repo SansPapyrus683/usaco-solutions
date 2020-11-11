@@ -14,7 +14,8 @@ public class CowFundraising {
             cows[i] = new Cow(Integer.parseInt(unparsed[0]), Integer.parseInt(unparsed[1]), Integer.parseInt(unparsed[2]));
         }
         Arrays.sort(cows, Comparator.comparingInt(c -> c.y));
-        ArrayList<Cow> seen = new ArrayList<>();
+
+        int seen = 0;
         ArrayList<int[]> coveredIntervals = new ArrayList<>();
         for (Cow c : cows) {
             int[] inFrontTimes = new int[] {(-c.x - 1) * c.speed, -c.x * c.speed};  // x is always negative dw
@@ -26,27 +27,16 @@ public class CowFundraising {
                 }
             }
             if (!blocked) {
-                seen.add(c);
+                seen++;
                 insertIntoIntervals(coveredIntervals, inFrontTimes);
             }
         }
 
         PrintWriter written = new PrintWriter(new FileOutputStream("stampede.out"));
-        written.println(seen.size());
+        written.println(seen);
         written.close();
-        System.out.println(seen.size());
+        System.out.println(seen);
         System.out.printf("AOIJDSAPAPAPAPA took %d ms", System.currentTimeMillis() - start);
-    }
-
-    static void arrayListArray(List<int[]> toPrint) {
-        if (toPrint.size() == 0) {
-            System.out.println("[]");
-            return;
-        }
-        for (int[] asdf : toPrint) {
-            System.out.printf("%s ", Arrays.toString(asdf));
-        }
-        System.out.println();
     }
 
     static boolean overlap(int[] a, int[] b) {
@@ -82,7 +72,6 @@ public class CowFundraising {
                 int[] middleman = new int[] {Math.min(currInterval[0], toInsert[0]), Integer.MAX_VALUE};
                 while (i < insertTo.size() && overlapExisting) {
                     middleman[1] = Math.max(insertTo.get(i)[1], toInsert[1]);
-                    // simplified version of: i == allIntervals.size() - 1 ? false : overlap(allIntervals.get(i + 1), toInsert);
                     if (i == insertTo.size() - 1) {
                         overlapExisting = false;
                     } else {
