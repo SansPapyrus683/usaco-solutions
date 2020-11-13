@@ -41,7 +41,7 @@ public class Split {
         maxY = cows[0][1];
         int atCow = 0;
         for (int x : xVals.subList(0, xVals.size() - 1)) {  // try and split the field horizontally first
-            while (atCow < cowNum && cows[atCow + 1][0] <= x) {
+            while (cows[atCow + 1][0] <= x) {  // move the pointer and pop the thing until it matches the coo
                 atCow++;
                 rightSideCows.poll();
                 int[] cow = cows[atCow];
@@ -63,7 +63,7 @@ public class Split {
         maxX = cows[0][0];
         atCow = 0;
         for (int y : yVals.subList(0, yVals.size() - 1)) {
-            while (atCow < cowNum && cows[atCow + 1][1] <= y) {  // move the pointer and pop the thing until it matches the y coo
+            while (cows[atCow + 1][1] <= y) {
                 atCow++;
                 aboveCows.poll();
                 int[] cow = cows[atCow];
