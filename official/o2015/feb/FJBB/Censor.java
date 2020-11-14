@@ -3,16 +3,16 @@ import java.util.*;
 
 // 2015 feb silver
 public class Censor {
+    private static final long MOD = (long) (Math.pow(10, 9)) + 9;
+    private static final long POWER = 31;  // some website told me to do this
     static long[] hashPowers = new long[1000000];
-    static final long mod = (long) (Math.pow(10, 9)) + 9;
-    static final long power = 31;  // some website told me to do this
 
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         long nowPower = 1;
         for (int i = 0; i < 1000000; i++) {  // precompute power (takes surprisingly little time)
             hashPowers[i] = nowPower;
-            nowPower = (nowPower * power) % mod;
+            nowPower = (nowPower * POWER) % MOD;
         }
 
         BufferedReader read = new BufferedReader(new FileReader("censor.in"));
@@ -28,7 +28,7 @@ public class Censor {
     }
 
     static long hashConcat(long rnHashVal, int nowStrLen, long toAdd) {
-        return (rnHashVal + toAdd * hashPowers[nowStrLen]) % mod;
+        return (rnHashVal + toAdd * hashPowers[nowStrLen]) % MOD;
     }
 
     static String clean(String toCensor, String badWord) {
@@ -46,9 +46,9 @@ public class Censor {
             
             int headIndex = Math.max(index - badWord.length(), 0);
             prevHashCodes[index] = hashConcat(prevHashCodes[index - 1], index - 1, c - 'a' + 1);
-            long currViewHash = (prevHashCodes[index] - prevHashCodes[headIndex]) % mod;
-            currViewHash += currViewHash >= 0 ? 0 : mod;  // java's modulus function sucks butt
-            if (currViewHash == (badHashCode * hashPowers[headIndex]) % mod) {  // no divisibility issues now ha
+            long currViewHash = (prevHashCodes[index] - prevHashCodes[headIndex]) % MOD;
+            currViewHash += currViewHash >= 0 ? 0 : MOD;  // java's modulus function sucks butt
+            if (currViewHash == (badHashCode * hashPowers[headIndex]) % MOD) {  // no divisibility issues now ha
                 index -= badWord.length();  // reset the pointer back to "checkpoint"? idk
             }
         }

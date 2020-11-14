@@ -5,7 +5,7 @@ import java.util.stream.Stream;
 // 2019 silver december (did this after gold)
 public class MilkVisitsSilver {
 
-    static final long MAX_DEPTH = 100000;
+    private static final long MAX_DEPTH = 100000;
     static int farmNum;
     static int friendNum;
     static int[] types;

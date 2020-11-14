@@ -4,7 +4,7 @@ import java.util.stream.Stream;
 
 // 2016 usopen silver
 public class Reduce {
-    static final int REMOVED = 3;
+    private static final int REMOVED = 3;
     static ArrayList<int[]> leastX = new ArrayList<>();
     static ArrayList<int[]> mostX = new ArrayList<>();
     static ArrayList<int[]> leastY = new ArrayList<>();

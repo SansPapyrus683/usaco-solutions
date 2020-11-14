@@ -8,7 +8,7 @@ import java.util.*;
 import java.util.stream.Stream;
 
 public class Stamps {
-    static final int INVALID = 420696969;  // stupid integer overflow
+    private static final int INVALID = 420696969;  // stupid integer overflow
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("stamps.in"));

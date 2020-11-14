@@ -3,7 +3,7 @@ import java.util.*;
 
 // 2014 mar silver
 public class Irrigation {
-    static final int MAX_BOUND = 1001;
+    private static final int MAX_BOUND = 1001;
     public static void main(String[] args) throws IOException {
         long timeStart = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("irrigation.in"));

@@ -4,7 +4,7 @@ import java.util.stream.Stream;
 
 // 2018 feb silver
 public class SnowBoots {
-    static final int INVALID = 420696969;
+    private static final int INVALID = 420696969;
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("snowboots.in"));

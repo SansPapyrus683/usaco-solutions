@@ -2,7 +2,7 @@ import java.io.*;
 
 // 2019 feb silver
 public class PaintBarn {
-    static final int BARN_WIDTH = 1000;
+    private static final int BARN_WIDTH = 1000;
 
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();

@@ -3,7 +3,7 @@ import java.util.*;
 
 // 2014 feb silver
 public class SCode {
-    static final int mod = 2014;
+    private static final int MOD = 2014;
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         String encrypted =  new BufferedReader(new FileReader("scode.in")).readLine();
@@ -18,9 +18,9 @@ public class SCode {
             String current = frontier.poll();
             int currMultiplier = waysToGet.get(current);
             for (String n : validFrom(current)) {
-                opWays = (opWays + currMultiplier) % mod;
+                opWays = (opWays + currMultiplier) % MOD;
                 if (waysToGet.containsKey(n)) {
-                    waysToGet.put(n, (waysToGet.get(n) + currMultiplier) % mod);
+                    waysToGet.put(n, (waysToGet.get(n) + currMultiplier) % MOD);
                 } else {
                     waysToGet.put(n, currMultiplier);  // multipliers should carry on
                     frontier.add(n);

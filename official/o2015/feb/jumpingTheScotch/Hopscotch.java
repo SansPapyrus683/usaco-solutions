@@ -4,7 +4,7 @@ import java.util.stream.Stream;
 
 // 2015 feb silver
 public class Hopscotch {
-    static final long mod = 1000000007L;  // idk why they chose this number i mean
+    private static final long MOD = 1000000007L;  // idk why they chose this number i mean
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("hopscotch.in"));
@@ -43,9 +43,9 @@ public class Hopscotch {
             }
 
             long numWays = multipliers[current[0]][current[1]];
-            long increment = (numWays * (canGoTo.size() - 1)) % mod;
-            validWays = (validWays + increment) % mod;
-            validWays += validWays < 0 ? mod : 0;
+            long increment = (numWays * (canGoTo.size() - 1)) % MOD;
+            validWays = (validWays + increment) % MOD;
+            validWays += validWays < 0 ? MOD : 0;
 
             for (int[] n : canGoTo) {
                 if (Arrays.equals(n, end)) {  // nowhere to go from the end
@@ -55,14 +55,14 @@ public class Hopscotch {
                 if (multipliers[n[0]][n[1]] == 0) {  // =0 means that it's not explored
                     frontier.add(n);
                 }
-                multipliers[n[0]][n[1]] = (multipliers[n[0]][n[1]] + numWays) % mod;
+                multipliers[n[0]][n[1]] = (multipliers[n[0]][n[1]] + numWays) % MOD;
             }
         }
 
         PrintWriter written = new PrintWriter(new FileOutputStream("hopscotch.out"));
-        written.println(validWays % mod);  // just in case
+        written.println(validWays % MOD);  // just in case
         written.close();
-        System.out.println(validWays % mod);
+        System.out.println(validWays % MOD);
         System.out.printf("ok took %d ms i am 120938741209384%% sure%n", System.currentTimeMillis() - start);
     }
 }

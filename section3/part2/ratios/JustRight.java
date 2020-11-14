@@ -8,9 +8,9 @@ import java.util.Arrays;
 import java.util.stream.Stream;
 
 public class JustRight {
-    public static final int FEED_NUM = 3;
-    public static final int NUTRIENT_NUM = 3;
-    public static final int MAX_RATIO = 100;
+    private static final int FEED_NUM = 3;
+    private static final int NUTRIENT_NUM = 3;
+    private static final int MAX_RATIO = 100;
     static int[] goal = new int[FEED_NUM];
     static int[][] mixes = new int[FEED_NUM][NUTRIENT_NUM];
 
