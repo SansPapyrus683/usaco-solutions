@@ -14,6 +14,7 @@ public class Diamond {
             diamonds[d] = Integer.parseInt(read.readLine());
         }
 
+        // before you say that this is n^2 and it shouldn't work- it does and i don't know why lol
         int[] canBeStored = caseStored(diamonds, maxSizeDiff);
         int max = 0;
         for (int d = 0; d < diamondNum; d++) {  // brute force all meaningful case combinations
