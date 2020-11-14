@@ -10,7 +10,7 @@ with open('berries.in') as read:
             trees = trees[:basketNum]  # bessie can only fill so many baskets anyways
 
 maxBerries = 0
-for b in range(1, bestTree + 1):  # just try to give elsie no more than bessie
+for b in range(1, bestTree + 1):  # just try to give elsie no more than bessie bc why would we do that
     tempTrees = trees.copy()
     basketsLeft = basketNum
     gottenBerries = 0
@@ -40,4 +40,4 @@ for b in range(1, bestTree + 1):  # just try to give elsie no more than bessie
 
 with open('berries.out', 'w') as written:
     print(maxBerries)
-    written.write(f'{maxBerries}\n')
+    written.write(str(maxBerries) + "\n")
