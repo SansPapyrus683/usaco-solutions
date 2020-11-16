@@ -18,8 +18,7 @@ public class Loan {
         long upperBound = (long) Math.pow(10, 12);
         while (lowerBound <= upperBound) {
             long toSearch = (lowerBound + upperBound) / 2;
-            boolean validX = paidBeforeDeadline(milkOwed, deadline, dayReq, toSearch);
-            if (validX) {
+            if (paidBeforeDeadline(milkOwed, deadline, dayReq, toSearch)) {
                 lowerBound = toSearch + 1;
                 validSoFar = toSearch;
             } else {
