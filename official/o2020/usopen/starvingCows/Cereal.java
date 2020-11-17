@@ -2,6 +2,7 @@ import java.io.*;
 import java.util.*;
 import java.util.stream.Stream;
 
+// 2020 usopen silver
 public class Cereal {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
