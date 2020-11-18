@@ -12,6 +12,7 @@ with open('triangles.in') as read:
         if v > 0:
             coordinates.append(tuple([int(i) for i in line.rstrip().split()]))
 
+
 def slope(p1, p2):
     try:
         s = -((p1[1] - p2[1]) / (p1[0] - p2[0]))
@@ -19,12 +20,13 @@ def slope(p1, p2):
         s = float("inf")
     return s
 
+
 maxArea = 0
 for (a, b, c) in combinations(coordinates, 3):
     if slope(a, b) == slope(b, c):  # stupid collinear things
         continue
 
-    possArea = 0
+    possArea = 0  # no idea why this code exists, maybe just to handle all the stupid edge cases
     if (a[0] == b[0] or b[0] == c[0] or a[0] == c[0]) and (a[1] == b[1] or b[1] == c[1] or a[1] == c[1]):
         if a[0] == b[0]:
             firstLen = abs(a[1] - b[1])
