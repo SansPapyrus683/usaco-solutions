@@ -6,7 +6,7 @@ public class Template {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("README.md"));
-        StringTokenizer test = new StringTokenizer(read.readLine());
+        StringTokenizer test = new StringTokenizer(read.readLine());  // some random placeholder code
         while (test.hasMoreTokens()) {
             System.out.println(test.nextToken());
         }
