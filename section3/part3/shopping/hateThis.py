@@ -47,17 +47,20 @@ cached = deepcopy(allOffers)
 def subtract(rn: [int], offer_: [int]) -> [int]:
     return tuple([o1 - o2 for o1, o2 in zip(rn, offer_)])
 
-def valid(shoppingList: (int,)):
+
+def valid(shoppingList: (int,)) -> bool:
     for i in shoppingList:
         if i < 0:
             return False
     return True
 
-def empty(shoppingList: (int,)):
+
+def empty(shoppingList: (int,)) -> bool:
     for i in shoppingList:
         if i != 0:
             return False
     return True
+
 
 def findLowestCost(shoppingList: (int,)) -> int:
     if shoppingList in cached:
