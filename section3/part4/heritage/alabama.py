@@ -3,7 +3,6 @@ ID: kevinsh4
 TASK: heritage
 LANG: PYTHON3
 """
-
 with open('heritage.in') as read:
     inorder = list(read.readline().strip())  # the left, root, right
     preorder = list(read.readline().strip())  # the root, left, right
