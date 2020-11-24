@@ -10,12 +10,11 @@ public class BCount {
         int cowNum = Integer.parseInt(initial.nextToken());
         int queryNum = Integer.parseInt(initial.nextToken());
 
-        int[] cows = new int[cowNum + 1];  // to make prefix summing easier, we won't use index 0
-        int[][] soFar = new int[cowNum + 1][3];
+        int[][] soFar = new int[cowNum + 1][3];  // to make prefix summing easier, we won't use index 0
         for (int c = 1; c < cowNum + 1; c++) {
-            cows[c] = Integer.parseInt(read.readLine());
+            int cow = Integer.parseInt(read.readLine());
             soFar[c] = soFar[c - 1].clone();
-            soFar[c][cows[c] - 1]++;
+            soFar[c][cow - 1]++;
         }
 
         // printing out all the answers to stdout takes too long so no stdout this time

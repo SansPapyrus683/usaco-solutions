@@ -35,7 +35,7 @@ public class SkiTime {
             StringTokenizer row = new StringTokenizer(read.readLine());
             for (int c = 0; c < length; c++) {
                 hills[i][c] = Integer.parseInt(row.nextToken());
-                upperBound = Math.max(upperBound, hills[i][c]);  // the upperbound can only be SO large as the max hill
+                upperBound = Math.max(upperBound, hills[i][c]);  // the upperbound can only be as large as the max hill
                 if (!inGeneral) {
                     lowerBound = Math.min(lowerBound, hills[i][c]);  // set an arbitrary lower bound
                 }
