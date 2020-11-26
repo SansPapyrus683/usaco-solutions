@@ -1,17 +1,19 @@
 import java.util.*;
 import java.io.*;
 
-// 2014 silver dec contest
-// somehow even though this should take smth like n^2 operations it still worked
-// w h a t
+/*
+ * 2014 dec silver
+ * somehow even though this should take smth like n^2 operations it still worked
+ */
 public class CowJog {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
-        JoggingReader read = new JoggingReader("cowjog.in");
-        int[][] cows = new int[read.nextInt()][2];
-        int time = read.nextInt();
+        BufferedReader read = new BufferedReader(new FileReader("cowjog.in"));
+        StringTokenizer initial = new StringTokenizer(read.readLine());
+        int[][] cows = new int[Integer.parseInt(initial.nextToken())][2];
+        int time = Integer.parseInt(initial.nextToken());
         for (int i = 0; i < cows.length; i++) {
-            cows[i] = new int[] {read.nextInt(), read.nextInt()};  // they're alr sorted, just so you know
+            cows[i] = Arrays.stream(read.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();  // they're alr sorted, just so you know
         }
 
         int[][] simulationCows = new int[cows.length][2];  // stupid pass-by-reference
@@ -56,53 +58,5 @@ public class CowJog {
         written.close();
         System.out.println(groups.size());
         System.out.printf("ok so it took around %d ms%n", System.currentTimeMillis() - start);
-    }
-}
-
-class JoggingReader {
-    final private int BUFFER_SIZE = 1 << 16;
-    private DataInputStream din;
-    private byte[] buffer;
-    private int bufferPointer, bytesRead;
-
-    public JoggingReader(String fileName) throws IOException {
-        din = new DataInputStream(new FileInputStream(fileName));
-        buffer = new byte[BUFFER_SIZE];
-        bufferPointer = bytesRead = 0;
-    }
-
-    public int nextInt() throws IOException {
-        int ret = 0;
-        byte c = read();
-        while (c <= ' ')
-            c = read();
-        boolean neg = (c == '-');
-        if (neg)
-            c = read();
-        do {
-            ret = ret * 10 + c - '0';
-        } while ((c = read()) >= '0' && c <= '9');
-
-        if (neg)
-            return -ret;
-        return ret;
-    }
-
-    private void fillBuffer() throws IOException {
-        bytesRead = din.read(buffer, bufferPointer = 0, BUFFER_SIZE);
-        if (bytesRead == -1)
-            buffer[0] = -1;
-    }
-
-    private byte read() throws IOException {
-        if (bufferPointer == bytesRead)
-            fillBuffer();
-        return buffer[bufferPointer++];
-    }
-
-    public void close() throws IOException {
-        if (din == null)
-            return;
-        din.close();
     }
 }
