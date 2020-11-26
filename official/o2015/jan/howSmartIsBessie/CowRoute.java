@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.*;
 import java.util.stream.Stream;
 
-// 2015 jan silver (fails for 6 oof)
+// 2015 jan silver
 public class CowRoute {
     public static void main(String[] args) throws IOException {
         long timeStart = System.currentTimeMillis();
@@ -47,17 +47,21 @@ public class CowRoute {
         int minCostMovement = Integer.MAX_VALUE;
         while (!frontier.isEmpty()) {
             int[] curr = frontier.poll();
-            if (curr[0] == end) {
-                minCost = travelCosts[curr[0]][curr[1]];
-                minCostMovement = moveCosts[curr[0]][curr[1]];
-                break;
-            }
-
             long rnCost = travelCosts[curr[0]][curr[1]];
             int rnMoveCost = moveCosts[curr[0]][curr[1]] + 1;
+
+            if (curr[0] == end) {
+                if (rnCost < minCost) {
+                    minCost = rnCost;
+                    minCostMovement = rnMoveCost - 1;  // -1 because we're already at the end, why that +1 above lol
+                } else if (rnCost == minCost) {
+                    minCostMovement = Math.min(minCostMovement, rnMoveCost - 1);
+                }
+                continue;  // sometimes the algo glitches out, so don't break- just continue
+            }
             for (int[] n : canGoTo[curr[0]]) {
                 long cost = rnCost;
-                cost += curr[1] != n[1] ? n[2] : 0;
+                cost += curr[1] != n[1] ? n[2] : 0;  // if we're continuing on that plane, don't add the cost
                 if (cost < travelCosts[n[0]][n[1]] ||
                         (travelCosts[n[0]][n[1]] == cost && rnMoveCost < moveCosts[n[0]][n[1]])) {
                     travelCosts[n[0]][n[1]] = cost;

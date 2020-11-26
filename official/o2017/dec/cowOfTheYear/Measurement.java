@@ -17,7 +17,6 @@ public class Measurement {
             // time taken, cow id, milk change
             int[] measurement = Arrays.stream(read.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
             measurements[m] = measurement;
-            assert measurement[2] != 0;
             if (!cowToMilk.containsKey(measurement[1])) {
                 cowToMilk.put(measurement[1], initialMilk);
                 milkToCows.get(initialMilk).add(measurement[1]);
