@@ -1,3 +1,4 @@
+# 2020 usopen bronze
 def spreadSimulation(cowNum, pZero, spreadTimes, handshakes):
     cows = [False for _ in range(cowNum)]
     cows[pZero] = True

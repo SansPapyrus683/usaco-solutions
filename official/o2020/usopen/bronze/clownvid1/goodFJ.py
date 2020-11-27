@@ -1,6 +1,7 @@
 import sys
 import math
 
+# 2020 usopen bronze
 with open('socdist1.in') as read:
     read.readline()
     stalls = [s == '1' for s in read.readline().rstrip()]

@@ -1,3 +1,4 @@
+# 2020 usopen bronze
 cows = []
 with open('socdist2.in') as read:
     read.readline()
