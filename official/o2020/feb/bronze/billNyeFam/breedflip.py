@@ -7,7 +7,7 @@ with open('breedflip.in') as read:
             haveRN = tuple(c == 'H' for c in line.rstrip())
 
 differenceList = [v for v, c in enumerate(haveRN) if needed[v] != c]  # true if different, false it not
-print(differenceList)
+
 consec = []
 curr = []
 firstTime = True

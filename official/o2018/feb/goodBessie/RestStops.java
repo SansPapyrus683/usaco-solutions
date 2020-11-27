@@ -1,20 +1,23 @@
 import java.io.*;
+import java.util.StringTokenizer;
 
 // 2018 feb silver
 public class RestStops {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
-        RestfulReader read = new RestfulReader("reststops.in");
-        read.nextInt();  // lol the trail length is irrelevant
-        int restStopNum = read.nextInt();
-        int farmerSpeed = read.nextInt();  // NOTE TO SELF: IT'S SECONDS PER METER
-        int bessieSpeed = read.nextInt();
+        BufferedReader read = new BufferedReader(new FileReader("reststops.in"));
+        StringTokenizer initial = new StringTokenizer(read.readLine());
+        initial.nextToken(); // lol the trail length is irrelevant
+        int restStopNum = Integer.parseInt(initial.nextToken());
+        int farmerSpeed = Integer.parseInt(initial.nextToken());  // NOTE TO SELF: IT'S SECONDS PER METER
+        int bessieSpeed = Integer.parseInt(initial.nextToken());
 
         long[] positions = new long[restStopNum];  // we're dealing with huge numbers here boys
         long[] goodGrass = new long[restStopNum];
         for (int i = 0; i < restStopNum; i++) {
-            positions[i] = read.nextInt();
-            goodGrass[i] = read.nextInt();
+            StringTokenizer stop = new StringTokenizer(read.readLine());
+            positions[i] = Integer.parseInt(stop.nextToken());
+            goodGrass[i] = Integer.parseInt(stop.nextToken());
         }
 
         boolean[] goodOnes = new boolean[restStopNum];
@@ -45,52 +48,3 @@ public class RestStops {
         System.out.printf("so it took about %d ms to finish", System.currentTimeMillis() - start);
     }
 }
-
-class RestfulReader {
-    final private int BUFFER_SIZE = 1 << 16;
-    private DataInputStream din;
-    private byte[] buffer;
-    private int bufferPointer, bytesRead;
-
-    public RestfulReader(String file_name) throws IOException {
-        din = new DataInputStream(new FileInputStream(file_name));
-        buffer = new byte[BUFFER_SIZE];
-        bufferPointer = bytesRead = 0;
-    }
-
-    public int nextInt() throws IOException {
-        int ret = 0;
-        byte c = read();
-        while (c <= ' ')
-            c = read();
-        boolean neg = (c == '-');
-        if (neg)
-            c = read();
-        do {
-            ret = ret * 10 + c - '0';
-        } while ((c = read()) >= '0' && c <= '9');
-
-        if (neg)
-            return -ret;
-        return ret;
-    }
-
-    private void fillBuffer() throws IOException {
-        bytesRead = din.read(buffer, bufferPointer = 0, BUFFER_SIZE);
-        if (bytesRead == -1)
-            buffer[0] = -1;
-    }
-
-    private byte read() throws IOException {
-        if (bufferPointer == bytesRead)
-            fillBuffer();
-        return buffer[bufferPointer++];
-    }
-
-    public void close() throws IOException {
-        if (din == null)
-            return;
-        din.close();
-    }
-}
-
