@@ -4,20 +4,6 @@ def peakTotal(peak, end):
 
 
 def peakHeight(dist, end):  # given dist and end, find the maximum peak so we <= the dist
-    # sometimes we actually accelerate to the finish line before we get to the end speed
-    # so we binsearch for the least time that still stays below
-    validSoFar = end
-    lowerBound = 1
-    upperBound = end
-    while lowerBound <= upperBound:
-        toSearch = (lowerBound + upperBound) // 2
-        if toSearch * (toSearch + 1) // 2 <= dist:
-            lowerBound = toSearch + 1
-            validSoFar = toSearch
-        else:
-            upperBound = toSearch - 1
-    end = validSoFar
-
     lowerBound = 1
     upperBound = dist
     height_ = -1
@@ -28,7 +14,7 @@ def peakHeight(dist, end):  # given dist and end, find the maximum peak so we <=
             lowerBound = toSearch + 1
         else:
             upperBound = toSearch - 1
-    return height_, end
+    return height_
 
 
 # the minimum amt of numbers we have to use (numbers can range from 1 to maxNum) to get to sumTo
@@ -44,11 +30,19 @@ with open('race.in') as read:
     distance, queryNum = [int(i) for i in read.readline().split()]
     queries = [int(read.readline()) for _ in range(queryNum)]
 
+maxSpeedUp = 0
+while True:  # we can only speed up so much before we hit the finish line, let's see what that bound is
+    maxSpeedUp += 1
+    if maxSpeedUp * (maxSpeedUp + 1) // 2 > distance:
+        maxSpeedUp -= 1
+        break
+
 minTimes = []
 for q in queries:
-    height, endSpeed = peakHeight(distance, q)
-    minTimes.append(int((2 * height - endSpeed) +  # initial time (straight to the peak and down to the end)
-                        minSumNum(height, distance - peakTotal(height, endSpeed))))  # padding to get to the finish line
+    q = min(q, maxSpeedUp)
+    height = peakHeight(distance, q)
+    minTimes.append(int((2 * height - q) +  # initial time (straight to the peak and down to the end)
+                        minSumNum(height, distance - peakTotal(height, q))))  # padding to get to the finish line
 
 print(minTimes)
 with open('race.out', 'w') as written:
