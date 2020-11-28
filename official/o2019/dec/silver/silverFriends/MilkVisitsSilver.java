@@ -2,9 +2,8 @@ import java.io.*;
 import java.util.*;
 import java.util.stream.Stream;
 
-// 2019 gold december (it took two whole weeks lol)
-public class MilkVisits {
-
+// 2019 silver december (did this after gold)
+public class MilkVisitsSilver {
     private static final long MAX_DEPTH = 100000;
     static int farmNum;
     static int friendNum;
@@ -22,7 +21,11 @@ public class MilkVisits {
         StringTokenizer initial = new StringTokenizer(read.readLine());
         farmNum = Integer.parseInt(initial.nextToken());
         friendNum = Integer.parseInt(initial.nextToken());
-        types = Stream.of(read.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
+        char[] rawTypes = read.readLine().toCharArray();
+        types = new int[farmNum];
+        for (int i = 0; i < farmNum; i++) {
+            types[i] = rawTypes[i] == 'H' ? 1 : 0;
+        }
 
         happiness = new char[friendNum];
         Arrays.fill(happiness, '0');
@@ -50,7 +53,7 @@ public class MilkVisits {
             StringTokenizer query = new StringTokenizer(read.readLine());
             int from = Integer.parseInt(query.nextToken());
             int to = Integer.parseInt(query.nextToken());
-            int milk = Integer.parseInt(query.nextToken());
+            int milk = query.nextToken().equals("H") ? 1 : 0;
             nodeQueries[from].add(new int[] {fn, milk});
             nodeQueries[to].add(new int[] {fn, milk});
             queryLookup[fn] = new int[] {from, to};
@@ -65,7 +68,7 @@ public class MilkVisits {
         System.out.printf("so we finished: it took something like %s milliseconds %n", System.currentTimeMillis() - start);
     }
 
-    static void traverseRecordTimes(int startNode) {
+    private static void traverseRecordTimes(int startNode) {
         int movesTaken = 0;
         HashSet<Integer> traversed = new HashSet<>();
         LinkedList<Integer> frontier = new LinkedList<>();  // use it for its queue capability
@@ -90,16 +93,16 @@ public class MilkVisits {
         }
     }
 
-    static boolean fatherTest(int possDad, int possKid) {
+    private static boolean fatherTest(int possDad, int possKid) {
         return inTimes[possDad] <= inTimes[possKid] && outTimes[possDad] >= outTimes[possKid];
     }
 
-    static void actualSol(int startNode) {
+    private static void actualSol(int startNode) {
         HashSet<Integer> traversed = new HashSet<>();
         LinkedList<int[]> frontier = new LinkedList<>();
         frontier.add(new int[] {startNode, 0});
 
-        int[] stack = new int[(int) farmNum];
+        int[] stack = new int[farmNum];
         ArrayList<Long>[] seenTypes = new ArrayList[farmNum + 1];
         for (int i = 0; i < farmNum + 1; i++) {
             seenTypes[i] = new ArrayList<>();
