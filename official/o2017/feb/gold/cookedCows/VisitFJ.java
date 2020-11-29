@@ -4,8 +4,8 @@ import java.util.*;
 // 2017 feb gold
 public class VisitFJ {
     // we count bessie's moves as "3 jumps", and that's why these arrays are so huge
-    static final int[] CHANGE_R = new int[] {0, 0, 0,  0,  1,  1, 1, -1, -1, -1, 2,  2, -2, -2, 3, 3, -3, -3};
-    static final int[] CHANGE_C = new int[] {-3, 3, 1, -1, -2, 0, 2, -2, 0,  2,  -1, 1, -1, 1,  0, 0, 0,  0};
+    private static final int[] CHANGE_R = new int[] {0, 0, 0,  0,  1,  1, 1, -1, -1, -1, 2,  2, -2, -2, 3, 3, -3, -3};
+    private static final int[] CHANGE_C = new int[] {-3, 3, 1, -1, -2, 0, 2, -2, 0,  2,  -1, 1, -1, 1,  0, 0, 0,  0};
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("visitfj.in"));

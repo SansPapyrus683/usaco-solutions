@@ -12,8 +12,8 @@ public class CountCross {
         }
     }
 
-    static final int[] CHANGE_X = new int[] {1, -1, 0, 0};
-    static final int[] CHANGE_Y = new int[] {0, 0, 1, -1};
+    private static final int[] CHANGE_X = new int[] {1, -1, 0, 0};
+    private static final int[] CHANGE_Y = new int[] {0, 0, 1, -1};
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("countcross.in"));
