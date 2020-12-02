@@ -1,5 +1,6 @@
 from string import ascii_lowercase
 
+# 2016 dec bronze
 words = []
 with open('blocks.in') as read:
     for i in range(int(read.readline())):

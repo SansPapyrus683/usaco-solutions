@@ -3,7 +3,6 @@ import java.util.*;
 
 // 2016 jan silver
 public class Angry {
-    private static final int MAX_DIST = (int) Math.pow(10, 9);
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("angry.in"));
@@ -18,7 +17,7 @@ public class Angry {
 
         int validSoFar = -1;
         int lowerBound = 0;
-        int upperBound = MAX_DIST;
+        int upperBound = (int) Math.pow(10, 9);
         while (lowerBound <= upperBound) {
             int toSearch = (lowerBound + upperBound) / 2;
             if (canKillAll(cows, toSearch, haybales)) {
@@ -33,7 +32,7 @@ public class Angry {
         written.println(validSoFar);
         written.close();
         System.out.println(validSoFar);
-        System.out.printf("bruh why did you run this code that took %d ms lol%n", System.currentTimeMillis() - start);
+        System.out.printf("wait until rovio sues bessie for copyright infringement lol: %d ms%n", System.currentTimeMillis() - start);
     }
 
     static boolean canKillAll(int cows, int power, int[] haybales) {  // assumes haybales is sorted, which we did do above
