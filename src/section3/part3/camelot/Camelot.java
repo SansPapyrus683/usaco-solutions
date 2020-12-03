@@ -80,7 +80,6 @@ public class Camelot {
             }
         }
 
-        System.out.println(best);
         PrintWriter written = new PrintWriter("camelot.out");
         written.println(best);
         written.close();

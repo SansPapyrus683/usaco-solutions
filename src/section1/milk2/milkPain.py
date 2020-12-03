@@ -10,7 +10,6 @@ with open('milk2.in') as read:
         intervals.append([int(i) for i in read.readline().rstrip().split()])
 
 intervals.sort()
-print(intervals)
 maxMilkingTime = 0
 maxPassiveTime = 0
 start = intervals[0][0]
