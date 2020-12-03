@@ -1,3 +1,5 @@
+package official.o2017.feb.gold.cookedCows3;
+
 import java.io.*;
 import java.util.*;
 
@@ -42,7 +44,7 @@ public class CircleCross {
 
     // copied from https://www.geeksforgeeks.org/queries-number-distinct-elements-subarray/?ref=rp
     static class BITree {
-        private int[] treeThing;
+        private final int[] treeThing;
         private final int size;
 
         public BITree(int size) {

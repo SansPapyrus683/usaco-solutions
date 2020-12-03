@@ -1,3 +1,5 @@
+package official.o2018.feb.silver.wastefulFJ;
+
 import java.io.*;
 import java.util.*;
 import java.util.stream.Stream;

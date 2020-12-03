@@ -1,3 +1,5 @@
+package official.o2017.jan.silver.gameLogic100;
+
 import java.io.*;
 import java.util.*;
 

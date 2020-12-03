@@ -1,3 +1,4 @@
+package section3.part1.stamps;
 /*
 ID: kevinsh4
 TASK: stamps

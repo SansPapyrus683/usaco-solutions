@@ -1,3 +1,4 @@
+package section3.part3.camelot;
 /*
 ID: kevinsh4
 LANG: JAVA
@@ -8,12 +9,15 @@ import java.io.*;
 import java.util.*;
 
 public class Camelot {
-    static int[][][][] distances;
-    static int[][] cachedKing;
-    static int[][][][] cachedNeighbors;
-    static int rows, cols;
-    static int[] kingPos;
-    static int kingPickupDist = 2;
+    private static final int[] R_CHANGE = new int[] {-2, -2, -1, 1, 2, 2, 1, -1};
+    private static final int[] C_CHANGE = new int[] {-1, 1, 2, 2, 1, -1, -2, -2};
+
+    private static int[][][][] distances;
+    private static int[][] cachedKing;
+    private static int[][][][] cachedNeighbors;
+    private static int rows, cols;
+    private static int[] kingPos;
+    private static int kingPickupDist = 2;
 
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
@@ -84,37 +88,34 @@ public class Camelot {
         System.out.printf("time taken (ms): %s%n", System.currentTimeMillis() - start);
     }
 
-    static int kingCalc(int[] kingPos, int[] goToPos) {
+    private static int kingCalc(int[] kingPos, int[] goToPos) {
         if (cachedKing[goToPos[1]][goToPos[0]] != Integer.MAX_VALUE) {
             return cachedKing[goToPos[1]][goToPos[0]];
         }
-        cachedKing[goToPos[1]][goToPos[0]] = Math.max(Math.abs(kingPos[0]- goToPos[0]),
+        return cachedKing[goToPos[1]][goToPos[0]] =  Math.max(Math.abs(kingPos[0]- goToPos[0]),
                 Math.abs(kingPos[1] - goToPos[1]));
-        return cachedKing[goToPos[1]][goToPos[0]];
     }
 
-    static int[][] knightNeighbors(int[] pos) {
+    private static int[][] knightNeighbors(int[] pos) {
         if (cachedNeighbors[pos[1]][pos[0]] != null) {
             return cachedNeighbors[pos[1]][pos[0]];
         }
 
         // given a knight's position and whether they have the king or not, returns possible neighbors
-        int[] changeRow = new int[] {-2, -2, -1, 1, 2, 2, 1, -1};
-        int[] changeCol = new int[] {-1, 1, 2, 2, 1, -1, -2, -2};
         int col  = pos[0];
         int row = pos[1];
         ArrayList<int[]> actualNeighbors = new ArrayList<>();
         for (int i = 0; i < 8; i++) {
-            int newCol = col + changeCol[i];
-            int newRow = row + changeRow[i];
+            int newCol = col + C_CHANGE[i];
+            int newRow = row + R_CHANGE[i];
             if (0 <= newCol && newCol < cols && 0 <= newRow && newRow < rows) {
                 actualNeighbors.add(new int[] {newCol, newRow});
             }
         }
-        int[][] thing = new int[actualNeighbors.size()][2];
-        actualNeighbors.toArray(thing);
-        cachedNeighbors[pos[1]][pos[0]] = thing;
-        return thing;
+        int[][] toReturn = new int[actualNeighbors.size()][2];
+        actualNeighbors.toArray(toReturn);
+        cachedNeighbors[pos[1]][pos[0]] = toReturn;
+        return toReturn;
     }
 
     static void knightExpand(int[] pos) {  // calculates distances & updates the distances variable w/ it

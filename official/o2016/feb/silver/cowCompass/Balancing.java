@@ -1,3 +1,5 @@
+package official.o2016.feb.silver.cowCompass;
+
 import java.io.*;
 import java.util.*;
 

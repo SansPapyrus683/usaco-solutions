@@ -1,3 +1,5 @@
+package official.o2014.usopen.silver.photoDiscrimination;
+
 import java.io.*;
 import java.util.*;
 

@@ -1,3 +1,5 @@
+package official.o2019.dec.gold.soManyFriends;
+
 import java.io.*;
 import java.lang.reflect.Array;
 import java.util.*;

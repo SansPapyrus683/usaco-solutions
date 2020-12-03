@@ -1,3 +1,5 @@
+package official.o2019.dec.silver.pureMath;
+
 import java.io.*;
 
 // 2019 dec silver (i swear this problem is just pure math)

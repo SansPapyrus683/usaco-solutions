@@ -1,3 +1,5 @@
+package official.o2016.usopen.silver.cheapAndLazy;
+
 import java.io.*;
 import java.util.*;
 import java.util.stream.Stream;

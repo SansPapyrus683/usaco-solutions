@@ -1,3 +1,5 @@
+package official.o2017.dec.silver.cowOfTheYear;
+
 import java.io.*;
 import java.util.*;
 

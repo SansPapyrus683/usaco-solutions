@@ -1,3 +1,5 @@
+package official.o2015.dec.silver.countingCows;
+
 import java.io.*;
 import java.util.*;
 

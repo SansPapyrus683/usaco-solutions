@@ -1,3 +1,5 @@
+package official.o2019.usopen.gold.SNAAAKES;
+
 import java.io.*;
 import java.util.*;
 

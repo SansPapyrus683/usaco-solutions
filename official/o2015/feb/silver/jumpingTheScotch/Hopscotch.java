@@ -1,3 +1,5 @@
+package official.o2015.feb.silver.jumpingTheScotch;
+
 import java.util.*;
 import java.io.*;
 import java.util.stream.Stream;

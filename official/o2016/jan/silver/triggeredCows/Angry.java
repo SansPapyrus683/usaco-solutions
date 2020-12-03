@@ -1,3 +1,5 @@
+package official.o2016.jan.silver.triggeredCows;
+
 import java.io.*;
 import java.util.*;
 

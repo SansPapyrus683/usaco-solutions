@@ -1,3 +1,5 @@
+package official.o2016.usopen.silver.farmsClosed;
+
 import java.io.*;
 import java.util.*;
 

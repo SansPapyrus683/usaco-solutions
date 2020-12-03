@@ -1,3 +1,5 @@
+package official.o2014.jan.silver.fjGetTheCamera;
+
 import java.io.*;
 import java.util.*;
 import java.util.stream.Stream;

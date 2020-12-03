@@ -1,3 +1,5 @@
+package official.o2016.usopen.gold.cheapFJ;
+
 import java.io.*;
 import java.util.*;
 import java.util.stream.Stream;
@@ -85,7 +87,7 @@ public class Split {
 
 // copied from: https://cp-algorithms.com/data_structures/stack_queue_modification.html
 class MinMaxStack {
-    private Stack<int[]> stack = new Stack<>();
+    private final Stack<int[]> stack = new Stack<>();
     public void add(int toAdd) {
         if (stack.isEmpty()) {
             stack.add(new int[] {toAdd, toAdd, toAdd});

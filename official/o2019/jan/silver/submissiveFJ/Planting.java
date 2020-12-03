@@ -1,3 +1,5 @@
+package official.o2019.jan.silver.submissiveFJ;
+
 import java.io.*;
 import java.util.*;
 

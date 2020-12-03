@@ -1,3 +1,5 @@
+package official.o2015.feb.silver.howDoCowsThrow;
+
 import java.io.*;
 import java.util.*;
 

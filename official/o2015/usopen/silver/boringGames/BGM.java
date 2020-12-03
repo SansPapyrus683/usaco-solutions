@@ -1,3 +1,5 @@
+package official.o2015.usopen.silver.boringGames;
+
 import java.io.*;
 import java.util.*;
 

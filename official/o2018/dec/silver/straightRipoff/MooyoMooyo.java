@@ -1,3 +1,5 @@
+package official.o2018.dec.silver.straightRipoff;
+
 import java.io.*;
 import java.util.*;
 

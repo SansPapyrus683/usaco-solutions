@@ -1,3 +1,5 @@
+package official.o2017.feb.silver.cowKill;
+
 import java.io.*;
 import java.util.*;
 

@@ -1,3 +1,5 @@
+package official.o2014.jan.silver.howCowsSki;
+
 import java.io.*;
 import java.util.*;
 

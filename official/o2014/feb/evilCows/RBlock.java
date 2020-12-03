@@ -1,3 +1,5 @@
+package official.o2014.feb.evilCows;
+
 import java.io.*;
 import java.util.*;
 

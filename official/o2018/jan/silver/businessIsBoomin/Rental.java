@@ -1,3 +1,5 @@
+package official.o2018.jan.silver.businessIsBoomin;
+
 import java.io.*;
 import java.util.*;
 import java.util.stream.IntStream;

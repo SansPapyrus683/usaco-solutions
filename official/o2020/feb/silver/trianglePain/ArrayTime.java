@@ -1,3 +1,5 @@
+package official.o2020.feb.silver.trianglePain;
+
 import java.io.*;
 import java.util.*;
 import java.util.stream.Stream;
@@ -48,7 +50,7 @@ public class ArrayTime {
             long firstNum = y.get(0).first;
             y.get(0).second = y.stream().mapToLong(p -> p.first - firstNum).sum();
             for (int p = 1; p < y.size(); p++) {
-                y.get(p).second = y.get(p - 1).second + (2 * p - y.size()) * (y.get(p).first - y.get(p - 1).first);
+                y.get(p).second = y.get(p - 1).second + (2L * p - y.size()) * (y.get(p).first - y.get(p - 1).first);
             }
         }
 
@@ -60,7 +62,7 @@ public class ArrayTime {
             long firstNum = x.get(0).first;
             x.get(0).second = x.stream().mapToLong(p -> p.first - firstNum).sum();
             for (int p = 1; p < x.size(); p++) {
-                x.get(p).second = x.get(p - 1).second + (2 * p - x.size()) * (x.get(p).first - x.get(p - 1).first);
+                x.get(p).second = x.get(p - 1).second + (2L * p - x.size()) * (x.get(p).first - x.get(p - 1).first);
             }
         }
 

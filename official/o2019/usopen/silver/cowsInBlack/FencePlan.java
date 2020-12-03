@@ -1,3 +1,5 @@
+package official.o2019.usopen.silver.cowsInBlack;
+
 import java.io.*;
 import java.util.*;
 

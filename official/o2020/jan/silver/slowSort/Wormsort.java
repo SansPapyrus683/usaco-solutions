@@ -1,3 +1,5 @@
+package official.o2020.jan.silver.slowSort;
+
 import java.util.*;
 import java.io.*;
 

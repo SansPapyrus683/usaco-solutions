@@ -1,11 +1,13 @@
+package official.o2019.usopen.gold.hugeNumbers;
+
 import java.io.*;
 import java.util.*;
 
 // 2019 usopen gold
 public class Walk {
-    private static long FIRST = 2019201913;
-    private static long SECOND = 2019201949;
-    private static long MOD = 2019201997;
+    private static final long FIRST = 2019201913;
+    private static final long SECOND = 2019201949;
+    private static final long MOD = 2019201997;
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("walk.in"));

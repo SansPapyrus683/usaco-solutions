@@ -1,3 +1,5 @@
+package official.o2015.jan.silver.howSmartIsBessie;
+
 import java.io.*;
 import java.util.*;
 import java.util.stream.Stream;

@@ -1,3 +1,5 @@
+package official.o2017.feb.gold.cookedCows2;
+
 import java.io.*;
 import java.util.*;
 

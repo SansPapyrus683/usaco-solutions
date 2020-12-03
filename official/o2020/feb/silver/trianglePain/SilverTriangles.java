@@ -1,3 +1,5 @@
+package official.o2020.feb.silver.trianglePain;
+
 import java.io.*;
 import java.util.*;
 import java.util.stream.Stream;

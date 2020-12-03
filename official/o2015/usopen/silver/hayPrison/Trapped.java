@@ -1,3 +1,5 @@
+package official.o2015.usopen.silver.hayPrison;
+
 import java.io.*;
 import java.util.*;
 import java.util.stream.Stream;

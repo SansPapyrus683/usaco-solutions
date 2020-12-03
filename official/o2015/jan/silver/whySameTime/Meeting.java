@@ -1,3 +1,5 @@
+package official.o2015.jan.silver.whySameTime;
+
 import java.io.*;
 import java.util.*;
 

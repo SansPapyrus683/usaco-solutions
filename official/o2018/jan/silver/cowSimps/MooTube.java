@@ -1,3 +1,5 @@
+package official.o2018.jan.silver.cowSimps;
+
 import java.util.*;
 import java.io.*;
 

@@ -23,7 +23,7 @@ def slope(p1, p2):
 
 maxArea = 0
 for (a, b, c) in combinations(coordinates, 3):
-    if slope(a, b) == slope(b, c):  # stupid collinear things
+    if slope(a, b) == slope(b, c):  # if they're collinear don't even bother
         continue
 
     possArea = 0  # no idea why this code exists, maybe just to handle all the stupid edge cases
@@ -43,8 +43,7 @@ for (a, b, c) in combinations(coordinates, 3):
             secondLen = abs(a[0] - c[0])
         possArea = firstLen * secondLen
 
-    if possArea > maxArea:
-        maxArea = possArea
+    maxArea = max(maxArea, possArea)
 
 with open('triangles.out', 'w') as written:
     written.write(str(maxArea) + '\n')

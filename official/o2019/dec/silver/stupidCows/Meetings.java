@@ -1,3 +1,5 @@
+package official.o2019.dec.silver.stupidCows;
+
 import java.io.*;
 import java.util.*;
 
