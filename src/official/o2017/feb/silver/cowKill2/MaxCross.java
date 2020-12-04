@@ -8,7 +8,7 @@ public class MaxCross {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("maxcross.in"));
-        StringTokenizer initial = new StringTokenizer(read.readLine());  // some random placeholder code
+        StringTokenizer initial = new StringTokenizer(read.readLine());
         int lightNum = Integer.parseInt(initial.nextToken());
         int atLeast = Integer.parseInt(initial.nextToken());
         int brokenNum = Integer.parseInt(initial.nextToken());
