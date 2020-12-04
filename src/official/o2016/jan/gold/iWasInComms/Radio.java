@@ -16,7 +16,7 @@ public class Radio {
         char[] fjMovements = read.readLine().toCharArray();
         char[] bessieMovements = read.readLine().toCharArray();
 
-        int[][] fjAfter = new int[fjAmt + 1][2];
+        int[][] fjAfter = new int[fjAmt + 1][2];  // precalculate the positions after each step in the movement
         int[][] bessieAfter = new int[bessieAmt + 1][2];
         fjAfter[0] = fjPos;
         bessieAfter[0] = bessiePos;
@@ -27,6 +27,7 @@ public class Radio {
             bessieAfter[i] = move(bessieAfter[i - 1], bessieMovements[i - 1]);
         }
 
+        // each of these costs is the minimum cost with the index i and j as the NEXT movement (@ end means completed)
         int[][] minBattery = new int[fjAmt + 1][bessieAmt + 1];
         for (int i = 0; i < fjAmt + 1; i++) {
             Arrays.fill(minBattery[i], Integer.MAX_VALUE);
@@ -38,16 +39,20 @@ public class Radio {
             int[] curr = frontier.poll();
             int rnCost = minBattery[curr[0]][curr[1]];
             int newCost;
+            // see all the states we can move to and also calculate if they're even worth it
+            // fj moves up one
             if (curr[0] < fjAmt && 
                     (newCost = rnCost + batteryCost(fjAfter[curr[0] + 1], bessieAfter[curr[1]])) < minBattery[curr[0] + 1][curr[1]]) {
                 minBattery[curr[0] + 1][curr[1]] = newCost;
                 frontier.add(new int[] {curr[0] + 1, curr[1]});
             }
+            // bessie moves up one
             if (curr[1] < bessieAmt && 
                     (newCost = rnCost + batteryCost(fjAfter[curr[0]], bessieAfter[curr[1] + 1])) < minBattery[curr[0]][curr[1] + 1]) {
                 minBattery[curr[0]][curr[1] + 1] = newCost;
                 frontier.add(new int[] {curr[0], curr[1] + 1});
             }
+            // both move up one
             if (curr[0] < fjAmt && curr[1] < bessieAmt && 
                     (newCost = rnCost + batteryCost(fjAfter[curr[0] + 1], bessieAfter[curr[1] + 1])) < minBattery[curr[0] + 1][curr[1] + 1]) {
                 minBattery[curr[0] + 1][curr[1] + 1] = newCost;

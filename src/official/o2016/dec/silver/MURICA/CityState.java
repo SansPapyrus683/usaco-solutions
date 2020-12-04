@@ -1,7 +1,6 @@
 package official.o2016.dec.silver.MURICA;
 
 import java.io.*;
-import java.util.Arrays;
 import java.util.HashMap;
 
 // 2016 dec silver

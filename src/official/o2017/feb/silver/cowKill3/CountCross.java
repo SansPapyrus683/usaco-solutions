@@ -36,7 +36,7 @@ public class CountCross {
             roadedAdjacents[road[2]][road[3]].add(new int[] {road[0], road[1]});
         }
         for (int c = 0; c < cowNum; c++) {
-            cows[c] = new Pair(Arrays.stream(read.readLine().split(" ")).mapToInt(p -> Integer.parseInt(p) - 1).toArray(), null);
+            cows[c] = new Pair<int[], boolean[][]>(Arrays.stream(read.readLine().split(" ")).mapToInt(p -> Integer.parseInt(p) - 1).toArray(), null);
         }
 
 
