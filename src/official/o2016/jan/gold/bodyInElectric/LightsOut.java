@@ -3,7 +3,7 @@ package official.o2016.jan.gold.bodyInElectric;
 import java.io.*;
 import java.util.*;
 
-// 2016 jan gold (for some reason it fails for test case 8, i have no idea why)
+// 2016 jan gold
 public class LightsOut {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
@@ -22,7 +22,7 @@ public class LightsOut {
             int[] prevVertex = vertices[(v - 1 + vertexNum) % vertexNum];
             int[] atVertex = vertices[v];
             int[] nextVertex = vertices[(v + 1) % vertexNum];
-            attributes.add(rightTurn(prevVertex, atVertex, nextVertex) ? 1 : 2);  // 1 signals a right turn, 2 a left
+            attributes.add(rightTurn(prevVertex, atVertex, nextVertex) ? -1 : -2);  // 1 signals a right turn, 2 a left
             attributes.add(Math.abs(atVertex[0] - nextVertex[0]) + Math.abs(atVertex[1] - nextVertex[1]));
             distToExit[v] = totalDist;
             totalDist += Math.abs(atVertex[0] - nextVertex[0]) + Math.abs(atVertex[1] - nextVertex[1]);
@@ -31,11 +31,11 @@ public class LightsOut {
             distToExit[v] = Math.min(distToExit[v], totalDist - distToExit[v]);
         }
         attributes.set(0, 0);  // do some special stuff for the exit to distinguish them from the rest
-        attributes.set(attributes.size() - 1, -attributes.get(attributes.size() - 1));
+        attributes.add(0);  // rn the list len is even, let's make it odd (see below for why)
 
         HashMap<List<Integer>, Integer> subLengthCounts = new HashMap<>();
-        for (int i = 0; i <= attributes.size(); i += 2) {  // += 2 because we only have to account for even lengths (see double add() below)
-            for (int j = i + 2; j <= attributes.size(); j += 2) {
+        for (int i = 0; i <= attributes.size(); i += 2) {
+            for (int j = i + 1; j <= attributes.size(); j += 2) {
                 List<Integer> subLength = attributes.subList(i, j);
                 subLengthCounts.put(subLength, subLengthCounts.getOrDefault(subLength, 0) + 1);
             }
@@ -43,15 +43,15 @@ public class LightsOut {
 
         int worstDiff = 0;
         for (int v = 1; v < vertexNum; v++) {  // they said we don't calculate if bessie starts @ the exit
-            ArrayList<Integer> soFar = new ArrayList<>();
+            ArrayList<Integer> soFar = new ArrayList<>(Collections.singletonList(attributes.get(2 * v)));
             int pos = v;
             int distTravelled = 0;
             while (true) {
-                soFar.add(attributes.get(2 * pos));
-                soFar.add(attributes.get(2 * pos + 1));
+                soFar.add(attributes.get(2 * pos + 1));  // bessie walks an edge
                 distTravelled += Math.abs(attributes.get(2 * pos + 1));
                 pos = (pos + 1) % vertexNum;
-                if (subLengthCounts.get(soFar) == 1) {  // don't worry, the element is always going to be there
+                soFar.add(attributes.get(2 * pos));  // then she reaches a vertex
+                if (subLengthCounts.getOrDefault(soFar, -1) == 1) {
                     worstDiff = Math.max(worstDiff, distTravelled + distToExit[pos] - distToExit[v]);
                     break;
                 }

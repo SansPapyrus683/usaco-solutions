@@ -59,7 +59,7 @@ public class CowRoute {
                 } else if (rnCost == minCost) {
                     minCostMovement = Math.min(minCostMovement, rnMoveCost - 1);
                 }
-                continue;  // sometimes the algo glitches out, so don't break- just continue
+                continue;  // sometimes the algo glitches out (probably bc one consists of 2 states), so don't break- just continue
             }
             for (int[] n : canGoTo[curr[0]]) {
                 long cost = rnCost;

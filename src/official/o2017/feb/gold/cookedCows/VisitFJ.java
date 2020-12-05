@@ -30,7 +30,7 @@ public class VisitFJ {
             int[] curr = frontier.poll();
             int rnCost = distances[curr[0]][curr[1]];
             int distToEnd;
-            // ok, we can go to the end, but just MAYBE there's going to be a shorter path, so just store it and move on
+            // ok so probably because of the weird change_r and change_c, the algorithm sometimes produces an incorrect answer
             if ((distToEnd = Math.abs((side - 1) - curr[0]) + Math.abs((side - 1) - curr[1])) < 3) {
                 distances[side - 1][side - 1] = Math.min(distances[side - 1][side - 1], rnCost + distToEnd * roadTime);
                 continue;
