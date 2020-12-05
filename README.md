@@ -14,3 +14,4 @@ and i am not doing that crap all over again
 * and yes some of the names are weird while others are normal
 * there's a reader class that is in the top level, but i still include it in every single java one for simplicity (some i just use buffered reader)
 * the "o" in each of the official year folders stands for "official" (so it can be a valid package name)
+* the package names are there so vs code doesn't have a meltdown with package names loll
