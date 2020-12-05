@@ -39,11 +39,13 @@ public class Cowmbat {
             }
         }
         
-        for (int c = minStreak; c < comboLen + 1; c++) {
+        for (int c = 1; c < comboLen + 1; c++) {
             for (int b = 0; b < buttonNum; b++) {
+                // possibility 1- we just extend the previous thing
                 int extensionTotal = minDaysWithButton[c - 1][b] + minTimes[rnCombo[c - 1]][b];
                 int switchBackTotal = INVALID;
-                if (c >= minStreak) {
+                if (c == minStreak || c >= 2 * minStreak) {
+                    // possibility 2- if possible, we change a previous config (c - minStreak) to button b
                     switchBackTotal = overallMin[c - minStreak] + (switchCosts[b][c] - switchCosts[b][c - minStreak]);
                 }
                 minDaysWithButton[c][b] = Math.min(minDaysWithButton[c][b], Math.min(extensionTotal, switchBackTotal));
