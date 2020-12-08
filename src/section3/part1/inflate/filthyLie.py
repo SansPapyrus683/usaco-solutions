@@ -6,14 +6,6 @@ too slow for some of the test cases lol
 """
 from typing import List
 
-problems = []
-with open('loScores.txt') as read:
-    for v, line in enumerate(read):
-        if v == 0:
-            timeLimit = int(line.split()[0])
-        else:
-            problems.append([int(i) for i in line.split()])  # points, minutes
-
 
 def calcBest(limit: int, probList: List[List[int]]) -> int:
     bestPoints = [0 for _ in range(limit + 1)]
@@ -23,6 +15,14 @@ def calcBest(limit: int, probList: List[List[int]]) -> int:
             bestPoints[t] = max(bestPoints[t], bestPoints[t - p[1]] + p[0])
     return max(bestPoints)
 
+
+problems = []
+with open('loScores.txt') as read:
+    for v, line in enumerate(read):
+        if v == 0:
+            timeLimit = int(line.split()[0])
+        else:
+            problems.append([int(i) for i in line.split()])  # points, minutes
 
 totalBest = calcBest(timeLimit, problems)
 print(totalBest)
