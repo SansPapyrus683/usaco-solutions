@@ -7,6 +7,7 @@ public class Template {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("README.md"));
         StringTokenizer initial = new StringTokenizer(read.readLine());  // some random placeholder code
+        read.close();
         while (initial.hasMoreTokens()) {
             System.out.println(initial.nextToken());
         }

@@ -21,6 +21,7 @@ public class WestVirginia {
                 inputTo[c] = Character.getNumericValue(row[c]);
             }
         }
+        read.close();
 
         int[][] grassSoFar = new int[fieldWidth + 1][fieldWidth + 1];
         grassSoFar[1][1] = grass[0][0];

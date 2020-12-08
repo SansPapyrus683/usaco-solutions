@@ -20,6 +20,7 @@ public class Numbergasms {
             allNums.append(rnLine);
             allNums.append(" ");
         }
+        read.close();
         int[] numbers = Arrays.stream(allNums.toString().split(" ")).mapToInt(Integer::parseInt).toArray();
 
         int player1 = p1BestScore(numbers);

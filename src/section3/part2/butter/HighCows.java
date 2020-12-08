@@ -33,6 +33,7 @@ public class HighCows {
             neighbors[p1].add(p2);
             neighbors[p2].add(p1);
         }
+        read.close();
 
         int[][] pairwiseDistances = allFieldDist(neighbors, distances);
         int minButterDist = Integer.MAX_VALUE;
