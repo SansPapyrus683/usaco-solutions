@@ -2,11 +2,9 @@
 ID: kevinsh4
 TASK: inflate
 LANG: PYTHON3
+too slow for some of the test cases lol
 """
-# TODO: THIS IS WAY TOO SLOW.
-#  I JUST IMPLEMENTED USACO'S APPROACH AND PYTHON IS JUST TOO SLOW.
-#  SO PLZ TELL ME HOW TO OPTIMIZE THIS DARN THING
-from collections import defaultdict
+from typing import List
 
 problems = []
 with open('loScores.txt') as read:
@@ -14,14 +12,19 @@ with open('loScores.txt') as read:
         if v == 0:
             timeLimit = int(line.split()[0])
         else:
-            problems.append([int(i) for i in reversed(line.split())])  # [minutes, points]
+            problems.append([int(i) for i in line.split()])  # points, minutes
 
-def calcBest(limit, probList):
-    bestPoints = defaultdict(lambda: 0)
+
+def calcBest(limit: int, probList: List[List[int]]) -> int:
+    bestPoints = [0 for _ in range(limit + 1)]
     for p in probList:
-        for t in range(p[0], limit + 1):
-            bestPoints[t] = max([bestPoints[t], bestPoints[t - p[0]] + p[1]])
-    return bestPoints
+        for t in range(p[1], limit + 1):
+            # we can use the old amt of points from before this problem and add this problem's point amt
+            bestPoints[t] = max(bestPoints[t], bestPoints[t - p[1]] + p[0])
+    return max(bestPoints)
 
+
+totalBest = calcBest(timeLimit, problems)
+print(totalBest)
 with open('outputs.txt', 'w') as written:
-    written.write(str(max(calcBest(timeLimit, problems).values())) + '\n')
+    written.write(str(totalBest) + '\n')
