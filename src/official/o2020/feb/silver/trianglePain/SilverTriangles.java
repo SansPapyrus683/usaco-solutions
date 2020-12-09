@@ -8,7 +8,7 @@ import java.util.stream.Stream;
 public class SilverTriangles {
     private static final int MOD = (int) Math.pow(10, 9) + 7;
 
-    static class Pair {  // had to make it private and static bc another one was alr defined in the project
+    private static class Pair {  // had to make it private and static bc another one was alr defined in the project
         public long first;
         public long second;
         public Pair(long first, long second) {

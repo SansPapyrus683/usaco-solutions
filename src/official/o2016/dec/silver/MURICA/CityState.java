@@ -6,7 +6,7 @@ import java.util.HashMap;
 // 2016 dec silver
 public class CityState {
 
-    static class Pair <T1, T2> {  // maybe i could ask usaco for apache commons?
+    private static class Pair <T1, T2> {  // maybe i could ask usaco for apache commons?
         public T1 first;
         public T2 second;
         public Pair(T1 first, T2 second) {

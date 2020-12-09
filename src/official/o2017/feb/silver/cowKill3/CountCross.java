@@ -5,7 +5,7 @@ import java.util.*;
 
 // 2017 feb silver
 public class CountCross {
-    static class Pair<T1, T2> {  // CURSE YOU JAVA!!!!
+    private static class Pair<T1, T2> {  // CURSE YOU JAVA!!!!
         public T1 first;
         public T2 second;
         public Pair(T1 first, T2 second) {

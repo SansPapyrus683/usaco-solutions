@@ -5,7 +5,7 @@ import java.util.*;
 
 // 2019 usopen silver (waaay too slow for last test case lol)
 public class CowJump {
-    static class Point {
+    private static class Point {
         public int x, y;
         public Point(int x, int y){
             this.x = x; this.y = y;

@@ -12,7 +12,7 @@ import java.util.*;
  * 4 = purple, slides (each slide counts as a move) and removes smell
  */
 public class Dream {
-    static class Pair<T1, T2> {  // seriously wish java had it's own pair class
+    private static class Pair<T1, T2> {  // seriously wish java had it's own pair class
         public T1 first;
         public T2 second;
         public Pair(T1 first, T2 second) {
