@@ -22,7 +22,7 @@ with open('sheGotMilk.txt') as read:
 def findBarn(cowPos):
     costs = {cowPos: 0}
     frontier = [cowPos]
-    came_from = {cowPos: None}
+    cameFrom = {cowPos: None}
 
     while frontier:  # dijkstra's or smth idk
         inLine = []
@@ -37,7 +37,7 @@ def findBarn(cowPos):
                 if neighbor not in costs or newCost < costs[neighbor]:
                     costs[neighbor] = newCost
                     inLine.append(neighbor)
-                    came_from[neighbor] = current
+                    cameFrom[neighbor] = current
         frontier = inLine
     return costs['Z']
 

@@ -47,5 +47,6 @@ for n in [1, 2]:  # now we just brute force sort, starting with ones and moving 
                     break
             exchange += 1
 
+print(exchange)
 with open('outputs.txt', 'w') as written:
     written.write(str(exchange) + '\n')

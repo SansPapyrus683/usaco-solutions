@@ -1,0 +1,36 @@
+"""
+ID: kevinsh4
+TASK: gift1
+LANG: PYTHON3
+"""
+with open('notSanta.txt') as read:
+    people = {}  # dictionaries preserve insertion order now: we'll use that
+    transactions = []
+    peopleNum = int(read.readline())
+    for _ in range(peopleNum):
+        people[read.readline().rstrip()] = 0
+    for _ in range(peopleNum):
+        giver = read.readline().rstrip()
+        money, receiverNum = [int(i) for i in read.readline().split()]
+        receivers = []
+        for _ in range(receiverNum):
+            receivers.append(read.readline().rstrip())
+        # a bit more explicit this way
+        transactions.append({'giver': giver, 'money': money, 'receivers' : receivers})
+
+# i think there's a better way to do this with some math, but simulating it is good enough
+for t in transactions:
+    if not t['receivers']:
+        continue
+    moneyToGive = t['money'] // len(t['receivers'])
+    people[t['giver']] -= t['money']
+    for r in t['receivers']:
+        people[r] += moneyToGive
+    
+    leftOver = t['money'] - len(t['receivers']) * moneyToGive
+    people[t['giver']] += leftOver
+
+with open('outputs.txt', 'w') as written:
+    for p, m in people.items():
+        print(p, m)
+        written.write(str(p) + ' ' + str(m) + '\n')
