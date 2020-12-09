@@ -65,7 +65,7 @@ written.write(str(color - 1) + '\n' + str(biggestSize) + '\n')  # color - 1 beca
 bigRooms = {}
 for cellWalls in walls.items():
     for pair in [(cellWalls[0], w) for w in cellWalls[1]]:
-        if not{maxWidth, 0}.intersection({i[1] for i in pair}) and not{maxHeight, 0}.intersection({i[0] for i in pair}):
+        if not {maxWidth, 0}.intersection({i[1] for i in pair}) and not{maxHeight, 0}.intersection({i[0] for i in pair}):
             if paintedCastle[pair[0]] != paintedCastle[pair[1]]:
                 bigRooms[pair] = sizePaints[paintedCastle[pair[0]]] + sizePaints[paintedCastle[pair[1]]]
 
