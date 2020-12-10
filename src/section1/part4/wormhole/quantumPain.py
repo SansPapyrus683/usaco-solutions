@@ -3,67 +3,75 @@ ID: kevinsh4
 TASK: wormhole
 LANG: PYTHON3
 """
-from itertools import combinations
-
-cachedPairings = {}
 
 
-def possiblePairings(positions):
-    assert len(positions) % 2 == 0, "i mean it has to be even for complete pairings to be possible"
-    if not positions:
-        return []
-    elif len(positions) == 2:
-        return (tuple(positions),),
+class Wormholes:  # i don't like global variables, so i made this class lol
+    def __init__(self, wormholes):
+        self.__wormholes = wormholes
+        self.__partners = [-1 for _ in range(len(wormholes))]  # the index of the wormhole that's paired up
+        self.__toTheRight = [None for _ in range(len(wormholes))]  # the index of the next wormhole (going right)
+        self.processWormholes()
 
-    if positions in cachedPairings:
-        return cachedPairings[positions]
+    @property
+    def wormholes(self):  # all this is to prevent monkeys from misusing my class
+        return self.__wormholes
 
-    possible = []
-    for c in combinations(positions, 2):
-        theRest = tuple(p for p in positions if p not in c)
-        for p in possiblePairings(theRest):
-            possible.append((c, *p))
-    cachedPairings[positions] = tuple(possible)
-    return tuple(possible)
+    @wormholes.setter
+    def wormholes(self, value):
+        self.__wormholes = value
+        self.processWormholes()
 
+    @property
+    def partners(self):
+        return self.__partners
 
-def infLoopPossible(pairings):
-    actualPoints = []
-    for p in pairings:
-        actualPoints.extend(p)
-    for p in actualPoints:
-        pos = p
-        while True:
-            possNextPos = [p_ for p_ in actualPoints if p_[1] == pos[1] and pos[0] < p_[0]]
-            if not possNextPos:  # bessie starts to wander off to infinity and beyond
+    @property
+    def toTheRight(self):
+        return self.__toTheRight
+
+    def processWormholes(self) -> None:
+        for v, wh in enumerate(self.wormholes):
+            possNext = [w for w in self.wormholes if w[1] == wh[1] and wh[0] < w[0]]
+            if possNext:
+                self.toTheRight[v] = self.wormholes.index(min(possNext, key=lambda a: a[0]))
+
+    def countValid(self) -> int:
+        for i in range(len(self.wormholes)):
+            if self.partners[i] == -1:
                 break
-            nextPos = min(possNextPos, key=lambda a: a[0])
-            for pair in pairings:
-                if nextPos in pair:
-                    pos = pair[0] if nextPos == pair[1] else pair[1]
+        else:  # ok, everyone has a partner, let's test
+            if self.infLoopPossible():
+                return 1
+            return 0
+
+        total = 0
+        for j in range(i + 1, len(self.wormholes)):
+            if self.partners[j] == -1:  # assign a random partner and keep on going
+                self.partners[i] = j
+                self.partners[j] = i
+                total += self.countValid()
+                self.partners[i] = self.partners[j] = -1  # reset the partners
+        return total
+
+    def infLoopPossible(self) -> bool:
+        for s in range(len(self.wormholes)):  # try all start positions
+            pos = s
+            for _ in range(len(self.wormholes)):  # we can only go through so many wormholes before a loop is reached
+                if self.toTheRight[pos] is None:  # frick, from this start we just wander off into no where
                     break
-            if pos == p:
-                return True
-    return False
+                pos = self.partners[self.toTheRight[pos]]
+                if pos == s:  # oh wow, we ended back where we started!
+                    return True
+        return False  # not a single start works, heck
 
 
 with open('quantumSuffering.txt') as read:
     wormholeNum = int(read.readline())
-    wormholes = []
+    positions = []
     for _ in range(wormholeNum):
-        wormholes.append(tuple([int(i) for i in read.readline().split()]))
-    wormholes = tuple(wormholes)
+        positions.append([int(i) for i in read.readline().split()])
 
-processed = set()
-validPairings = set()
-for pairing in possiblePairings(wormholes):
-    pairing = tuple(sorted(tuple(sorted(p)) for p in pairing))
-    if pairing in processed:
-        continue
-    if infLoopPossible(pairing):
-        validPairings.add(pairing)
-    processed.add(pairing)
-
-print(len(validPairings))
+validPairings = Wormholes(positions).countValid()
+print(validPairings)
 with open('outputs.txt', 'w') as written:
-    written.write(str(len(validPairings)) + '\n')
+    written.write(str(validPairings) + '\n')
