@@ -9,7 +9,7 @@ class Wormholes:  # i don't like global variables, so i made this class lol
     def __init__(self, wormholes):
         self.__wormholes = wormholes
         self.__partners = [-1 for _ in range(len(wormholes))]  # the index of the wormhole that's paired up
-        self.__toTheRight = [None for _ in range(len(wormholes))]  # the index of the next wormhole (going right)
+        self.__toTheRight = [-1 for _ in range(len(wormholes))]  # the index of the next wormhole (going right)
         self.processWormholes()
 
     @property
@@ -57,7 +57,7 @@ class Wormholes:  # i don't like global variables, so i made this class lol
         for s in range(len(self.wormholes)):  # try all start positions
             pos = s
             for _ in range(len(self.wormholes)):  # we can only go through so many wormholes before a loop is reached
-                if self.toTheRight[pos] is None:  # frick, from this start we just wander off into no where
+                if self.toTheRight[pos] == -1:  # frick, from this start we just wander off into no where
                     break
                 pos = self.partners[self.toTheRight[pos]]
                 if pos == s:  # oh wow, we ended back where we started!
