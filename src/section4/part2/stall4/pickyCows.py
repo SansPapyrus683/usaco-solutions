@@ -39,5 +39,4 @@ for c in range(cowNum):
         maxMatched += 1
 
 print(maxMatched)
-with open('stall4.out', 'w') as written:
-    written.write(str(maxMatched) + '\n')
+print(maxMatched, file=open('stall4.out', 'w'))

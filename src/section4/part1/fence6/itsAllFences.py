@@ -57,5 +57,4 @@ for p, nList in neighbors.items():
         neighbors[adj].append((p, dist))  # revert changes
 
 print(minPerimeter)
-with open('fence6.out', 'w') as written:
-    written.write(str(minPerimeter) + '\n')
+print(minPerimeter, file=open('fence6.out', 'w'))
