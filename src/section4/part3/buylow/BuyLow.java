@@ -2,7 +2,7 @@
 ID: kevinsh4
 TASK: buylow
 LANG: JAVA
-just see the python version for explanation, this is p much the exact same
+just see the python version for the explanation, this is p much the exact same
 */
 package section4.part3.buylow;
 

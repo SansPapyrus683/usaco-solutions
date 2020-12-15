@@ -10,7 +10,7 @@ with open('nuggets.in') as read:
     assert all([n <= MAX_SIZE for n in nuggets])
 
 # so given 2 relatively prime #'s the largest # that can't be formed is 1st * 2nd - (1st + 2nd)
-# the MAX_SIZE + 50 is just some leeway
+# the + MAX_SIZE is just some leeway for my horrid coding
 largestImpossible = MAX_SIZE * MAX_SIZE - (MAX_SIZE + MAX_SIZE)
 possible = [False for _ in range(largestImpossible + MAX_SIZE)]
 possible[0] = True
