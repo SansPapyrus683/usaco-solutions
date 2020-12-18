@@ -32,7 +32,7 @@ public class CircleCross {
         // two cows cross if their orientations are like ABAB, so for B and B, we try to detect that ending A
         for (int[] b : betweenPoints) {
             crossed += biTree.query(b[1]) - biTree.query(b[0]);
-            biTree.update(b[1], 1);  // update the exit
+            biTree.increment(b[1], 1);  // update the exit
         }
 
         PrintWriter written = new PrintWriter("circlecross.out");
@@ -41,29 +41,29 @@ public class CircleCross {
         System.out.println(crossed);
         System.out.printf("now listen up here's a story about some random code that ran for %d ms%n", System.currentTimeMillis() - start);
     }
+}
 
-    // copied from https://www.geeksforgeeks.org/queries-number-distinct-elements-subarray/?ref=rp
-    private static class BITree {
-        private final int[] treeThing;
-        private final int size;
+// copied from https://www.geeksforgeeks.org/queries-number-distinct-elements-subarray/?ref=rp
+class BITree {
+    private final int[] treeThing;
+    private final int size;
 
-        public BITree(int size) {
-            treeThing = new int[size + 1];  // so apparently binary trees have to be 1-indexed
-            this.size = size;
+    public BITree(int size) {
+        treeThing = new int[size + 1];  // so apparently binary trees have to be 1-indexed
+        this.size = size;
+    }
+
+    public void increment(int updateAt, int val) {
+        for (; updateAt <= size; updateAt += updateAt & -updateAt) {
+            treeThing[updateAt] += val;
         }
+    }
 
-        public void update(int updateAt, int val) {
-            for (; updateAt <= size; updateAt += updateAt & -updateAt) {
-                treeThing[updateAt] += val;
-            }
+    public int query(int ind) {
+        int sum = 0;
+        for (; ind > 0; ind -= ind & -ind) {
+            sum += treeThing[ind];
         }
-
-        public int query(int ind) {
-            int sum = 0;
-            for (; ind > 0; ind -= ind & -ind) {
-                sum += treeThing[ind];
-            }
-            return sum;
-        }
+        return sum;
     }
 }

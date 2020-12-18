@@ -12,14 +12,6 @@ import java.util.*;
  * 4 = purple, slides (each slide counts as a move) and removes smell
  */
 public class Dream {
-    private static class Pair<T1, T2> {  // seriously wish java had it's own pair class
-        public T1 first;
-        public T2 second;
-        public Pair(T1 first, T2 second) {
-            this.first = first;
-            this.second = second;
-        }
-    }
     private static final int[] CHANGE_R = new int[] {1, -1, 0, 0};
     private static final int[] CHANGE_C = new int[] {0, 0, 1, -1};
 
@@ -119,5 +111,14 @@ public class Dream {
             rnPos = nextPos;
         }
         return new Pair<>(rnPos, distance);
+    }
+}
+
+class Pair<T1, T2> {  // seriously wish java had it's own pair class
+    public T1 first;
+    public T2 second;
+    public Pair(T1 first, T2 second) {
+        this.first = first;
+        this.second = second;
     }
 }

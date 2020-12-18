@@ -29,21 +29,20 @@ with open('lgame.in') as read:
 
 with open('lgame.dict') as read:
     words = [line.lower().strip() for line in read.readlines() if line.strip() != '.']
-toOriginal = {}
+sortedToOrig = {}
 for v, w in enumerate(words):
     words[v] = ''.join(sorted(w))
-    if words[v] not in toOriginal:  # put in a list because a word can have like multiple permutations
-        toOriginal[words[v]] = []
-    toOriginal[words[v]].append(w)
+    if words[v] not in sortedToOrig:  # put in a list because a word can have like multiple permutations
+        sortedToOrig[words[v]] = []
+    sortedToOrig[words[v]].append(w)
     assert MIN_LEN <= len(w) <= MAX_LEN
-words = set(words)
 
 bestSingle = 0
 bestWords = set()
 for w in allPossWords(have, MIN_LEN):
     w = ''.join(sorted(w))
     value = wordVal(w)
-    if w in words:
+    if w in sortedToOrig:
         if value > bestSingle:
             bestSingle = value
             bestWords = {w}
@@ -60,7 +59,7 @@ for w1 in allPossWords(have, MIN_LEN, len(have) - MIN_LEN):
 
     for w2 in allPossWords(''.join(leftover), MIN_LEN, len(leftover)):
         w2 = ''.join(sorted(w2))
-        if w1 in words and w2 in words:
+        if w1 in sortedToOrig and w2 in sortedToOrig:
             totalVal = wordVal(w1) + wordVal(w2)
             if totalVal > bestDouble:
                 bestDouble = totalVal
@@ -71,11 +70,11 @@ for w1 in allPossWords(have, MIN_LEN, len(have) - MIN_LEN):
 results = []
 if bestSingle >= bestDouble:
     for w in bestWords:
-        for o in toOriginal[w]:
+        for o in sortedToOrig[w]:
             results.append([o])
 if bestDouble >= bestSingle:
     for p in bestPairs:
-        o = [toOriginal[p[0]], toOriginal[p[1]]]
+        o = [sortedToOrig[p[0]], sortedToOrig[p[1]]]
         for c in product(*o):
             results.append(sorted(c))
 results.sort()

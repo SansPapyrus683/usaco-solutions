@@ -7,46 +7,31 @@ import java.util.stream.Stream;
 // 2020 feb silver (as if that wasn't obvious already)
 public class SilverTriangles {
     private static final int MOD = (int) Math.pow(10, 9) + 7;
-
-    private static class Pair {  // had to make it private and static bc another one was alr defined in the project
-        public long first;
-        public long second;
-        public Pair(long first, long second) {
-            this.first = first;
-            this.second = second;
-        }
-
-        @Override
-        public String toString() {
-            return String.format("Pair{first=%s, second=%s}", first, second);
-        }
-    }
-
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("triangles.in"));
         int postNum = Integer.parseInt(read.readLine());
         int[][] posts = new int[postNum][2];
-        HashMap<Integer, ArrayList<Pair>> sameXVals = new HashMap<>();
-        HashMap<Integer, ArrayList<Pair>> sameYVals = new HashMap<>();
+        HashMap<Integer, ArrayList<Pair_>> sameXVals = new HashMap<>();
+        HashMap<Integer, ArrayList<Pair_>> sameYVals = new HashMap<>();
         for (int p = 0; p < postNum; p++) {
             int[] post = Stream.of(read.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
             posts[p] = post;
             // the second part will be the sum of the distances from this number to the other numbers
             if (!sameXVals.containsKey(post[0])) {
-                sameXVals.put(post[0], new ArrayList<>(Collections.singletonList(new Pair(post[1], -1))));
+                sameXVals.put(post[0], new ArrayList<>(Collections.singletonList(new Pair_(post[1], -1))));
             } else {
-                sameXVals.get(post[0]).add(new Pair(post[1], -1));
+                sameXVals.get(post[0]).add(new Pair_(post[1], -1));
             }
             if (!sameYVals.containsKey(post[1])) {
-                sameYVals.put(post[1], new ArrayList<>(Collections.singletonList(new Pair(post[0], -1))));
+                sameYVals.put(post[1], new ArrayList<>(Collections.singletonList(new Pair_(post[0], -1))));
             } else {
-                sameYVals.get(post[1]).add(new Pair(post[0], -1));
+                sameYVals.get(post[1]).add(new Pair_(post[0], -1));
             }
         }
 
         // here we calculate the sums in linear time from the previous ones, it's some math stuff idc to explain lol
-        for (ArrayList<Pair> y : sameXVals.values()) {
+        for (ArrayList<Pair_> y : sameXVals.values()) {
             y.sort(Comparator.comparingLong(p -> p.first));
             long firstNum = y.get(0).first;
             y.get(0).second = y.stream().mapToLong(p -> p.first - firstNum).sum();
@@ -55,7 +40,7 @@ public class SilverTriangles {
             }
         }
 
-        for (ArrayList<Pair> x : sameYVals.values()) {
+        for (ArrayList<Pair_> x : sameYVals.values()) {
             x.sort(Comparator.comparingLong(p -> p.first));
             long firstNum = x.get(0).first;
             x.get(0).second = x.stream().mapToLong(p -> p.first - firstNum).sum();
@@ -71,10 +56,10 @@ public class SilverTriangles {
         long totalSum = 0;
         for (int[] p : posts) {
             long totalXDiff = sameXVals.get(p[0])  // use binary search to get the sums and then multiply them
-                    .get(Collections.binarySearch(sameXVals.get(p[0]), new Pair(p[1], -1),
+                    .get(Collections.binarySearch(sameXVals.get(p[0]), new Pair_(p[1], -1),
                             Comparator.comparingLong(a -> a.first))).second;
             long totalYDiff = sameYVals
-                    .get(p[1]).get(Collections.binarySearch(sameYVals.get(p[1]), new Pair(p[0], -1),
+                    .get(p[1]).get(Collections.binarySearch(sameYVals.get(p[1]), new Pair_(p[0], -1),
                             Comparator.comparingLong(a -> a.first))).second;
             totalSum = (totalSum + ((totalXDiff % MOD) * (totalYDiff % MOD) % MOD)) % MOD;
         }
@@ -83,5 +68,19 @@ public class SilverTriangles {
         written.close();
         System.out.println(totalSum);
         System.out.printf("i say that it took %d ms- the grader might think differently%n", System.currentTimeMillis() - start);
+    }
+}
+
+class Pair_ {  // underscore so it doesn't clash with that other pair class
+    public long first;
+    public long second;
+    public Pair_(long first, long second) {
+        this.first = first;
+        this.second = second;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Pair_{first=%s, second=%s}", first, second);
     }
 }

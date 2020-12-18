@@ -4,20 +4,6 @@ import java.io.*;
 import java.util.*;
 
 public class Swap {
-    private static class Pair <T1, T2> {  // frick you java for not having a pair class
-        public T1 first;
-        public T2 second;
-        public Pair(T1 first, T2 second) {
-            this.first = first;
-            this.second = second;
-        }
-
-        @Override
-        public String toString() {
-            return String.format("Pair{first=%s, second=%s}", first, second);
-        }
-    }
-
     public static void main(String[] args) throws IOException {
         long timeStart = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("swap.in"));
@@ -85,5 +71,19 @@ public class Swap {
         written.close();
         System.out.println(Arrays.toString(actualPos));
         System.out.printf("what kind of exercise routine takes a measly %d ms lol%n", System.currentTimeMillis() - timeStart);
+    }
+}
+
+class Pair <T1, T2> {  // frick you java for not having a pair class
+    public T1 first;
+    public T2 second;
+    public Pair(T1 first, T2 second) {
+        this.first = first;
+        this.second = second;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Pair{first=%s, second=%s}", first, second);
     }
 }

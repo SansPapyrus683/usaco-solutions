@@ -6,7 +6,7 @@ LANG: PYTHON3
 from typing import List
 
 
-def directedGoodPath(neighbors: List[List[int]], start=0, end=None):
+def directedGoodPath(neighbors: List[List[int]], start=0, end=None) -> List[int]:
     end = len(neighbors) - 1 if end is None else end
     cameFrom = {start: None}
     frontier = [start]

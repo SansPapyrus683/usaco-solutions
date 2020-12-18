@@ -5,21 +5,6 @@ import java.util.HashMap;
 
 // 2016 dec silver
 public class CityState {
-
-    private static class Pair <T1, T2> {  // maybe i could ask usaco for apache commons?
-        public T1 first;
-        public T2 second;
-        public Pair(T1 first, T2 second) {
-            this.first = first;
-            this.second = second;
-        }
-
-        @Override
-        public String toString() {
-            return String.format("Pair{first=%s, second=%s}", first, second);
-        }
-    }
-
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("citystate.in"));
@@ -55,5 +40,19 @@ public class CityState {
         written.close();
         System.out.println(reversedPairs);
         System.out.printf("your code took %d ms. ᵇᵉᵉᵖ ᵇᵒᵒᵖ ᶦ'ᵐ ᵃ ᵇᵒᵗ%n", System.currentTimeMillis() - start);
+    }
+}
+
+class Pair <T1, T2> {  // maybe i could ask usaco for apache commons?
+    public T1 first;
+    public T2 second;
+    public Pair(T1 first, T2 second) {
+        this.first = first;
+        this.second = second;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Pair{first=%s, second=%s}", first, second);
     }
 }

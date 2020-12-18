@@ -5,18 +5,6 @@ import java.util.*;
 
 // 2019 usopen silver (waaay too slow for last test case lol)
 public class CowJump {
-    private static class Point {
-        public int x, y;
-        public Point(int x, int y){
-            this.x = x; this.y = y;
-        }
-
-        @Override
-        public String toString() {
-            return String.format("(%s, %s)", x, y);
-        }
-    }
-
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("cowjump.in"));
@@ -92,5 +80,17 @@ public class CowJump {
             return between(s1Start, s2Start, s2End) || between(s1End, s2Start, s2End) || between(s2Start, s1Start, s1End);
         }
         return signs[0] != signs[1] && signs[2] != signs[3];
+    }
+}
+
+class Point {
+    public int x, y;
+    public Point(int x, int y){
+        this.x = x; this.y = y;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("(%s, %s)", x, y);
     }
 }
