@@ -15,10 +15,11 @@ public class Div7 {
         Arrays.fill(firstModOccurrence, -2);
         firstModOccurrence[0] = -1;
         int runningMod = 0;
-        /* so if the running total at index a is the same as the running total at index b, then
+        /* 
+         * so if the running total at index a is the same as the running total at index b, then
          * we can say that the total between a and b is divisible by 7
          * of course if the running total is 0 then the start will always be at the start of the array
-         * */
+         */
         for (int c = 0; c < cowNum; c++) {
             int cow = Integer.parseInt(read.readLine());
             runningMod = (runningMod + cow) % MOD;

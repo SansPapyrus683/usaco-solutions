@@ -5,6 +5,7 @@ import java.util.*;
 
 // 2017 feb gold
 public class NoCross {
+    private static final int THRESHOLD = 4;
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("nocross.in"));
@@ -19,44 +20,35 @@ public class NoCross {
             secondIDToPos[Integer.parseInt(read.readLine()) - 1] = i;
         }
 
-        // an arraylist the connections drawn and the last taken second pos given the last thing we connect
-        int max = 0;
-        ArrayList<int[]>[] connSoFar = new ArrayList[fieldNum + 1];
-        connSoFar[0] = new ArrayList<>(Collections.singletonList(new int[] {0, -1}));
-        for (int f = 1; f <= fieldNum; f++) {
-            // the indices we can link the current field to
-            ArrayList<Integer> options = new ArrayList<>();
-            for (int canLink = Math.max(0, firstFields[f - 1] - 4); canLink <= Math.min(firstFields[f - 1] + 4, fieldNum - 1); canLink++) {
-                options.add(secondIDToPos[canLink]);
+        // maximum crosswalks we can draw given the ending position of the last crosswalk
+        int[] maxWithEnd = new int[fieldNum];
+        // set the base case
+        for (int f = Math.max(0, firstFields[0] - THRESHOLD); f <= Math.min(fieldNum - 1, firstFields[0] + THRESHOLD); f++) {
+            maxWithEnd[secondIDToPos[f]]++;
+        }
+        for (int i = 1; i < fieldNum; i++) {
+            int[] updated = maxWithEnd.clone();
+            for (int f = Math.max(0, firstFields[i] - THRESHOLD); f <= Math.min(fieldNum - 1, firstFields[i] + THRESHOLD); f++) {
+                updated[secondIDToPos[f]] = Math.max(rangeMax(maxWithEnd, 0, secondIDToPos[f]) + 1, maxWithEnd[secondIDToPos[f]]);
             }
-            options.sort(Comparator.comparingInt(i -> i));
-
-            int[] connNumToLastConn = new int[fieldNum + 1];
-            Arrays.fill(connNumToLastConn, Integer.MAX_VALUE);
-            for (int i = 0; i < f; i++) {
-                for (int[] prevState : connSoFar[i]) {
-                    for (int o : options) {
-                        if (o > prevState[1]) {
-                            connNumToLastConn[prevState[0] + 1] = Math.min(connNumToLastConn[prevState[0] + 1], o);
-                            break;  // options was sorted, and why in frick would we choose something higher? just break it
-                        }
-                    }
-                }
+            for (int f = 0; f < fieldNum; f++) {
+                maxWithEnd[f] = Math.max(maxWithEnd[f], updated[f]);
             }
-            ArrayList<int[]> thisStates = new ArrayList<>();
-            for (int i = 0; i <= fieldNum; i++) {  // actually make the states and pass them on to the storage
-                if (connNumToLastConn[i] != Integer.MAX_VALUE) {
-                    thisStates.add(new int[] {i, connNumToLastConn[i]});
-                    max = Math.max(max, i);
-                }
-            }
-            connSoFar[f] = thisStates;
         }
 
+        int max = Arrays.stream(maxWithEnd).max().getAsInt();
         PrintWriter written = new PrintWriter("nocross.out");
         written.println(max);
         written.close();
         System.out.println(max);
         System.out.printf("%d ms and we are DONE FRICK YEA%n", System.currentTimeMillis() - start);
+    }
+
+    static int rangeMax(int[] arr, int from, int to) {
+        int max = 0;
+        for (int i = from; i < to; i++) {
+            max = Math.max(max, arr[i]);
+        }
+        return max;
     }
 }

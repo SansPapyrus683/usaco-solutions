@@ -114,7 +114,8 @@ public class Dream {
     }
 }
 
-class Pair<T1, T2> {  // seriously wish java had it's own pair class
+// i swear i will go to james gosling's house and personally beg him to implement a pair class
+class Pair<T1, T2> {
     public T1 first;
     public T2 second;
     public Pair(T1 first, T2 second) {
