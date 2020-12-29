@@ -1,8 +1,10 @@
+package utils.template;
+
 import java.io.*;
 import java.util.*;
 
 // most of my sols are structured like this (bare bones)
-public class Template {
+public class FileTemplate {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("test.in"));
