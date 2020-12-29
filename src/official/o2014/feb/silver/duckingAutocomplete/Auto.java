@@ -5,6 +5,20 @@ import java.util.*;
 
 // 2014 feb silver (and yes i realize that duck is bc of autoCORRECT, not autoCOMPLETE)
 public class Auto {
+    private static class Pair<T1, T2> {  // seriously wish java had it's own pair class
+        public T1 first;
+        public T2 second;
+        public Pair(T1 first, T2 second) {
+            this.first = first;
+            this.second = second;
+        }
+
+        @Override
+        public String toString() {
+            return String.format("Pair{first: %s, second: %s}", first, second);
+        }
+    }
+
     static Pair<Integer, String>[] words;
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
@@ -25,7 +39,7 @@ public class Auto {
 
         int queryAt = 0;
         int[] answers = new int[queries.length];
-        for (Pair<Integer, String> q : queries) {
+        for (Pair<Integer, String> q : queries) {  // looking back at this, this method was awfully convoluted lol
             // binary search for the first & last occurrence of the starting substring
             int firstMatch = findIndex(q.second), lastMatch = findIndex(q.second, false);
             // if there's enough matches (&& we actually found some stuff), give an answer or just -1
@@ -69,19 +83,5 @@ public class Auto {
             }
         }
         return toReturn;
-    }
-}
-
-class Pair<T1, T2> {  // seriously wish java had it's own pair class
-    public T1 first;
-    public T2 second;
-    public Pair(T1 first, T2 second) {
-        this.first = first;
-        this.second = second;
-    }
-
-    @Override
-    public String toString() {
-        return String.format("Pair{first: %s, second: %s}", first, second);
     }
 }

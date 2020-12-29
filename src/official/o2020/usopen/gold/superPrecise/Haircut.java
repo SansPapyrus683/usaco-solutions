@@ -41,7 +41,9 @@ public class Haircut {
     }
 }
 
-// slightly different implmentation: https://www.geeksforgeeks.org/binary-indexed-tree-or-fenwick-tree-2/
+/**
+ * see {@link utils.BinaryIndexedTree} if you want an explanation for how this works
+ */
 class BITree {
     private final long[] treeThing;
     private final int size;

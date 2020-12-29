@@ -43,7 +43,7 @@ public class CircleCross {
     }
 }
 
-// copied from https://www.geeksforgeeks.org/queries-number-distinct-elements-subarray/?ref=rp
+// this one is actually copied from https://www.geeksforgeeks.org/queries-number-distinct-elements-subarray/?ref=rp
 class BITree {
     private final int[] treeThing;
     private final int size;

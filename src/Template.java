@@ -5,12 +5,13 @@ import java.util.*;
 public class Template {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
-        BufferedReader read = new BufferedReader(new FileReader("README.md"));
-        StringTokenizer initial = new StringTokenizer(read.readLine());  // some random placeholder code
-        read.close();
-        while (initial.hasMoreTokens()) {
-            System.out.println(initial.nextToken());
+        BufferedReader read = new BufferedReader(new FileReader("test.in"));
+        ArrayList<String[]> lines = new ArrayList<>();
+        String currLine;
+        while ((currLine = read.readLine()) != null) {
+            lines.add(currLine.split(" "));
         }
+
         System.out.printf("bruh why did you run this code that took %d ms lol%n", System.currentTimeMillis() - start);
     }
 }

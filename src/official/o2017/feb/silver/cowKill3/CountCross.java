@@ -5,8 +5,19 @@ import java.util.*;
 
 // 2017 feb silver
 public class CountCross {
-    private static final int[] CHANGE_X = new int[] {1, -1, 0, 0};
-    private static final int[] CHANGE_Y = new int[] {0, 0, 1, -1};
+    private static final int[] CHANGE_X = new int[]{1, -1, 0, 0};
+    private static final int[] CHANGE_Y = new int[]{0, 0, 1, -1};
+
+    private static class Pair<T1, T2> {  // CURSE YOU JAVA!!!!
+        public T1 first;
+        public T2 second;
+
+        public Pair(T1 first, T2 second) {
+            this.first = first;
+            this.second = second;
+        }
+    }
+
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("countcross.in"));
@@ -81,14 +92,5 @@ public class CountCross {
             }
         }
         return visited;
-    }
-}
-
-class Pair<T1, T2> {  // CURSE YOU JAVA!!!!
-    public T1 first;
-    public T2 second;
-    public Pair(T1 first, T2 second) {
-        this.first = first;
-        this.second = second;
     }
 }

@@ -23,7 +23,6 @@ public class MilkVisits {
         for (int i = 0; i < farmNum; i++) {
             adj[i] = new ArrayList<>();
         }
-
         for (int i = 0; i < farmNum - 1; i++) {
             StringTokenizer path = new StringTokenizer(read.readLine());
             int firstFarm = Integer.parseInt(path.nextToken()) - 1;  // farms start at 1, let's make that 0
@@ -52,29 +51,28 @@ public class MilkVisits {
         int[] outTimes = new int[farmNum];
         int movesTaken = 0;
         ArrayDeque<Integer> timeFrontier = new ArrayDeque<>(Collections.singletonList(0));  // start @ node 0
-        while (!timeFrontier.isEmpty()) {
+        while (!timeFrontier.isEmpty()) {  // sauce: https://www.geeksforgeeks.org/query-ancestor-descendant-relationship-tree/
             int curr = timeFrontier.removeFirst();
-            if (traversed[curr]) {  // this should be that marker i think
+            if (traversed[curr]) {  // this should be that marker (defined below) i think
                 outTimes[curr] = movesTaken;
                 continue;
             }
-
             inTimes[curr] = movesTaken;
             timeFrontier.addFirst(curr);  // set a marker to record the outtime
             traversed[curr] = true;
-            for (int c : adj[curr]) {
-                if (!traversed[c]) {
-                    timeFrontier.addFirst(c);
+            for (int n : adj[curr]) {
+                if (!traversed[n]) {
+                    timeFrontier.addFirst(n);
                 }
             }
             movesTaken++;
         }
 
-        Arrays.fill(traversed, false);
+        Arrays.fill(traversed, false);  // reset the traversed array
         ArrayDeque<int[]> frontier = new ArrayDeque<>(Collections.singletonList(new int[] {0, 0}));
 
         int[] stack = new int[farmNum];
-        ArrayList<Long>[] seenTypes = new ArrayList[farmNum];
+        ArrayList<Long>[] seenTypes = new ArrayList[farmNum];  // longs for like point compression or smth
         for (int i = 0; i < farmNum; i++) {
             seenTypes[i] = new ArrayList<>();
         }

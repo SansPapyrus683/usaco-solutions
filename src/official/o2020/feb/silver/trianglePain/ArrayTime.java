@@ -9,6 +9,20 @@ public class ArrayTime {
     private static final int MOD = (int) Math.pow(10, 9) + 7;
     private static final int LEN = (int) Math.pow(10, 4);
 
+    private static class Pair {
+        public long first;
+        public long second;
+        public Pair(long first, long second) {
+            this.first = first;
+            this.second = second;
+        }
+
+        @Override
+        public String toString() {
+            return String.format("Pair{first=%s, second=%s}", first, second);
+        }
+    }
+
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("triangles.in"));
@@ -67,19 +81,5 @@ public class ArrayTime {
         written.close();
         System.out.println(totalSum);
         System.out.printf("i say that it took %d ms- the grader might think differently%n", System.currentTimeMillis() - start);
-    }
-}
-
-class Pair {
-    public long first;
-    public long second;
-    public Pair(long first, long second) {
-        this.first = first;
-        this.second = second;
-    }
-
-    @Override
-    public String toString() {
-        return String.format("Pair{first=%s, second=%s}", first, second);
     }
 }
