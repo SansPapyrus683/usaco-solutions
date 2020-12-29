@@ -111,6 +111,8 @@ public class CompSegmentTree {
     public int calc(int from, int to) {
         if (from < 0 || to > arrSize) {
             throw new IllegalArgumentException(String.format("the bounds %s and %s are out of bounds i think", from, to));
+        } else if (to <= from) {
+            throw new IllegalArgumentException(String.format("the bounds %s and %s don't make sense bro", from, to));
         }
         return calc(from, to, 0, 0, size);
     }

@@ -16,7 +16,9 @@ public class Odometer {
         StringTokenizer info = new StringTokenizer(read.readLine());
         long start = Long.parseLong(info.nextToken());
         long end = Long.parseLong(info.nextToken());
-        assert 100 <= start && start <= end;
+        if (!(100 <= start && start <= end)) {
+            throw new IllegalArgumentException("idk man according to the problem your input's wrong");
+        }
 
         long mooTimes = interestingNum(start, end);
         PrintWriter written = new PrintWriter(new FileOutputStream("odometer.out"));
@@ -38,7 +40,7 @@ public class Odometer {
         return (input + base - 1) / base * base;
     }
 
-    // copied from stackoverflow: https://stackoverflow.com/questions/2201113/combinatoric-n-choose-r-in-java-math
+    // copied from SO: https://stackoverflow.com/questions/2201113/combinatoric-n-choose-r-in-java-math
     static long choose(long n, long r) {
         long ans = 1;
         for (int i = 0; i < r; i++) {

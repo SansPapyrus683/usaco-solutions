@@ -139,9 +139,9 @@ public class CowLand {
         private final ArrayList<Integer> eulerTour = new ArrayList<>();
         private final int[] firstOcc;
         private final int[] lastOcc;
-        private final int[] parent;
         private final int[] height;
         private final int[] enjoyment;
+        private final int nodes;
 
         private final MinSegTree LCATree;
         private final XORSegTree queryTree;
@@ -149,10 +149,9 @@ public class CowLand {
         public AmusementPark(ArrayList<Integer>[] neighbors, int[] respectiveVals) {
             this.neighbors = neighbors;
             enjoyment = respectiveVals.clone();
-            int nodes = neighbors.length;
+            nodes = neighbors.length;
             firstOcc = new int[nodes];
             lastOcc = new int[nodes];
-            parent = new int[nodes];
             height = new int[nodes];
 
             eulerTour();
@@ -185,7 +184,7 @@ public class CowLand {
         public int LCA(int n1, int n2) {
             int p1 = firstOcc[n1];
             int p2 = firstOcc[n2];
-            if (p1 > p2) {
+            if (p1 > p2) {  // see which one occurs first because of the minimum thing
                 int temp = p1;
                 p1 = p2;
                 p2 = temp;
@@ -196,6 +195,7 @@ public class CowLand {
         private void eulerTour() {  // i could just put this in the constructor but this makes it look better
             ArrayDeque<int[]> frontier = new ArrayDeque<>(Collections.singletonList(new int[]{0, -1, 0}));
             HashSet<Integer> visited = new HashSet<>();
+            int[] parent = new int[nodes];
             while (!frontier.isEmpty()) {
                 int[] curr = frontier.removeFirst();
                 eulerTour.add(curr[0]);

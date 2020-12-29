@@ -6,13 +6,13 @@ import java.util.*;
 // 2015 feb silver
 public class Censor {
     private static final long MOD = (long) (Math.pow(10, 9)) + 9;
-    private static final long POWER = 31;  // some website told me to do this
+    private static final long POWER = 31;  // some website told me to do this (https://cp-algorithms.com/string/string-hashing.html)
     static long[] hashPowers = new long[1000000];
 
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         long nowPower = 1;
-        for (int i = 0; i < 1000000; i++) {  // precompute power (takes surprisingly little time)
+        for (int i = 0; i < 1000000; i++) {  // precompute powers (takes surprisingly little time)
             hashPowers[i] = nowPower;
             nowPower = (nowPower * POWER) % MOD;
         }
