@@ -48,16 +48,16 @@ public class Rut {
                  * E
                  *      N (i mean tbh it's kinda obvi why this is true)
                  */
-                if (!deadAlr[e] && !deadAlr[n] && eCow[0] < nCow[0] && nCow[1] < eCow[1]) {
+                if (!deadAlr[n] && eCow[0] < nCow[0] && nCow[1] < eCow[1]) {
                     int eCowTime = nCow[0] - eCow[0];
                     int nCowTime = eCow[1] - nCow[1];
                     if (eCowTime < nCowTime) {  // the east cow blocked the north cow
                         deadAlr[n] = true;
                         blame[e] += blame[n] + 1;  // carry over all the blame (plus the cow itself)
                     } else if (eCowTime > nCowTime) {  // the north cow blocked the east cow
-                        deadAlr[e] = true;
+                        deadAlr[e] = true;  // this one doesn't matter, just gives me some closure
                         blame[n] += blame[e] + 1;
-                        break;
+                        break;  // no point in processing any more
                     }
                 }
             }
