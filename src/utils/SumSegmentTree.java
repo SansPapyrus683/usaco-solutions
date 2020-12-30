@@ -16,7 +16,7 @@ import java.util.StringTokenizer;
  */
 public class SumSegmentTree {
     public enum OpType {  // dk if this is a best practice but i don't wanna have two really similar classes
-        ADD,
+        SUM,
         XOR
     }
 
@@ -59,7 +59,7 @@ public class SumSegmentTree {
         StringTokenizer initial = new StringTokenizer(read.readLine());
         initial.nextToken();
         int queryNum = Integer.parseInt(initial.nextToken());
-        SumSegmentTree segmentTree = new SumSegmentTree(Arrays.stream(read.readLine().split(" ")).mapToInt(Integer::parseInt).toArray(), OpType.ADD);
+        SumSegmentTree segmentTree = new SumSegmentTree(Arrays.stream(read.readLine().split(" ")).mapToInt(Integer::parseInt).toArray(), OpType.SUM);
         for (int q = 0; q < queryNum; q++) {
             int[] query = Arrays.stream(read.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
             if (query[0] == 1) {
@@ -88,7 +88,7 @@ public class SumSegmentTree {
                 set(index, element, 2 * currNode + 2, mid, right);
             }
             switch (op) {
-                case ADD:
+                case SUM:
                     segtree[currNode] = segtree[2 * currNode + 1] + segtree[2 * currNode + 2];
                     break;
                 case XOR:
@@ -119,7 +119,7 @@ public class SumSegmentTree {
         int leftPartSum = sum(from, to, 2 * currNode + 1, left, middle);
         int rightPartSum = sum(from, to, 2 * currNode + 2, middle, right);
         switch (op) {
-            case ADD:
+            case SUM:
                 return leftPartSum + rightPartSum;
             case XOR:
                 return leftPartSum ^ rightPartSum;

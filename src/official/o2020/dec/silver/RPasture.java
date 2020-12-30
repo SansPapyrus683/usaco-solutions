@@ -15,12 +15,19 @@ public class RPasture {
     public static void main(String[] args) throws IOException {
         BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
         int cowNum = Integer.parseInt(read.readLine());
-        // all x coo and y coo are distinct
+
+        HashSet<Integer> seenX = new HashSet<>();
+        HashSet<Integer> seenY = new HashSet<>();
         int[][] cows = new int[cowNum][2];
         for (int c = 0; c < cowNum; c++) {
-            int[] cow = Arrays.stream(read.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
-            cows[c] = cow;
+            cows[c] = Arrays.stream(read.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
+            if (seenX.contains(cows[c][0]) || seenY.contains(cows[c][1])) {
+                throw new IllegalArgumentException("look my man all the coordinates gotta be distinct");
+            }
+            seenX.add(cows[c][0]);
+            seenY.add(cows[c][1]);
         }
+
         long start = System.currentTimeMillis();
         // because all the x's and y's are distinct, we can just sort of "compress" them into just 1, 2, 3, etc...
         Arrays.sort(cows, Comparator.comparingInt(c -> c[1]));
@@ -62,6 +69,6 @@ public class RPasture {
         }
         total += cowNum + 1;  // we didn't count the ones where fj just boxes either a single cow or no cow at all
         System.out.println(total);
-        System.err.printf("i love when the cows are just treated as static objects: %d%n", System.currentTimeMillis() - start);
+        System.err.printf("i love when the cows are just treated as static objects: %d ms%n", System.currentTimeMillis() - start);
     }
 }

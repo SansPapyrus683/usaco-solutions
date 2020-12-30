@@ -13,27 +13,79 @@ package utils;
  * the algo would first take 16, then 8, then 1, and accumulate all the values at those indices (16, 24, and 25)
  */
 public class BinaryIndexedTree {
-    private final int[] treeThing;
-    private final int size;
-
-    public BinaryIndexedTree(int size) {
-        treeThing = new int[size + 1];  // to make stuff easier we'll just make it 1-indexed
-        this.size = size;
+    public enum OpType {
+        SUM,
+        XOR
     }
 
-    public void increment(int updateAt, long val) {
-        updateAt++;  // have the driver code not worry about 1-indexing
-        // that bitwise thing returns the greatest power of two that's less than i
-        for (; updateAt <= size; updateAt += updateAt & -updateAt) {
-            treeThing[updateAt] += val;
+    private final int[] treeThing;
+    private final int[] actualArr;
+    private final int size;
+    private final OpType opType;
+
+    public BinaryIndexedTree(int size, OpType opType) {
+        treeThing = new int[size + 1];  // to make stuff easier we'll just make it 1-indexed
+        actualArr = new int[size];
+        this.size = size;
+        this.opType = opType;
+    }
+
+    public BinaryIndexedTree(int[] arr, OpType opType) {
+        this(arr.length, opType);
+        for (int i = 0; i < arr.length; i++) {
+            set(i, arr[i]);
         }
     }
 
-    public long query(int ind) {  // the bound is inclusive i think
+    public int get(int ind) {
+        return actualArr[ind];
+    }
+
+    public void set(int ind, int val) {
+        switch (opType) {
+            case SUM:
+                increment(ind, val - actualArr[ind]);
+                break;
+            case XOR:
+                increment(ind, val ^ actualArr[ind]);
+                break;
+            default:
+                throw new RuntimeException("this shouldn't happen, but you never know!");
+        }
+    }
+
+    public void increment(int ind, int val) {
+        actualArr[ind] += val;
+        ind++;  // have the driver code not worry about 1-indexing
+        // that bitwise thing returns the greatest power of two that's less than i
+        for (; ind <= size; ind += ind & -ind) {
+            switch (opType) {
+                case SUM:
+                    treeThing[ind] += val;
+                    break;
+                case XOR:
+                    treeThing[ind] ^= val;
+                    break;
+                default:
+                    throw new RuntimeException("this shouldn't happen, but you never know!");
+            }
+        }
+    }
+
+    public long query(int ind) {  // the bound is inclusive i think (returns sum of everything from 0 to ind)
         ind++;
         long sum = 0;
         for (; ind > 0; ind -= ind & -ind) {
-            sum += treeThing[ind];
+            switch (opType) {
+                case SUM:
+                    sum += treeThing[ind];
+                    break;
+                case XOR:
+                    sum ^= treeThing[ind];
+                    break;
+                default:
+                    throw new RuntimeException("this shouldn't happen, but you never know!");
+            }
         }
         return sum;
     }
