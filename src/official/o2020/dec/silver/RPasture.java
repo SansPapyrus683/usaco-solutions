@@ -21,7 +21,7 @@ public class RPasture {
             int[] cow = Arrays.stream(read.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
             cows[c] = cow;
         }
-
+        long start = System.currentTimeMillis();
         // because all the x's and y's are distinct, we can just sort of "compress" them into just 1, 2, 3, etc...
         Arrays.sort(cows, Comparator.comparingInt(c -> c[1]));
         HashMap<Integer, Integer> reducedY = new HashMap<>();
@@ -62,5 +62,6 @@ public class RPasture {
         }
         total += cowNum + 1;  // we didn't count the ones where fj just boxes either a single cow or no cow at all
         System.out.println(total);
+        System.err.printf("i love when the cows are just treated as static objects: %d%n", System.currentTimeMillis() - start);
     }
 }
