@@ -40,7 +40,6 @@ public class Lifeguards {
             if (watchedOver.size() == 1) {
                 onlyThem[(int) watchedOver.toArray()[0]] += i - lastKey;
             }
-
             for (int c : startEnds.get(i)) {
                 if (watchedOver.contains(c)) {
                     watchedOver.remove(c);

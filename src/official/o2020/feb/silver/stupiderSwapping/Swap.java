@@ -50,7 +50,8 @@ public class Swap {
             if (afterReversing[c] == c) {  // if it isn't affected by the reversals, it'll still be the same at the end
                 finalPos[c] = c;
             }
-            /* if we haven't processed this thing's cycle, go through it and process all the other cycles
+            /*
+             * if we haven't processed this thing's cycle, go through it and process all the other cycles
              * that we come upon as well (faster than processing each position at a time)
              */
             else if (!cycled.containsKey(c)) {

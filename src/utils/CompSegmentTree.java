@@ -1,12 +1,8 @@
 package utils;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.StringTokenizer;
 
 /**
  * this does pretty much the same thing as the sum segment tree<br>
@@ -48,33 +44,6 @@ public class CompSegmentTree {
 
     public CompSegmentTree(int len, OpType op) {
         this(len, op, Comparator.naturalOrder());
-    }
-
-    /**
-     * a small demonstration of this segtree<br>
-     * 5 5<br>
-     * 5 4 2 3 5<br>
-     * 2 0 3<br>
-     * 1 2 6<br>
-     * 2 0 3<br>
-     * 1 3 1<br>
-     * 2 0 5<br>
-     * in total, this should output 2, 4, and 1 each on a newline
-     */
-    public static void main(String[] args) throws IOException {
-        BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer initial = new StringTokenizer(read.readLine());
-        initial.nextToken();
-        int queryNum = Integer.parseInt(initial.nextToken());
-        CompSegmentTree segmentTree = new CompSegmentTree(Arrays.stream(read.readLine().split(" ")).mapToInt(Integer::parseInt).toArray(), OpType.MIN);
-        for (int q = 0; q < queryNum; q++) {
-            int[] query = Arrays.stream(read.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
-            if (query[0] == 1) {
-                segmentTree.set(query[1], query[2]);
-            } else {
-                System.out.println(segmentTree.calc(query[1], query[2]));
-            }
-        }
     }
 
     public void set(int index, int element) {

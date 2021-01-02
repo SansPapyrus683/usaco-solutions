@@ -6,6 +6,35 @@ import java.util.*;
 // 2020 usopen gold
 // answer all the inversions number from 0 all the way to hairNum - 1
 public class Haircut {
+    /**
+     * see {@link utils.BinaryIndexedTree} if you want an explanation for how this works
+     */
+    private static class BITree {
+        private final long[] treeThing;
+        private final int size;
+
+        public BITree(int size) {
+            treeThing = new long[size + 1];
+            this.size = size;
+        }
+
+        public void increment(int updateAt, long val) {
+            updateAt++;  // have the driver code not worry about 1-indexing
+            for (; updateAt <= size; updateAt += updateAt & -updateAt) {
+                treeThing[updateAt] += val;
+            }
+        }
+
+        public long query(int ind) {  // the bound is inclusive i think
+            ind++;
+            long sum = 0;
+            for (; ind > 0; ind -= ind & -ind) {
+                sum += treeThing[ind];
+            }
+            return sum;
+        }
+    }
+
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("haircut.in"));
@@ -38,34 +67,5 @@ public class Haircut {
         }
         written.close();
         System.out.printf("bam %d ms now leave me alone%n", System.currentTimeMillis() - start);
-    }
-}
-
-/**
- * see {@link utils.BinaryIndexedTree} if you want an explanation for how this works
- */
-class BITree {
-    private final long[] treeThing;
-    private final int size;
-
-    public BITree(int size) {
-        treeThing = new long[size + 1];
-        this.size = size;
-    }
-
-    public void increment(int updateAt, long val) {
-        updateAt++;  // have the driver code not worry about 1-indexing
-        for (; updateAt <= size; updateAt += updateAt & -updateAt) {
-            treeThing[updateAt] += val;
-        }
-    }
-
-    public long query(int ind) {  // the bound is inclusive i think
-        ind++;
-        long sum = 0;
-        for (; ind > 0; ind -= ind & -ind) {
-            sum += treeThing[ind];
-        }
-        return sum;
     }
 }

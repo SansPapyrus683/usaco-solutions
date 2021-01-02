@@ -16,9 +16,6 @@ public class Odometer {
         StringTokenizer info = new StringTokenizer(read.readLine());
         long start = Long.parseLong(info.nextToken());
         long end = Long.parseLong(info.nextToken());
-        if (!(100 <= start && start <= end)) {
-            throw new IllegalArgumentException("idk man according to the problem your input's wrong");
-        }
 
         long mooTimes = interestingNum(start, end);
         PrintWriter written = new PrintWriter(new FileOutputStream("odometer.out"));
@@ -50,15 +47,19 @@ public class Odometer {
     }
 
     static long interestingNum(long start, long end) {  // find all interesting numbers from start to end (inclusive i think)
+        if (!(100 <= start && start <= end)) {
+            throw new IllegalArgumentException("idk man according to the problem your input's wrong");
+        }
+
         if (!allZeroes(end)) {
             long upper = round(end, (int) Math.log10(end));
             long answer = interestingNum(start, upper);
+            System.out.println(start + " " + upper + " " + answer);
             if (end < upper) {  // if the end is less than the upper bound, subtract the other range
                 answer -= interestingNum(end + 1, upper);
             }
             return answer;
         }
-        assert start <= end;
         if (start == end) {
             return 1;  // bc it's at least 100, the end is always interesting
         }

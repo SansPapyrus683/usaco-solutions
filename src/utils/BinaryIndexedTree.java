@@ -72,9 +72,9 @@ public class BinaryIndexedTree {
         }
     }
 
-    public long query(int ind) {  // the bound is inclusive i think (returns sum of everything from 0 to ind)
+    public int query(int ind) {  // the bound is inclusive i think (returns sum of everything from 0 to ind)
         ind++;
-        long sum = 0;
+        int sum = 0;
         for (; ind > 0; ind -= ind & -ind) {
             switch (opType) {
                 case SUM:

@@ -9,7 +9,7 @@ ok now all the official problems will be just using stdin and stdout, so yeah
 
 ## some small nitpicks
 
-* yes ik that the convention is snake_case for python, but idrc, it was too late when i learned about that
-* idk but there might be some debug prints left in the files, but that doesn't really matter
-* the package names are there so vs code doesn't have a meltdown with the files lol (the thing is intellij handles them just fine so idk)
-* so i learned that asserts for input validation are somehow *bad*, but that probably won't affect anything lol
+* yes ik that the convention is snake_case for python, but it was too late when i learned about that
+* ther might be some debug prints left in the files, but that shouldn't affect anything
+* the package names are there so vs code doesn't have a meltdown with the files lol (the thing is intellij handles them just fine)
+* so i learned that asserts for input validation are somehow *bad*, but that probably won't affect anything -usaco does give perfect input anyways

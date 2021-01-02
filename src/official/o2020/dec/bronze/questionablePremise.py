@@ -33,7 +33,7 @@ for e in eastCowIndices:
     for n in northCowIndices:
         nCow = cows[n]
         """
-        (comment copied from the java sol)
+        (comment copied from the java sol in that silver version)
         the arrangement has to be something like this for possibility of a block
         E
                N (i mean tbh it's kinda obvi why this is true)
