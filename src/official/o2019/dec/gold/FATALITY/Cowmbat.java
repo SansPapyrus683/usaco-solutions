@@ -27,7 +27,6 @@ public class Cowmbat {
         }
 
         // the min amt of days to switch the prev {first index} buttons to valid streaks given the last button number
-        // for indexes less than the minStreak it's just the cost to switch all previous ones to the last button
         int[][] minDaysWithButton = new int[comboLen + 1][buttonNum];
         int[] overallMin = new int[comboLen + 1];
         Arrays.fill(overallMin, INVALID);
