@@ -5,6 +5,9 @@ import java.io.*;
 
 // 2019 feb gold (this one works by PURE CHANCE- sometimes it works, sometimes it doesn't so yeah lol)
 public class CowLand {
+    /**
+     * see {@link utils.SumSegmentTree} for explanation ok?
+     */
     private static class MinSegTree {
         private final int[] segtree;
         private final int arrSize;

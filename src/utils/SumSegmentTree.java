@@ -8,7 +8,7 @@ import java.util.StringTokenizer;
 
 /**
  * <a href="https://codeforces.com/edu/course/2/lesson/4/1">this video does a really good explanation if you wanna see</a><br>
- * but if you really want my crappy explanation here we go<br>
+ * but if you really want my crappy explanation here we go:<br>
  * so a segment tree breaks down an array into halves, and breaks those halves into halves, and so on and so forth until
  * you just end up with a bunch of single numbers as the leaf nodes (which are the values of the array themselves)<br>
  * so you end up with a sort of tree with the root being the sum of the entire array. then the two children have the sum

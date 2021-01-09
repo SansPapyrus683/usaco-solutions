@@ -6,6 +6,7 @@ import java.util.*;
  * tbh this class doesn't really do anything<br>
  * it just has some little algorithms that i think might(?) help<br>
  * it includes an iterative euler tour which i couldn't find anywhere on the internet so...
+ * i might implement HLD sometimes soon (aka never)
  */
 public class Tree {
     private static class TourInfo {
@@ -81,8 +82,8 @@ public class Tree {
     }
 
     public int LCA(int n1, int n2) {  // basically copied from https://cp-algorithms.com/graph/lca.html
-        int p1 = inOutTour.firstOcc[n1];
-        int p2 = inOutTour.firstOcc[n2];
+        int p1 = inOutTour.getFirstOcc()[n1];
+        int p2 = inOutTour.getFirstOcc()[n2];
         if (p1 > p2) {
             int temp = p1;
             p1 = p2;

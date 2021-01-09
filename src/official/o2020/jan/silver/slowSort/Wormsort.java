@@ -4,11 +4,12 @@ import java.util.*;
 import java.io.*;
 
 // 2020 jan silver
+// 1/6/2021 - i was young and innocent when i wrote this code, so it's full of bad practices
 public class Wormsort {
-    static int[] cows;
-    static int[] parents;
-    static int[] sizes;
-    static int[][] wormholes;
+    private static int[] cows;
+    private static int[] parents;
+    private static int[] sizes;
+    private static int[][] wormholes;
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("wormsort.in"));
@@ -75,21 +76,20 @@ public class Wormsort {
                 upperBound = toSearch;
             }
         }
-        
         System.out.println(lowerBound);
         written.println(lowerBound);
         written.close();
         System.out.printf("so it took about this many ms: %s%n", System.currentTimeMillis() - start);
     }
 
-    static int getUltimate(int start) {
+    private static int getUltimate(int start) {
         if (parents[start] == start) {
             return start;  // i mean the start is its own parent so it doesn't really matter
         }
         return parents[start] = getUltimate(parents[start]);
     }
 
-    static void merge(int nodeA, int nodeB) {
+    private static void merge(int nodeA, int nodeB) {
         nodeA = getUltimate(nodeA);  // always merge roots, not leaves
         nodeB = getUltimate(nodeB);
         if (sizes[nodeB] > sizes[nodeA]) {  // make sure that a is always larger than b

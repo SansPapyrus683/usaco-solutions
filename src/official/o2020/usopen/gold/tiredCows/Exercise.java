@@ -1,6 +1,7 @@
 package official.o2020.usopen.gold.tiredCows;
 
 import java.io.*;
+import java.math.BigInteger;
 import java.util.*;
 
 /**
@@ -11,39 +12,40 @@ import java.util.*;
  * so this is like finding the sum of LCM of all partitions of N
  * but because doing that would be slow as frick, we instead just consider the partitions which
  * consists only of distinct prime powers, because those would cover all possible LCMs
+ *
+ * also this is slow mostly bc of the bigintegers
+ * if you want like super speed, just switch to longs and do everything mod the mod idk
  */
 public class Exercise {
-    private static final int MAX = 1000000007;
-    private static long mod;
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         StringTokenizer initial = new StringTokenizer(new BufferedReader(new FileReader("exercise.in")).readLine());
         int cowNum = Integer.parseInt(initial.nextToken());
-        mod = Long.parseLong(initial.nextToken());
-        if (mod > MAX) {
-            throw new IllegalArgumentException(String.format("sorry but the mod %s is too high- overflow could occur", mod));
-        }
+        BigInteger mod = new BigInteger(initial.nextToken());
 
-        long[] totalWithSum = new long[cowNum + 1];  // the sum of all the LCMs of the prime powers that sum to i (the array index)
-        totalWithSum[0] = 1;
+        // the sum of all the LCMs of the prime powers that sum to i (the array index)
+        BigInteger[] totalWithSum = new BigInteger[cowNum + 1];
+        Arrays.fill(totalWithSum, new BigInteger("0"));
+        totalWithSum[0] = new BigInteger("1");
         for (int i = 2; i <= cowNum; i++) {
             if (!prime(i)) {
                 continue;
             }
             // this is an array so the update happens "simultaneously"
-            long[] updatedTotal = totalWithSum.clone();
+            BigInteger[] updatedTotal = totalWithSum.clone();
             for (int p = i; p <= cowNum; p *= i) {  // go through all prime powers
                 for (int from = 0; from + p <= cowNum; from++) {
-                    updatedTotal[from + p] = add(updatedTotal[from + p], mul(p, totalWithSum[from]));
+                    updatedTotal[from + p] = updatedTotal[from + p].add(totalWithSum[from].multiply(new BigInteger(String.valueOf(p))));
                 }
             }
             totalWithSum = updatedTotal;
         }
 
-        long total = 0;
-        for (long prod : totalWithSum) {
-            total = add(total, prod);
+        BigInteger total = new BigInteger("0");
+        for (BigInteger prod : totalWithSum) {
+            total = total.add(prod);
         }
+        total = total.mod(mod);
         PrintWriter written = new PrintWriter("exercise.out");
         written.println(total);
         written.close();
@@ -61,13 +63,5 @@ public class Exercise {
             if (n % i == 0 || n % (i + 2) == 0)
                 return false;
         return true;
-    }
-
-    private static long mul(long a, long b) {
-        return (a * b) % mod;
-    }
-
-    private static long add(long a, long b) {
-        return (a + b) % mod;
     }
 }
