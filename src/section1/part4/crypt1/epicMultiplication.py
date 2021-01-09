@@ -41,5 +41,4 @@ for c in possCombinations:
         total += 1
 
 print(total)
-with open('outputs.txt', 'w') as written:
-    written.write(str(total) + '\n')
+print(total, file=open('outputs.txt', 'w'))

@@ -11,11 +11,7 @@ MOD = 47
 with open('rescueET.txt') as read:
     comet = [ord(c) - 64 for c in read.readline().rstrip()]
     group = [ord(c) - 64 for c in read.readline().rstrip()]
-print(comet, group)
-with open('outputs.txt', 'w') as written:
-    if reduce(mul, comet) % MOD == reduce(mul, group) % MOD:
-        print('GO')
-        written.write('GO\n')
-    else:
-        print('STAY')
-        written.write('STAY\n')
+
+result = 'GO' if reduce(mul, comet) % MOD == reduce(mul, group) % MOD else 'STAY'
+print(result)
+print(result, file=open('outputs.txt', 'w'))

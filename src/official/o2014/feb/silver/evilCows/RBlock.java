@@ -1,4 +1,4 @@
-package official.o2014.feb.evilCows;
+package official.o2014.feb.silver.evilCows;
 
 import java.io.*;
 import java.util.*;

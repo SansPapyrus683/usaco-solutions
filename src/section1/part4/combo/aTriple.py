@@ -30,5 +30,4 @@ for comb in combs:
 
 valid = len(set(validCombs))
 print(valid)
-with open('outputs.txt', 'w') as written:
-    written.write(str(valid) + '\n')
+print(valid, file=open('outputs.txt', 'w'))

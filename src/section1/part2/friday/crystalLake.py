@@ -19,7 +19,6 @@ for _ in range(years):
         day = (day + dayAmt) % 7  # jump to the first day of next month
     currYear += 1
 
-with open('outputs.txt', 'w') as written:
-    goodOrder = [str(s) for s in [thirteenAmt[6]] + thirteenAmt[:6]]
-    print(goodOrder)
-    written.write(' '.join(goodOrder) + '\n')
+goodOrder = [str(s) for s in [thirteenAmt[6]] + thirteenAmt[:6]]
+print(goodOrder)
+print(' '.join(goodOrder), file=open('outputs.txt', 'w'))

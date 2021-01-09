@@ -29,5 +29,4 @@ for i in range(beadLen // 2, beadLen + beadLen // 2):  # test all the possible s
     maxLen = max(maxLen, min(beadLen, rightIndex - leftIndex + 1))
 
 print(maxLen)
-with open('outputs.txt', 'w') as written:
-    written.write(str(maxLen) + '\n')
+print(maxLen, file=open('outputs.txt', 'w'))

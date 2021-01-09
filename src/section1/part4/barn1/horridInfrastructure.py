@@ -36,5 +36,4 @@ for _ in range(boardNum - 1):
     stalls = removeSegment(stalls, occupied)
 
 print(len(stalls))
-with open('outputs.txt', 'w') as written:
-    written.write(str(len(stalls)) + '\n')
+print(len(stalls), file=open('outputs.txt', 'w'))

@@ -73,5 +73,4 @@ with open('quantumSuffering.txt') as read:
 
 validPairings = Wormholes(positions).countValid()
 print(validPairings)
-with open('outputs.txt', 'w') as written:
-    written.write(str(validPairings) + '\n')
+print(validPairings, file=open('outputs.txt', 'w'))

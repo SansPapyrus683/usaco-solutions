@@ -18,5 +18,4 @@ while gottenMilk < req:
     spent += buyAmt * thisPrice
 
 print(spent)
-with open('outputs.txt', 'w') as written:
-    written.write(str(spent) + '\n')
+print(spent, file=open('outputs.txt', 'w'))
