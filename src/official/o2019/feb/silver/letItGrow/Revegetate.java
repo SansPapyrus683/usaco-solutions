@@ -56,7 +56,7 @@ public class Revegetate {
         System.out.printf("so it took about %d milliseconds to finish", System.currentTimeMillis() - start);
     }
 
-    static void expandField(int start) {
+    private static void expandField(int start) {
         usedUp[start] = true;
         ArrayDeque<Integer> frontier = new ArrayDeque<Integer>();
         frontier.add(start);
@@ -72,7 +72,7 @@ public class Revegetate {
                 }
                 else if (hypothetical[n[0]] != supposedType) {  // if it's used up, check for a contradiction
                     System.out.println("farmer john you absolute dummy");
-                    written.println("0");
+                    written.println(0);
                     written.close();
                     System.exit(0);
                 }

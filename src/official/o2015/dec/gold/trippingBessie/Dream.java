@@ -71,7 +71,7 @@ public class Dream {
         System.out.printf("fricc yeah an undertale reference (WAIT THIS WAS IN 2015???) - %d ms%n", System.currentTimeMillis() - start);
     }
 
-    static ArrayList<Pair<int[], Boolean>> neighbors(Pair<int[], Boolean> rn, int[][] grid) {
+    private static ArrayList<Pair<int[], Boolean>> neighbors(Pair<int[], Boolean> rn, int[][] grid) {
         int height = grid.length;
         int width = grid[0].length;
         ArrayList<Pair<int[], Boolean>> valid = new ArrayList<>();
@@ -98,7 +98,7 @@ public class Dream {
         return valid;
     }
 
-    static Pair<int[], Integer> slide(Pair<int[], Boolean> rn, int[][] grid, int direction) {
+    private static Pair<int[], Integer> slide(Pair<int[], Boolean> rn, int[][] grid, int direction) {
         int height = grid.length;
         int width = grid[0].length;
         int[] rnPos = rn.first;

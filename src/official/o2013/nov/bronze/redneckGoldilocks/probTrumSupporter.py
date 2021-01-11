@@ -7,7 +7,7 @@ for c in cows:
     endpoints.extend([[c[0], 1], [c[1], 2]])  # 1 is start point, 2 is endpoint
 endpoints.sort()
 
-# this is kinda llike a line sweep approach
+# this is kinda like a line sweep approach
 # we go through all the endpoints of all the cows and then move the thermostat up and up
 # then we just take the running max
 milk_production = len(cows) * cold
