@@ -23,6 +23,14 @@ public class CowJump {
         // we just have to check for one intersecting pair, since all others are like non-intersecting
         IDSeg firstBad = null;
         IDSeg secondBad = null;
+        /*
+         * the segments that are sorted by y value
+         * now you might be thinking, "wait aren't the value of the segments constantly changing, possibly resulting in a loss of order"?
+         * that's what i thought
+         * then i asked someone
+         * the reason is because the only possible way for order to change is for an intersection to occur
+         * and by then we would've broken out of the loop alr
+         */
         TreeSet<IDSeg> relevantSegs = new TreeSet<>(Comparator.comparingDouble(IDSeg::currY));
         for (int i = 0; i < segmentNum * 2; i++) {
             xAt = endpoints[i].x;
