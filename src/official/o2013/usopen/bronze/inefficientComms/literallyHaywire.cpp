@@ -50,7 +50,6 @@ class WireSystem {
             }
         }
     public:
-        // 1/11/2021- i still don't know how to throw exceptions so no input validation
         WireSystem(vector<vector<int>> friends) {
             friendly = friends;
             cow_num = friends.size();
