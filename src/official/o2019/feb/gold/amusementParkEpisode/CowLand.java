@@ -5,6 +5,43 @@ import java.io.*;
 
 // 2019 feb gold (this one works by PURE CHANCE- sometimes it works, sometimes it doesn't so yeah lol)
 public class CowLand {
+    public static void main(String[] args) throws IOException {
+        long start = System.currentTimeMillis();
+        BufferedReader read = new BufferedReader(new FileReader("cowland.in"));
+        StringTokenizer initial = new StringTokenizer(read.readLine());
+        int placeNum = Integer.parseInt(initial.nextToken());
+        int queryNum = Integer.parseInt(initial.nextToken());
+        int[] initialVals = Arrays.stream(read.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
+        ArrayList<Integer>[] neighbors = new ArrayList[placeNum];
+        for (int p = 0; p < placeNum; p++) {
+            neighbors[p] = new ArrayList<>();
+        }
+        for (int i = 0; i < placeNum - 1; i++) {
+            int[] route = Arrays.stream(read.readLine().split(" ")).mapToInt(j -> Integer.parseInt(j) - 1).toArray();
+            neighbors[route[0]].add(route[1]);
+            neighbors[route[1]].add(route[0]);
+        }
+        AmusementPark park = new AmusementPark(neighbors, initialVals);
+        PrintWriter written = new PrintWriter("cowland.out");
+        for (int q = 0; q < queryNum; q++) {
+            int[] query = Arrays.stream(read.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
+            switch (query[0]) {
+                case 1:
+                    park.set(query[1] - 1, query[2]);
+                    break;
+                case 2:
+                    int happiness = park.query(query[1] - 1, query[2] - 1);
+                    // System.out.println(happiness);  // <- adding this makes the thing too slow lol
+                    written.println(happiness);
+                    break;
+                default:
+                    throw new IllegalArgumentException("what kind of query is " + Arrays.toString(query) + " lol");
+            }
+        }
+        written.close();
+        System.out.printf("WOOOOOASDPOFIJASDFIOJASPODI it took %d ms%n", System.currentTimeMillis() - start);
+    }
+
     /**
      * see {@link utils.SumSegmentTree} for explanation ok?
      */
@@ -79,6 +116,7 @@ public class CowLand {
         }
     }
 
+    // i coulda just used a binary indexed tree but oh well
     private static class XORSegTree {
         private final int[] segtree;
         private final int arrSize;
@@ -224,42 +262,5 @@ public class CowLand {
                 }
             }
         }
-    }
-
-    public static void main(String[] args) throws IOException {
-        long start = System.currentTimeMillis();
-        BufferedReader read = new BufferedReader(new FileReader("cowland.in"));
-        StringTokenizer initial = new StringTokenizer(read.readLine());
-        int placeNum = Integer.parseInt(initial.nextToken());
-        int queryNum = Integer.parseInt(initial.nextToken());
-        int[] initialVals = Arrays.stream(read.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
-        ArrayList<Integer>[] neighbors = new ArrayList[placeNum];
-        for (int p = 0; p < placeNum; p++) {
-            neighbors[p] = new ArrayList<>();
-        }
-        for (int i = 0; i < placeNum - 1; i++) {
-            int[] route = Arrays.stream(read.readLine().split(" ")).mapToInt(j -> Integer.parseInt(j) - 1).toArray();
-            neighbors[route[0]].add(route[1]);
-            neighbors[route[1]].add(route[0]);
-        }
-        AmusementPark park = new AmusementPark(neighbors, initialVals);
-        PrintWriter written = new PrintWriter("cowland.out");
-        for (int q = 0; q < queryNum; q++) {
-            int[] query = Arrays.stream(read.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
-            switch (query[0]) {
-                case 1:
-                    park.set(query[1] - 1, query[2]);
-                    break;
-                case 2:
-                    int happiness = park.query(query[1] - 1, query[2] - 1);
-                    // System.out.println(happiness);  // <- adding this makes the thing too slow lol
-                    written.println(happiness);
-                    break;
-                default:
-                    throw new IllegalArgumentException("what kind of query is " + Arrays.toString(query) + " lol");
-            }
-        }
-        written.close();
-        System.out.printf("WOOOOOASDPOFIJASDFIOJASPODI it took %d ms%n", System.currentTimeMillis() - start);
     }
 }

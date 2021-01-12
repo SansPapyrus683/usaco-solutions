@@ -5,7 +5,8 @@ so this is my USACO repo with all the solutions
 update (12/10/2020):  
 boom i did all the problems in part 1, with good variable names too!  
 update (12/19/2020):  
-ok now all the official problems will be just using stdin and stdout, so yeah
+ok now all the official problems will be just using stdin and stdout, so yeah conventions are camelCase for java and
+python, and snake_case for c++ (though there's like basically no c++ solutions lol)
 
 ## some small nitpicks
 

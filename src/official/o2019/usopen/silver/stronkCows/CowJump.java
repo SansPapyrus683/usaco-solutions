@@ -3,94 +3,169 @@ package official.o2019.usopen.silver.stronkCows;
 import java.io.*;
 import java.util.*;
 
-// 2019 usopen silver (waaay too slow for last test case lol)
+// 2019 usopen silver (my initial solution for this exploited the test data, so )
 public class CowJump {
+    private static int xAt;
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("cowjump.in"));
         int segmentNum = Integer.parseInt(read.readLine());
-        Point[][] segments = new Point[segmentNum][4];
+        IDSeg[] segments = new IDSeg[segmentNum];
+        IDPoint[] endpoints = new IDPoint[segmentNum * 2];
         for (int s = 0; s < segmentNum; s++) {
             int[] rawSegment = Arrays.stream(read.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
-            segments[s] = new Point[] {new Point(rawSegment[0], rawSegment[1]), new Point(rawSegment[2], rawSegment[3])};
+            segments[s] = new IDSeg(new IDPoint(rawSegment[0], rawSegment[1], s), new IDPoint(rawSegment[2], rawSegment[3], s), s);
+            endpoints[2 * s] = segments[s].start;
+            endpoints[2 * s + 1] = segments[s].end;
         }
-        Point[][] originalSegments = segments.clone();
-        Arrays.sort(segments, (a, b) -> a[0].x != b[0].x ? a[0].x - b[0].x : a[1].x - b[1].x);
+        Arrays.sort(endpoints, Comparator.comparingInt(p -> p.x));
 
-        int[] badIndices = new int[] {-1, -1};
-        // you may have outsmarted me by putting the intersection at the back, but i outsmarted your outsmarting!
-        searching:
-        for (int s1 = segmentNum - 1; s1 >= 0; s1--) {
-            for (int s2 = s1 - 1; s2 >= 0; s2--) {
-                // see if we've gone past the "no hope" point- where even the x intervals don't line up (we know bc sorted above)
-                if (Math.max(segments[s2][0].x, segments[s2][1].x) < Math.min(segments[s1][0].x, segments[s1][1].x)) {
+        // we just have to check for one intersecting pair, since all others are like non-intersecting
+        IDSeg firstBad = null;
+        IDSeg secondBad = null;
+        TreeSet<IDSeg> relevantSegs = new TreeSet<>(Comparator.comparingDouble(IDSeg::currY));
+        for (int i = 0; i < segmentNum * 2; i++) {
+            xAt = endpoints[i].x;
+            firstBad = segments[endpoints[i].id];
+            if (relevantSegs.contains(firstBad)) {  // wait, this is the end, let's check and then remove
+                relevantSegs.remove(firstBad);
+                IDSeg below = relevantSegs.lower(firstBad);  // only possibility is for segs directly above and below anyways
+                IDSeg above = relevantSegs.ceiling(firstBad);
+                if (below != null && above != null && below.intersecting(above)) {
+                    firstBad = below;
+                    secondBad = above;
+                }
+            } else {
+                // like above, it only makes sense to check the segments that are directly above and below it
+                IDSeg below = relevantSegs.lower(firstBad);
+                IDSeg above = relevantSegs.ceiling(firstBad);
+                if (below != null && firstBad.intersecting(below)) {
+                    secondBad = below;
+                    break;
+                } else if (above != null && firstBad.intersecting(above)) {
+                    secondBad = above;
                     break;
                 }
-                if (intersecting(segments[s1], segments[s2])) {
-                    badIndices = new int[] {s2, s1};
-                    break searching;
+                relevantSegs.add(firstBad);
+            }
+        }
+
+        int toRemove;
+        if (firstBad == null || secondBad == null) {
+            toRemove = -1;
+        } else {
+            int firstIntersecting = 0;
+            int secondIntersecting = 0;
+            for (IDSeg s : segments) {
+                if (s.id != firstBad.id && s.intersecting(firstBad)) {
+                    firstIntersecting++;
+                }
+                if (s.id != secondBad.id && s.intersecting(secondBad)) {
+                    secondIntersecting++;
                 }
             }
-        }
 
-        int[] indicesIntersections = new int[2];  // ok so we found the intersection, let's see which to remove
-        for (int s = 0; s < segmentNum; s++) {
-            if (s == badIndices[0] || s == badIndices[1]) {
-                continue;
+            if (firstIntersecting > secondIntersecting) {  // the first one has committed more crimes, let's remove that one
+                toRemove = firstBad.id;
+            } else if (secondIntersecting > firstIntersecting) {  // oh it's the second one?
+                toRemove = secondBad.id;
+            } else {  // if they're the same, take the one with the earlier index
+                toRemove = Math.min(firstBad.id, secondBad.id);
             }
-            if (intersecting(segments[badIndices[0]], segments[s])) {
-                indicesIntersections[0]++;
-            }
-            if (intersecting(segments[badIndices[1]], segments[s])) {
-                indicesIntersections[1]++;
-            }
-        }
-        // default to the first one (the earlier one) but if the second one has more intersections remove that one
-        Point[] toRemove = indicesIntersections[0] >= indicesIntersections[1] ? segments[badIndices[0]] : segments[badIndices[1]];
-        int ans = 1;
-        while (!Arrays.equals(originalSegments[ans - 1], toRemove)) {
-            ans++;
         }
         PrintWriter written = new PrintWriter("cowjump.out");
-        written.println(ans);
+        written.println(toRemove + 1);
         written.close();
-        System.out.println(ans);
-        System.out.printf("MEMES. (%d ms lol)%n", System.currentTimeMillis() - start);
+        System.out.println(toRemove + 1);
+        System.out.printf("%d ms is an ok time? you could've done better lol%n", System.currentTimeMillis() - start);
     }
 
-    public static int sign(Point a, Point b, Point c) {
-        return Integer.compare((b.x - a.x) * (c.y-a.y) - (c.x-a.x) * (b.y-a.y), 0);
-    }
+    // equality for these 2 classes aren't based on their actual info, but id numbers they're given
+    private static class IDPoint {
+        public int x;
+        public int y;
+        public int id = 0;
 
-    public static boolean between(Point p, Point x, Point y) {  // checks if p is between x and y
-        return ((x.x <= p.x && p.x <= y.x) || (y.x <= p.x && p.x <= x.x))
-                && ((x.y <= p.y && p.y <= y.y) || (y.y <= p.y && p.y <= x.y));
-    }
-
-    public static boolean intersecting(Point[] s1, Point[] s2) {
-        return intersecting(s1[0], s1[1], s2[0], s2[1]);
-    }
-
-    // touching at endpoints do count as intersecting (copied from some random book lmao)
-    public static boolean intersecting(Point s1Start, Point s1End, Point s2Start, Point s2End) {
-        int[] signs = {sign(s1Start, s2Start, s2End), sign(s1End, s2Start, s2End),
-                sign(s2Start, s1Start, s1End), sign(s2End, s1Start, s1End)};
-
-        if (Arrays.stream(signs).allMatch(Integer.valueOf(0)::equals)) {
-            return between(s1Start, s2Start, s2End) || between(s1End, s2Start, s2End) || between(s2Start, s1Start, s1End);
+        public IDPoint(int x, int y) {
+            this.x = x;
+            this.y = y;
         }
-        return signs[0] != signs[1] && signs[2] != signs[3];
-    }
-}
 
-class Point {
-    public int x, y;
-    public Point(int x, int y){
-        this.x = x; this.y = y;
+        public IDPoint(int x, int y, int id) {
+            this(x, y);
+            this.id = id;
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            return obj.getClass() == getClass() && id == ((IDPoint) obj).id;
+        }
+
+        @Override
+        public String toString() {
+            return String.format("(%s, %s)", x, y);
+        }
     }
 
-    @Override
-    public String toString() {
-        return String.format("(%s, %s)", x, y);
+    private static class IDSeg {
+        public IDPoint start;
+        public IDPoint end;
+        public int id = 0;
+
+        public IDSeg(IDPoint start, IDPoint end) {
+            this.start = start;
+            this.end = end;
+        }
+
+        public IDSeg(IDPoint start, IDPoint end, int id) {
+            this(start, end);
+            this.id = id;
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            return obj.getClass() == getClass() && id == ((IDSeg) obj).id;
+        }
+
+        @Override
+        public int hashCode() {
+            return id;
+        }
+
+        @Override
+        public String toString() {
+            return String.format("Segment{start=%s,end=%s}", start, end);
+        }
+
+        // copied from: https://darrenyao.com/usacobook/java.pdf#page=84
+        public boolean intersecting(IDSeg other) {
+            return intersecting(other.start, other.end);
+        }
+
+        private boolean intersecting(IDPoint otherStart, IDPoint otherEnd) {
+            int[] signs = {
+                    sign(start, otherStart, otherEnd), sign(end, otherStart, otherEnd),
+                    sign(otherStart, start, end), sign(otherEnd, start, end)
+            };
+
+            if (Arrays.stream(signs).allMatch(Integer.valueOf(0)::equals)) {
+                return between(start, otherStart, otherEnd) || between(end, otherStart, otherEnd) || between(otherStart, start, end);
+            }
+            return signs[0] != signs[1] && signs[2] != signs[3];
+        }
+
+        public boolean between(IDPoint p, IDPoint x, IDPoint y) {  // returns if point p is between point x and y
+            return ((x.x <= p.x && p.x <= y.x) || (y.x <= p.x && p.x <= x.x))
+                    && ((x.y <= p.y && p.y <= y.y) || (y.y <= p.y && p.y <= x.y));
+        }
+
+        // i think this returns the sign of the area of like the 3 points (through like cross product or something)
+        public int sign(IDPoint a, IDPoint b, IDPoint c) {
+            return Integer.compare((b.x - a.x) * (c.y - a.y) - (c.x - a.x) * (b.y - a.y), 0);
+        }
+
+        public double currY() {  // gives the y-coordinate of the segment at the current x coordinate
+            return start.x == end.x ? start.y : start.y + (end.y - start.y) * (xAt - start.x) / (double) (end.x - start.x);
+        }
     }
 }

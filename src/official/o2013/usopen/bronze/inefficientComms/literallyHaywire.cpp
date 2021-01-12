@@ -72,15 +72,12 @@ int main() {
     std::ifstream read("haywire.in");
     int cow_num;
     read >> cow_num;
-    vector<vector<int>> friends;
+    vector<vector<int>> friends(cow_num, vector<int>(FRIEND_NUM));
     for (int c = 0; c < cow_num; c++) {
-        vector<int> this_friends;
         for (int f = 0; f < FRIEND_NUM; f++) {
-            int homie;
-            read >> homie;
-            this_friends.push_back(homie - 1);  // make the cows 0-indexed
+            read >> friends[c][f];
+            friends[c][f]--;  // make the cows 0-indexed
         }
-        friends.push_back(this_friends);
     }
 
     WireSystem system(friends);
