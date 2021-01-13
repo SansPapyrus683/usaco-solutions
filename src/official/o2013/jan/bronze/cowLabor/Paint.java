@@ -1,16 +1,15 @@
-package official.o2013.jan.silver.cowLabor;
+package official.o2013.jan.bronze.cowLabor;
 
 import java.io.*;
 import java.util.*;
 
-// 2013 jan silver
+// 2013 jan bronze (basically copied from silver lol)
 public class Paint {
+    private static final int PAINT_REQ = 2;
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("paint.in"));
-        StringTokenizer initial = new StringTokenizer(read.readLine());
-        int moveNum = Integer.parseInt(initial.nextToken());
-        int paintReq = Integer.parseInt(initial.nextToken());
+        int moveNum = Integer.parseInt(read.readLine());
 
         int pos = 0;
         TreeMap<Integer, Integer> fenceStartEnds = new TreeMap<>();
@@ -39,7 +38,7 @@ public class Paint {
         int paintSoFar = 0;
         int last = -1;
         for (Map.Entry<Integer, Integer> point : fenceStartEnds.entrySet()) {
-            if (paintSoFar >= paintReq) {
+            if (paintSoFar >= PAINT_REQ) {
                 covered += point.getKey() - last;
             }
             last = point.getKey();
@@ -50,6 +49,6 @@ public class Paint {
         written.println(covered);
         written.close();
         System.out.println(covered);
-        System.out.printf("i feel bad for bessie: %d ms%n", System.currentTimeMillis() - start);
+        System.out.printf("almost exactly the same as silver lol: %d ms%n", System.currentTimeMillis() - start);
     }
 }

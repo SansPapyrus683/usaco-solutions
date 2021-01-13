@@ -5,7 +5,8 @@ import java.io.*;
 
 // 2019 february silver
 public class Revegetate {
-    static ArrayList<int[]>[] specifications;
+    private static final int INVALID = 420696969;
+    static ArrayList<int[]>[] specifications;  // 1/13/2021- oh i was such a fool, using static variable like this...
     static int[] hypothetical;
     static boolean[] usedUp;
     static PrintWriter written;
@@ -34,16 +35,17 @@ public class Revegetate {
 
         written = new PrintWriter(new FileWriter(new File("revegetate.out")));
         hypothetical = new int[fieldNum + 1];  // no use 0 index (seriously usaco)
-        Arrays.fill(hypothetical, 69);
+        Arrays.fill(hypothetical, INVALID);
         usedUp = new boolean[fieldNum + 1];
         int sectorNum = 0;  // we can split the fields into "sectors"- sectors are never dependent on each other
         
         for (int i = 1; i <= fieldNum; i++) {  // the actual program
-            if (!usedUp[i]) {
-                hypothetical[i] = 0;  // it doesn't matter
-                expandField(i);
-                sectorNum++;
+            if (usedUp[i]) {
+                continue;
             }
+            hypothetical[i] = 0;  // it doesn't matter
+            expandField(i);
+            sectorNum++;
         }
 
         written.write("1");  // i can always count on the answer being a power of 2
@@ -58,7 +60,7 @@ public class Revegetate {
 
     private static void expandField(int start) {
         usedUp[start] = true;
-        ArrayDeque<Integer> frontier = new ArrayDeque<Integer>();
+        ArrayDeque<Integer> frontier = new ArrayDeque<>();
         frontier.add(start);
 
         while (!frontier.isEmpty()) {
@@ -69,8 +71,7 @@ public class Revegetate {
                     usedUp[n[0]] = true;
                     hypothetical[n[0]] = supposedType;
                     frontier.add(n[0]);
-                }
-                else if (hypothetical[n[0]] != supposedType) {  // if it's used up, check for a contradiction
+                } else if (hypothetical[n[0]] != supposedType) {  // if it's used up, check for a contradiction
                     System.out.println("farmer john you absolute dummy");
                     written.println(0);
                     written.close();

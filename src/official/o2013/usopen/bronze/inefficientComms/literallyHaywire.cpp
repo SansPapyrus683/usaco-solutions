@@ -63,6 +63,7 @@ class WireSystem {
 };
 
 /**
+ * 2013 jan silver
  * ok so because this is a brute force problem
  * i decided to use c++ because of its speed
  * if you were looking for a sol in another language i'm sorry

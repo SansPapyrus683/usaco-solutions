@@ -64,6 +64,7 @@ long long overlapping_area(Point l1, Point r1, Point l2, Point r2) {
 }
  
 
+// 2013 jan silver
 // i would've used java but it can't do iterators like c++ so (also sorry for the long-butt file)
 int main() {
     std::ifstream read("squares.in");
@@ -88,27 +89,7 @@ int main() {
         IDSquare square = squares[p.second];
         set<IDSquare>::iterator presence = relevant.find(square);
 
-        if (presence != relevant.end()) {  // oh, this is the end of a square, let's do some checks then erase it
-            if (presence != relevant.begin()) {  // better make sure there's an upper and a lower
-                set<IDSquare>::iterator upper = presence;
-                set<IDSquare>::iterator lower = presence;
-                upper++;
-                lower--;
-                if (upper != relevant.end()) {
-                    while (overlapping.size() < 3 && upper != relevant.end() && (*lower).overlaps(*upper)) {
-                        overlapping.push_back({*lower, *upper});
-                        upper++;
-                    }
-                    
-                    // reset the upper iterator (we didn't change to lower one so don't reset it)
-                    upper = presence;
-                    upper++;
-                    while (overlapping.size() < 3 && lower != relevant.begin() && (*upper).overlaps(*(lower))) {
-                        overlapping.push_back({*lower, *upper});
-                        lower--;
-                    }
-                }
-            }
+        if (presence != relevant.end()) {  // oh, this is the end of a square, let's do erase it
             relevant.erase(presence);
         } else {  // a new one- let's compare it with the ones directly above and below
             set<IDSquare>::iterator higher = relevant.lower_bound(square);
