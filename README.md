@@ -1,10 +1,14 @@
 # USACOSucks
 
-so this is my USACO repo with all the solutions  
+so this is my USACO repo with all the solutions that i've either finished or just given up on
+and copied the solution lol  
+
 ~~don't ask where the other problems in section one went~~  
+
 update (12/10/2020):  
 boom i did all the problems in part 1, with good variable names too!  
 update (12/19/2020):  
+
 ok now all the official problems will be just using stdin and stdout, so yeah conventions are camelCase for java and
 python, and snake_case for c++ (though there's like basically no c++ solutions lol)
 

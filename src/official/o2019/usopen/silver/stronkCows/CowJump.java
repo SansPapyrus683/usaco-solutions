@@ -150,7 +150,7 @@ public class CowJump {
             return intersecting(other.start, other.end);
         }
 
-        private boolean intersecting(IDPoint otherStart, IDPoint otherEnd) {
+        public boolean intersecting(IDPoint otherStart, IDPoint otherEnd) {
             int[] signs = {
                     sign(start, otherStart, otherEnd), sign(end, otherStart, otherEnd),
                     sign(otherStart, start, end), sign(otherEnd, start, end)

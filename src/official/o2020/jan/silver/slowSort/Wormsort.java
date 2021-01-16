@@ -6,98 +6,106 @@ import java.io.*;
 // 2020 jan silver
 // 1/6/2021 - i was young and innocent when i wrote this code, so it's full of bad practices
 public class Wormsort {
-    private static int[] cows;
-    private static int[] parents;
-    private static int[] sizes;
-    private static int[][] wormholes;
+    private static class DisjointSets {
+        private final int[] parents;
+        private final int[] sizes;
+        public DisjointSets(int size) {
+            parents = new int[size];
+            sizes = new int[size];
+            for (int i = 0; i < size; i++) {
+                parents[i] = i;
+                sizes[i] = 1;
+            }
+        }
+
+        public boolean sameSet(int n1, int n2) {
+            return getUltimate(n1) == getUltimate(n2);
+        }
+
+        public int getUltimate(int n) {
+            return n == parents[n] ? n : (parents[n] = getUltimate(parents[n]));
+        }
+
+        public void link(int e1, int e2) {
+            if (sameSet(e1, e2)) {
+                return;
+            }
+            e1 = getUltimate(e1);
+            e2 = getUltimate(e2);
+            if (sizes[e2] > sizes[e1]) {
+                int temp = e1;
+                e1 = e2;
+                e2 = temp;
+            }
+            parents[e2] = e1;
+            sizes[e1] += sizes[e2];
+        }
+    }
+
+    private static final long start = System.currentTimeMillis();
     public static void main(String[] args) throws IOException {
-        long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("wormsort.in"));
-        PrintWriter written = new PrintWriter("wormsort.out");
         StringTokenizer initial = new StringTokenizer(read.readLine());
         int cowNum = Integer.parseInt(initial.nextToken());
         int wormholeNum = Integer.parseInt(initial.nextToken());
         
-        cows = new int[cowNum + 1];  // stupid 1-based indexing
-        parents = new int[cowNum + 1];  // index 0 will never be used just so you know
-        sizes = new int[cowNum + 1];
+        int[] cows = Arrays.stream(read.readLine().split(" ")).mapToInt(c -> Integer.parseInt(c) - 1).toArray();
+        int[][] wormholes = new int[wormholeNum][3];
+        for (int i = 0; i < wormholeNum; i++) {
+            wormholes[i] = Arrays.stream(read.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
+            wormholes[i][0]--;  // make the wormholes 1-indexed (the cows were also 1-indexed if you didn't notice)
+            wormholes[i][1]--;
+        }
+
         ArrayList<int[]> toSort = new ArrayList<>();
         boolean alrSorted = true;
-        String[] rawCows = read.readLine().split(" ");
-        for (int i = 1; i <= cowNum; i++) {
-            cows[i] = Integer.parseInt(rawCows[i - 1]);
+        for (int i = 0; i < cowNum; i++) {
             if (cows[i] != i) {
                 alrSorted = false;
                 toSort.add(new int[] {cows[i], i});
             }
         }
         if (alrSorted) {
-            System.out.println("bruh this is already sorted");
-            written.println(-1);
-            written.close();
-            System.exit(0);
-        }
-
-        wormholes = new int[wormholeNum][3];
-        for (int i = 0; i < wormholeNum; i++) {
-            wormholes[i] = Arrays.stream(read.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
+           outputAndDie(-1);
         }
 
         int lowerBound = 1;
-        int upperBound = -1;
-        for (int[] w : wormholes) {
-            upperBound = Math.max(upperBound, w[2] + 1);  // +1 because it isn't inclusive
-        }
-        while (upperBound - lowerBound > 1) {  // binary search the possible lower bound for wormhole width
+        int upperBound = Arrays.stream(wormholes).mapToInt(w -> w[2]).max().getAsInt();
+        int valid = -1;
+        while (lowerBound <= upperBound) {  // binary search the possible lower bound for wormhole width
+            DisjointSets linkedCows = new DisjointSets(cowNum);
             int toSearch = (upperBound + lowerBound) / 2;
-            for (int i = 1; i <= cowNum; i++) {  // reset parents, sizes, & the cached parents
-                parents[i] = i;
-            }
-            Arrays.fill(sizes, 1);
-
-            boolean goodToGo = true;
             for (int[] w : wormholes) {
                 if (w[2] >= toSearch) {
-                    merge(w[0], w[1]);
+                    linkedCows.link(w[0], w[1]);
                 }
             }
 
-            for (int[] ts: toSort) {
-                if (getUltimate(ts[0]) != getUltimate(ts[1])) {  // test if this cow can still be sorted
+            boolean goodToGo = true;
+            for (int[] ts : toSort) {  // as long as the two are still linked in some way, we can sort them
+                if (!linkedCows.sameSet(ts[0], ts[1])) {  // test if this cow can still be sorted
                     goodToGo = false;
                     break;
                 }
             }
 
             if (goodToGo) {
-                lowerBound = toSearch;
-            }
-            else {
-                upperBound = toSearch;
+                lowerBound = toSearch + 1;
+                valid = toSearch;
+            } else {
+                upperBound = toSearch - 1;
             }
         }
-        System.out.println(lowerBound);
-        written.println(lowerBound);
+        outputAndDie(valid);
+
+    }
+
+    private static void outputAndDie(Object output) throws IOException {
+        PrintWriter written = new PrintWriter("wormsort.out");
+        written.println(output);
         written.close();
+        System.out.println(output);
         System.out.printf("so it took about this many ms: %s%n", System.currentTimeMillis() - start);
-    }
-
-    private static int getUltimate(int start) {
-        if (parents[start] == start) {
-            return start;  // i mean the start is its own parent so it doesn't really matter
-        }
-        return parents[start] = getUltimate(parents[start]);
-    }
-
-    private static void merge(int nodeA, int nodeB) {
-        nodeA = getUltimate(nodeA);  // always merge roots, not leaves
-        nodeB = getUltimate(nodeB);
-        if (sizes[nodeB] > sizes[nodeA]) {  // make sure that a is always larger than b
-            int temp = nodeA;
-            nodeA = nodeB;
-            nodeB = temp;
-        }
-        parents[nodeB] = nodeA;
-        sizes[nodeA] += sizes[nodeB];
+        System.exit(0);
     }
 }
