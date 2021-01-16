@@ -56,7 +56,15 @@ public class Balance {
         }
         int elsiFalse = elsi.length - elsiTrue;
 
-        long best = Math.abs(bessScore - elsiScore);
+        /*
+         * ok so here's the thing (solution explains it better imo just look at it)
+         * the only "big" moves we can make are in the middle
+         * all others just either decrease or increase the amount of inversions on a side by 1
+         * so we can like try all the amounts of "big" moves we can make and see how many moves it'd take in total
+         * 1 | 0
+         * 1 1 | 0 0 and so on until we've exhausted the capacity
+         */
+        long best = Math.abs(bessScore - elsiScore);  // start is just the difference between the 2 scores
         int swappable = changeBessTo ? Math.min(bessTrue, elsiFalse) : Math.min(bess.length - bessTrue, elsiTrue);
         int bessClosest = bess.length - 1;
         int elsiClosest = 0;
@@ -76,6 +84,7 @@ public class Balance {
             newBessScore += changeBessTo ? (long) i * bessLeftTrue : (long) -i * bessLeftTrue;
             newElsiScore += changeBessTo ? (long) i * elsiLeftFalse : (long) -i * elsiLeftFalse;
 
+            // initMoves is the amount of moves we need to prepare for the big moves + the big moves themselves
             // apparently if you put the Math.pow at the end it overflows for no reason
             long initMoves = (long) Math.pow(i, 2) + bessPrepare + elsiPrepare;
             best = Math.min(best, initMoves + Math.abs(newBessScore - newElsiScore));
