@@ -53,7 +53,7 @@ public class Wormsort {
         int[][] wormholes = new int[wormholeNum][3];
         for (int i = 0; i < wormholeNum; i++) {
             wormholes[i] = Arrays.stream(read.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
-            wormholes[i][0]--;  // make the wormholes 1-indexed (the cows were also 1-indexed if you didn't notice)
+            wormholes[i][0]--;  // make the wormholes 0-indexed (the cows were also 1-indexed if you didn't notice)
             wormholes[i][1]--;
         }
 

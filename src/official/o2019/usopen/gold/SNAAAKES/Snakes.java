@@ -49,6 +49,7 @@ public class Snakes {
         System.out.printf("%d ms- frick.%n", System.currentTimeMillis() - start);
     }
 
+    // tbh the prefix sum array was probably a bad idea but...
     private static int spaceWasted(int[] snakesSoFar, int start, int end) {  // bounds are inclusive
         int totalSnakes = snakesSoFar[end] - snakesSoFar[start - 1];
         int netSize = 0;

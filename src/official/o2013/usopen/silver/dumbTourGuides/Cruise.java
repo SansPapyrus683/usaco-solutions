@@ -3,7 +3,7 @@ package official.o2013.usopen.silver.dumbTourGuides;
 import java.io.*;
 import java.util.*;
 
-// most of my sols are structured like this (bare bones)
+// 2013 usopen silver
 public class Cruise {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
