@@ -38,7 +38,7 @@ public class CountCross {
             roadedAdjacents[road[2]][road[3]].add(new int[] {road[0], road[1]});
         }
         for (int c = 0; c < cowNum; c++) {
-            cows[c] = new Pair<int[], boolean[][]>(Arrays.stream(read.readLine().split(" ")).mapToInt(p -> Integer.parseInt(p) - 1).toArray(), null);
+            cows[c] = new Pair<>(Arrays.stream(read.readLine().split(" ")).mapToInt(p -> Integer.parseInt(p) - 1).toArray(), null);
         }
 
 
@@ -60,7 +60,7 @@ public class CountCross {
         written.println(distantPairs);
         written.close();
         System.out.println(distantPairs);
-        System.out.printf("bruh why did you run this code that took %d ms lol%n", System.currentTimeMillis() - start);
+        System.out.printf("%d ms thanks ok bye%n", System.currentTimeMillis() - start);
     }
 
     static boolean arrayInArrayList(ArrayList<int[]> checkIn, int[] checkFor) {

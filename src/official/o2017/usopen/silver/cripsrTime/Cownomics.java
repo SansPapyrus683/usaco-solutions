@@ -14,10 +14,10 @@ public class Cownomics {
         String[] spotty = new String[cowNum];
         String[] plain = new String[cowNum];
         for (int c = 0; c < cowNum; c++) {
-            spotty[c] = read.readLine();
+            spotty[c] = read.readLine().toUpperCase();
         }
         for (int c = 0; c < cowNum; c++) {
-            plain[c] = read.readLine();
+            plain[c] = read.readLine().toUpperCase();
         }
         int[] allIndices = new int[genomeLen];
         for (int g = 0; g < genomeLen; g++) {
@@ -35,7 +35,7 @@ public class Cownomics {
         written.println(distinguishableGenomeNum);
         written.close();
         System.out.println(distinguishableGenomeNum);
-        System.out.printf("bruh why did you run this code that took %d ms lol%n", System.currentTimeMillis() - start);
+        System.out.printf("%d ms: the bruh momento%n", System.currentTimeMillis() - start);
     }
 
     // copied from: https://stackoverflow.com/questions/29910312/algorithm-to-get-all-the-combinations-of-size-n-from-an-array-java

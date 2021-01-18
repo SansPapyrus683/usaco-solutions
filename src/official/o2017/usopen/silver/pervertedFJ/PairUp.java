@@ -46,6 +46,6 @@ public class PairUp {
         written.println(maxTime);
         written.close();
         System.out.println(maxTime);
-        System.out.printf("bruh why did you run this code that took %d ms lol%n", System.currentTimeMillis() - start);
+        System.out.printf("someone help me i'm being forced to write these against my will: %d ms%n", System.currentTimeMillis() - start);
     }
 }

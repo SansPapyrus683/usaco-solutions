@@ -1,9 +1,9 @@
-package official.o2017.usopen.plat.fineArt;
+package official.o2017.usopen.bronze.fineArt;
 
 import java.io.*;
 import java.util.*;
 
-// 2017 usopen plat (don't expect more of these lol)
+// 2017 usopen bronze (copied from plat version lol)
 public class Art {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
@@ -14,11 +14,12 @@ public class Art {
         HashMap<Integer, int[]> visible = new HashMap<>();
         for (int r = 0; r < width; r++) {
             // used this weird \\s+ regex so deubgging would be easier
-            canvas[r] = Arrays.stream(read.readLine().split("\\s+")).mapToInt(Integer::parseInt).toArray();
-            if (canvas[r].length != width) {
+            char[] row = read.readLine().toCharArray();
+            if (row.length != width) {
                 throw new IllegalArgumentException("you idiot picowso only paints on square canvases");
             }
             for (int c = 0; c < width; c++) {
+                canvas[r][c] = Character.getNumericValue(row[c]);
                 int[] bounds;
                 if (!visible.containsKey(canvas[r][c])) {
                     // these values will be the lowest row num, highest row num, lowest col num, and highest col num
@@ -35,7 +36,7 @@ public class Art {
         visible.remove(0);
 
         // all the non-visible ones could've been painted first
-        int possFirst = (int) Math.pow(width, 2) - visible.size();
+        int possFirst = 0;
         if (visible.size() > 1) {  // if statement for special edge case handling
             ArrayList<int[]> allBounds = new ArrayList<>(visible.values());
             int[][] rectNum = new int[width + 1][width + 1];  // dw, we won't care about the outer areas
@@ -75,3 +76,4 @@ public class Art {
         System.out.printf("it's a bunch of squares. and it's ART. (%d ms)%n", System.currentTimeMillis() - start);
     }
 }
+

@@ -5,14 +5,15 @@ import java.util.*;
 
 // 2015 feb silver
 public class Censor {
-    private static final long MOD = (long) (Math.pow(10, 9)) + 9;
+    private static final int MAX_LEN = (int) Math.pow(10, 6);
+    private static final long MOD = (long) Math.pow(10, 9) + 9;
     private static final long POWER = 31;  // some website told me to do this (https://cp-algorithms.com/string/string-hashing.html)
-    static long[] hashPowers = new long[1000000];
+    private static final long[] hashPowers = new long[MAX_LEN];
 
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         long nowPower = 1;
-        for (int i = 0; i < 1000000; i++) {  // precompute powers (takes surprisingly little time)
+        for (int i = 0; i < MAX_LEN; i++) {  // precompute powers (takes surprisingly little time)
             hashPowers[i] = nowPower;
             nowPower = (nowPower * POWER) % MOD;
         }
@@ -20,6 +21,9 @@ public class Censor {
         BufferedReader read = new BufferedReader(new FileReader("censor.in"));
         String toCensor = read.readLine();  // remember kids, nothing happened on june 4th 1989
         String badWord = read.readLine();
+        if (toCensor.length() > MAX_LEN || badWord.length() > MAX_LEN) {
+            throw new IllegalArgumentException("look i'm sure your input is good but i can't handle strings that are too long");
+        }
 
         PrintWriter written = new PrintWriter(new FileOutputStream("censor.out"));
         String after = clean(toCensor, badWord);
@@ -29,11 +33,14 @@ public class Censor {
         System.out.printf("our great leader fj says it took %d ms so it did%n", System.currentTimeMillis() - start);
     }
 
-    static long hashConcat(long rnHashVal, int nowStrLen, long toAdd) {
+    private static long hashConcat(long rnHashVal, int nowStrLen, long toAdd) {
         return (rnHashVal + toAdd * hashPowers[nowStrLen]) % MOD;
     }
 
-    static String clean(String toCensor, String badWord) {
+    private static String clean(String toCensor, String badWord) {
+        toCensor = toCensor.toLowerCase();
+        badWord = badWord.toLowerCase();
+
         long badHashCode = 0;  // hashcode for the badword to censor
         for (int i = 0; i < badWord.length(); i++) {
             // - 'a' + 1 just translates a to 1, b to 2, etc...
@@ -41,15 +48,14 @@ public class Censor {
         }
 
         char[] all = new char[toCensor.length()];
-        long[] prevHashCodes = new long[toCensor.length() + 1];  // + 1 for the empty string, which has a has of 0
+        long[] hashesSoFar = new long[toCensor.length() + 1];  // + 1 for the empty string, which has a has of 0
         int index = 0;
         for (char c : toCensor.toCharArray()) {
             all[index++] = c;
-            
             int headIndex = Math.max(index - badWord.length(), 0);
-            prevHashCodes[index] = hashConcat(prevHashCodes[index - 1], index - 1, c - 'a' + 1);
-            long currViewHash = (prevHashCodes[index] - prevHashCodes[headIndex]) % MOD;
-            currViewHash += currViewHash >= 0 ? 0 : MOD;  // java's modulus function sucks butt
+            hashesSoFar[index] = hashConcat(hashesSoFar[index - 1], index - 1, c - 'a' + 1);
+            long currViewHash = (hashesSoFar[index] - hashesSoFar[headIndex]) % MOD;
+            currViewHash += currViewHash >= 0 ? 0 : MOD;  // let's make it positive
             if (currViewHash == (badHashCode * hashPowers[headIndex]) % MOD) {  // no divisibility issues now ha
                 index -= badWord.length();  // reset the pointer back to "checkpoint"? idk
             }

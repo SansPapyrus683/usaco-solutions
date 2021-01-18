@@ -35,6 +35,6 @@ public class MaxCross {
         written.println(leastToRepair);
         written.close();
         System.out.println(leastToRepair);
-        System.out.printf("bruh why did you run this code that took %d ms lol%n", System.currentTimeMillis() - start);
+        System.out.printf("%d ms please don't run me more i can't take it anymore%n", System.currentTimeMillis() - start);
     }
 }
