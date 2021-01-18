@@ -3,6 +3,7 @@ package official.o2017.usopen.gold.ascendedArt;
 import java.io.*;
 import java.util.*;
 
+// 2017 usopen gold
 public class Art2 {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
