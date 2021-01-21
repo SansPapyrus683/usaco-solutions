@@ -46,7 +46,7 @@ for i in range(len(sensors)):
     startPoss.append(start)
 
     end = sensors[i][1].copy()
-    for j in range(i + 1, len(sensors)):
+    for j in range(i + 1, len(sensors)):  # do pretty much the same thing for the end
         if sensors[j][0] == NONE:
             end = intersection(end, sensors[j][1])
         elif sensors[j][0] == ON:
