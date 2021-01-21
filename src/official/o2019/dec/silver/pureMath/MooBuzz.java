@@ -30,7 +30,7 @@ public class MooBuzz {
         System.out.printf("the fizz is mooing and the buzz is mooing: %d ms%n", System.currentTimeMillis() - start);
     }
 
-    static int numbersSaid(int upTo) {  // upTo is inclusive
+    private static int numbersSaid(int upTo) {  // upTo is inclusive
         return upTo - upTo / 3 - upTo / 5 + upTo / 15;
     }
 }

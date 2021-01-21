@@ -1,3 +1,4 @@
+# 2019 jan bronze
 from itertools import combinations
 
 animals = []

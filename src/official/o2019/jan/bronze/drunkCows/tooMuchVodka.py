@@ -1,3 +1,4 @@
+# 2019 jan bronze
 with open('sleepy.in') as read:
     cowNum = int(read.readline())
     cows = [int(c) - 1 for c in read.readline().split()]
