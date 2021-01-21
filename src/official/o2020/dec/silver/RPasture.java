@@ -4,7 +4,6 @@ import java.io.*;
 import java.util.*;
 
 /**
- * @author sanspapyrus683 (kevin s)
  * 2020 dec silver
  * 4
  * 0 2
@@ -45,6 +44,7 @@ public class RPasture {
             cows[c][0] = reducedX.get(cows[c][0]);
             cows[c][1] = reducedY.get(cows[c][1]);
         }
+
         // make prefix sums for how many points have a less than & greater than y value
         int[][] lessThanY = new int[cowNum][cowNum + 1];
         int[][] greaterThanY = new int[cowNum][cowNum + 1];

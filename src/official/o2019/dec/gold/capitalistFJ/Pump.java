@@ -32,11 +32,11 @@ public class Pump {
             maxScore = Math.max(maxScore, ((float) r) / minCostWithFlow(r, neighbors));
         }
 
-        int answer = (int) (maxScore * Math.pow(10, 6));
+        int ans = (int) (maxScore * Math.pow(10, 6));
         PrintWriter written = new PrintWriter("pump.out");
-        written.println(answer);
+        written.println(ans);
         written.close();
-        System.out.println(answer);
+        System.out.println(ans);
         System.out.printf("%d ms bruh you're so bad git gud%n", System.currentTimeMillis() - start);
     }
 
@@ -87,4 +87,3 @@ public class Pump {
         return minCost;
     }
 }
-

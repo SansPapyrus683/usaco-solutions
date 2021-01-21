@@ -18,12 +18,11 @@ public class CowQueue {
         // i copied this from my convention 2 code lol (2018 dec silver)
         ArrayDeque<int[]> inLine = new ArrayDeque<>();
         int time = cows[0][0];  // global timer
-        int eatingStart = cows[0][0];  // the time that the cow started to eat
+        int interrogationStart = cows[0][0];  // the time that the cow started to get interrogated
         int cowAt = 1;  // the cow that's still wandering around
-        int maxWait = 0;
-        int[] pastureCow = cows[0];
-        while (cowAt < cows.length || pastureCow != null) {
-            int eatingFinish = pastureCow != null ? pastureCow[1] - (time - eatingStart) : Integer.MAX_VALUE;
+        int[] borderCow = cows[0];
+        while (cowAt < cows.length || borderCow != null) {
+            int eatingFinish = borderCow != null ? borderCow[1] - (time - interrogationStart) : Integer.MAX_VALUE;
             int nextCow = cowAt < cows.length ? cows[cowAt][0] - time : Integer.MAX_VALUE;
 
             if (nextCow <= eatingFinish) {  // ok a cow arrived first
@@ -31,20 +30,17 @@ public class CowQueue {
                 time = cows[cowAt][0];
                 // but wait, the checkpoint's empty! we can go straight to
                 // answering questions about our sleep paralysis demons!
-                if (pastureCow == null) {
-                    pastureCow = inLine.poll();
-                    eatingStart = time;
+                if (borderCow == null) {
+                    borderCow = inLine.poll();
+                    interrogationStart = time;
                 }
                 cowAt++;
             }
             if (eatingFinish <= nextCow) {  // ok the eating event finished first
-                time = eatingStart + pastureCow[1];
+                time = interrogationStart + borderCow[1];
                 int[] nextUp = inLine.poll();
-                pastureCow = nextUp;
-                if (nextUp != null) {  // there's a chance the queue is empty
-                    maxWait = Math.max(maxWait, time - nextUp[0]);
-                }
-                eatingStart = time;
+                borderCow = nextUp;
+                interrogationStart = time;
             }
         }
 

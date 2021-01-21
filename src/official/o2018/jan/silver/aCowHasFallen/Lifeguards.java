@@ -6,15 +6,12 @@ import java.io.*;
 // 2018 silver jan
 public class Lifeguards {
     // A COW HAS FALLEN INTO THE POOL IN FARMER JOHN'S FARM!
-    static int[][] shifts;
-    static int initialWatchTime;
-    static SortedMap<Integer, ArrayList<Integer>> startEnds = new TreeMap<>();
-
+    private static int[][] shifts;
     public static void main(String[] args) throws IOException {
         long timeStart = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("lifeguards.in"));
         shifts = new int[Integer.parseInt(read.readLine())][2];
-
+        SortedMap<Integer, ArrayList<Integer>> startEnds = new TreeMap<>();
         for (int i = 0; i < shifts.length; i++) {
             StringTokenizer shift = new StringTokenizer(read.readLine());
             int start = Integer.parseInt(shift.nextToken());
@@ -31,7 +28,19 @@ public class Lifeguards {
         }
         Arrays.sort(shifts, Comparator.comparingInt(o -> o[0]));
 
-        initialWatchTime = calcWatchLength();
+        int startTime = -1;
+        int endTime = -1;
+        int initialWatchTime = 0;
+        for (int[] s : shifts) {
+            if (s[0] > endTime) {
+                initialWatchTime += endTime - startTime;
+                startTime = s[0];
+                endTime = s[1];
+            } else {
+                endTime = Math.max(endTime, s[1]);
+            }
+        }
+        initialWatchTime += endTime - startTime;
 
         int[] onlyThem = new int[shifts.length];
         HashSet<Integer> watchedOver = new HashSet<>();
@@ -43,8 +52,7 @@ public class Lifeguards {
             for (int c : startEnds.get(i)) {
                 if (watchedOver.contains(c)) {
                     watchedOver.remove(c);
-                }
-                else {
+                } else {
                     watchedOver.add(c);
                 }
             }
@@ -55,23 +63,5 @@ public class Lifeguards {
         written.println(initialWatchTime - Arrays.stream(onlyThem).min().getAsInt());
         written.close();
         System.out.printf("so it took like %d milliseconds to finish", System.currentTimeMillis() - timeStart);
-    }
-
-    private static int calcWatchLength() {
-        int startTime = -1;
-        int endTime = -1;
-        int amtWatched = 0;
-        for (int[] s : shifts) {
-            if (s[0] > endTime) {
-                amtWatched += endTime - startTime;
-                startTime = s[0];
-                endTime = s[1];
-            }
-            else {
-                endTime = Math.max(endTime, s[1]);
-            }
-        }
-        amtWatched += endTime - startTime;
-        return amtWatched;
     }
 }

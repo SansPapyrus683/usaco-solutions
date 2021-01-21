@@ -5,6 +5,38 @@ import java.util.*;
 
 // 2019 jan silver
 public class Perimeter {
+    private static class Blob {
+        private final int[] rChange = new int[] {1, -1, 0, 0};
+        private final int[] cChange = new int[] {0, 0, 1, -1};
+
+        private final int side;
+        private final boolean[][] iceCream;
+        public int area;
+        public ArrayList<int[]> points = new ArrayList<>();
+        public Blob(int area, int sideLen, boolean[][] iceCream) {
+            this.area = area;
+            this.iceCream = iceCream;
+            side = sideLen;
+        }
+
+        public int perimeter() {
+            int perim = 0;
+            for (int[] pt : points) {
+                int r = pt[0], c = pt[1];
+                if (iceCream[r][c]) {
+                    for (int i = 0; i < 4; i++) {
+                        if (r + rChange[i] < 0 || r + rChange[i] >= side ||
+                                c + cChange[i] < 0 || c + cChange[i] >= side ||
+                                !iceCream[r + rChange[i]][c + cChange[i]]) {
+                            perim++;
+                        }
+                    }
+                }
+            }
+            return perim;
+        }
+    }
+
     static int side;
     static boolean[][] iceCream;
     static boolean[][] visited;
@@ -68,7 +100,7 @@ public class Perimeter {
     }
 
     static ArrayList<int[]> neighbors(int[] pt) {
-        ArrayList<int[]> valid = new ArrayList<>();  // it don't look pretty, and it don't work pretty, but it works. (haha)
+        ArrayList<int[]> valid = new ArrayList<>();  // it don't look pretty, and it don't work pretty, but it works.
         if (pt[0] - 1 >= 0) {
             valid.add(new int[] {pt[0] - 1, pt[1]});
         }
@@ -82,37 +114,5 @@ public class Perimeter {
             valid.add(new int[] {pt[0], pt[1] + 1});
         }
         return valid;
-    }
-}
-
-class Blob {
-    private final int[] rChange = new int[] {1, -1, 0, 0};
-    private final int[] cChange = new int[] {0, 0, 1, -1};
-
-    private final int side;
-    private final boolean[][] iceCream;
-    public int area;
-    public ArrayList<int[]> points = new ArrayList<>();
-    public Blob(int area, int sideLen, boolean[][] iceCream) {
-        this.area = area;
-        this.iceCream = iceCream;
-        side = sideLen;
-    }
-
-    public int perimeter() {
-        int perim = 0;
-        for (int[] pt : points) {
-            int r = pt[0], c = pt[1];
-            if (iceCream[r][c]) {
-                for (int i = 0; i < 4; i++) {
-                    if (r + rChange[i] < 0 || r + rChange[i] >= side ||
-                            c + cChange[i] < 0 || c + cChange[i] >= side ||
-                            !iceCream[r + rChange[i]][c + cChange[i]]) {
-                        perim++;
-                    }
-                }
-            }
-        }
-        return perim;
     }
 }
