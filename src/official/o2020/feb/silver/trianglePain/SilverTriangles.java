@@ -34,15 +34,13 @@ public class SilverTriangles {
             posts[p] = post;
             // the second part will be the sum of the distances from this number to the other numbers
             if (!sameXVals.containsKey(post[0])) {
-                sameXVals.put(post[0], new ArrayList<>(Collections.singletonList(new Pair(post[1], -1))));
-            } else {
-                sameXVals.get(post[0]).add(new Pair(post[1], -1));
+                sameXVals.put(post[0], new ArrayList<>());
             }
+            sameXVals.get(post[0]).add(new Pair(post[1], -1));
             if (!sameYVals.containsKey(post[1])) {
-                sameYVals.put(post[1], new ArrayList<>(Collections.singletonList(new Pair(post[0], -1))));
-            } else {
-                sameYVals.get(post[1]).add(new Pair(post[0], -1));
+                sameYVals.put(post[1], new ArrayList<>());
             }
+            sameYVals.get(post[1]).add(new Pair(post[0], -1));
         }
 
         // here we calculate the sums in linear time from the previous ones, it's some math stuff idc to explain lol
@@ -51,7 +49,7 @@ public class SilverTriangles {
             long firstNum = y.get(0).first;
             y.get(0).second = y.stream().mapToLong(p -> p.first - firstNum).sum();
             for (int p = 1; p < y.size(); p++) {
-                y.get(p).second = y.get(p - 1).second + (2 * p - y.size()) * (y.get(p).first - y.get(p - 1).first);
+                y.get(p).second = y.get(p - 1).second + (2L * p - y.size()) * (y.get(p).first - y.get(p - 1).first);
             }
         }
 
@@ -60,7 +58,7 @@ public class SilverTriangles {
             long firstNum = x.get(0).first;
             x.get(0).second = x.stream().mapToLong(p -> p.first - firstNum).sum();
             for (int p = 1; p < x.size(); p++) {
-                x.get(p).second = x.get(p - 1).second + (2 * p - x.size()) * (x.get(p).first - x.get(p - 1).first);
+                x.get(p).second = x.get(p - 1).second + (2L * p - x.size()) * (x.get(p).first - x.get(p - 1).first);
             }
         }
 

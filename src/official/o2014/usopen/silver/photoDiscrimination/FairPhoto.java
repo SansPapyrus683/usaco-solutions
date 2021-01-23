@@ -5,7 +5,7 @@ import java.util.*;
 
 // 2014 usopen silver (pretty much copied from official sol)
 public class FairPhoto {
-    static int[][] cows;
+    private static int[][] cows;
     static ArrayList<Integer>[] relCowStarts = new ArrayList[] {new ArrayList(), new ArrayList()};
     static ArrayList<Integer>[] relCowPrefixes = new ArrayList[] {new ArrayList(), new ArrayList()};
     public static void main(String[] args) throws IOException {

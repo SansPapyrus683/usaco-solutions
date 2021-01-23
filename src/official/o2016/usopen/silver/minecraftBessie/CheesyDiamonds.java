@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2016 usopen silver
-public class Diamond {
+public class CheesyDiamonds {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("diamond.in"));
@@ -33,7 +33,7 @@ public class Diamond {
         System.out.printf("i am sorry to inform you that it took %d ms%n", System.currentTimeMillis() - start);
     }
 
-    static int[] caseStored(int[] diamonds, int maxSizeDiff) {
+    private static int[] caseStored(int[] diamonds, int maxSizeDiff) {
         Arrays.sort(diamonds);
         int[] caseStored = new int[diamonds.length];  // this[i] = diamonds can store in a case if diamonds[i] is the min
         for (int d = 0; d < diamonds.length; d++) {

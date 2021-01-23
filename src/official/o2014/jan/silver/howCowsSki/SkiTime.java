@@ -83,10 +83,12 @@ public class SkiTime {
                     return true;
                 }
             }
-            /* yes, this is a really hacky implementation.
+            /*
+             * yes, this is a really hacky implementation.
              * yes, i am absolutely ashamed of such blasphemy.
              * but it runs under the limit, so here it stays.
-             * (anyways this tries all the possible neighbors and checks if they're valid) */
+             * (anyways this tries all the possible neighbors and checks if they're valid)
+             */
             int currElevation = hills[y][x];
             if (x + 1 < length && Math.abs(currElevation - hills[y][x+1]) <= diff && !visited[y][x+1]) {
                 visited[y][x+1] = true;

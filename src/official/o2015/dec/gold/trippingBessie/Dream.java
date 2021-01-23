@@ -62,8 +62,8 @@ public class Dream {
             }
         }
 
-        int minMoves = Arrays.stream(distances[rows - 1][cols - 1]).min().getAsInt() == Integer.MAX_VALUE ? -1 :
-                Arrays.stream(distances[rows - 1][cols - 1]).min().getAsInt();
+        int minMoves = Arrays.stream(distances[rows - 1][cols - 1]).min().getAsInt() == Integer.MAX_VALUE ? -1
+                : Arrays.stream(distances[rows - 1][cols - 1]).min().getAsInt();
         PrintWriter written = new PrintWriter("dream.out");
         written.println(minMoves);
         written.close();

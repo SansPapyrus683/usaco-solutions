@@ -48,10 +48,10 @@ public class PaintBarn {
         int[][] prefixedLeftovers = new int[BARN_WIDTH + 1][BARN_WIDTH + 1];
         for (int r = 1; r < BARN_WIDTH + 1; r++) {  // make a prefix array of the leftovers for O(1) range sums and stuff
             for (int c = 1; c < BARN_WIDTH + 1; c++) {
-                prefixedLeftovers[r][c] = prefixedLeftovers[r - 1][c] +
-                        prefixedLeftovers[r][c - 1] -
-                        prefixedLeftovers[r - 1][c - 1] +
-                        leftovers[r - 1][c - 1];  // this time r - 1 because we started at 1 remember
+                prefixedLeftovers[r][c] = prefixedLeftovers[r - 1][c]
+                        + prefixedLeftovers[r][c - 1]
+                        - prefixedLeftovers[r - 1][c - 1]
+                        + leftovers[r - 1][c - 1];  // this time r - 1 because we started at 1 remember
             }
         }
 

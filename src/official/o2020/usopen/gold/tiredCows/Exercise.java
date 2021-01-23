@@ -25,7 +25,7 @@ public class Exercise {
 
         // the sum of all the LCMs of the prime powers that sum to i (the array index)
         BigInteger[] totalWithSum = new BigInteger[cowNum + 1];
-        Arrays.fill(totalWithSum, new BigInteger("0"));
+        Arrays.fill(totalWithSum, BigInteger.ZERO);
         totalWithSum[0] = new BigInteger("1");
         for (int i = 2; i <= cowNum; i++) {
             if (!prime(i)) {
@@ -41,7 +41,7 @@ public class Exercise {
             totalWithSum = updatedTotal;
         }
 
-        BigInteger total = new BigInteger("0");
+        BigInteger total = BigInteger.ZERO;
         for (BigInteger prod : totalWithSum) {
             total = total.add(prod);
         }

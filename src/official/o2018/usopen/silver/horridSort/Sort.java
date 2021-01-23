@@ -19,7 +19,7 @@ public class Sort {
          * however, smol elements can only move to the left one at a time
          * so we see which element has to move the farthest to the left (by keeping a marker of their initial pos)
          * same val elements are handled ok bc they will NEVER cross positions and stuff
-         * */
+         */
         int movedFarthestLeft = 0;
         for (int i = 0; i < unsorted.length; i++) {
             movedFarthestLeft = Math.max(movedFarthestLeft, unsorted[i][1] - i);

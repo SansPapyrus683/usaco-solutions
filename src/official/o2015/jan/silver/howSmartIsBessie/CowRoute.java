@@ -6,14 +6,15 @@ import java.util.stream.Stream;
 
 // 2015 jan silver
 public class CowRoute {
+    private static final int CITY_NUM = 1000;
     public static void main(String[] args) throws IOException {
         long timeStart = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader(new File("cowroute.in")));
         String[] initialInfo = read.readLine().split(" ");
         int start = Integer.parseInt(initialInfo[0]) - 1, end = Integer.parseInt(initialInfo[1]) - 1;
         int planeNum = Integer.parseInt(initialInfo[2]);
-        ArrayList<int[]>[] canGoTo = new ArrayList[1000];  // can go to pos, plane id, cost
-        for (int i = 0; i < 1000; i++) {
+        ArrayList<int[]>[] canGoTo = new ArrayList[CITY_NUM];  // can go to pos, plane id, cost
+        for (int i = 0; i < CITY_NUM; i++) {
             canGoTo[i] = new ArrayList<>();
         }
 
@@ -29,9 +30,9 @@ public class CowRoute {
                 }
             }
         }
-        long[][] travelCosts = new long[1000][planeNum + 1];  // the actual money it takes
-        int[][] moveCosts = new int[1000][planeNum + 1];  // min amount of city jumps it takes
-        for (int i = 0; i < 1000; i++) {
+        long[][] travelCosts = new long[CITY_NUM][planeNum + 1];  // the actual money it takes
+        int[][] moveCosts = new int[CITY_NUM][planeNum + 1];  // min amount of city jumps it takes
+        for (int i = 0; i < CITY_NUM; i++) {
             Arrays.fill(travelCosts[i], Long.MAX_VALUE);
             Arrays.fill(moveCosts[i], Integer.MAX_VALUE);
         }

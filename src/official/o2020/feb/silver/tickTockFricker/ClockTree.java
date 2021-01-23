@@ -51,7 +51,8 @@ public class ClockTree {
             frontier = inLine;
         }
 
-        /* (copied straight from official sol)
+        /*
+         * (copied straight from official sol)
          * so apparently a node is only valid (every node, not just the ultimate node)
          * if and only if it's even distances (mod 12) - its odd distances (mod 12)
          * are either 0 or 1 (not -1)
@@ -66,7 +67,7 @@ public class ClockTree {
         } else if ((oddDistSum + 1) % 12 == evenDistSum % 12) {
             written.println(evenDistRooms);
             System.out.println(evenDistRooms);
-        }else {
+        } else {
             written.println(0);
             System.out.println(0);
         }

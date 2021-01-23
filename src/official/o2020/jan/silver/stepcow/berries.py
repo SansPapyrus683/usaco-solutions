@@ -38,6 +38,5 @@ for b in range(1, bestTree + 1):  # just try to give elsie no more than bessie b
 
     maxBerries = max(maxBerries, gottenBerries)
 
-with open('berries.out', 'w') as written:
-    print(maxBerries)
-    written.write(str(maxBerries) + "\n")
+print(maxBerries)
+print(maxBerries, file=open('berries.out', 'w'))

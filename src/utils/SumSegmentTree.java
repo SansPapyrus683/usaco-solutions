@@ -15,29 +15,22 @@ import java.util.StringTokenizer;
  * of the left and right half respectively, and so on and so forth until you just get the array elements<br>
  */
 public class SumSegmentTree {
-    public enum OpType {  // dk if this is a best practice but i don't wanna have two really similar classes
-        SUM,
-        XOR
-    }
-
     private final int[] segtree;
     private final int arrSize;
     private final int size;
-    private final OpType op;
 
-    public SumSegmentTree(int len, OpType op) {  // constructs the thing kinda like an array
+    public SumSegmentTree(int len) {  // constructs the thing kinda like an array
         int size = 1;
         while (size < len) {
             size *= 2;
         }
         this.size = size;
-        this.op = op;
         arrSize = len;
         segtree = new int[size * 2];  // we won't necessarily use all of the element but that doesn't really matter
     }
 
-    public SumSegmentTree(int[] arr, OpType op) {  // constructs the thing with initial elements as well
-        this(arr.length, op);
+    public SumSegmentTree(int[] arr) {  // constructs the thing with initial elements as well
+        this(arr.length);
         for (int i = 0; i < arr.length; i++) {
             set(i, arr[i]);
         }
@@ -59,7 +52,7 @@ public class SumSegmentTree {
         StringTokenizer initial = new StringTokenizer(read.readLine());
         initial.nextToken();
         int queryNum = Integer.parseInt(initial.nextToken());
-        SumSegmentTree segmentTree = new SumSegmentTree(Arrays.stream(read.readLine().split(" ")).mapToInt(Integer::parseInt).toArray(), OpType.SUM);
+        SumSegmentTree segmentTree = new SumSegmentTree(Arrays.stream(read.readLine().split(" ")).mapToInt(Integer::parseInt).toArray());
         for (int q = 0; q < queryNum; q++) {
             int[] query = Arrays.stream(read.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
             if (query[0] == 1) {
@@ -87,16 +80,7 @@ public class SumSegmentTree {
             } else {
                 set(index, element, 2 * currNode + 2, mid, right);
             }
-            switch (op) {
-                case SUM:
-                    segtree[currNode] = segtree[2 * currNode + 1] + segtree[2 * currNode + 2];
-                    break;
-                case XOR:
-                    segtree[currNode] = segtree[2 * currNode + 1] ^ segtree[2 * currNode + 2];
-                    break;
-                default:
-                    throw new RuntimeException("wait how did this even happen lmao");
-            }
+            segtree[currNode] = segtree[2 * currNode + 1] + segtree[2 * currNode + 2];
         }
     }
 
@@ -118,13 +102,6 @@ public class SumSegmentTree {
         int middle = (left + right) / 2;
         int leftPartSum = sum(from, to, 2 * currNode + 1, left, middle);
         int rightPartSum = sum(from, to, 2 * currNode + 2, middle, right);
-        switch (op) {
-            case SUM:
-                return leftPartSum + rightPartSum;
-            case XOR:
-                return leftPartSum ^ rightPartSum;
-            default:
-                throw new RuntimeException("wait how did this even happen lmao");
-        }
+        return leftPartSum + rightPartSum;
     }
 }

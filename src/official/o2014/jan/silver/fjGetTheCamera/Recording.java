@@ -6,6 +6,25 @@ import java.util.stream.Stream;
 
 // 2014 jan silver
 public class Recording {
+    private static class PArrangement {  // i could just make a generic Pair<> class but screw it
+        public ArrayList<Integer> first;
+        public ArrayList<Integer> second;
+        public PArrangement(ArrayList<Integer> first, ArrayList<Integer> second) {
+            this.first = first;
+            this.second = second;
+        }
+
+        public PArrangement(PArrangement toCopy) {
+            this.first = new ArrayList<>(toCopy.first);
+            this.second = new ArrayList<>(toCopy.second);
+        }
+
+        @Override
+        public String toString() {
+            return String.format("PArrangement{A: %s, B: %s}", first, second);
+        }
+    }
+
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("recording.in"));
@@ -56,10 +75,10 @@ public class Recording {
                     soFar = ours;
                 } else if (recorded == best) {  // if it's the same but it makes more efficient use of space, replace the old one
                     assert soFar != null;
-                    int ourOtherEnd = events[ours.first.get(ours.first.size() - 1)][1] != toAdd[1] ? events[ours.first.get(ours.first.size() - 1)][1] :
-                            events[ours.second.get(ours.second.size() - 1)][1];
-                    int theirOtherEnd = events[soFar.first.get(soFar.first.size() - 1)][1] != toAdd[1] ? events[soFar.first.get(soFar.first.size() - 1)][1] :
-                            events[soFar.second.get(soFar.second.size() - 1)][1];
+                    int ourOtherEnd = events[ours.first.get(ours.first.size() - 1)][1] != toAdd[1] ? events[ours.first.get(ours.first.size() - 1)][1]
+                            : events[ours.second.get(ours.second.size() - 1)][1];
+                    int theirOtherEnd = events[soFar.first.get(soFar.first.size() - 1)][1] != toAdd[1] ? events[soFar.first.get(soFar.first.size() - 1)][1]
+                            : events[soFar.second.get(soFar.second.size() - 1)][1];
                     soFar = ourOtherEnd < theirOtherEnd ? ours : soFar;
                 }
             }
@@ -73,24 +92,5 @@ public class Recording {
         written.close();
         System.out.println(answer);
         System.out.printf("IT TOOK %d MS AND THE WORLD RECORD HAS- wait it's still intact nvm%n", System.currentTimeMillis() - start);
-    }
-}
-
-class PArrangement {  // i could just make a generic Pair<> class but screw it
-    ArrayList<Integer> first;
-    ArrayList<Integer> second;
-    public PArrangement(ArrayList<Integer> first, ArrayList<Integer> second) {
-        this.first = first;
-        this.second = second;
-    }
-
-    public PArrangement(PArrangement toCopy) {
-        this.first = new ArrayList<>(toCopy.first);
-        this.second = new ArrayList<>(toCopy.second);
-    }
-
-    @Override
-    public String toString() {
-        return String.format("PArrangement{A: %s, B: %s}", first, second);
     }
 }

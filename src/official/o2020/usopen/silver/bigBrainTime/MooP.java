@@ -13,6 +13,7 @@ public class MooP {
         for (int p = 0; p < particleNum; p++) {
             particles[p] = Arrays.stream(read.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
         }
+        // so sorting by y is actually necessary lol (if you just use Comparator.comparingInt it breaks)
         Arrays.sort(particles, (a, b) -> a[0] != b[0] ? a[0] - b[0] : a[1] - b[1]);
 
         int[] leftMinY = new int[particleNum];  // the running min/max y from the left and right respectively
@@ -28,15 +29,16 @@ public class MooP {
 
         int interactionPools = 1;  // we start with one "pool" always
         for (int p = 0; p < particleNum - 1; p++) {
-            /* if the minimum is greater than the maximum, of course the two can't interact
+            /*
+             * if the minimum is greater than the maximum, of course the two can't interact
              * and we'll have to make a new pool (or divide the particles, idk)
              * kinda like
              *   •      <- obvi these two can't interact
              *       •
              * it's the running minimum because the previous particles can act as a sort of conduit between that particle
              * and the other particles on the right
-             * and the x doesn't matter bc we sorted it alr lol
-             * */
+             * and the x doesn't matter bc we sorted it alr
+             */
             if (leftMinY[p] > rightMaxY[p + 1]) {
                 interactionPools++;
             }
@@ -46,6 +48,6 @@ public class MooP {
         written.println(interactionPools);
         written.close();
         System.out.println(interactionPools);
-        System.out.printf("you absolute buffoon, how did you write code that took a huge %d ms%n", System.currentTimeMillis() - timeStart);
+        System.out.printf("you absolute buffoon, how did you write code that took %d ms%n", System.currentTimeMillis() - timeStart);
     }
 }

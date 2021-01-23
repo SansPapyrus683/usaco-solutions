@@ -26,6 +26,7 @@ public class CowJog {
 
         int[] catchupTimes = new int[cows.length];
         int timeLeft = time;
+        // this probably theoretically shouldn't be fast enough, but it's fast enough for the test cases for this problem lol
         while (true) {
             Arrays.fill(catchupTimes, Integer.MAX_VALUE);  // reset the stuff
             int nextCatchupTime = Integer.MAX_VALUE;
@@ -46,8 +47,7 @@ public class CowJog {
             for (int c = 0; c < groups.size(); c++) {
                 if (catchupTimes[c] > nextCatchupTime) {
                     groups.get(c)[0] += groups.get(c)[1] * nextCatchupTime;
-                }
-                else {
+                } else {
                     groups.set(c, null);
                 }
             }

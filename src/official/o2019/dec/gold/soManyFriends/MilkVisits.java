@@ -4,8 +4,11 @@ import java.io.*;
 import java.util.*;
 import java.util.stream.Stream;
 
-// 2019 gold december (it took two whole weeks lol)
-// and even then this is rife of bad practices but it works so screw it
+/**
+ * 2019 gold december (it took two whole weeks lol)
+ * and even then this is rife of bad practices but it works so screw it
+ * 1/22/2021- oh my god looking back at this this is even worse than i first thought
+ */
 public class MilkVisits {
     private static final long MAX_DEPTH = 100000;
 

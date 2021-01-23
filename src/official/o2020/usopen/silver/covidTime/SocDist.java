@@ -26,7 +26,7 @@ public class SocDist {
         long upperBound = rightestPatch - leftestPatch;  // yes ik binsearch is log n but optimization doesn't hurt
         while (lowerBound <= upperBound) {
             long toSearch = (upperBound + lowerBound) / 2;
-            if (valid(patches, cowNum, toSearch)) {
+            if (fittable(patches, cowNum, toSearch)) {
                 lowerBound = toSearch + 1;
                 validDistance = toSearch;
             } else {
@@ -42,7 +42,7 @@ public class SocDist {
     }
 
     // tests if a distance is valid by greedily squeezing cows wherever there's space
-    static boolean valid(long[][] patches, int cows, long distance) {  // assumes patches are sorted, use at your own risk
+    static boolean fittable(long[][] patches, int cows, long distance) {  // assumes patches are sorted, use at your own risk
         long lastCow = Integer.MIN_VALUE;  // the position of the last cow we just put them in
         int lastPatch = 0;  // only start from the last patch (otherwise it takes too long bc it's like at the higher end of n^2)
         for (int c = 0; c < cows; c++) {

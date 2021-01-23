@@ -6,6 +6,15 @@ import java.util.stream.Stream;
 
 // 2015 us open silver (solution shamelessly copied)
 public class Trapped {
+    private static class Bale {  // makes reading the code much more easier
+        int size;
+        int pos;
+        public Bale(int size, int pos) {
+            this.size = size;
+            this.pos = pos;
+        }
+    }
+
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("trapped.in"));
@@ -32,7 +41,7 @@ public class Trapped {
             }
         }
 
-        int best = Integer.MAX_VALUE;  // note to self: 0=size, 1=position
+        int best = Integer.MAX_VALUE;
         int farthest = insertPos;
         for (int i = insertPos - 1; i >= 0; i--) {
             // the second inequality tells if the hay bale at farthest CAN'T be broken down when we're at i
@@ -61,14 +70,5 @@ public class Trapped {
         }
         written.close();
         System.out.printf("oh no it took %d ms we're all doomed%n", System.currentTimeMillis() - start);
-    }
-}
-
-class Bale {  // makes reading the code much more easier
-    int size;
-    int pos;
-    public Bale(int size, int pos) {
-        this.size = size;
-        this.pos = pos;
     }
 }

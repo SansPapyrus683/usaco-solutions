@@ -26,9 +26,7 @@ public class Teleport {
             if ((t[1] >= t[0] && t[0] < 0) || (t[0] >= t[1] && t[0] >= 0)) {  // if it goes from neg to pos or pos to neg
                 increment(distanceChanges, 0, -1);
                 increment(distanceChanges, 2 * t[1], -1);
-            }
-            // a simple else would work, it's just more explicit this way
-            else if ((t[1] >= t[0] && t[0] >= 0) || (t[0] >= t[1] && t[0] < 0)) {
+            } else {
                 increment(distanceChanges, 2 * t[0], -1);
                 increment(distanceChanges, 2 * t[1] - 2 * t[0], -1);
             }
@@ -39,7 +37,7 @@ public class Teleport {
         int currChange = 0;
         int lastInterestPoint = distanceChanges.firstKey();
         for (int c : distanceChanges.keySet()) {
-            currDistance += currChange * (c - lastInterestPoint);
+            currDistance += (long) currChange * (c - lastInterestPoint);
             lastInterestPoint = c;
             leastDistance = Math.min(leastDistance, currDistance);
             currChange += distanceChanges.get(c);

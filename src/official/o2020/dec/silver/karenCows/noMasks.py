@@ -26,14 +26,15 @@ frontier = deque([0])
 visited[0] = True
 while frontier:
     curr = frontier.popleft()
-    # this stores all the farms that this farm should spread to for optimal spreading
+    # this stores the number of farms that this farm should spread to for optimal spreading
     spreadTo = 0
     for n in neighbors[curr]:
         if not visited[n]:
             spreadTo += 1
             visited[n] = True
             frontier.append(n)
-    # the log base 2 is so enough superspreader events go around so that there are enough cows, and then we need to add the length of spreadTo so the cows can actually go to the other farms
+    # the log base 2 is so enough superspreader events go around so that there are enough cows,
+    # and then we need to add the length of spreadTo so the cows can actually go to the other farms
     minDays += ceiLog2(spreadTo + 1) + spreadTo
 
 print(minDays)

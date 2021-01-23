@@ -4,17 +4,17 @@ import java.io.*;
 import java.util.*;
 import java.util.stream.Stream;
 
-// 2018 usopen silver (times out for test case 9)
+// 2018 usopen silver
 public class MultiMoo {
-    static final int[] rChanges = new int[] {1, -1, 0, 0};
-    static final int[] cChanges = new int[] {0, 0, 1, -1};
-    static int side;
-    static int currID = 0;
-    static int[][] board;
-    static int[][] ids;  // these ids are different from cow ids
-    static ArrayList<Integer> regionSizes = new ArrayList<>();
-    static ArrayList<HashSet<ArrayList<Integer>>> adjPoints = new ArrayList<>();
-    static boolean[][] visited;
+    private static  final int[] rChanges = new int[] {1, -1, 0, 0};
+    private static  final int[] cChanges = new int[] {0, 0, 1, -1};
+    private static  int side;
+    private static  int currID = 0;
+    private static  int[][] board;
+    private static  int[][] ids;  // these ids are different from cow ids
+    private static  ArrayList<Integer> regionSizes = new ArrayList<>();
+    private static  ArrayList<HashSet<ArrayList<Integer>>> adjPoints = new ArrayList<>();
+    private static  boolean[][] visited;
 
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
@@ -98,8 +98,10 @@ public class MultiMoo {
     }
 
     static int twoRegionSize(int[] first, int[] second) {
-        int firstID = ids[first[0]][first[1]], secondID = ids[second[0]][second[1]];
-        int type1 = board[first[0]][first[1]], type2 = board[second[0]][second[1]];
+        int firstID = ids[first[0]][first[1]];
+        int secondID = ids[second[0]][second[1]];
+        int type1 = board[first[0]][first[1]];
+        int type2 = board[second[0]][second[1]];
         HashSet<Integer> doneIDs = new HashSet<>(Arrays.asList(firstID, secondID));
         ArrayDeque<Integer> frontier = new ArrayDeque<>(Arrays.asList(firstID, secondID));
         int totalSize = regionSizes.get(firstID) + regionSizes.get(secondID);

@@ -3,7 +3,7 @@ package official.o2016.feb.silver.cowCompass;
 import java.io.*;
 import java.util.*;
 
-// 2016 feb silver
+// 2016 feb silver (this is REALLY inefficient but what can you do about it lol)
 public class Balancing {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();

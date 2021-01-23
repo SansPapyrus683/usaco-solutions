@@ -66,7 +66,6 @@ public class Meeting {
                 }
             }
         }
-
         return new ArrayList<>(allTimes[edgeTimes.length - 1]);
     }
 }

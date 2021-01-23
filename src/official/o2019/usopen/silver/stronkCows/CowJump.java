@@ -3,7 +3,7 @@ package official.o2019.usopen.silver.stronkCows;
 import java.io.*;
 import java.util.*;
 
-// 2019 usopen silver (my initial solution for this exploited the test data, so )
+// 2019 usopen silver (my initial solution for this exploited the test data, so)
 public class CowJump {
     private static int xAt;
     public static void main(String[] args) throws IOException {

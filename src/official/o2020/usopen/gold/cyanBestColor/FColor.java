@@ -97,8 +97,7 @@ public class FColor {
 
         HashMap<Integer, Integer> starsToColor = new HashMap<>();
         int rnColor = 1;
-        // stringbuilder so printing to stdout doesn't slow down the program
-        StringBuilder allAssigned = new StringBuilder();
+        StringBuilder allAssigned = new StringBuilder();  // StringBuilder so printing isn't slow
         for (int c = 0; c < cowNum; c++) {
             int ultimateParent = mergingCows.getUltimate(c);
             if (!starsToColor.containsKey(ultimateParent)) {

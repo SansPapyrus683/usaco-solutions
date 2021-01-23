@@ -17,22 +17,19 @@ public class Gates {
         int[] pos = new int[] {BOUNDS, BOUNDS};  // make everything positive, also makes things easier
         boolean[][] walls = new boolean[TRUE_BOUNDS][TRUE_BOUNDS];
         walls[pos[0]][pos[1]] = true;
-        for(char d : directions) {
+        for (char d : directions) {
             int dirX = 0;
             int dirY = 0;
-            if (d == 'N') {
+            if (d == 'N') {  // i'd use a switch statement but does that really matter?
                 dirX = 1;
-            }
-            else if (d == 'S') {
+            } else if (d == 'S') {
                 dirX = -1;
-            }
-            else if (d == 'W') {
+            } else if (d == 'W') {
                 dirY = 1;
-            }
-            else if (d == 'E') {
+            } else if (d == 'E') {
                 dirY = -1;
             }
-            for(int i = 0; i < 2; i++) {  // because we have fences as blocks, double the dist. travelled
+            for (int i = 0; i < 2; i++) {  // because we have fences as blocks, double the dist. travelled
                 pos[0] += dirX;
                 pos[1] += dirY;
                 walls[pos[0]][pos[1]] = true;
@@ -68,7 +65,7 @@ public class Gates {
             }
         }
 
-        // the answer if just amt of regions - 1 because idk, it just seems kinda obvi
+        // the answer if just amt of regions - 1 because with a gate we can only connect 2 regions
         PrintWriter written = new PrintWriter("gates.out");
         written.println(fenceRegions - 1);
         written.close();

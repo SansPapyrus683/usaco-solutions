@@ -6,9 +6,9 @@ import java.util.stream.Stream;
 
 // 2014 mar silver
 public class Lazy {
-    static int side;
-    static int[][] soFar;
-    static int walkingDist;
+    private static int side;
+    private static int[][] soFar;
+    private static int walkingDist;
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("lazy.in"));

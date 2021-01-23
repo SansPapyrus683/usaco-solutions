@@ -37,7 +37,7 @@ public class SCode {
         System.out.printf("how do we even decrypt fj's message (it took %d ms ok?)", System.currentTimeMillis() - start);
     }
 
-    public static ArrayList<String> validFrom(String result) {
+    private static ArrayList<String> validFrom(String result) {
         ArrayList<String> valid = new ArrayList<>();
         for (int i = 1; i < result.length(); i++) {
             if (i == (float) result.length() / 2) {  // NOOO!! YOU CAN'T JUST DUPLICATE A STRING AS AN OPERATION!!!

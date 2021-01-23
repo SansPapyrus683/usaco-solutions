@@ -20,7 +20,7 @@ public class Haybales {
             int qStart = Integer.parseInt(query.nextToken());
             int qEnd = Integer.parseInt(query.nextToken());
             // find the insert location of the intervals relative to the bales and then subtract them
-            int haybaleNum = bisect_right(haybales, qEnd) - bisect_left(haybales, qStart);
+            int haybaleNum = bisectRight(haybales, qEnd) - bisectLeft(haybales, qStart);
             written.println(haybaleNum);
         }
         written.close();
@@ -28,7 +28,7 @@ public class Haybales {
     }
 
     // straight from https://stackoverflow.com/questions/2945017/javas-equivalent-to-bisect-in-python
-    public static int bisect_right(int[] searchOn, int x) {
+    public static int bisectRight(int[] searchOn, int x) {
         int lo = 0;
         int hi = searchOn.length;
         if (hi == 0) {
@@ -53,7 +53,7 @@ public class Haybales {
         }
     }
 
-    public static int bisect_left(int[] searchOn, int x) {
+    public static int bisectLeft(int[] searchOn, int x) {
         int lo = 0;
         int hi = searchOn.length;
         if (hi == 0) {

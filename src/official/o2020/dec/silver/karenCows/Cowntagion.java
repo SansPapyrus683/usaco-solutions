@@ -34,7 +34,7 @@ public class Cowntagion {
         visited[0] = true;
         while (!frontier.isEmpty()) {
             int current = frontier.poll();
-            // this stores all the farms that this farm should spread to for optimal spreading
+            // this stores the # of farms that this farm should spread to
             int spreadTo = 0;
             for (int n : neighbors[current]) {
                 if (!visited[n]) {
@@ -48,7 +48,7 @@ public class Cowntagion {
         }
 
         System.out.println(minDays);
-        // i'm using System.err because it interferes with how like the grader thing works
+        // i'm using System.err because using stdout interferes with how like the grader thing works
         System.err.printf("i am listening to earrape whilst writing this: %d ms", System.currentTimeMillis() - start);
     }
 
@@ -61,5 +61,5 @@ public class Cowntagion {
             count++;
         }
         return count;
-    } 
+    }
 }

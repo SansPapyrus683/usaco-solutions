@@ -4,8 +4,25 @@ import java.util.*;
 import java.io.*;
 
 // 2015 jan silver
-// for some reason with i name it Stampede.java the whole thing just frickin breaks
+// for some reason with i name it Stampede.java intellij seizure salds
 public class CowFundraising {
+    private static class Cow {
+        public int speed;
+        public int x;
+        public int y;
+
+        public Cow(int x, int y, int speed) {
+            this.x = x;
+            this.y = y;
+            this.speed = speed;
+        }
+
+        @Override
+        public String toString() {  // just for debugging purposes
+            return String.format("Cow{speed=%s, x=%s, y=%s}", speed, x, y);
+        }
+    }
+
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader(new File("stampede.in")));
@@ -45,6 +62,7 @@ public class CowFundraising {
         return Math.min(a[1], b[1]) >= Math.max(a[0], b[0]);
     }
 
+    // sauce: https://www.geeksforgeeks.org/insert-in-sorted-and-non-overlapping-interval-array/
     static void insertIntoIntervals(List<int[]> insertTo, int[] toInsert) {
         if (insertTo.size() <= 0) {
             insertTo.add(toInsert);
@@ -87,22 +105,5 @@ public class CowFundraising {
             insertTo.clear();
             insertTo.addAll(newIntervals);
         }
-    }
-}
-
-class Cow {
-    public int speed;
-    public int x;
-    public int y;
-
-    public Cow(int x, int y, int speed) {
-        this.x = x;
-        this.y = y;
-        this.speed = speed;
-    }
-
-    @Override
-    public String toString() {  // just for debugging purposes
-        return String.format("Cow{speed=%s, x=%s, y=%s}", speed, x, y);
     }
 }

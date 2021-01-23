@@ -80,9 +80,7 @@ public class Swap {
 
         int[] actualPos = Arrays.copyOfRange(finalPos, 1, finalPos.length);
         PrintWriter written = new PrintWriter("swap.out");
-        for (int p : actualPos) {
-            written.println(p);
-        }
+        Arrays.stream(actualPos).forEach(written::println);  // even though streams are slow, they're convenient as frick
         written.close();
         System.out.println(Arrays.toString(actualPos));
         System.out.printf("what kind of exercise routine takes a measly %d ms lol%n", System.currentTimeMillis() - timeStart);
