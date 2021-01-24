@@ -54,7 +54,7 @@ public class Exercise {
     }
 
     // nothing beats copying src code (sauce: https://www.geeksforgeeks.org/primality-test-set-1-introduction-and-school-method/)
-    public static boolean prime(int n) {
+    private static boolean prime(int n) {
         if (n <= 1) return false;
         if (n <= 3) return true;
         if (n % 2 == 0 || n % 3 == 0) return false;
