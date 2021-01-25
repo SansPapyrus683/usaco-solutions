@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2017 jan silver
-public class HPS {
+public final class HPS {
     // goddamit usaco when will you upgrade to java like 11 or 13
     static final HashMap<Character, Integer> MOVES = new HashMap<Character, Integer>() {{
         put('P', 0);

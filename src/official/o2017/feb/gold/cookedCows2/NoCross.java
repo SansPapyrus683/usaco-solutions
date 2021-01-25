@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2017 feb gold
-public class NoCross {
+public final class NoCross {
     private static final int THRESHOLD = 4;
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();

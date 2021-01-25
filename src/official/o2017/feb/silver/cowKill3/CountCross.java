@@ -4,11 +4,11 @@ import java.io.*;
 import java.util.*;
 
 // 2017 feb silver
-public class CountCross {
+public final class CountCross {
     private static final int[] CHANGE_X = new int[]{1, -1, 0, 0};
     private static final int[] CHANGE_Y = new int[]{0, 0, 1, -1};
 
-    private static class Pair<T1, T2> {  // CURSE YOU JAVA!!!!
+    private static final class Pair<T1, T2> {  // CURSE YOU JAVA!!!!
         public T1 first;
         public T2 second;
 

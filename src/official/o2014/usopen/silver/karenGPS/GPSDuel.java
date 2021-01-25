@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2014 us open silver
-public class GPSDuel {
+public final class GPSDuel {
     static int intNum;
     static ArrayList<int[]>[] neighbors;
     static ArrayList<int[]>[] reverseNeighbors;

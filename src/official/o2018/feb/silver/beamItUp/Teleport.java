@@ -5,7 +5,7 @@ import java.util.*;
 import java.util.stream.Stream;
 
 // 2018 feb silver
-public class Teleport {
+public final class Teleport {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("teleport.in"));

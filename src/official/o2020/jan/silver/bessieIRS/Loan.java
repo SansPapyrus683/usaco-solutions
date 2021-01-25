@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2020 jan silver
-public class Loan {
+public final class Loan {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         StringTokenizer initial = new StringTokenizer(new BufferedReader(new FileReader("loan.in")).readLine());

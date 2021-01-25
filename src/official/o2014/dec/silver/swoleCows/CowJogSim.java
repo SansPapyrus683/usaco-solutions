@@ -7,7 +7,7 @@ import java.io.*;
  * 2014 dec silver
  * somehow even though this should take smth like n^2 operations it still worked
  */
-public class CowJogSim {
+public final class CowJogSim {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("cowjog.in"));

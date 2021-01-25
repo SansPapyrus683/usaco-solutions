@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2014 jan silver
-public class SlowDown {
+public final class SlowDown {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("slowdown.in"));

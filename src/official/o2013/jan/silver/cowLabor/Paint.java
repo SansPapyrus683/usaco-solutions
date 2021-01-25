@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2013 jan silver
-public class Paint {
+public final class Paint {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("paint.in"));

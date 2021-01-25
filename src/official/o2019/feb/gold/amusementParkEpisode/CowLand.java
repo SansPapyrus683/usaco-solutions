@@ -4,7 +4,7 @@ import java.util.*;
 import java.io.*;
 
 // 2019 feb gold (this one works by PURE CHANCE- sometimes it works, sometimes it doesn't so yeah lol)
-public class CowLand {
+public final class CowLand {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("cowland.in"));
@@ -45,7 +45,7 @@ public class CowLand {
     /**
      * see {@link utils.SumSegmentTree} for explanation ok?
      */
-    private static class MinSegTree {
+    private static final class MinSegTree {
         private final int[] segtree;
         private final int arrSize;
         private final int size;
@@ -117,7 +117,7 @@ public class CowLand {
     }
 
     // i coulda just used a binary indexed tree but oh well
-    private static class XORSegTree {
+    private static final class XORSegTree {
         private final int[] segtree;
         private final int arrSize;
         private final int size;
@@ -175,7 +175,7 @@ public class CowLand {
         }
     }
 
-    private static class AmusementPark {
+    private static final class AmusementPark {
         private final ArrayList<Integer>[] neighbors;
         private final ArrayList<Integer> eulerTour = new ArrayList<>();
         private final int[] firstOcc;

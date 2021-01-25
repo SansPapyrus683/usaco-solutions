@@ -12,7 +12,7 @@ package utils;
  * say we wanted to query for 25<br>
  * the algo would first take 16, then 8, then 1, and accumulate all the values at those indices (16, 24, and 25)
  */
-public class BinaryIndexedTree {
+public final class BinaryIndexedTree {
     public enum OpType {
         SUM,
         XOR

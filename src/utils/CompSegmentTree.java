@@ -8,8 +8,8 @@ import java.util.Comparator;
  * this does pretty much the same thing as the sum segment tree<br>
  * except for this one it returns the min or max of a range (updates are still a thing, don't worry)
  */
-public class CompSegmentTree {
-    public enum OpType {  // dk if this is a best practice but i don't wanna have two really similar classes
+public final class CompSegmentTree {
+    public enum OpType {  // dk if this is a best practice but i don't wanna have two really similar final classes
         MIN,
         MAX
     }

@@ -10,7 +10,7 @@ import java.io.*;
 import java.util.*;
 import java.math.BigInteger;
 
-public class BuyLow {
+public final class BuyLow {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("buylow.in"));

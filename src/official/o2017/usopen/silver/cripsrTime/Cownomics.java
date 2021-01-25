@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2017 usopen silver
-public class Cownomics {
+public final class Cownomics {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("cownomics.in"));

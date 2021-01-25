@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2014 feb silver (or feb gold, both are the same i think)
-public class RBlock {
+public final class RBlock {
     static int fieldNum;
     static ArrayList<Integer>[] neighbors;
     static int[][] lengths;

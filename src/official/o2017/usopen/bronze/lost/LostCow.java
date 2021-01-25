@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2017 usopen bronze (just decided to do a java translation for fun)
-public class LostCow {
+public final class LostCow {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("lostcow.in"));

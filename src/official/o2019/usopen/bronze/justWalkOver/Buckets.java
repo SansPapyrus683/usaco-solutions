@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2019 usopen bronze (no idea why i decided to use java, force of habit i guess)
-public class Buckets {
+public final class Buckets {
     private static final int[] CHANGE_R = {0, 0, 1, -1};
     private static final int[] CHANGE_C = {1, -1, 0, 0};
     private static final int WIDTH = 10;

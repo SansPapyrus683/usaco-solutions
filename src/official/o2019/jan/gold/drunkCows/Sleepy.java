@@ -4,11 +4,11 @@ import java.io.*;
 import java.util.*;
 
 // 2019 jan gold
-public class Sleepy {
+public final class Sleepy {
     /**
      * see {@link utils.BinaryIndexedTree} if you want an explanation for how this works
      */
-    private static class BITree {
+    private static final class BITree {
         private final int[] treeThing;
         private final int size;
 

@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2015 us open (i regret nothing for using epic as a var name)
-public class Buffet {
+public final class Buffet {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("buffet.in"));

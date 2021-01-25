@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2017 usopen silver
-public class Where {
+public final class Where {
     static final int[] R_CHANGE = new int[] {1, -1, 0, 0};
     static final int[] C_CHANGE = new int[] {0, 0, 1, -1};
     public static void main(String[] args) throws IOException {

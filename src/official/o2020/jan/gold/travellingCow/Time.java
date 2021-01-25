@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2020 jan gold
-public class Time {
+public final class Time {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("time.in"));

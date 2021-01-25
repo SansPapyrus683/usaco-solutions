@@ -4,7 +4,7 @@ import java.util.*;
 import java.io.*;
 
 // 2014 dec silver (this one implements the "intended" sol)
-public class CowJog {
+public final class CowJog {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("cowjog.in"));

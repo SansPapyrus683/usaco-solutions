@@ -15,7 +15,7 @@ import java.util.*;
  * so we can just calculate the sums for each alternating row/col,
  * and then just greedy it out
  */
-public class SpacedOut {
+public final class SpacedOut {
     public static void main(String[] args) throws IOException {
         BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer initial = new StringTokenizer(read.readLine());

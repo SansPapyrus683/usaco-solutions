@@ -4,8 +4,8 @@ import java.io.*;
 import java.util.*;
 
 // 2014 feb silver (and yes i realize that duck is bc of autoCORRECT, not autoCOMPLETE)
-public class Auto {
-    private static class Pair<T1, T2> {  // seriously wish java had it's own pair class
+public final class Auto {
+    private static final class Pair<T1, T2> {  // seriously wish java had it's own pair final class
         public T1 first;
         public T2 second;
         public Pair(T1 first, T2 second) {

@@ -3,20 +3,20 @@ package utils;
 import java.util.*;
 
 /**
- * tbh this class doesn't really do anything<br>
+ * tbh this final class doesn't really do anything<br>
  * it just has some little algorithms that i think might(?) help<br>
  * it includes an iterative euler tour which i couldn't find anywhere on the internet so...
  * i might implement HLD sometimes soon (aka never)
  */
-public class Tree {
-    private static class TourInfo {
+public final class Tree {
+    private static final class TourInfo {
         private final ArrayList<Integer> toured;
         private final int[] parent;
         private final int[] height;
         private final int[] firstOcc;
         private final int[] lastOcc;
 
-        // because of you java i have to make this god-awful TourInfo class
+        // because of you java i have to make this god-awful TourInfo final class
         public TourInfo(ArrayList<Integer> toured, int[] parent, int[] height) {
             if (parent.length != height.length) {
                 throw new IllegalArgumentException("your parent and height stuff is kinda wonky ngl");

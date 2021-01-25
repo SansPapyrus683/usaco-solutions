@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2016 dec silver (bruh this problem ez as frick)
-public class MooCast {
+public final class MooCast {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("moocast.in"));

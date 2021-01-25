@@ -4,7 +4,7 @@ import java.util.*;
 import java.io.*;
 
 // 2018 silver jan
-public class Lifeguards {
+public final class Lifeguards {
     // A COW HAS FALLEN INTO THE POOL IN FARMER JOHN'S FARM!
     private static int[][] shifts;
     public static void main(String[] args) throws IOException {

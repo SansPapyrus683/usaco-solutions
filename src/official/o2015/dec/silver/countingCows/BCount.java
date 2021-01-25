@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2015 dec silver (bro the old problems really are easier)
-public class BCount {
+public final class BCount {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("bcount.in"));

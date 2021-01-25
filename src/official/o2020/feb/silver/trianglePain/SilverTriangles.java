@@ -5,10 +5,10 @@ import java.util.*;
 import java.util.stream.Stream;
 
 // 2020 feb silver (as if that wasn't obvious already)
-public class SilverTriangles {
+public final class SilverTriangles {
     private static final int MOD = (int) Math.pow(10, 9) + 7;
 
-    private static class Pair {  // underscore so it doesn't clash with that other pair class
+    private static final class Pair {  // underscore so it doesn't clash with that other pair final class
         public long first;
         public long second;
         public Pair(long first, long second) {

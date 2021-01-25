@@ -5,8 +5,8 @@ import java.util.*;
 import java.util.stream.Stream;
 
 // 2014 jan silver
-public class Recording {
-    private static class PArrangement {  // i could just make a generic Pair<> class but screw it
+public final class Recording {
+    private static final class PArrangement {  // i could just make a generic Pair<> final class but screw it
         public ArrayList<Integer> first;
         public ArrayList<Integer> second;
         public PArrangement(ArrayList<Integer> first, ArrayList<Integer> second) {

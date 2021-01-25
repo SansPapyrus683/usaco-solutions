@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2017 jan silver
-public class CowDance {
+public final class CowDance {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("cowdance.in"));

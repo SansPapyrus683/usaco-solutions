@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2015 feb silver
-public class Censor {
+public final class Censor {
     private static final int MAX_LEN = (int) Math.pow(10, 6);
     private static final long MOD = (long) Math.pow(10, 9) + 9;
     private static final long POWER = 31;  // some website told me to do this (https://cp-algorithms.com/string/string-hashing.html)

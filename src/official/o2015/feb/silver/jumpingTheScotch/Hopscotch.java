@@ -5,7 +5,7 @@ import java.io.*;
 import java.util.stream.Stream;
 
 // 2015 feb silver
-public class Hopscotch {
+public final class Hopscotch {
     private static final long MOD = 1000000007L;  // idk why they chose this number i mean
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();

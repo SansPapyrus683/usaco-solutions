@@ -4,7 +4,7 @@ package utils;
  * https://cp-algorithms.com/data_structures/disjoint_set_union.html#toc-tgt-3
  * i might add a bad explanation™ later if i have the time
  */
-public class DisjointSets {
+public final class DisjointSets {
     private final int[] parents;
     private final int[] sizes;
     private final boolean compressPaths;

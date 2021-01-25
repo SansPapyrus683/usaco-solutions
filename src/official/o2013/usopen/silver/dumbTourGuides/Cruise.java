@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2013 usopen silver
-public class Cruise {
+public final class Cruise {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("cruise.in"));

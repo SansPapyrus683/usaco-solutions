@@ -6,7 +6,7 @@ import java.util.*;
 import static java.lang.Math.max;
 
 // 2019 feb gold (i spent an entire day debugging the array indices on this oh my fricking god)
-public class PaintBarn {
+public final class PaintBarn {
     private static final int BARN_WIDTH = 200;
     public static void main(String[] args) throws IOException {
         long timeStart = System.currentTimeMillis();

@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2019 jan bronze
-public class Sleepy {
+public final class Sleepy {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("sleepy.in"));

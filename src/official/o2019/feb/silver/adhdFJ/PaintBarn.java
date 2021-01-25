@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2019 feb silver
-public class PaintBarn {
+public final class PaintBarn {
     private static final int BARN_WIDTH = 1000;
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();

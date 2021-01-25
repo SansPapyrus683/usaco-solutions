@@ -8,7 +8,7 @@ import java.io.*;
 import java.util.Arrays;
 import java.util.stream.Stream;
 
-public class JustRight {
+public final class JustRight {
     private static final int FEED_NUM = 3;
     private static final int NUTRIENT_NUM = 3;
     private static final int MAX_RATIO = 100;

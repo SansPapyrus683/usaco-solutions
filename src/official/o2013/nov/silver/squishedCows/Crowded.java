@@ -4,8 +4,8 @@ import java.util.*;
 import java.io.*;
 
 // 2013 dec silver (just used a segment tree and binary search to absolutely cheese this problem)
-public class Crowded {
-    private static class MaxSegTree {
+public final class Crowded {
+    private static final class MaxSegTree {
         private final int[] segtree;
         private final int arrSize;
         private final int size;

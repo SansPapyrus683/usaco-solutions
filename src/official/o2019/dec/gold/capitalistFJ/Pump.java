@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2019 dec gold
-public class Pump {
+public final class Pump {
     private static final int INVALID = 420696969;
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();

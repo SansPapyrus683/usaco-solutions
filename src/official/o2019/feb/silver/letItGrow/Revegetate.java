@@ -4,7 +4,7 @@ import java.util.*;
 import java.io.*;
 
 // 2019 february silver
-public class Revegetate {
+public final class Revegetate {
     private static final int INVALID = 420696969;
     static ArrayList<int[]>[] specifications;  // 1/13/2021- oh i was such a fool, using static variable like this...
     static int[] hypothetical;

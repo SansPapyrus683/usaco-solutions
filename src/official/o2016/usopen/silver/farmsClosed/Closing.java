@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2016 usopen silver (this solution sometimes times out, sometimes it doesn't, depends on your luck)
-public class Closing {
+public final class Closing {
     static boolean[] visited;  // most definitely bad practice, but it probably (?) makes it faster
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();

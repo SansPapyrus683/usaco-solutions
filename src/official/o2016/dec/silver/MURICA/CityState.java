@@ -7,8 +7,8 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 
 // 2016 dec silver
-public class CityState {
-    private static class Pair<T1, T2> {  // maybe i could ask usaco for apache commons?
+public final class CityState {
+    private static final class Pair<T1, T2> {  // maybe i could ask usaco for apache commons?
         public T1 first;
         public T2 second;
 
@@ -57,6 +57,6 @@ public class CityState {
         written.println(reversedPairs);
         written.close();
         System.out.println(reversedPairs);
-        System.out.printf("your code took %d ms. ᵇᵉᵉᵖ ᵇᵒᵒᵖ ᶦ'ᵐ ᵃ ᵇᵒᵗ%n", System.currentTimeMillis() - start);
+        System.out.printf("your code took %d ms. (beep boop i'm a bot)%n", System.currentTimeMillis() - start);
     }
 }

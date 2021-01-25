@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2015 us open silver
-public class BGM {
+public final class BGM {
     private static final int MOD = 7;
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();

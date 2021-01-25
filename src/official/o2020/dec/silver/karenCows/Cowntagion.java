@@ -10,7 +10,7 @@ import java.util.*;
  * 1 3
  * 1 4 should output 5
  */
-public class Cowntagion {
+public final class Cowntagion {
     public static void main(String[] args) throws IOException {
         BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
         int farmNum  = Integer.parseInt(read.readLine());

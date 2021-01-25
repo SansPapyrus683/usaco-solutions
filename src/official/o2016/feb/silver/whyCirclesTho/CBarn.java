@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2016 feb silver (works for gold too lol)
-public class CBarn {
+public final class CBarn {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("cbarn.in"));

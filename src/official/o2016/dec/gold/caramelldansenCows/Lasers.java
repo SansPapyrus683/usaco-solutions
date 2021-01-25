@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2016 dec gold
-public class Lasers {
+public final class Lasers {
     // 0 means that the beam is coming from left or right, and 1 means it's coming from up or down
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
@@ -81,7 +81,7 @@ public class Lasers {
     }
 }
 
-class LaserState {
+final class LaserState {
     public int x;
     public int y;
     public int dir;

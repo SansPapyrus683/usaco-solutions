@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 import java.util.stream.Stream;
 
-public class SocDist {
+public final class SocDist {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("socdist.in"));

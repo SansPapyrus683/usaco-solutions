@@ -14,7 +14,7 @@ import java.util.StringTokenizer;
  * so you end up with a sort of tree with the root being the sum of the entire array. then the two children have the sum
  * of the left and right half respectively, and so on and so forth until you just get the array elements<br>
  */
-public class SumSegmentTree {
+public final class SumSegmentTree {
     private final int[] segtree;
     private final int arrSize;
     private final int size;

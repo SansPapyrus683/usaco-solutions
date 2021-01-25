@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2016 jan silver (the premise of this problem is the most questionable one so far)
-public class Div7 {
+public final class Div7 {
     private static final int MOD = 7;
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();

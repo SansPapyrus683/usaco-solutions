@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2019 jan gold (i'd use biginteger but it makes the calculations too slow)
-public class Poetry {
+public final class Poetry {
     private static final long MOD = (long) Math.pow(10, 9) + 7;
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
@@ -47,7 +47,7 @@ public class Poetry {
             }
         }
 
-        // contains the number of ways to make a line end with a certain rhyme class
+        // contains the number of ways to make a line end with a certain rhyme final class
         long[] rhymeAmts = new long[rhymeClasses.size()];
         int ind = 0;
         for (ArrayList<Integer> similar : rhymeClasses.values()) {

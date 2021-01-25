@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 import java.util.stream.Stream;
 
-public class LightsOn {
+public final class LightsOn {
     static int barnSide;
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
@@ -45,7 +45,7 @@ public class LightsOn {
                 }
             }
 
-            for (int[] n : neighbors(current)) {  // classic grid bfs
+            for (int[] n : neighbors(current)) {  // final classic grid bfs
                 if (lit[n[0]][n[1]] && !visited[n[0]][n[1]]) {
                     frontier.add(n);
                     visited[n[0]][n[1]] = true;

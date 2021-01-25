@@ -8,7 +8,7 @@ import java.util.*;
  * so idk why but the time limit for this problem is 2 seconds
  * so it's too slow for test case 9 but good enough lol
  */
-public class SkiTime {
+public final class SkiTime {
     static int width, length;
     static int[][] hills;
     static int checkpointNum = 0;

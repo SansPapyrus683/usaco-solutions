@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2019 feb bronze (i'm lazy so i just copied right from silver and just changed the input/output stuff)
-public class Herding {
+public final class Herding {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("herding.in"));

@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2015 jan silver
-public class Meeting {
+public final class Meeting {
     static ArrayList<Integer>[] neighbors;
 
     public static void main(String[] args) throws IOException {

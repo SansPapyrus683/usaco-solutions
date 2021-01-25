@@ -4,8 +4,8 @@ import java.io.*;
 import java.util.*;
 
 // 2019 jan silver
-public class Perimeter {
-    private static class Blob {
+public final class Perimeter {
+    private static final class Blob {
         private final int[] rChange = new int[] {1, -1, 0, 0};
         private final int[] cChange = new int[] {0, 0, 1, -1};
 

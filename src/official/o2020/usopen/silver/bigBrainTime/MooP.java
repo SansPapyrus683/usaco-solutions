@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2020 usopen silver (copied lol)
-public class MooP {
+public final class MooP {
     public static void main(String[] args) throws IOException {
         long timeStart = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("moop.in"));

@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2013 jan bronze (basically copied from silver lol)
-public class Paint {
+public final class Paint {
     private static final int PAINT_REQ = 2;
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();

@@ -4,7 +4,7 @@ import java.util.*;
 import java.io.*;
 
 // 2018 jan silver
-public class MooTube {
+public final class MooTube {
     static int vidNum;
     static ArrayList<int[]>[] neighbors;
 

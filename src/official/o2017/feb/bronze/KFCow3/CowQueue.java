@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2017 feb bronze
-public class CowQueue {
+public final class CowQueue {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("cowqueue.in"));

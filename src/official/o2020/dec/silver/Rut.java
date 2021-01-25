@@ -13,7 +13,7 @@ import java.util.*;
  * N 11 1
  * E 9 2 should output 0, 0, 1, 2, 1, and 0, each on a newline
  */
-public class Rut {
+public final class Rut {
     public static void main(String[] args) throws IOException {
         BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
         int cowNum = Integer.parseInt(read.readLine());

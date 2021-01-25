@@ -11,7 +11,7 @@ import java.util.*;
  * 2 3
  * 2 4 should output 4, 4, 3, 4, and 1, each on a newline
  */
-public class Groovy {
+public final class Groovy {
     public static void main(String[] args) throws IOException {
         BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer initial = new StringTokenizer(read.readLine());

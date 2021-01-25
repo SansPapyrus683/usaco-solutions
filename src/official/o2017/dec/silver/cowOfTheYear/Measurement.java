@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2017 dec silver
-public class Measurement {
+public final class Measurement {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("measurement.in"));

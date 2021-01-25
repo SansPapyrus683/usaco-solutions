@@ -8,7 +8,7 @@ TASK: game1
 import java.io.*;
 import java.util.*;
 
-public class Numbergasms {
+public final class Numbergasms {
     private static int[][] cachedFromTos;
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();

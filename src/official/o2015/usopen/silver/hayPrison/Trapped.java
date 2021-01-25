@@ -5,8 +5,8 @@ import java.util.*;
 import java.util.stream.Stream;
 
 // 2015 us open silver (solution shamelessly copied)
-public class Trapped {
-    private static class Bale {  // makes reading the code much more easier
+public final class Trapped {
+    private static final class Bale {  // makes reading the code much more easier
         int size;
         int pos;
         public Bale(int size, int pos) {

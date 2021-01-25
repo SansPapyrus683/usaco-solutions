@@ -8,7 +8,7 @@ TASK: range
 import java.io.*;
 
 // pretty much a direct java translation
-public class WestVirginia {
+public final class WestVirginia {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("range.in"));

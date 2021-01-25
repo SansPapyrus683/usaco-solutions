@@ -5,8 +5,8 @@ import java.io.*;
 
 // 2020 jan silver
 // 1/6/2021 - i was young and innocent when i wrote this code, so it's full of bad practices
-public class Wormsort {
-    private static class DisjointSets {
+public final class Wormsort {
+    private static final class DisjointSets {
         private final int[] parents;
         private final int[] sizes;
         public DisjointSets(int size) {

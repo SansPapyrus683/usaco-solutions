@@ -3,7 +3,7 @@ package official.o2019.dec.gold.FATALITY;
 import java.io.*;
 import java.util.*;
 
-public class Cowmbat {
+public final class Cowmbat {
     private static final int INVALID = 420696969;
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();

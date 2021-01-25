@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2019 usopen gold
-public class Walk {
+public final class Walk {
     private static final long FIRST = 2019201913;
     private static final long SECOND = 2019201949;
     private static final long MOD = 2019201997;

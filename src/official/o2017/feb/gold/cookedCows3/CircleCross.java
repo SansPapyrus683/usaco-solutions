@@ -5,7 +5,7 @@ import java.util.*;
 
 // 2017 feb gold
 // for naming, i'm going to assume the first occurrence as the entrance and the second occurrence as the exit
-public class CircleCross {
+public final class CircleCross {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("circlecross.in"));
@@ -44,7 +44,7 @@ public class CircleCross {
 }
 
 // this one is actually copied from https://www.geeksforgeeks.org/queries-number-distinct-elements-subarray/?ref=rp
-class BITree {
+final class BITree {
     private final int[] treeThing;
     private final int size;
 

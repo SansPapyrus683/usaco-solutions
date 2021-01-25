@@ -8,7 +8,7 @@ import java.io.*;
 import java.util.*;
 import java.util.stream.Stream;
 
-public class Stamps {
+public final class Stamps {
     private static final int INVALID = 420696969;  // stupid integer overflow
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();

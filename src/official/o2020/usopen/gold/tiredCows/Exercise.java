@@ -16,7 +16,7 @@ import java.util.*;
  * also this is slow mostly bc of the bigintegers
  * if you want like super speed, just switch to longs and do everything mod the mod idk
  */
-public class Exercise {
+public final class Exercise {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         StringTokenizer initial = new StringTokenizer(new BufferedReader(new FileReader("exercise.in")).readLine());

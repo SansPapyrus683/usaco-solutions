@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2019 usopen silver (my initial solution for this exploited the test data, so)
-public class CowJump {
+public final class CowJump {
     private static int xAt;
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
@@ -88,8 +88,8 @@ public class CowJump {
         System.out.printf("%d ms is an ok time? you could've done better lol%n", System.currentTimeMillis() - start);
     }
 
-    // equality for these 2 classes aren't based on their actual info, but id numbers they're given
-    private static class IDPoint {
+    // equality for these 2 final classes aren't based on their actual info, but id numbers they're given
+    private static final class IDPoint {
         public int x;
         public int y;
         public int id = 0;
@@ -115,7 +115,7 @@ public class CowJump {
         }
     }
 
-    private static class IDSeg {
+    private static final class IDSeg {
         public IDPoint start;
         public IDPoint end;
         public int id = 0;

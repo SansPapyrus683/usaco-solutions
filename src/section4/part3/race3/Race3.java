@@ -9,7 +9,7 @@ package section4.part3.race3;
 import java.io.*;
 import java.util.*;
 
-public class Race3 {
+public final class Race3 {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("race3.in"));
@@ -61,7 +61,7 @@ public class Race3 {
     }
 }
 
-class RaceTrack {
+final class RaceTrack {
     private final ArrayList<int[]> neighbors;
     private final HashSet<Integer> allPoints;
     public RaceTrack(ArrayList<int[]> neighbors) {

@@ -5,9 +5,9 @@ import java.util.*;
 import java.util.stream.Stream;
 
 // 2016 usopen gold
-public class Split {
+public final class Split {
     private static // copied from: https://cp-algorithms.com/data_structures/stack_queue_modification.html
-    class MinMaxStack {
+    final class MinMaxStack {
         private final Stack<int[]> stack = new Stack<>();
         public void add(int toAdd) {
             if (stack.isEmpty()) {

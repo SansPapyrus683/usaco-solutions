@@ -11,7 +11,7 @@ import java.util.*;
  * 2 3
  * 3 5 should output 13
  */
-public class RPasture {
+public final class RPasture {
     public static void main(String[] args) throws IOException {
         BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
         int cowNum = Integer.parseInt(read.readLine());

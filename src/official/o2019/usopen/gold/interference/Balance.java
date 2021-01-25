@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2019 usopen gold
-public class Balance {
+public final class Balance {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("balance.in"));

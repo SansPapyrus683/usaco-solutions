@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2015 dec gold
-public class Feast {
+public final class Feast {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("feast.in"));

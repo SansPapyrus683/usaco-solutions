@@ -10,7 +10,7 @@ import java.util.*;
  * 3 6
  * 1 4 should output 4 and 3, each on a newline
  */
-public class NoTime {
+public final class NoTime {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new InputStreamReader(System.in));

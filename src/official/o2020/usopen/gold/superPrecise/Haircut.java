@@ -5,11 +5,11 @@ import java.util.*;
 
 // 2020 usopen gold
 // answer all the inversions number from 0 all the way to hairNum - 1
-public class Haircut {
+public final class Haircut {
     /**
      * see {@link utils.BinaryIndexedTree} if you want an explanation for how this works
      */
-    private static class BITree {
+    private static final class BITree {
         private final long[] treeThing;
         private final int size;
 

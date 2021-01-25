@@ -5,11 +5,11 @@ import java.util.*;
 import java.util.stream.Stream;
 
 // an alternate implementation with arrays (a bit faster- maybe like 10 to 20%)
-public class ArrayTime {
+public final class ArrayTime {
     private static final int MOD = (int) Math.pow(10, 9) + 7;
     private static final int LEN = (int) Math.pow(10, 4);
 
-    private static class Pair {
+    private static final class Pair {
         public long first;
         public long second;
         public Pair(long first, long second) {

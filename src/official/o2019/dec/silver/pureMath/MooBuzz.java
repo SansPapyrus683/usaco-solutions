@@ -3,7 +3,7 @@ package official.o2019.dec.silver.pureMath;
 import java.io.*;
 
 // 2019 dec silver (i swear this problem is just pure math)
-public class MooBuzz {
+public final class MooBuzz {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         int toFind = Integer.parseInt(new BufferedReader(new FileReader("moobuzz.in")).readLine());

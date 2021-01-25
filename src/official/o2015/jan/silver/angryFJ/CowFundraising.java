@@ -5,8 +5,8 @@ import java.io.*;
 
 // 2015 jan silver
 // for some reason with i name it Stampede.java intellij seizure salds
-public class CowFundraising {
-    private static class Cow {
+public final class CowFundraising {
+    private static final class Cow {
         public int speed;
         public int x;
         public int y;
