@@ -41,8 +41,8 @@ public final class SpacedOut {
         int total = 0;
         for (int c = 0; c < alternating[0].length; c++) {
             int colMax = 0;
-            for (int r = 0; r < alternating.length; r++) {
-                colMax = Math.max(colMax, alternating[r][c]);
+            for (int[] ints : alternating) {
+                colMax = Math.max(colMax, ints[c]);
             }
             total += colMax;
         }

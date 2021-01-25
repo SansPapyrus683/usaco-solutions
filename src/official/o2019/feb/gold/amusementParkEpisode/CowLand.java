@@ -116,67 +116,49 @@ public final class CowLand {
         }
     }
 
-    // i coulda just used a binary indexed tree but oh well
-    private static final class XORSegTree {
-        private final int[] segtree;
-        private final int arrSize;
+    /**
+     * see {@link utils.BinaryIndexedTree} for the explanation ok bye
+     */
+    private static final class XORBIT {
+        private final int[] treeThing;
+        private final int[] actualArr;
         private final int size;
-
-        public XORSegTree(int len) {  // constructs the thing kinda like an array
-            int size = 1;
-            while (size < len) {
-                size *= 2;
-            }
+        public XORBIT(int size) {
+            treeThing = new int[size + 1];  // to make stuff easier we'll just make it 1-indexed
+            actualArr = new int[size];
             this.size = size;
-            arrSize = len;
-            segtree = new int[size * 2];  // we won't necessarily use all of the element but that doesn't really matter
         }
 
-        public void set(int index, int element) {
-            if (index < 0 || index > arrSize) {
-                throw new IllegalArgumentException(String.format("%s should be out of bounds lol", index));
-            }
-            set(index, element, 0, 0, size);
+        public int get(int ind) {
+            return actualArr[ind];
         }
 
-        private void set(int index, int element, int currNode, int left, int right) {
-            if (right - left == 1) {
-                segtree[currNode] = element;
-            } else {
-                int mid = (left + right) / 2;
-                if (index < mid) {
-                    set(index, element, 2 * currNode + 1, left, mid);
-                } else {
-                    set(index, element, 2 * currNode + 2, mid, right);
-                }
-                segtree[currNode] = segtree[2 * currNode + 1] ^ segtree[2 * currNode + 2];
+        public void set(int ind, int val) {
+            increment(ind, actualArr[ind] ^ val);
+        }
+
+        public void increment(int ind, int val) {
+            actualArr[ind] ^= val;
+            ind++;  // have the driver code not worry about 1-indexing
+            // that bitwise thing returns the greatest power of two that's less than i
+            for (; ind <= size; ind += ind & -ind) {
+                treeThing[ind] ^= val;
             }
         }
 
-        // for this one, from and to follow "normal" slicing rules - left bound is inclusive, right bound isn't
-        public int xor(int from, int to) {
-            if (from < 0 || to > arrSize) {
-                throw new IllegalArgumentException(String.format("the bounds %s and %s are out of bounds i think", from, to));
+        public int xor(int ind) {  // the bound is inclusive i think (returns sum of everything from 0 to ind)
+            ind++;
+            int sum = 0;
+            for (; ind > 0; ind -= ind & -ind) {
+                sum ^= treeThing[ind];
             }
-            return xor(from, to, 0, 0, size);
-        }
-
-        private int xor(int from, int to, int currNode, int left, int right) {
-            if (right <= from || to <= left) {  // oof, out of bounds, so the sum is definitely 0
-                return 0;
-            }
-            if (from <= left && right <= to) {
-                return segtree[currNode];
-            }
-            int middle = (left + right) / 2;
-            int leftPartSum = xor(from, to, 2 * currNode + 1, left, middle);
-            int rightPartSum = xor(from, to, 2 * currNode + 2, middle, right);
-            return leftPartSum ^ rightPartSum;
+            return sum;
         }
     }
 
+
     private static final class AmusementPark {
-        private final ArrayList<Integer>[] neighbors;
+        private final List<Integer>[] neighbors;
         private final ArrayList<Integer> eulerTour = new ArrayList<>();
         private final int[] firstOcc;
         private final int[] lastOcc;
@@ -185,9 +167,9 @@ public final class CowLand {
         private final int nodes;
 
         private final MinSegTree LCATree;
-        private final XORSegTree queryTree;
+        private final XORBIT queryTree;
 
-        public AmusementPark(ArrayList<Integer>[] neighbors, int[] respectiveVals) {
+        public AmusementPark(List<Integer>[] neighbors, int[] respectiveVals) {
             this.neighbors = neighbors;
             enjoyment = respectiveVals.clone();
             nodes = neighbors.length;
@@ -204,7 +186,8 @@ public final class CowLand {
                     seen[n] = true;
                 }
             }
-            queryTree = new XORSegTree(eulerTour.size());
+
+            queryTree = new XORBIT(eulerTour.size());
             for (int n = 0; n < nodes; n++) {
                 queryTree.set(firstOcc[n], enjoyment[n]);
                 queryTree.set(lastOcc[n], enjoyment[n]);
@@ -213,7 +196,7 @@ public final class CowLand {
         }
 
         public int query(int n1, int n2) {
-            return queryTree.xor(0, firstOcc[n1] + 1) ^ queryTree.xor(0, firstOcc[n2] + 1) ^ enjoyment[LCA(n1, n2)];
+            return queryTree.xor(firstOcc[n1]) ^ queryTree.xor(firstOcc[n2]) ^ enjoyment[LCA(n1, n2)];
         }
 
         public void set(int node, int val) {
@@ -226,9 +209,7 @@ public final class CowLand {
             int p1 = firstOcc[n1];
             int p2 = firstOcc[n2];
             if (p1 > p2) {  // see which one occurs first because of the minimum thing
-                int temp = p1;
-                p1 = p2;
-                p2 = temp;
+                return LCA(n2, n1);
             }
             return LCATree.min(p1, p2 + 1);  // + 1 because of the bounds of min()
         }
