@@ -51,7 +51,7 @@ public final class Groovy {
                 state[0] = swapWith[state[0]].get(state[1])[1];
 
                 int newMoveInd = bisectLeft(swapWith[state[0]], state[2] + 1, 0);
-                newMoveInd = newMoveInd == swapWith[state[0]].size() ? 0 : newMoveInd;
+                newMoveInd = newMoveInd == swapWith[state[0]].size() ? 0 : newMoveInd;  // wrap the index around
                 state[1] = newMoveInd;
                 state[2] = swapWith[state[0]].get(state[1])[0];
                 uniquePos[c].add(state[0]);

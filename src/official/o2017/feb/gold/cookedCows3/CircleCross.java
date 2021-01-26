@@ -6,6 +6,30 @@ import java.util.*;
 // 2017 feb gold
 // for naming, i'm going to assume the first occurrence as the entrance and the second occurrence as the exit
 public final class CircleCross {
+    // this one is actually copied from https://www.geeksforgeeks.org/queries-number-distinct-elements-subarray/?ref=rp
+    private static final class BITree {
+        private final int[] treeThing;
+        private final int size;
+        public BITree(int size) {
+            treeThing = new int[size + 1];  // so apparently binary trees have to be 1-indexed
+            this.size = size;
+        }
+
+        public void increment(int updateAt, int val) {
+            for (; updateAt <= size; updateAt += updateAt & -updateAt) {
+                treeThing[updateAt] += val;
+            }
+        }
+
+        public int query(int ind) {
+            int sum = 0;
+            for (; ind > 0; ind -= ind & -ind) {
+                sum += treeThing[ind];
+            }
+            return sum;
+        }
+    }
+
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("circlecross.in"));
@@ -40,30 +64,5 @@ public final class CircleCross {
         written.close();
         System.out.println(crossed);
         System.out.printf("now listen up here's a story about some random code that ran for %d ms%n", System.currentTimeMillis() - start);
-    }
-}
-
-// this one is actually copied from https://www.geeksforgeeks.org/queries-number-distinct-elements-subarray/?ref=rp
-final class BITree {
-    private final int[] treeThing;
-    private final int size;
-
-    public BITree(int size) {
-        treeThing = new int[size + 1];  // so apparently binary trees have to be 1-indexed
-        this.size = size;
-    }
-
-    public void increment(int updateAt, int val) {
-        for (; updateAt <= size; updateAt += updateAt & -updateAt) {
-            treeThing[updateAt] += val;
-        }
-    }
-
-    public int query(int ind) {
-        int sum = 0;
-        for (; ind > 0; ind -= ind & -ind) {
-            sum += treeThing[ind];
-        }
-        return sum;
     }
 }

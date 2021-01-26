@@ -3,7 +3,7 @@ package official.o2019.feb.gold.amusementParkEpisode;
 import java.util.*;
 import java.io.*;
 
-// 2019 feb gold (this one works by PURE CHANCE- sometimes it works, sometimes it doesn't so yeah lol)
+// 2019 feb gold
 public final class CowLand {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
@@ -21,8 +21,9 @@ public final class CowLand {
             neighbors[route[0]].add(route[1]);
             neighbors[route[1]].add(route[0]);
         }
+
         AmusementPark park = new AmusementPark(neighbors, initialVals);
-        PrintWriter written = new PrintWriter("cowland.out");
+        StringBuilder enjoyment = new StringBuilder();  // so io becomes faster
         for (int q = 0; q < queryNum; q++) {
             int[] query = Arrays.stream(read.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
             switch (query[0]) {
@@ -31,14 +32,16 @@ public final class CowLand {
                     break;
                 case 2:
                     int happiness = park.query(query[1] - 1, query[2] - 1);
-                    // System.out.println(happiness);  // <- adding this makes the thing too slow lol
-                    written.println(happiness);
+                    enjoyment.append(happiness).append('\n');
                     break;
                 default:
                     throw new IllegalArgumentException("what kind of query is " + Arrays.toString(query) + " lol");
             }
         }
+        PrintWriter written = new PrintWriter("cowland.out");
+        written.print(enjoyment);
         written.close();
+        System.out.print(enjoyment);
         System.out.printf("WOOOOOASDPOFIJASDFIOJASPODI it took %d ms%n", System.currentTimeMillis() - start);
     }
 

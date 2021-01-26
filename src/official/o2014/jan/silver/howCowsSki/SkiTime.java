@@ -9,11 +9,11 @@ import java.util.*;
  * so it's too slow for test case 9 but good enough lol
  */
 public final class SkiTime {
-    static int width, length;
-    static int[][] hills;
-    static int checkpointNum = 0;
-    static boolean[][] checkpoints;
-    static int[] randomCheckpoint;
+    private static int width, length;
+    private static int[][] hills;
+    private static int checkpointNum = 0;
+    private static boolean[][] checkpoints;
+    private static int[] randomCheckpoint;
 
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
@@ -90,20 +90,20 @@ public final class SkiTime {
              * (anyways this tries all the possible neighbors and checks if they're valid)
              */
             int currElevation = hills[y][x];
-            if (x + 1 < length && Math.abs(currElevation - hills[y][x+1]) <= diff && !visited[y][x+1]) {
-                visited[y][x+1] = true;
+            if (x + 1 < length && Math.abs(currElevation - hills[y][x + 1]) <= diff && !visited[y][x + 1]) {
+                visited[y][x + 1] = true;
                 frontier.add(new int[] {y, x + 1});
             }
-            if (x - 1 >= 0 && Math.abs(currElevation - hills[y][x-1]) <= diff && !visited[y][x-1]) {
-                visited[y][x-1] = true;
+            if (x - 1 >= 0 && Math.abs(currElevation - hills[y][x - 1]) <= diff && !visited[y][x - 1]) {
+                visited[y][x - 1] = true;
                 frontier.add(new int[] {y, x - 1});
             }
-            if (y + 1 < width && Math.abs(currElevation - hills[y+1][x]) <= diff && !visited[y+1][x]) {
-                visited[y+1][x] = true;
+            if (y + 1 < width && Math.abs(currElevation - hills[y + 1][x]) <= diff && !visited[y + 1][x]) {
+                visited[y + 1][x] = true;
                 frontier.add(new int[] {y + 1, x});
             }
-            if (y - 1 >= 0 && Math.abs(currElevation - hills[y-1][x]) <= diff && !visited[y-1][x]) {
-                visited[y-1][x] = true;
+            if (y - 1 >= 0 && Math.abs(currElevation - hills[y - 1][x]) <= diff && !visited[y - 1][x]) {
+                visited[y - 1][x] = true;
                 frontier.add(new int[] {y - 1, x});
             }
         }
