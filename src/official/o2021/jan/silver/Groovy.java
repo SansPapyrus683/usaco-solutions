@@ -46,6 +46,7 @@ public final class Groovy {
                 continue;
             }
             int[] state = new int[] {c, 0, swapWith[c].get(0)[0]};
+            // i have noticed that cows will always cycle back to their original position
             while (seenBefore[state[0]][state[1]] == -1) {
                 seenBefore[state[0]][state[1]] = c;
                 state[0] = swapWith[state[0]].get(state[1])[1];

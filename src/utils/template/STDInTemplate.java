@@ -10,6 +10,6 @@ public final class STDInTemplate {
         BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("whaddya want me to say? ");
         System.out.println(read.readLine());
-        System.out.printf("this code that took %d ms is absolutely pointless lol%n", System.currentTimeMillis() - start);
+        System.err.printf("this code that took %d ms is absolutely pointless lol%n", System.currentTimeMillis() - start);
     }
 }
