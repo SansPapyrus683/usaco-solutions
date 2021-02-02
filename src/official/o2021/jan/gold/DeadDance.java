@@ -15,7 +15,7 @@ public final class DeadDance {
     /**
      * see {@link utils.BinaryIndexedTree} for a crap explanation
      */
-    private static final class BITree {
+    private static class BITree {
         private final int[] treeThing;
         private final int size;
         public BITree(int size) {

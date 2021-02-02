@@ -3,7 +3,7 @@ package official.o2016.jan.gold.madAndGolden;
 import java.io.*;
 import java.util.*;
 
-// 2016 jan gold
+// 2016 jan gold (this is really horrid but it works lol)
 public final class GoldenFury {
     private static final int MAX = 420696969;
     public static void main(String[] args) throws IOException {
@@ -67,6 +67,7 @@ public final class GoldenFury {
             while (endIndex + 1 < haybales.length && haybales[endIndex + 1] - haybales[explosionStart] <= 2 * power) {
                 endIndex++;
             }
+            // if this can explode everything to the left and to the right
             if (leftPowers[explosionStart] <= power - 1 && rightPowers[endIndex] <= power - 1) {
                 return true;
             }
