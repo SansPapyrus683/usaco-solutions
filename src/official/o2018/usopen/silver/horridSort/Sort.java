@@ -7,7 +7,7 @@ import java.util.*;
 public final class Sort {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
-        BufferedReader read = new BufferedReader(new FileReader("sort.in"));
+        BufferedReader read = new BufferedReader(new FileReader("milkorder.in"));
         int[][] unsorted = new int[Integer.parseInt(read.readLine())][2];
         for (int i = 0; i < unsorted.length; i++) {
             unsorted[i] = new int[] {Integer.parseInt(read.readLine()), i};  // actual val, and their unsorted pos
