@@ -78,7 +78,7 @@ public final class Tree {
         inOutTour = genInOutTour();
         TourInfo eulerTour = genEulerTour();
         LCATree = new CompSegmentTree(eulerTour.toured.stream().mapToInt(i -> i).toArray(),
-                CompSegmentTree.OpType.MIN, Comparator.comparingInt(n -> eulerTour.height[n]));
+                Comparator.comparingInt(n -> eulerTour.height[n]));
     }
 
     public int LCA(int n1, int n2) {  // basically copied from https://cp-algorithms.com/graph/lca.html

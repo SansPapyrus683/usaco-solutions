@@ -18,6 +18,7 @@ with open('hoesMad.txt') as read:
         else:
             width, height = [int(i)*2 for i in line.rstrip().split()]
 
+
 def findNeighbors(pt: tuple) -> set:
     possibleNeighbors = {
         (pt[0] - 1, pt[1]),
@@ -27,7 +28,7 @@ def findNeighbors(pt: tuple) -> set:
     }
     return possibleNeighbors.intersection(points)
 
-print(points)
+
 frontier = []  # called frontier because that's what we'll expand from
 for p in points:
     for n in findNeighbors(p):
@@ -55,4 +56,4 @@ while frontier:
     expansionCount += 1
 
 with open('outputs.txt', 'w') as written:
-    written.write(str((expansionCount + 1)//2) + '\n')
+    written.write(str((expansionCount + 1) // 2) + '\n')

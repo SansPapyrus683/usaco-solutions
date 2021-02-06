@@ -9,41 +9,34 @@ import java.util.Comparator;
  * except for this one it returns the min or max of a range (updates are still a thing, don't worry)
  */
 public final class CompSegmentTree {
-    public enum OpType {  // dk if this is a best practice but i don't wanna have two really similar final classes
-        MIN,
-        MAX
-    }
-
     private final int[] segtree;
     private final int arrSize;
     private final int size;
-    private final OpType op;
     private final Comparator<Integer> cmp;
-    public CompSegmentTree(int len, OpType op, Comparator<Integer> cmp) {  // constructs the thing kinda like an array
+    public CompSegmentTree(int len, Comparator<Integer> cmp) {  // constructs the thing kinda like an array
         int size = 1;
         while (size < len) {
             size *= 2;
         }
         this.size = size;
-        this.op = op;
         this.cmp = cmp;
         arrSize = len;
         segtree = new int[size * 2];  // we won't necessarily use all of the element but that doesn't really matter
     }
 
-    public CompSegmentTree(int[] arr, OpType op, Comparator<Integer> cmp) {  // constructs the thing with initial elements as well
-        this(arr.length, op, cmp);
+    public CompSegmentTree(int[] arr, Comparator<Integer> cmp) {  // constructs the thing with initial elements as well
+        this(arr.length, cmp);
         for (int i = 0; i < arr.length; i++) {
             set(i, arr[i]);
         }
     }
 
-    public CompSegmentTree(int[] arr, OpType op) {
-        this(arr, op, Comparator.naturalOrder());
+    public CompSegmentTree(int[] arr) {
+        this(arr, Comparator.naturalOrder());
     }
 
-    public CompSegmentTree(int len, OpType op) {
-        this(len, op, Comparator.naturalOrder());
+    public CompSegmentTree(int len) {
+        this(len, Comparator.naturalOrder());
     }
 
     public void set(int index, int element) {
@@ -63,16 +56,7 @@ public final class CompSegmentTree {
             } else {
                 set(index, element, 2 * currNode + 2, mid, right);
             }
-            switch (op) {
-                case MIN:
-                    segtree[currNode] = min(segtree[2 * currNode + 1], segtree[2 * currNode + 2]);
-                    break;
-                case MAX:
-                    segtree[currNode] = max(segtree[2 * currNode + 1], segtree[2 * currNode + 2]);
-                    break;
-                default:
-                    throw new RuntimeException("wait how did this even happen lmao");
-            }
+            segtree[currNode] = min(segtree[2 * currNode + 1], segtree[2 * currNode + 2]);
         }
     }
 
@@ -88,7 +72,7 @@ public final class CompSegmentTree {
 
     private int calc(int from, int to, int currNode, int left, int right) {
         if (right <= from || to <= left) {
-            return op == OpType.MIN ? Integer.MAX_VALUE : Integer.MIN_VALUE;
+            return Integer.MIN_VALUE;
         }
         if (from <= left && right <= to) {
             return segtree[currNode];
@@ -96,14 +80,7 @@ public final class CompSegmentTree {
         int middle = (left + right) / 2;
         int leftPart = calc(from, to, 2 * currNode + 1, left, middle);
         int rightPart = calc(from, to, 2 * currNode + 2, middle, right);
-        switch (op) {
-            case MIN:
-                return min(leftPart, rightPart);
-            case MAX:
-                return max(leftPart, rightPart);
-            default:
-                throw new RuntimeException("wait how did this even happen lmao");
-        }
+        return min(leftPart, rightPart);
     }
 
     private int min(int x, int y) {
@@ -113,14 +90,5 @@ public final class CompSegmentTree {
             return x;
         }
         return Collections.min(Arrays.asList(x, y), cmp);
-    }
-
-    private int max(int x, int y) {
-        if (x == Integer.MIN_VALUE) {
-            return y;
-        } else if (y == Integer.MIN_VALUE) {
-            return x;
-        }
-        return Collections.max(Arrays.asList(x, y), cmp);
     }
 }
