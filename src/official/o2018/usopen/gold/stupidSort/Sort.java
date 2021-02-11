@@ -43,14 +43,13 @@ public class Sort {
             arr[i][0] = Integer.parseInt(read.readLine());
             arr[i][1] = i;
         }
-        int[][] sortedArr = arr.clone();  // no need for deepcopy
-        Arrays.sort(sortedArr, Comparator.comparingInt(i -> i[0]));
+        Arrays.sort(arr, Comparator.comparingInt(i -> i[0]));
 
         // just go to the official sol here lol: http://usaco.org/current/data/sol_sort_gold_open18.html
         int maxChangedAmt = 0;
         BITree sortedSeen = new BITree(arr.length);
         for (int i = 0; i < arr.length; i++) {
-            sortedSeen.increment(sortedArr[i][1], 1);
+            sortedSeen.increment(arr[i][1], 1);
             maxChangedAmt = Math.max(maxChangedAmt, i - sortedSeen.query(i) + 1);
         }
         int mooTimes = maxChangedAmt == 0 ? 1 : maxChangedAmt;

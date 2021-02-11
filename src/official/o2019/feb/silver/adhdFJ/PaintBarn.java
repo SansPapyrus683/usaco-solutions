@@ -26,13 +26,13 @@ public final class PaintBarn {
 
         int kAreaAmt = 0;
         for (int r = 0; r < BARN_WIDTH; r++) {
-            int currIncrement = 0;
+            int currAmt = 0;
             int[] increments = startEnds[r];
             for (int c = 0; c < BARN_WIDTH; c++) {
-                if (currIncrement == requirement) {
+                if (currAmt == requirement) {
                     kAreaAmt++;
                 }
-                currIncrement += increments[c];
+                currAmt += increments[c];
             }
         }
 
