@@ -3,7 +3,7 @@ package official.o2018.jan.gold.cowSimps;
 import java.io.*;
 import java.util.*;
 
-public class MooTube {
+public final class MooTube {
     /**
      * based on {@link utils.DisjointSets} and there's also a link explaining it
      */

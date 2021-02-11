@@ -11,7 +11,7 @@ import java.util.*;
  * we then use complementary counting and math voodoo to figure the amount of INVALID
  * paintings, then subtract that from the total amt
  */
-public class SPainting {
+public final class SPainting {
     private static final int MOD = (int) Math.pow(10, 9) + 7;
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();

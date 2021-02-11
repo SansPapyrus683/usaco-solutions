@@ -3,7 +3,7 @@ package official.o2018.usopen.gold.stupidSort;
 import java.io.*;
 import java.util.*;
 
-public class Sort {
+public final class Sort {
     /**
      * sauce is over at {@link utils.BinaryIndexedTree} and there's also a bad explanation
      */

@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2018 usopen gold
-public class Talent {
+public final class Talent {
     private static final int INVALID = 420696969;
     private static final int MUL_BY = 1000;
     public static void main(String[] args) throws IOException {
