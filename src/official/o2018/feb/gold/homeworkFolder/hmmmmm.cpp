@@ -77,7 +77,7 @@ class FileSys {
                 }
             }
             long long others_best = min_total_path(root, init_cost);
-            // -file_num because of the trailing /'s
+            // -file_num because of the trailing /'s for each file path
             return std::min(init_cost, others_best) - file_num;
         }
 };
