@@ -61,7 +61,7 @@ public class Cowpatibility {
         for (int i = 0; i < FAVE_NUM; i++) {
             faveSubsets[i] = new HashMap<>();
         }
-        for (int i = 0; i < cowNum; i++) {
+        for (int c = 0; c < cowNum; c++) {
             int[] cow = Arrays.stream(read.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
             if (cow.length != FAVE_NUM) {
                 throw new IllegalArgumentException("blasphemy- each cow should like only 5 ice creams");
