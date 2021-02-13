@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 /**
- * 2021 jan gold (too slow for a single test case, but does that really matter?)
+ * 2021 jan gold
  * 5 4
  * 1 4 2 3 4
  * 1010

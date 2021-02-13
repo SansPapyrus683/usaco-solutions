@@ -10,6 +10,7 @@ import java.util.*;
  * 2 3
  * 3 4
  * 4 5 should output 5, 4, 3, 3, 3, and 1, each on a newline
+ * (jesus christ this solution is convoluted as all hell)
  */
 public final class DeadDance {
     /**

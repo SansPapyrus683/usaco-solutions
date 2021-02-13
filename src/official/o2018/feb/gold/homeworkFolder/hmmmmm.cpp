@@ -36,7 +36,9 @@ class FileSys {
         long long min_total_path(int at, long long at_cost) {
             long long best = 9223372036854775807L;
             for (int f : children[at]) {
+                // we're going to have to add an extra "../" to all the ones that aren't children of our directory
                 long long farther_amt = (file_num - files_contained[f]) * PARENT_LEN;
+                // but we'll also get a bit closer to the files that ARE children
                 long long closer_amt = files_contained[f] * (lengths[f] + 1);
                 long long child_cost = at_cost + farther_amt - closer_amt;
                 best = std::min(best, std::min(child_cost, min_total_path(f, child_cost)));
@@ -72,7 +74,8 @@ class FileSys {
         long long min_total_path() {
             long long init_cost = 0;
             for (int i = 0; i < file_dir_num; i++) {
-                if (i != root) { 
+                if (i != root) {
+                    // the +1 for the length is for the ending '/'
                     init_cost += files_contained[i] * (lengths[i] + 1);
                 }
             }
