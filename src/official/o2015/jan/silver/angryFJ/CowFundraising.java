@@ -1,7 +1,7 @@
 package official.o2015.jan.silver.angryFJ;
 
-import java.util.*;
 import java.io.*;
+import java.util.*;
 
 // 2015 jan silver
 // for some reason with i name it Stampede.java intellij seizure salds

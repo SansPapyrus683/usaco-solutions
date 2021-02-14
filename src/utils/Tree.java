@@ -70,14 +70,14 @@ public final class Tree {
     private final List<Integer>[] neighbors;
     private final int nodes;
     private final TourInfo inOutTour;
-    private final CompSegmentTree LCATree;  // it's in that other file, you should go look at it lol
+    private final MinSegmentTree LCATree;  // it's in that other file, you should go look at it lol
 
     public Tree(List<Integer>[] neighbors) {
         this.neighbors = neighbors;
         nodes = neighbors.length;
         inOutTour = genInOutTour();
         TourInfo eulerTour = genEulerTour();
-        LCATree = new CompSegmentTree(eulerTour.toured.stream().mapToInt(i -> i).toArray(),
+        LCATree = new MinSegmentTree(eulerTour.toured.stream().mapToInt(i -> i).toArray(),
                 Comparator.comparingInt(n -> eulerTour.height[n]));
     }
 
@@ -89,7 +89,7 @@ public final class Tree {
             p1 = p2;
             p2 = temp;
         }
-        return LCATree.calc(p1, p2 + 1);
+        return LCATree.rangeMin(p1, p2 + 1);
     }
 
     // sauce: https://www.geeksforgeeks.org/query-ancestor-descendant-relationship-tree/

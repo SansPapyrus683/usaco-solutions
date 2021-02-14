@@ -1,7 +1,7 @@
 package official.o2013.nov.silver.squishedCows;
 
-import java.util.*;
 import java.io.*;
+import java.util.*;
 
 // 2013 dec silver (just used a segment tree and binary search to absolutely cheese this problem)
 public final class Crowded {

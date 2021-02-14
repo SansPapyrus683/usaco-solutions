@@ -1,7 +1,7 @@
 package official.o2018.jan.silver.aCowHasFallen;
 
-import java.util.*;
 import java.io.*;
+import java.util.*;
 
 // 2018 silver jan
 public final class Lifeguards {

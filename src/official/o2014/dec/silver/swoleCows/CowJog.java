@@ -1,7 +1,7 @@
 package official.o2014.dec.silver.swoleCows;
 
-import java.util.*;
 import java.io.*;
+import java.util.*;
 
 // 2014 dec silver (this one implements the "intended" sol)
 public final class CowJog {

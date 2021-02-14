@@ -1,7 +1,7 @@
 package official.o2019.feb.gold.amusementParkEpisode;
 
-import java.util.*;
 import java.io.*;
+import java.util.*;
 
 // 2019 feb gold
 public final class CowLand {

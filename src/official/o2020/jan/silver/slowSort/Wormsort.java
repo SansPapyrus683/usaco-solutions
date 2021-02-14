@@ -1,7 +1,7 @@
 package official.o2020.jan.silver.slowSort;
 
-import java.util.*;
 import java.io.*;
+import java.util.*;
 
 // 2020 jan silver
 // 1/6/2021 - i was young and innocent when i wrote this code, so it's full of bad practices

@@ -1,7 +1,7 @@
 package official.o2018.jan.silver.cowSimps;
 
-import java.util.*;
 import java.io.*;
+import java.util.*;
 
 // 2018 jan silver
 public final class MooTube {

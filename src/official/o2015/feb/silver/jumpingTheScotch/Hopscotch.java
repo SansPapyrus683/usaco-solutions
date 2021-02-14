@@ -1,8 +1,7 @@
 package official.o2015.feb.silver.jumpingTheScotch;
 
-import java.util.*;
 import java.io.*;
-import java.util.stream.Stream;
+import java.util.*;
 
 // 2015 feb silver
 public final class Hopscotch {
@@ -14,7 +13,7 @@ public final class Hopscotch {
         int[][] grid = new int[Integer.parseInt(initial[0])][Integer.parseInt(initial[1])];
         int[] end = new int[] {grid.length - 1, grid[0].length - 1};
         for (int i = 0; i < grid.length; i++) {
-            grid[i] = Stream.of(read.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
+            grid[i] = Arrays.stream(read.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
         }
 
         Queue<int[]> frontier = new PriorityQueue<>((p1, p2) -> {

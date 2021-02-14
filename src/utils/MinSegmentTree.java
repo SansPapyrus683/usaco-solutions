@@ -8,12 +8,12 @@ import java.util.Comparator;
  * this does pretty much the same thing as the sum segment tree<br>
  * except for this one it returns the min or max of a range (updates are still a thing, don't worry)
  */
-public final class CompSegmentTree {
+public final class MinSegmentTree {
     private final int[] segtree;
     private final int arrSize;
     private final int size;
     private final Comparator<Integer> cmp;
-    public CompSegmentTree(int len, Comparator<Integer> cmp) {  // constructs the thing kinda like an array
+    public MinSegmentTree(int len, Comparator<Integer> cmp) {  // constructs the thing kinda like an array
         int size = 1;
         while (size < len) {
             size *= 2;
@@ -24,18 +24,18 @@ public final class CompSegmentTree {
         segtree = new int[size * 2];  // we won't necessarily use all of the element but that doesn't really matter
     }
 
-    public CompSegmentTree(int[] arr, Comparator<Integer> cmp) {  // constructs the thing with initial elements as well
+    public MinSegmentTree(int[] arr, Comparator<Integer> cmp) {  // constructs the thing with initial elements as well
         this(arr.length, cmp);
         for (int i = 0; i < arr.length; i++) {
             set(i, arr[i]);
         }
     }
 
-    public CompSegmentTree(int[] arr) {
+    public MinSegmentTree(int[] arr) {
         this(arr, Comparator.naturalOrder());
     }
 
-    public CompSegmentTree(int len) {
+    public MinSegmentTree(int len) {
         this(len, Comparator.naturalOrder());
     }
 
@@ -61,16 +61,16 @@ public final class CompSegmentTree {
     }
 
     // for this one, from and to follow "normal" slicing rules - left bound is inclusive, right bound isn't
-    public int calc(int from, int to) {
+    public int rangeMin(int from, int to) {
         if (from < 0 || to > arrSize) {
             throw new IllegalArgumentException(String.format("the bounds %s and %s are out of bounds i think", from, to));
         } else if (to <= from) {
             throw new IllegalArgumentException(String.format("the bounds %s and %s don't make sense bro", from, to));
         }
-        return calc(from, to, 0, 0, size);
+        return rangeMin(from, to, 0, 0, size);
     }
 
-    private int calc(int from, int to, int currNode, int left, int right) {
+    private int rangeMin(int from, int to, int currNode, int left, int right) {
         if (right <= from || to <= left) {
             return Integer.MIN_VALUE;
         }
@@ -78,8 +78,8 @@ public final class CompSegmentTree {
             return segtree[currNode];
         }
         int middle = (left + right) / 2;
-        int leftPart = calc(from, to, 2 * currNode + 1, left, middle);
-        int rightPart = calc(from, to, 2 * currNode + 2, middle, right);
+        int leftPart = rangeMin(from, to, 2 * currNode + 1, left, middle);
+        int rightPart = rangeMin(from, to, 2 * currNode + 2, middle, right);
         return min(leftPart, rightPart);
     }
 
