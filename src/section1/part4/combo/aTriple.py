@@ -9,25 +9,25 @@ from itertools import product
 LOCK_NUM = 2
 
 with open('ohBaby.txt') as read:
-    lockAmt = int(read.readline())
+    lock_amt = int(read.readline())
     combs = [tuple([int(i) for i in read.readline().split()]) for _ in range(LOCK_NUM)]
 
-validCombs = []
+valid_combs = []
 for comb in combs:
-    singlePossVals = []
+    single_poss_vals = []
     for c in comb:
-        onePossVal = []
+        one_poss_val = []
         for i in range(-2, 3):
             val = c + i
-            while val < 1 or val > lockAmt:
-                if val > lockAmt:
-                    val -= lockAmt
+            while val < 1 or val > lock_amt:
+                if val > lock_amt:
+                    val -= lock_amt
                 elif c + i < 1:
-                    val += lockAmt
-            onePossVal.append(val)
-        singlePossVals.append(onePossVal)
-    validCombs.extend(list(product(*singlePossVals)))
+                    val += lock_amt
+            one_poss_val.append(val)
+        single_poss_vals.append(one_poss_val)
+    valid_combs.extend(list(product(*single_poss_vals)))
 
-valid = len(set(validCombs))
+valid = len(set(valid_combs))
 print(valid)
 print(valid, file=open('outputs.txt', 'w'))

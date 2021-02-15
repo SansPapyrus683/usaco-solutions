@@ -10,10 +10,10 @@ with open('pascalsOrNo.txt') as read:
         if v != 0:
             triangle.append([int(x) for x in line.rstrip().split()])
         else:
-            rowNum = int(line.rstrip())
+            row_num = int(line.rstrip())
 
-for r in range(rowNum - 1, -1, -1):  # iterate through the rows backwards
-    if r == rowNum - 1:  # we don't process the bottom one
+for r in range(row_num - 1, -1, -1):  # iterate through the rows backwards
+    if r == row_num - 1:  # we don't process the bottom one
         continue
     for i in range(r+1):
         if triangle[r+1][i] < triangle[r+1][i+1]:

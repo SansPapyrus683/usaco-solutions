@@ -10,20 +10,19 @@ with open('milk2.in') as read:
         intervals.append([int(i) for i in read.readline().rstrip().split()])
 
 intervals.sort()
-maxMilkingTime = 0
-maxPassiveTime = 0
+max_milking_time = 0
+max_passive_time = 0
 start = intervals[0][0]
 end = intervals[0][1]
 for i in intervals[1:]:
     if i[0] > end:
-        maxPassiveTime = max(maxPassiveTime, i[0] - end)
-        maxMilkingTime = max(maxMilkingTime, end - start)
+        max_passive_time = max(max_passive_time, i[0] - end)
+        max_milking_time = max(max_milking_time, end - start)
         start = i[0]
         end = i[1]
     else:
         end = max(end, i[1])
-maxMilkingTime = max(maxMilkingTime, end - start)
+max_milking_time = max(max_milking_time, end - start)
 
-with open('milk2.out', 'w') as written:
-    print(maxMilkingTime, maxPassiveTime)
-    written.write(str(maxMilkingTime) + " " + str(maxPassiveTime) + "\n")
+print(max_milking_time, max_passive_time)
+print(max_milking_time, max_passive_time, file=open('milk2.out', 'w'))

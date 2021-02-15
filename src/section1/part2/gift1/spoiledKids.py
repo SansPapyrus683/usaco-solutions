@@ -6,28 +6,28 @@ LANG: PYTHON3
 with open('notSanta.txt') as read:
     people = {}  # dictionaries preserve insertion order now: we'll use that
     transactions = []
-    peopleNum = int(read.readline())
-    for _ in range(peopleNum):
+    people_num = int(read.readline())
+    for _ in range(people_num):
         people[read.readline().rstrip()] = 0
-    for _ in range(peopleNum):
+    for _ in range(people_num):
         giver = read.readline().rstrip()
-        money, receiverNum = [int(i) for i in read.readline().split()]
+        money, receiver_num = [int(i) for i in read.readline().split()]
         receivers = []
-        for _ in range(receiverNum):
+        for _ in range(receiver_num):
             receivers.append(read.readline().rstrip())
         # a bit more explicit this way
-        transactions.append({'giver': giver, 'money': money, 'receivers' : receivers})
+        transactions.append({'giver': giver, 'money': money, 'receivers': receivers})
 
 # i think there's a better way to do this with some math, but simulating it is good enough
 for t in transactions:
     if not t['receivers']:
         continue
-    moneyToGive = t['money'] // len(t['receivers'])
+    to_give = t['money'] // len(t['receivers'])
     people[t['giver']] -= t['money']
     for r in t['receivers']:
-        people[r] += moneyToGive
+        people[r] += to_give
     
-    leftOver = t['money'] - len(t['receivers']) * moneyToGive
+    leftOver = t['money'] - len(t['receivers']) * to_give
     people[t['giver']] += leftOver
 
 with open('outputs.txt', 'w') as written:

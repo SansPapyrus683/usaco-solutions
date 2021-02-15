@@ -6,50 +6,49 @@ LANG: PYTHON3
 from copy import deepcopy
 from itertools import permutations
 
-milkBuckets = {}
+milk_buckets = {}
 
 with open('malk.txt') as buckets:
     for line in buckets.readlines():
         line = [int(i) for i in line.rstrip().split()]
-        milkBuckets['A'] = [line[0], 0]
-        milkBuckets['B'] = [line[1], 0]
-        milkBuckets['C'] = [line[2], line[2]]
+        milk_buckets['A'] = [line[0], 0]
+        milk_buckets['B'] = [line[1], 0]
+        milk_buckets['C'] = [line[2], line[2]]
 
 
-def pour(pouring: 'bucket id', pouree: 'another bucket id', currStates: dict):
-    nextStates = deepcopy(currStates)
-    firstBucket = currStates[pouring].copy()
-    secondBucket = currStates[pouree].copy()
-    while firstBucket[-1] != 0:  # pours until a empty or b full
-        if secondBucket[0] == secondBucket[-1]:
+def pour(pouring: 'bucket id', pouree: 'another bucket id', curr_states: dict):
+    next_states = deepcopy(curr_states)
+    first_bucket = curr_states[pouring].copy()
+    second_bucket = curr_states[pouree].copy()
+    while first_bucket[-1] != 0:  # pours until a empty or b full
+        if second_bucket[0] == second_bucket[-1]:
             break
-        firstBucket[-1] -= 1
-        secondBucket[-1] += 1
-    nextStates[pouring] = firstBucket
-    nextStates[pouree] = secondBucket
-    return nextStates
+        first_bucket[-1] -= 1
+        second_bucket[-1] += 1
+    next_states[pouring] = first_bucket
+    next_states[pouree] = second_bucket
+    return next_states
 
 
-possValues = [pour('C', 'B', milkBuckets)['C'][-1]]  # an easy possible value
-statesInLine = [pour('C', 'A', milkBuckets), pour('C', 'B', milkBuckets)]  # sets up the a two nodes for bfs
+poss_values = [pour('C', 'B', milk_buckets)['C'][-1]]  # an easy possible value
+states_in_line = [pour('C', 'A', milk_buckets), pour('C', 'B', milk_buckets)]  # sets up the a two nodes for bfs
 
-visitedStates = deepcopy(statesInLine)
-foundAllStates = False
-while not foundAllStates:  # does a bfs through all possible states
-    foundAllStates = True
-    inLine = []
-    for state in statesInLine:  # one node will be linked to others if it's accessible through a single pour
+visited = deepcopy(states_in_line)
+found_all_states = False
+while not found_all_states:  # does a bfs through all possible states
+    found_all_states = True
+    in_line = []
+    for state in states_in_line:  # one node will be linked to others if it's accessible through a single pour
         for pourComb in permutations(['A', 'B', 'C'], 2):
             poss = pour(pourComb[0], pourComb[1], state)
-            if poss not in visitedStates:
-                inLine.append(poss)
-                visitedStates.append(poss)
-                foundAllStates = False
-            if poss['A'][-1] == 0 and poss['C'][-1] not in possValues:
-                possValues.append(poss['C'][-1])
-    statesInLine = inLine  # pushes all the inLine states into the processing line
+            if poss not in visited:
+                in_line.append(poss)
+                visited.append(poss)
+                found_all_states = False
+            if poss['A'][-1] == 0 and poss['C'][-1] not in poss_values:
+                poss_values.append(poss['C'][-1])
+    states_in_line = in_line  # pushes all the inLine states into the processing line
 
 with open('outputs.txt', 'w') as written:
-    possValues.sort()
-    written.write(' '.join([str(x) for x in possValues]))
-    written.write('\n')
+    poss_values.sort()
+    written.write(' '.join([str(x) for x in poss_values]) + '\n')

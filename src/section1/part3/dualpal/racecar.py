@@ -25,19 +25,18 @@ def int2base(x, base):
 
 
 with open('sameThing.txt') as read:
-    firstN, numberAt = [int(i) for i in read.readline().split()]
+    first_n, number_at = [int(i) for i in read.readline().split()]
 
-dualPals = []
-while len(dualPals) < firstN:
-    numberAt += 1
-    reprs = [int2base(numberAt, b) for b in range(2, 10 + 1)]
+dual_pals = []
+while len(dual_pals) < first_n:
+    number_at += 1
+    reprs = [int2base(number_at, b) for b in range(2, 10 + 1)]
     palCount = 0
     for r in reprs:
         if not r.endswith('0') and r[::-1] == r:
             palCount += 1
     if palCount >= 2:
-        dualPals.append(numberAt)
+        dual_pals.append(number_at)
 
-print(dualPals)
-with open('outputs.txt', 'w') as written:
-    written.write('\n'.join([str(i) for i in dualPals]) + '\n')
+print(dual_pals)
+print('\n'.join([str(i) for i in dual_pals]), file=open('outputs.txt', 'w'))

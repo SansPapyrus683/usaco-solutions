@@ -4,7 +4,7 @@ TASK: namenum
 LANG: PYTHON3
 """
 with open('cowNames.txt') as read:
-    cowID = read.readline().rstrip()
+    cow_id = read.readline().rstrip()
 with open('dict.txt') as names:
     names = set(names.read().split('\n'))
 
@@ -19,19 +19,19 @@ numChars = [
     ['T', 'U', 'V'],
     ['W', 'X', 'Y']
 ]
-possNames = ['']
-for i in cowID:
-    nextNames = []
+poss_names = ['']
+for i in cow_id:
+    next_name = []
     for c in numChars[int(i)]:
-        for n in possNames:
-            nextNames.append(n + c)
-    possNames = nextNames
-validNames = sorted(names.intersection(set(possNames)))
+        for n in poss_names:
+            next_name.append(n + c)
+    poss_names = next_name
+valid_names = sorted(names.intersection(set(poss_names)))
 
-print(validNames)
+print(valid_names)
 with open('outputs.txt', 'w') as written:
-    if validNames:
-        for n in validNames:
+    if valid_names:
+        for n in valid_names:
             written.write(n + '\n')
     else:
         written.write('NONE\n')

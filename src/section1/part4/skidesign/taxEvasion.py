@@ -8,7 +8,7 @@ MAX_DIFF = 17
 with open('skidesign.in') as read:
     hills = [int(read.readline()) for _ in range(int(read.readline()))]
 
-lowestCost = float('inf')
+lowest_cost = float('inf')
 for possLowest in range(min(hills), max(hills) - MAX_DIFF + 1):  # +1 because range
     cost = 0
     for h in hills:
@@ -16,8 +16,8 @@ for possLowest in range(min(hills), max(hills) - MAX_DIFF + 1):  # +1 because ra
             cost += (possLowest - h) ** 2
         elif h > possLowest + 17:
             cost += (h - (possLowest + 17)) ** 2
-    if cost < lowestCost:
-        lowestCost = cost
+    if cost < lowest_cost:
+        lowest_cost = cost
 
-print(lowestCost)
-print(lowestCost, file=open('outputs.txt', 'w'))
+print(lowest_cost)
+print(lowest_cost, file=open('outputs.txt', 'w'))
