@@ -22,7 +22,7 @@ int main() {
 
     // frick java for not having a multiset class
     std::multiset<int> plates;
-    int farthest_left = 0;
+    int closest_left = 0;
     long long flavor_sum = 0;
     int min_spiciness = std::numeric_limits<int>::max();
     for (int right = 0; right < plate_num; right++) {
@@ -31,11 +31,11 @@ int main() {
         plates.insert(spiciness[right]);
 
         // move the left pointer to the right so we have as small a set as possible
-        while (farthest_left <= right
-                && flavor_sum - flavors[farthest_left] >= flavor_req) {
-            flavor_sum -= flavors[farthest_left];
-            plates.erase(plates.find(spiciness[farthest_left]));
-            farthest_left++;
+        while (closest_left <= right
+                && flavor_sum - flavors[closest_left] >= flavor_req) {
+            flavor_sum -= flavors[closest_left];
+            plates.erase(plates.find(spiciness[closest_left]));
+            closest_left++;
         }
 
         if (flavor_sum >= flavor_req) {

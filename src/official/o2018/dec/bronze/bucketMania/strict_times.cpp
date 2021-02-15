@@ -21,7 +21,7 @@ int main() {
         int buckets;
         read >> start >> end >> buckets;
         if (times.find(start) != times.end() || times.find(end) != times.end()) {
-            throw std::invalid_argument("your start and end times aren't extinct bud");
+            throw std::invalid_argument("your start and end times aren't distinct bud");
         }
         times[start] = {true, buckets};
         times[end] = {false, buckets};
