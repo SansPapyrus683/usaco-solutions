@@ -8,6 +8,7 @@ TASK: camelot
 import java.io.*;
 import java.util.*;
 
+// TODO: refactor this absolute abomination of a program
 public final class Camelot {
     private static final int[] R_CHANGE = new int[] {-2, -2, -1, 1, 2, 2, 1, -1};
     private static final int[] C_CHANGE = new int[] {-1, 1, 2, 2, 1, -1, -2, -2};

@@ -6,29 +6,29 @@ LANG: PYTHON3
 from queue import Queue
 
 with open('rockers.in') as read:
-    _, capacity, diskNum = [int(i) for i in read.readline().split()]
+    _, capacity, disk_num = [int(i) for i in read.readline().split()]
     songs = [int(i) for i in read.readline().split() if int(i) <= capacity]
 
 visited = {(-1, 0, 0)}
 frontier = Queue()
 frontier.put((-1, 0, 1, 0))  # last song put in, total songs, disks used, last disk capacity
-maxSongs = 0
+max_songs = 0
 while not frontier.empty():
-    lastSong, totalSong, usedAlr, lastCap = frontier.get()
+    last_song, total_song, used_alr, last_cap = frontier.get()
     reachableStates = []
-    for v, s in enumerate(songs[lastSong + 1:]):
-        if lastCap + s <= capacity:
-            reachableStates.append((lastSong + v + 1, totalSong + 1, usedAlr, lastCap + s))
+    for v, s in enumerate(songs[last_song + 1:]):
+        if last_cap + s <= capacity:
+            reachableStates.append((last_song + v + 1, total_song + 1, used_alr, last_cap + s))
         else:
-            if usedAlr + 1 <= diskNum:
-                reachableStates.append((lastSong + v + 1, totalSong + 1, usedAlr + 1, s))
+            if used_alr + 1 <= disk_num:
+                reachableStates.append((last_song + v + 1, total_song + 1, used_alr + 1, s))
 
     for s in reachableStates:
         if s not in visited:
-            maxSongs = max(maxSongs, s[1])
+            max_songs = max(max_songs, s[1])
             frontier.put(s)
             visited.add(s)
 
-print(maxSongs)
+print(max_songs)
 with open('rockers.out', 'w') as written:
-    written.write(str(maxSongs) + '\n')
+    written.write(str(max_songs) + '\n')

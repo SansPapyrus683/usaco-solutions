@@ -7,7 +7,7 @@ from typing import List
 
 
 # used the typing module for compatibility and whatnot
-def machineFinTimes(machines: List[int], jobNum: int) -> List[int]:
+def machine_fin_times(machines: List[int], job_num: int) -> List[int]:
     """
     note to self:
     you can't just have all the machines run constantly
@@ -15,31 +15,31 @@ def machineFinTimes(machines: List[int], jobNum: int) -> List[int]:
     it's better for the 60 machine to like not run at all
     but anyways, this func calculates the minimum ending times for each job
     """
-    finishTimes = []
-    alreadySpent = [0 for _ in range(len(machines))]
-    for _ in range(jobNum):
-        assignmentTimes = [alreadySpent[i] + machines[i] for i in range(len(machines))]
-        bestTime = min(assignmentTimes)
-        finishTimes.append(bestTime)
-        alreadySpent[assignmentTimes.index(bestTime)] = bestTime
-    return finishTimes
+    finish_times = []
+    already_spent = [0 for _ in range(len(machines))]
+    for _ in range(job_num):
+        assignment_times = [already_spent[i] + machines[i] for i in range(len(machines))]
+        best_time = min(assignment_times)
+        finish_times.append(best_time)
+        already_spent[assignment_times.index(best_time)] = best_time
+    return finish_times
 
 
 with open('terminators.txt') as read:
-    jobs, aNum, bNum = [int(i) for i in read.readline().split()]
+    jobs, a_num, b_num = [int(i) for i in read.readline().split()]
     machines = []
     for line in read.readlines():
         machines.extend([int(i) for i in line.split()])
-    aMachines = machines[:aNum]
-    bMachines = machines[aNum: aNum + bNum]
-    assert len(aMachines) == aNum and len(bMachines) == bNum, 'you better give me the right numbers bro'
+    a_machines = machines[:a_num]
+    b_machines = machines[a_num: a_num + b_num]
+    assert len(a_machines) == a_num and len(b_machines) == b_num, 'you better give me the right numbers bro'
 
-aFinTimes = machineFinTimes(aMachines, jobs)
-bFinTimes = machineFinTimes(bMachines, jobs)
+a_fin_times = machine_fin_times(a_machines, jobs)
+b_fin_times = machine_fin_times(b_machines, jobs)
 
-print(aFinTimes)
-print(bFinTimes)
+print(a_fin_times)
+print(b_fin_times)
 
-totalTime = max(a + b for a, b in zip(aFinTimes, reversed(bFinTimes)))
-print(aFinTimes[-1], totalTime)
-print(aFinTimes[-1], totalTime, file=open('outputs.txt', 'w'))  # wow this is so concise though
+total_time = max(a + b for a, b in zip(a_fin_times, reversed(b_fin_times)))
+print(a_fin_times[-1], total_time)
+print(a_fin_times[-1], total_time, file=open('outputs.txt', 'w'))  # wow this is so concise though

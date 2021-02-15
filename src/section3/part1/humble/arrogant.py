@@ -11,17 +11,19 @@ with open('whyHumble.txt') as read:
         elif v == 1:
             primeList = line.copy()
 
+
 def humble(n, primes):
     h = [1] * (n + 1)  # n + 1 because the first element will be like [1 ....]
-    primeCounters = {p: p for p in primes}  # and 1 isn't a humble
-    expCounters = {p: 0 for p in primes}  # adding the 1 just makes computing simpler
+    prime_counters = {p: p for p in primes}  # and 1 isn't a humble
+    exp_counters = {p: 0 for p in primes}  # adding the 1 just makes computing simpler
     for n in range(1, n+1):
-        h[n] = min(primeCounters.values())
-        for p, c in primeCounters.items():
+        h[n] = min(prime_counters.values())
+        for p, c in prime_counters.items():
             if c == h[n]:
-                expCounters[p] += 1  # exp here means exponent, not experience
-                primeCounters[p] = p * h[expCounters[p]]
+                exp_counters[p] += 1  # exp here means exponent, not experience
+                prime_counters[p] = p * h[exp_counters[p]]
     return h[-1]
+
 
 with open('outputs.txt', 'w') as written:
     written.write(str(humble(nthNum, primeList)) + '\n')

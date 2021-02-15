@@ -8,30 +8,35 @@ import operator as op  # this file is if for you're running earlier versions of 
 from functools import reduce  # THE FUTURE IS NOW, OLD MAN.
 
 with open('notThatIveEatenIt.txt') as read:
-    length, oneBitNum, nthBitThing = [int(i) for i in read.read().split()]
-    nthBitThing -= 1
+    length, one_bit_num, nth_bit_thing = [int(i) for i in read.read().split()]
+    nth_bit_thing -= 1
+
 
 def ncr(n, r):
-    r = min(r, n-r)
-    numer = reduce(op.mul, range(n, n-r, -1), 1)
-    denom = reduce(op.mul, range(1, r+1), 1)
+    r = min(r, n - r)
+    numer = reduce(op.mul, range(n, n - r, -1), 1)
+    denom = reduce(op.mul, range(1, r + 1), 1)
     return numer // denom
 
-def allStrings(maxStringLen, mostBits):
-    mostBits = maxStringLen if mostBits > maxStringLen else mostBits
-    return sum([ncr(maxStringLen, i) for i in range(mostBits + 1)])
 
-def findIndex(stringLen, mostBits, theIndex, history=''):
-    if stringLen == 1:
-        if mostBits == 0:
+def all_strings(max_string_len, most_bits):
+    most_bits = max_string_len if most_bits > max_string_len else most_bits
+    return sum([ncr(max_string_len, i) for i in range(most_bits + 1)])
+
+
+def find_index(string_len, most_bits, the_index, history=''):
+    if string_len == 1:
+        if most_bits == 0:
             return history + '0'  # i mean, there's only one possibility so why not
         else:
-            return [history + '0', history + '1'][theIndex]
+            return [history + '0', history + '1'][the_index]
 
-    if theIndex < allStrings(stringLen - 1, mostBits):  # the recursive part
-        return findIndex(stringLen - 1, mostBits, theIndex, history + '0')
+    if the_index < all_strings(string_len - 1, most_bits):  # the recursive part
+        return find_index(string_len - 1, most_bits, the_index, history + '0')
     else:
-        return findIndex(stringLen - 1, mostBits - 1, theIndex - allStrings(stringLen - 1, mostBits), history + '1')
+        return find_index(string_len - 1, most_bits - 1,
+                          the_index - all_strings(string_len - 1, most_bits), history + '1')
+
 
 with open('outputs.txt', 'w') as written:
-    written.write(str(findIndex(length, oneBitNum, nthBitThing)) + '\n')
+    written.write(str(find_index(length, one_bit_num, nth_bit_thing)) + '\n')

@@ -6,75 +6,75 @@ LANG: PYTHON3
 from copy import deepcopy
 
 with open('shopping.in') as read:
-    offerList = []
-    toBuy = []
+    offer_list = []
+    to_buy = []
     for v, l in enumerate(read):
         if v == 0:
-            offerNum = int(l)
+            offer_num = int(l)
 
-        elif 1 <= v <= offerNum:
+        elif 1 <= v <= offer_num:
             offer = [int(i) for i in l.split()[1:]]
-            newOffer = []
+            new_offer = []
             for i in range(0, len(offer), 2):  # [[code, amt], [code, amt]... price]
                 c = offer[i:i + 2]
                 if len(c) == 1:
-                    newOffer.append(c[0])
+                    new_offer.append(c[0])
                 else:
-                    newOffer.append(c)
-            offerList.append(newOffer)
+                    new_offer.append(c)
+            offer_list.append(new_offer)
 
-        elif v > offerNum + 1:  # buy {1} of product {0}, each costing {2}
-            toBuy.append([int(i) for i in l.split()])
+        elif v > offer_num + 1:  # buy {1} of product {0}, each costing {2}
+            to_buy.append([int(i) for i in l.split()])
 
-allOffers = {}
+all_offers = {}
 prices = []
 encoding = {}
-for v, p in enumerate(toBuy):
-    singleOffer = [0 for _ in range(len(toBuy))]
-    singleOffer[v] = 1
-    allOffers[tuple(singleOffer)] = p[2]  # a singular item is basically just a horrid offer
+for v, p in enumerate(to_buy):
+    single_offer = [0 for _ in range(len(to_buy))]
+    single_offer[v] = 1
+    all_offers[tuple(single_offer)] = p[2]  # a singular item is basically just a horrid offer
     encoding[p[0]] = v
-    toBuy[v] = p[1]  # again, positions are the key
+    to_buy[v] = p[1]  # again, positions are the key
 
-for v, o in enumerate(offerList):
-    newOffer = [0 for _ in range(len(encoding))]  # more like edited
+for v, o in enumerate(offer_list):
+    new_offer = [0 for _ in range(len(encoding))]  # more like edited
     for p in o[:-1]:
-        newOffer[encoding[p[0]]] = p[1]
-    allOffers[tuple(newOffer)] = o[-1]
-cached = deepcopy(allOffers)
+        new_offer[encoding[p[0]]] = p[1]
+    all_offers[tuple(new_offer)] = o[-1]
+cached = deepcopy(all_offers)
 
 
 def subtract(rn: [int], offer_: [int]) -> [int]:
     return tuple([o1 - o2 for o1, o2 in zip(rn, offer_)])
 
 
-def valid(shoppingList: (int,)) -> bool:
-    for i in shoppingList:
+def valid(shopping_list: (int,)) -> bool:
+    for i in shopping_list:
         if i < 0:
             return False
     return True
 
 
-def empty(shoppingList: (int,)) -> bool:
-    for i in shoppingList:
+def empty(shopping_list: (int,)) -> bool:
+    for i in shopping_list:
         if i != 0:
             return False
     return True
 
 
-def findLowestCost(shoppingList: (int,)) -> int:
-    if shoppingList in cached:
-        return cached[shoppingList]
-    if empty(shoppingList):
+def find_lowest_cost(shopping_list: (int,)) -> int:
+    if shopping_list in cached:
+        return cached[shopping_list]
+    if empty(shopping_list):
         return 0
 
     best = float('inf')
-    for o in allOffers:
-        after = subtract(shoppingList, o)
+    for o in all_offers:
+        after = subtract(shopping_list, o)
         if valid(after):
-            gottenOutput = findLowestCost(after)
-            cached[after] = gottenOutput
-            best = min(best, gottenOutput + allOffers[o])
+            gotten_output = find_lowest_cost(after)
+            cached[after] = gotten_output
+            best = min(best, gotten_output + all_offers[o])
 
     if best == float('inf'):
         return 0
@@ -82,6 +82,6 @@ def findLowestCost(shoppingList: (int,)) -> int:
 
 
 with open('shopping.out', 'w') as written:
-    output = findLowestCost(tuple(toBuy))
+    output = find_lowest_cost(tuple(to_buy))
     print(output)
     written.write(f'{output}\n')

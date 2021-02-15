@@ -14,7 +14,6 @@ public final class JustRight {
     private static final int MAX_RATIO = 100;
     static int[] goal = new int[FEED_NUM];
     static int[][] mixes = new int[FEED_NUM][NUTRIENT_NUM];
-
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("theCowsDontCare.txt"));

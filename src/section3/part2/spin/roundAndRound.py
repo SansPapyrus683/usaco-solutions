@@ -8,14 +8,14 @@ from sys import exit
 wheels = []
 with open('kindaDizzy.txt') as read:
     for l in read.readlines():
-        newWheel = {'s': int(l.split()[0]), 'wedges': []}  # s means speed
-        currWedge = []
+        new_wheel = {'s': int(l.split()[0]), 'wedges': []}  # s means speed
+        curr_wedge = []
         for i in l.split()[2:]:
-            currWedge.append(int(i))
-            if len(currWedge) == 2:
-                newWheel['wedges'].append([currWedge[0], sum(currWedge) % 360])
-                currWedge = []
-        wheels.append(newWheel)
+            curr_wedge.append(int(i))
+            if len(curr_wedge) == 2:
+                new_wheel['wedges'].append([curr_wedge[0], sum(curr_wedge) % 360])
+                curr_wedge = []
+        wheels.append(new_wheel)
 written = open('outputs.txt', 'w')
 
 for t in range(360):  # after 360, everything will be back to normal regardless

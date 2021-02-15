@@ -11,8 +11,8 @@ with open('nuggets.in') as read:
 
 # so given 2 relatively prime #'s the largest # that can't be formed is 1st * 2nd - (1st + 2nd)
 # the + MAX_SIZE is just some leeway for my horrid coding
-largestImpossible = MAX_SIZE * MAX_SIZE - (MAX_SIZE + MAX_SIZE)
-possible = [False for _ in range(largestImpossible + MAX_SIZE)]
+largest_impossible = MAX_SIZE * MAX_SIZE - (MAX_SIZE + MAX_SIZE)
+possible = [False for _ in range(largest_impossible + MAX_SIZE)]
 possible[0] = True
 for i in range(len(possible)):
     if not possible[i]:
@@ -21,13 +21,13 @@ for i in range(len(possible)):
         if i + n < len(possible):
             possible[i + n] = True
 
-maxImpossible = 0
+max_impossible = 0
 for v, p in enumerate(possible):
     if not p:
-        maxImpossible = v
-if maxImpossible > largestImpossible:
-    maxImpossible = 0
+        max_impossible = v
+if max_impossible > largest_impossible:
+    max_impossible = 0
 
-print(maxImpossible)
+print(max_impossible)
 with open('nuggets.out', 'w') as written:
-    written.write(str(maxImpossible) + '\n')
+    written.write(str(max_impossible) + '\n')

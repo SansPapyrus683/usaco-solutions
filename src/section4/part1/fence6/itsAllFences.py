@@ -16,30 +16,30 @@ with open('fence6.in') as read:
         neighbors[fence_id] = [int(i) for i in read.readline().split()], [int(i) for i in read.readline().split()]
 
 point = 1
-pointsEdges = {}
+points_edges = {}
 processed = set()
 for n in neighbors:  # convert the edges list to a points list
     edge_meetup = tuple(sorted([n, *neighbors[n][0]]))
     if edge_meetup not in processed:
-        pointsEdges[point] = edge_meetup
+        points_edges[point] = edge_meetup
         point += 1
         processed.add(edge_meetup)
     edge_meetup = tuple(sorted([n, *neighbors[n][1]]))
     if edge_meetup not in processed:
-        pointsEdges[point] = edge_meetup
+        points_edges[point] = edge_meetup
         point += 1
         processed.add(edge_meetup)
 
 neighbors = {p: [] for p in range(1, point)}
-for p1, edges1 in pointsEdges.items():
+for p1, edges1 in points_edges.items():
     for e in edges1:
-        for p2, edges2 in pointsEdges.items():
+        for p2, edges2 in points_edges.items():
             if p1 != p2 and e in edges2:
                 neighbors[p1].append((p2, lengths[e]))
 
-minPerimeter = float('inf')
-for p, nList in neighbors.items():
-    for adj, dist in nList:
+min_perimeter = float('inf')
+for p, n_list in neighbors.items():
+    for adj, dist in n_list:
         neighbors[adj].remove((p, dist))  # prevent the algorithm from just going back without a cycle
         distances = {adj: dist}
         frontier = [(dist, adj)]
@@ -48,13 +48,13 @@ for p, nList in neighbors.items():
             if current == p:
                 continue
             rnCost = distances[current]
-            for n, nCost in neighbors[current]:
-                if n not in distances or rnCost + nCost < distances[n]:
-                    distances[n] = rnCost + nCost
-                    heappush(frontier, (rnCost + nCost, n))
+            for n, n_cost in neighbors[current]:
+                if n not in distances or rnCost + n_cost < distances[n]:
+                    distances[n] = rnCost + n_cost
+                    heappush(frontier, (rnCost + n_cost, n))
         if p in distances:  # sometimes it isn't possible to go back to the start in a cycle
-            minPerimeter = min(minPerimeter, distances[p])
+            min_perimeter = min(min_perimeter, distances[p])
         neighbors[adj].append((p, dist))  # revert changes
 
-print(minPerimeter)
-print(minPerimeter, file=open('fence6.out', 'w'))
+print(min_perimeter)
+print(min_perimeter, file=open('fence6.out', 'w'))

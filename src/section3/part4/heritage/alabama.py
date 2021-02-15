@@ -14,15 +14,15 @@ def postorder(inorder: [str], preorder: [str]) -> str:
     if len(inorder) <= 2:
         return ''.join(reversed(preorder))
     root = preorder[0]
-    leftTree = inorder[:inorder.index(root)]
-    rightTree = inorder[inorder.index(root) + 1:]
+    left_tree = inorder[:inorder.index(root)]
+    right_tree = inorder[inorder.index(root) + 1:]
 
     cutoff = len(preorder)  # if the if never evaluates to true, there is not right tree lol
     for i in range(1, len(preorder)):
-        if preorder[i] not in leftTree:
+        if preorder[i] not in left_tree:
             cutoff = i
             break
-    return postorder(leftTree, preorder[1:cutoff]) + postorder(rightTree, preorder[cutoff:]) + root
+    return postorder(left_tree, preorder[1:cutoff]) + postorder(right_tree, preorder[cutoff:]) + root
 
 
 ans = postorder(inorder, preorder)
