@@ -5,7 +5,7 @@ LANG: PYTHON3
 """
 from sys import exit
 
-with open('newLife.txt') as read:
+with open('new_life.txt') as read:
     start_from = int(read.read().rstrip()) + 1  # we want strictly greater than so +1
 
 

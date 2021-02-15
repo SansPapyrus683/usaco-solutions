@@ -8,7 +8,7 @@ from sys import exit
 written = open('outputs.txt', 'w')
 castle = []
 walls = {}
-with open('holyMusicStops.txt') as read:
+with open('holy_land.txt') as read:
     for v, row in enumerate(read):
         if v != 0:
             for x, col in enumerate(row.rstrip().split()):

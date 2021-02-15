@@ -5,7 +5,7 @@ LANG: PYTHON3
 """
 triangle = []
 
-with open('pascalsOrNo.txt') as read:
+with open('pascals_or_no.txt') as read:
     for v, line in enumerate(read):
         if v != 0:
             triangle.append([int(x) for x in line.rstrip().split()])

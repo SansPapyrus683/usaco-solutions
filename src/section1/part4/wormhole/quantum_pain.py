@@ -65,7 +65,7 @@ class Wormholes:  # i don't like global variables, so i made this class lol
         return False  # not a single start works, heck
 
 
-with open('quantumSuffering.txt') as read:
+with open('quantum_suffering.txt') as read:
     wormhole_num = int(read.readline())
     positions = []
     for _ in range(wormhole_num):

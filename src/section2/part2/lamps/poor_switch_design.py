@@ -3,7 +3,7 @@ ID: kevinsh4
 TASK: lamps
 LANG: PYTHON3
 """
-with open('nintendoSwitch.txt') as read:
+with open('nintendo_switch.txt') as read:
     for line_num, line in enumerate(read):
         if line_num == 0:
             lamps = tuple(True for _ in range(int(line.rstrip())))  # i just learned about for _ in range() lol

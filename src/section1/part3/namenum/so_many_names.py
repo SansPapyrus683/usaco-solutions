@@ -3,7 +3,7 @@ ID: kevinsh4
 TASK: namenum
 LANG: PYTHON3
 """
-with open('cowNames.txt') as read:
+with open('cow_names.txt') as read:
     cow_id = read.readline().rstrip()
 with open('dict.txt') as names:
     names = set(names.read().split('\n'))

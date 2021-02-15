@@ -6,7 +6,7 @@ LANG: PYTHON3
 from collections import defaultdict
 
 distances = defaultdict(lambda: defaultdict(lambda: float('inf')))
-with open('tikTokBad.txt') as read:
+with open('tik_tok_bad.txt') as read:
     for v, line in enumerate(read):
         if v == 0:
             farm_num = int(line.rstrip())

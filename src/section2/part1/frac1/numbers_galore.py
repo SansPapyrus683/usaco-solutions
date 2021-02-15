@@ -5,7 +5,7 @@ LANG: PYTHON3
 """
 from fractions import Fraction
 
-with open('metGala.txt') as read:
+with open('met_gala.txt') as read:
     limit = int(read.read().rstrip())
 
 good_fractions = {Fraction(1, 1)}

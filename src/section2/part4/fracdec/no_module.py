@@ -3,7 +3,7 @@ ID: kevinsh4
 TASK: fracdec
 LANG: PYTHON3
 """
-n, d = [int(i) for i in open('fractionsBetter.txt').read().rstrip().split()]
+n, d = [int(i) for i in open('fractions_better.txt').read().rstrip().split()]
 int_part = 0
 while n >= d:  # get out the whole number part
     int_part += 1

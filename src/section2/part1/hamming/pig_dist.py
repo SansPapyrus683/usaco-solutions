@@ -3,7 +3,7 @@ ID: kevinsh4
 TASK: hamming
 LANG: PYTHON3
 """
-with open('whosHammingAnyways.txt') as read:
+with open('buta.txt') as read:
     for v, i in enumerate([int(x) for x in read.read().split()]):
         if v == 0:
             codeNum = i

@@ -5,7 +5,7 @@ LANG: PYTHON3
 """
 from queue import Queue
 
-with open('wantRefund.txt') as read:
+with open('want_refund.txt') as read:
     read = read.read().split()
     curr_config = ((1, 2, 3, 4), (8, 7, 6, 5))
     needed_config = (tuple([int(i) for i in read[:4]]), tuple(reversed([int(i) for i in read[4:]])))

@@ -29,7 +29,7 @@ def int2base(x, base):
     return ''.join(digits)
 
 
-convert_to = int(open('palSatan.txt').readline())
+convert_to = int(open('pal_satan.txt').readline())
 
 pal_squares = []
 for n in range(1, UP_TO + 1):

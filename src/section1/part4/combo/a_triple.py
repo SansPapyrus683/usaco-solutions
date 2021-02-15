@@ -8,7 +8,7 @@ from itertools import product
 
 LOCK_NUM = 2
 
-with open('ohBaby.txt') as read:
+with open('oh_baby.txt') as read:
     lock_amt = int(read.readline())
     combs = [tuple([int(i) for i in read.readline().split()]) for _ in range(LOCK_NUM)]
 

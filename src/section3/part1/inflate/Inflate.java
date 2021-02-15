@@ -22,7 +22,7 @@ public final class Inflate {
         }
 
         int ans = bestScore(totalMins, problems);  // see python version for kinda? doc comments
-        PrintWriter written = new PrintWriter("outputs.txt");
+        PrintWriter written = new PrintWriter("job.out");
         written.println(ans);
         written.close();
         System.out.println(ans);

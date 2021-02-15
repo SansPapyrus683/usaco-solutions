@@ -3,7 +3,7 @@ ID: kevinsh4
 TASK: beads
 LANG: PYTHON3
 """
-with open('newOrleans.txt') as read:
+with open('new_orleans.txt') as read:
     bead_len = int(read.readline())
     beads = read.readline().rstrip()
     assert bead_len == len(beads), 'you thought you could get away with bad input? think again'

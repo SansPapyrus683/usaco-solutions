@@ -11,7 +11,7 @@ requirements = dict()
 raw_vitamins = dict()  # just a placeholder for how many vitamins there are, probs a better way of doing this
 vitamins = dict()  # the scoop assortment
 scoop_number = 1
-with open('strawberryGoodToo.txt') as read:
+with open('strawberry_good_too.txt') as read:
     for v, line in enumerate(read):
         if v == 1:
             for another_v, n in enumerate([int(i) for i in line.rstrip().split()]):

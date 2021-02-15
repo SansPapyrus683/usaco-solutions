@@ -8,7 +8,7 @@ from math import sqrt
 from queue import Queue
 from collections import defaultdict
 
-with open('notTouristsDumbo.txt') as read:
+with open('not_tourists_dumbo.txt') as read:
     read = [l.rstrip() for l in read.readlines()]
     connection = {p: [] for p in range(1, int(read[0]) + 1)}
     locations = {}

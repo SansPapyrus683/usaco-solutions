@@ -9,7 +9,7 @@ from copy import deepcopy
 
 sys.setrecursionlimit(10000)
 connected_intersections = defaultdict(lambda: list())
-with open('lazyAsFrick.txt') as read:
+with open('lazy_as_frick.txt') as read:
     for v, line in enumerate(read):
         line = [int(i) for i in line.split()]
         if v != 0:

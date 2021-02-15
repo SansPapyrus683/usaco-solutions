@@ -18,7 +18,7 @@ if we shift N's line o' numbers N+1 units to the right, and add the two like so 
 1   1   1   1
             1   1   1   1, we get N+1's line of numbers, and we keep doing that so yea
 """
-with open('subset.in') as read:
+with open('first_dp.txt') as read:
     up_to_num = int(read.read().rstrip())
 
 actual_set = {i for i in range(1, up_to_num + 1)}
@@ -33,7 +33,7 @@ while up_to_num not in sum_numbers:
     sum_numbers[need_to_add] = add_to_old
     need_to_add += 1
 
-with open('subset.out', 'w') as written:
+with open('outputs.txt', 'w') as written:
     if sum(actual_set) % 2:
         written.write('0\n')
     else:

@@ -3,7 +3,7 @@ ID: kevinsh4
 TASK: gift1
 LANG: PYTHON3
 """
-with open('notSanta.txt') as read:
+with open('not_santa.txt') as read:
     people = {}  # dictionaries preserve insertion order now: we'll use that
     transactions = []
     people_num = int(read.readline())

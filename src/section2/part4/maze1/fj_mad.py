@@ -4,7 +4,7 @@ TASK: maze1
 LANG: PYTHON3
 """
 points = set()
-with open('hoesMad.txt') as read:
+with open('hoes_mad.txt') as read:
     for y, line in enumerate(read):
         if y != 0:
             if y == 1:

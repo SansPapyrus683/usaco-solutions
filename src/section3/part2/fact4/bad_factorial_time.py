@@ -3,7 +3,7 @@ ID: kevinsh4
 TASK: fact4
 LANG: PYTHON3
 """
-the_fact = int(open('bigBigBigO.txt').read())
+the_fact = int(open('big_big_big_o.txt').read())
 five_count, curr_five_power = 0, 5
 
 while the_fact // curr_five_power > 0:  # these two loops get how many zeroes there are in the factorial

@@ -6,7 +6,7 @@ LANG: PYTHON3
 from collections import defaultdict
 from sys import exit
 
-with open('sheGotMilk.txt') as read:
+with open('she_got_milk.txt') as read:
     distances = defaultdict(lambda: defaultdict(lambda: float('inf')))
     pastures = set()
     for v, line in enumerate(read):

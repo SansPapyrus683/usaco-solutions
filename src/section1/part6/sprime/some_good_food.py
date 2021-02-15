@@ -6,7 +6,7 @@ LANG: PYTHON3
 from math import sqrt
 from itertools import count, islice
 
-with open('thordonRamsay.txt') as food:
+with open('thordon_ramsay.txt') as food:
     stamp_len = int(food.read().rstrip())
 
 

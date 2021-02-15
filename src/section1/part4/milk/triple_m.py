@@ -3,7 +3,7 @@ ID: kevinsh4
 TASK: milk
 LANG: PYTHON3
 """
-with open('milkHeaven.txt') as read:
+with open('milk_heaven.txt') as read:
     req, farmer_num = [int(i) for i in read.readline().split()]
     prices = [[int(i) for i in read.readline().split()] for _ in range(farmer_num)]
     assert sum(p[1] for p in prices) >= req, "there should be enough milk i mean"

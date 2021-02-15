@@ -22,7 +22,7 @@ def get_valid(the_prefixes, huge_molecule):
 
 prefixes = set()
 molecule = ''
-with open('bioTrash.txt') as read:
+with open('bio_trash.txt') as read:
     detect_prefix = True
     for v, line in enumerate(read):
         if line.rstrip() == '.':

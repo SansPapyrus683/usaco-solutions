@@ -7,7 +7,7 @@ LANG: PYTHON3
 import operator as op  # this file is if for you're running earlier versions of python (i mean pre 3.8)
 from functools import reduce  # THE FUTURE IS NOW, OLD MAN.
 
-with open('notThatIveEatenIt.txt') as read:
+with open('stinky.txt') as read:
     length, one_bit_num, nth_bit_thing = [int(i) for i in read.read().split()]
     nth_bit_thing -= 1
 

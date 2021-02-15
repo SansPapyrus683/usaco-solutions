@@ -6,7 +6,7 @@ LANG: PYTHON3
 from sys import exit
 
 wheels = []
-with open('kindaDizzy.txt') as read:
+with open('kinda_dizzy.txt') as read:
     for l in read.readlines():
         new_wheel = {'s': int(l.split()[0]), 'wedges': []}  # s means speed
         curr_wedge = []

@@ -8,7 +8,7 @@ from functools import reduce
 
 MOD = 47
 
-with open('rescueET.txt') as read:
+with open('rescue_et.txt') as read:
     comet = [ord(c) - 64 for c in read.readline().rstrip()]
     group = [ord(c) - 64 for c in read.readline().rstrip()]
 

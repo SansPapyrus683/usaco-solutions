@@ -5,7 +5,7 @@ LANG: PYTHON3
 """
 from collections import defaultdict
 
-with open('capitalismBeLike.txt') as read:
+with open('capitalism_be_like.txt') as read:
     owned = defaultdict(lambda: defaultdict(lambda: int()))  # owned[a][b] will give how much a owns of b
     companies = set()
     for v, line in enumerate(read):

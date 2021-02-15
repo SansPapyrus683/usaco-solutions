@@ -3,7 +3,7 @@ ID: kevinsh4
 TASK: zerosum
 LANG: PYTHON3
 """
-with open('zeroSoundsFuturistic.txt') as read:
+with open('game_theory.txt') as read:
     up_to_num = int(read.read().rstrip())  # don't question the name, zerosum just sounds kinda futuristic
 
 numbers = []

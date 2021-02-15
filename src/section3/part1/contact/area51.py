@@ -12,7 +12,7 @@ def chunks(lst, n):
 
 
 detected = ''
-with open('cantStopAll.txt') as read:
+with open('cant_stop_all.txt') as read:
     for v, line in enumerate(read):
         if v == 0:
             min_len, max_len, output_number = [int(i) for i in line.rstrip().split()]

@@ -3,7 +3,7 @@ ID: kevinsh4
 TASK: humble
 LANG: PYTHON3
 """
-with open('whyHumble.txt') as read:
+with open('why_humble.txt') as read:
     for v, line in enumerate(read):
         line = [int(i) for i in line.split()]
         if v == 0:

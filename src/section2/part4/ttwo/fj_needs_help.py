@@ -5,9 +5,10 @@ LANG: PYTHON3
 """
 from sys import exit
 
+TURNING = {'up': 'right', 'right': 'down', 'down': 'left', 'left': 'up'}  # turn to what?
+
 points = set()
-turning = {'up': 'right', 'right': 'down', 'down': 'left', 'left': 'up'}  # turn to what?
-with open('mentalWard.txt') as read:
+with open('mental_ward.txt') as read:
     for y, line in enumerate(read):
         for x, c in enumerate(line.rstrip()):
             if c != '*':  # don't add if obstacle
@@ -23,22 +24,22 @@ def move():
     for e in [farmer, cow]:
         if e[-1] == 'up':  # add moved if valid, if not just add the turned version of the point
             if (e[0], e[1] - 1) not in points:
-                new.append((e[0], e[1], turning[e[-1]]))
+                new.append((e[0], e[1], TURNING[e[-1]]))
             else:
                 new.append((e[0], e[1] - 1, e[-1]))
         elif e[-1] == 'down':
             if (e[0], e[1] + 1) not in points:
-                new.append((e[0], e[1], turning[e[-1]]))
+                new.append((e[0], e[1], TURNING[e[-1]]))
             else:
                 new.append((e[0], e[1] + 1, e[-1]))
         elif e[-1] == 'left':
             if (e[0] - 1, e[1]) not in points:
-                new.append((e[0], e[1], turning[e[-1]]))
+                new.append((e[0], e[1], TURNING[e[-1]]))
             else:
                 new.append((e[0] - 1, e[1], e[-1]))
         elif e[-1] == 'right':
             if (e[0] + 1, e[1]) not in points:
-                new.append((e[0], e[1], turning[e[-1]]))
+                new.append((e[0], e[1], TURNING[e[-1]]))
             else:
                 new.append((e[0] + 1, e[1], e[-1]))
     return new

@@ -5,7 +5,7 @@ LANG: PYTHON3
 good lord looking back at this i was so young and reckless
 """
 places = []
-with open('USACOIGuess.txt') as read:
+with open('swapping.txt') as read:
     for v, line in enumerate(read):
         if v != 0:
             places.append(int(line.rstrip()))

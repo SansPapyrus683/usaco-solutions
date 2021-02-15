@@ -5,17 +5,17 @@ LANG: PYTHON3
 """
 
 
-def possibleComb(initialComb, allCanUse):
-    for n in initialComb:
-        if n not in allCanUse:  # should never happen, but just a little check
+def possible_comb(initial_comb, all_can_use):
+    for n in initial_comb:
+        if n not in all_can_use:  # should never happen, but just a little check
             return False
-    top_three = int(''.join([str(i) for i in initialComb[:3]]))
-    bottom_ones = initialComb[3]
-    bottom_tens = initialComb[4]
+    top_three = int(''.join([str(i) for i in initial_comb[:3]]))
+    bottom_ones = initial_comb[3]
+    bottom_tens = initial_comb[4]
     intermediate_results = [top_three * bottom_ones, top_three * bottom_tens]
     final_result = intermediate_results[0] + 10 * intermediate_results[1]
     for n in str(intermediate_results[0]) + str(intermediate_results[1]) + str(final_result):
-        if int(n) not in allCanUse:
+        if int(n) not in all_can_use:
             return False
 
     if len(str(intermediate_results[0])) != 3 or len(str(intermediate_results[1])) != 3 or len(str(final_result)) != 4:
@@ -37,7 +37,7 @@ for _ in range(5):
 
 total = 0
 for c in poss_combinations:
-    if possibleComb(c, numbers):
+    if possible_comb(c, numbers):
         total += 1
 
 print(total)

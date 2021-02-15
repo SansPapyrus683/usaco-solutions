@@ -26,7 +26,7 @@ def remove_segment(all_stalls, occupied_ones):  # removes the longest unoccupied
     return sorted(all_stalls)
 
 
-with open('repairCosts.txt') as read:
+with open('repair_costs.txt') as read:
     board_num, stall_num, occupied_num = [int(i) for i in read.readline().split()]
     occupied = [int(read.readline()) for _ in range(occupied_num)]
 occupied.sort()

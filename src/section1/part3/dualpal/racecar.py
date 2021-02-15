@@ -24,7 +24,7 @@ def int2base(x, base):
     return ''.join(reversed(digits))
 
 
-with open('sameThing.txt') as read:
+with open('same_thing.txt') as read:
     first_n, number_at = [int(i) for i in read.readline().split()]
 
 dual_pals = []

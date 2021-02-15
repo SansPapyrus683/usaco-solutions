@@ -19,7 +19,7 @@ def rotate(square, amt=1):
     return square
 
 
-with open('optimusPrime.txt') as read:
+with open('optimus_prime.txt') as read:
     sideLen = int(read.readline())
     before = []
     for _ in range(sideLen):

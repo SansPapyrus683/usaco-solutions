@@ -5,7 +5,7 @@ LANG: PYTHON3
 """
 MAX_DIFF = 17
 
-with open('skidesign.in') as read:
+with open('crafty_fj.txt') as read:
     hills = [int(read.readline()) for _ in range(int(read.readline()))]
 
 lowest_cost = float('inf')

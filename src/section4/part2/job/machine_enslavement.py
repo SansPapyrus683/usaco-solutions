@@ -25,7 +25,7 @@ def machine_fin_times(machines: List[int], job_num: int) -> List[int]:
     return finish_times
 
 
-with open('terminators.txt') as read:
+with open('job.in') as read:
     jobs, a_num, b_num = [int(i) for i in read.readline().split()]
     machines = []
     for line in read.readlines():
@@ -42,4 +42,4 @@ print(b_fin_times)
 
 total_time = max(a + b for a, b in zip(a_fin_times, reversed(b_fin_times)))
 print(a_fin_times[-1], total_time)
-print(a_fin_times[-1], total_time, file=open('outputs.txt', 'w'))  # wow this is so concise though
+print(a_fin_times[-1], total_time, file=open('job.out', 'w'))  # wow this is so concise though
