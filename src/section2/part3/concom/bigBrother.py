@@ -18,30 +18,31 @@ with open('capitalismBeLike.txt') as read:
 prevFound = {}  # do some caching bc why not
 
 
-def findOwns(company):  # does simply bfs to figure out what others this company owns
-    global owned
+def find_owns(company):  # does simply bfs to figure out what others this company owns
+    global owned  # JESUS CHRIST A GLOBAL VARIABLE WHAT WAS I DOING BACK THEN
     visited = {company}
     frontier = [company]
-    sharesOwned = defaultdict(lambda: 0)
-    sharesOwned[company] = 100  # explicit lol
+    shares_owned = defaultdict(lambda: 0)
+    shares_owned[company] = 100  # explicit lol
     while frontier:
         for c in frontier:
             for share in owned[c]:
-                sharesOwned[share] += owned[c][share]  # add all shares that the company even remotely controls
+                shares_owned[share] += owned[c][share]  # add all shares that the company even remotely controls
 
-        inLine = []
-        for possPuppet in sharesOwned:
-            if sharesOwned[possPuppet] > 50 and possPuppet not in visited:
+        in_line = []
+        for possPuppet in shares_owned:
+            if shares_owned[possPuppet] > 50 and possPuppet not in visited:
                 visited.add(possPuppet)  # only search through puppet if puppet is controlled
-                inLine.append(possPuppet)
-        frontier = inLine
-    return [i for i in sharesOwned if sharesOwned[i] > 50 and i != company]
+                in_line.append(possPuppet)
+        frontier = in_line
+    return [i for i in shares_owned if shares_owned[i] > 50 and i != company]
 
-ownedPairs = []
+
+owned_pairs = []
 for co in companies:
-    ownedPairs.extend([(co, o) for o in findOwns(co)])  # just go through all companies, see how many they own
+    owned_pairs.extend([(co, o) for o in find_owns(co)])  # just go through all companies, see how many they own
 
-ownedPairs.sort()
+owned_pairs.sort()
 with open('outputs.txt', 'w') as written:
-    for p in ownedPairs:
+    for p in owned_pairs:
         written.write(' '.join([str(s) for s in p]) + '\n')

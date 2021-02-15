@@ -19,35 +19,36 @@ with open('sheGotMilk.txt') as read:
     distances = {d: dict(distances[d]) for d in distances}
 
 
-def findBarn(cowPos):
-    costs = {cowPos: 0}
-    frontier = [cowPos]
-    cameFrom = {cowPos: None}
+def find_barn(cow_pos):
+    costs = {cow_pos: 0}
+    frontier = [cow_pos]
+    came_from = {cow_pos: None}
 
     while frontier:  # dijkstra's or smth idk
-        inLine = []
+        in_line = []
         for current in frontier:  # also is adapted from this:
             # https://www.redblobgames.com/pathfinding/a-star/introduction.html
             if current == 'Z':
                 break
 
             for neighbor in distances[current]:
-                newCost = costs[current] + distances[current][neighbor]
+                new_cost = costs[current] + distances[current][neighbor]
 
-                if neighbor not in costs or newCost < costs[neighbor]:
-                    costs[neighbor] = newCost
-                    inLine.append(neighbor)
-                    cameFrom[neighbor] = current
-        frontier = inLine
+                if neighbor not in costs or new_cost < costs[neighbor]:
+                    costs[neighbor] = new_cost
+                    in_line.append(neighbor)
+                    came_from[neighbor] = current
+        frontier = in_line
     return costs['Z']
 
-wayHome = {}
+
+way_home = {}
 for p in pastures:
     if p.upper() == p and p != 'Z':
-        wayHome[p] = findBarn(p)
+        way_home[p] = find_barn(p)
 
 with open('outputs.txt', 'w') as written:
-    shortest = min(wayHome.values())
-    for p in wayHome:
-        if wayHome[p] == shortest:
+    shortest = min(way_home.values())
+    for p in way_home:
+        if way_home[p] == shortest:
             written.write('%s %i\n' % (p, shortest))

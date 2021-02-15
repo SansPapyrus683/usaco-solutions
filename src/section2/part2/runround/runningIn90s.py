@@ -6,27 +6,27 @@ LANG: PYTHON3
 from sys import exit
 
 with open('newLife.txt') as read:
-    startFrom = int(read.read().rstrip()) + 1  # we want strictly greater than so +1
+    start_from = int(read.read().rstrip()) + 1  # we want strictly greater than so +1
 
 
-def checkRun(n):
+def check_run(n):
     n = [int(x) for x in list(str(n))]
-    indexPos = 0
+    index_pos = 0
     visited = set()
     for i in range(len(n)):
-        indexPos = (n[indexPos] + indexPos) % len(n)
-        if n[indexPos] in visited:
+        index_pos = (n[index_pos] + index_pos) % len(n)
+        if n[index_pos] in visited:
             return False
-        visited.add(n[indexPos])
+        visited.add(n[index_pos])
     return True
 
 
 while True:
-    if len(set(list(str(startFrom)))) != len(list(str(startFrom))):  # if has repeating digits, don't even bother
-        startFrom += 1
+    if len(set(list(str(start_from)))) != len(list(str(start_from))):  # if has repeating digits, don't even bother
+        start_from += 1
         continue
-    if checkRun(startFrom):
+    if check_run(start_from):
         with open('outputs.txt', 'w') as written:
-            written.write(str(startFrom))
+            written.write(str(start_from))
             exit()
-    startFrom += 1
+    start_from += 1

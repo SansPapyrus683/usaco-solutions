@@ -9,22 +9,22 @@ with open('ceasarPuns.txt') as read:
     pageNum = int(read.read().rstrip())
 
 
-def romNum(num):  # converts normal to roman numerals
+def rom_num(num):  # converts normal to roman numerals (copied from internet lol)
     val = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1]
     syb = ["M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"]
-    romVer = ''  # apparently the just hardcoded the IV and stuff
+    rom_ver = ''
     i = 0
     while num > 0:
         for _ in range(num // val[i]):
-            romVer += syb[i]
+            rom_ver += syb[i]
             num -= val[i]
         i += 1
-    return romVer
+    return rom_ver
 
 
 symbols = defaultdict(lambda: 0)
 for p in range(pageNum + 1):
-    for char in romNum(p):  # goes thru each page, adding the amt of symbols required to a defaultdict
+    for char in rom_num(p):  # goes thru each page, adding the amt of symbols required to a defaultdict
         symbols[char] += 1
 
 with open('outputs.txt', 'w') as written:

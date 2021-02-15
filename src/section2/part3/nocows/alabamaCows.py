@@ -2,34 +2,36 @@
 ID: kevinsh4
 TASK: nocows
 LANG: PYTHON3
+iirc i just gave up and copied the official solution
 """
 from collections import defaultdict
 
+MOD = 9901
+
 with open('banjos.txt') as read:
-    cowNum, genNum = [int(c) for c in read.read().rstrip().split()]
+    cow_num, gen_num = [int(c) for c in read.read().rstrip().split()]
 
-treeTable = defaultdict(lambda: defaultdict(lambda: 0))  # the treeTable[i][cowN] is # of trees of depth i and cowN cowN
-shallowerTrees = defaultdict(lambda: defaultdict(lambda: 0))  # the treeTable[i][cowN] still has cowN cowN, but all's
+tree_table = defaultdict(lambda: defaultdict(lambda: 0))  # the treeTable[i][cowN] is # of trees of depth i and cowN cowN
+shallower_trees = defaultdict(lambda: defaultdict(lambda: 0))  # the treeTable[i][cowN] still has cowN cowN, but all's
 # depth <= i
-treeTable[1][1] = 1
+tree_table[1][1] = 1
 
-for i in range(2, genNum + 1):  # we'll search the depths of the trees one at a time
-    for cowN in range(1, cowNum + 1, 2):
+for i in range(2, gen_num + 1):  # we'll search the depths of the trees one at a time
+    for cow_n in range(1, cow_num + 1, 2):
         other = 1
-        while other <= (cowN - 1 - other):  # calcs all the number of trees smaller
-            if other != (cowN - 1 - other):
+        while other <= (cow_n - 1 - other):  # calcs all the number of trees smaller
+            if other != (cow_n - 1 - other):
                 multiplier = 2
             else:
                 multiplier = 1
-            treeTable[i][cowN] += multiplier * (shallowerTrees[i - 2][other] * treeTable[i - 1][cowN - 1 - other]
-                                                + treeTable[i - 1][other] * shallowerTrees[i - 2][cowN - 1 - other]
-                                                + treeTable[i - 1][other] * treeTable[i - 1][cowN - 1 - other])
-            treeTable[i][cowN] %= 9901
+            tree_table[i][cow_n] += multiplier * (shallower_trees[i - 2][other] * tree_table[i - 1][cow_n - 1 - other]
+                                                  + tree_table[i - 1][other] * shallower_trees[i - 2][cow_n - 1 - other]
+                                                  + tree_table[i - 1][other] * tree_table[i - 1][cow_n - 1 - other])
+            tree_table[i][cow_n] %= MOD
             other += 2
 
-    for other in range(cowNum + 1):
-        shallowerTrees[i - 1][other] += treeTable[i - 1][other] + shallowerTrees[i - 2][other]
-        shallowerTrees[i - 1][other] %= 9901
+    for other in range(cow_num + 1):
+        shallower_trees[i - 1][other] += tree_table[i - 1][other] + shallower_trees[i - 2][other]
+        shallower_trees[i - 1][other] %= MOD
 
-with open('outputs.txt', 'w') as written:
-    written.write(str(treeTable[genNum][cowNum]) + '\n')
+print(tree_table[gen_num][cow_num], file=open('outputs.txt', 'w'))

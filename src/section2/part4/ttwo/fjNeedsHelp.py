@@ -5,7 +5,7 @@ LANG: PYTHON3
 """
 from sys import exit
 
-points = set()  # set bc fast lookup
+points = set()
 turning = {'up': 'right', 'right': 'down', 'down': 'left', 'left': 'up'}  # turn to what?
 with open('mentalWard.txt') as read:
     for y, line in enumerate(read):
@@ -13,9 +13,10 @@ with open('mentalWard.txt') as read:
             if c != '*':  # don't add if obstacle
                 points.add((x, y))
                 if c == 'F':
-                    farmer = originalF = (x, y, 'up')  # default orientation is up
+                    farmer = original_f = (x, y, 'up')  # default orientation is up
                 elif c == 'C':
-                    cow = originalC = (x, y, 'up')
+                    cow = original_c = (x, y, 'up')
+
 
 def move():
     new = []
@@ -41,6 +42,7 @@ def move():
             else:
                 new.append((e[0] + 1, e[1], e[-1]))
     return new
+
 
 written = open('outputs.txt', 'w')
 count = 1

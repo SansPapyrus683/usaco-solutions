@@ -19,41 +19,41 @@ with open('hoesMad.txt') as read:
             width, height = [int(i)*2 for i in line.rstrip().split()]
 
 
-def findNeighbors(pt: tuple) -> set:
-    possibleNeighbors = {
+def find_neighbors(pt: tuple) -> set:
+    possible_neighbors = {
         (pt[0] - 1, pt[1]),
         (pt[0] + 1, pt[1]),
         (pt[0], pt[1] - 1),
         (pt[0], pt[1] + 1),
     }
-    return possibleNeighbors.intersection(points)
+    return possible_neighbors.intersection(points)
 
 
 frontier = []  # called frontier because that's what we'll expand from
 for p in points:
-    for n in findNeighbors(p):
+    for n in find_neighbors(p):
         if n[0] in [0, width] or n[1] in [0, height]:
             frontier.append(p)
 
-killList = []
+kill_list = []
 for p in points:
     if p[0] in [0, width] or p[1] in [0, height]:
-        killList.append(p)
+        kill_list.append(p)
 
-for target in killList:
+for target in kill_list:
     points.remove(target)
 
 visited = set(frontier)
-expansionCount = 0
+expansion_count = 0
 while frontier:
-    inLine = []
+    in_line = []
     for p in frontier:
-        for n in findNeighbors(p):
+        for n in find_neighbors(p):
             if n not in visited:
-                inLine.append(n)
+                in_line.append(n)
                 visited.add(n)
-    frontier = inLine
-    expansionCount += 1
+    frontier = in_line
+    expansion_count += 1
 
 with open('outputs.txt', 'w') as written:
-    written.write(str((expansionCount + 1) // 2) + '\n')
+    written.write(str((expansion_count + 1) // 2) + '\n')

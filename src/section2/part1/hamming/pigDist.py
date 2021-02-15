@@ -15,15 +15,15 @@ with open('whosHammingAnyways.txt') as read:
 
 def hamming(a, b):  # outputs hamming dist between two numbers (base 10)
     first, second = [int(i) for i in str(bin(a)[2:])], [int(i) for i in str(bin(b)[2:])]
-    conformLen = max(len(i) for i in [first, second])
+    conform_len = max(len(i) for i in [first, second])
     for n in first, second:
-        while len(n) < conformLen:
+        while len(n) < conform_len:
             n.insert(0, 0)
-    hamCount = 0
+    ham_count = 0
     for index, n in enumerate(first):
         if second[index] != n:
-            hamCount += 1
-    return hamCount
+            ham_count += 1
+    return ham_count
 
 
 def chunks(lst, n):  # just for formatting output

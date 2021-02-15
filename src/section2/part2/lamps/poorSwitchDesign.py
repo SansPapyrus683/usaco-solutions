@@ -4,29 +4,30 @@ TASK: lamps
 LANG: PYTHON3
 """
 with open('nintendoSwitch.txt') as read:
-    for lineNum, line in enumerate(read):
-        if lineNum == 0:
+    for line_num, line in enumerate(read):
+        if line_num == 0:
             lamps = tuple(True for _ in range(int(line.rstrip())))  # i just learned about for _ in range() lol
-        elif lineNum == 1:
-            offOnTimes = int(line.rstrip())
-        elif lineNum == 2:
-            onLamps = [int(i) - 1 for i in line.rstrip().split()[:-1]]
-        elif lineNum == 3:  # minus one because aRrAYS stARt At 0
+        elif line_num == 1:
+            off_on_times = int(line.rstrip())
+        elif line_num == 2:
+            on_lamps = [int(i) - 1 for i in line.rstrip().split()[:-1]]
+        elif line_num == 3:  # minus one because aRrAYS stARt At 0
             offLamps = [int(i) - 1 for i in line.rstrip().split()[:-1]]
 
 
-goodStates = set()
+good_states = set()
 frontier = [lamps]
-cachedN = {}  # cached neighbors
+cached_n = {}  # cached neighbors
 
-def stateNeighbors(currStates):
-    global cachedN
-    if currStates in cachedN:  # do some caching to speed up runtime
-        return cachedN[currStates]
-    second = list(currStates)
-    third = list(currStates)
-    fourth = list(currStates)
-    for v, l in enumerate(currStates):  # make all the switch lists in one iteration
+
+def state_neighbors(curr_states):
+    global cached_n
+    if curr_states in cached_n:  # do some caching to speed up runtime
+        return cached_n[curr_states]
+    second = list(curr_states)
+    third = list(curr_states)
+    fourth = list(curr_states)
+    for v, l in enumerate(curr_states):  # make all the switch lists in one iteration
         if (v + 1) % 2:
             second[v] = not l
             third[v] = l
@@ -38,19 +39,20 @@ def stateNeighbors(currStates):
         else:
             fourth[v] = l
     # below line caches the results because the program goes through many neighbors many times
-    cachedN[currStates] = (tuple(not l for l in currStates), tuple(second), tuple(third), tuple(fourth))
-    return tuple(not l for l in currStates), tuple(second), tuple(third), tuple(fourth)
+    cached_n[curr_states] = (tuple(not l for l in curr_states), tuple(second), tuple(third), tuple(fourth))
+    return tuple(not l for l in curr_states), tuple(second), tuple(third), tuple(fourth)
 
-for c in range(offOnTimes):  # do the actual switching and stuff
-    inLine = []
+
+for c in range(off_on_times):  # do the actual switching and stuff
+    in_line = []
     for state in frontier:
-        for n in stateNeighbors(state):
-            inLine.append(n)
-    frontier = list(set(inLine))
+        for n in state_neighbors(state):
+            in_line.append(n)
+    frontier = list(set(in_line))
 
 
 for arrangement in frontier:
-    for req in onLamps:  # test for validity of lamp states
+    for req in on_lamps:  # test for validity of lamp states
         if not arrangement[req]:
             break
     else:
@@ -58,14 +60,13 @@ for arrangement in frontier:
             if arrangement[req]:
                 break
         else:
-            goodStates.add(arrangement)
+            good_states.add(arrangement)
 
-goodStates = list(goodStates)
-goodStates.sort()
+good_states = sorted(good_states)
 with open('outputs.txt', 'w') as written:
-    if not goodStates:
+    if not good_states:
         written.write('IMPOSSIBLE\n')
-    for state in goodStates:
+    for state in good_states:
         state = list(state)
         for v, i in enumerate(state):
             state[v] = 1 if i else 0

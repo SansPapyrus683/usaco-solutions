@@ -4,29 +4,29 @@ TASK: fracdec
 LANG: PYTHON3
 """
 n, d = [int(i) for i in open('fractionsBetter.txt').read().rstrip().split()]
-intPart = 0
+int_part = 0
 while n >= d:  # get out the whole number part
-    intPart += 1
+    int_part += 1
     n -= d
 
 remains = [n * 10]
-memberCheck = {n * 10}  # set member checks faster
-newRemain = n * 10
-decPart = ''
+member_check = {n * 10}  # set member checks faster
+new_remain = n * 10
+dec_part = ''
 while True:
     decimal = 0
-    while newRemain >= d:
-        newRemain -= d
+    while new_remain >= d:
+        new_remain -= d
         decimal += 1
-    newRemain *= 10  # "drop the zero", which is really just mul-ing the inital one by 10
-    decPart += str(decimal)
-    if newRemain in memberCheck:  # did we reach something already reached?
+    new_remain *= 10  # "drop the zero", which is really just mul-ing the inital one by 10
+    dec_part += str(decimal)
+    if new_remain in member_check:  # did we reach something already reached?
         for v, c in enumerate(remains):
-            if newRemain == c:  # see where to cut the repeat off
-                repeatStart = v
+            if new_remain == c:  # see where to cut the repeat off
+                repeat_start = v
         break
-    remains.append(newRemain)
-    memberCheck.add(newRemain)
+    remains.append(new_remain)
+    member_check.add(new_remain)
 
 
 def chunks(lst, n):
@@ -35,11 +35,11 @@ def chunks(lst, n):
 
 
 with open('outputs.txt', 'w') as written:
-    if decPart[repeatStart:] != '0':
-        output = str(intPart) + '.' + decPart[:repeatStart] + '(' + decPart[repeatStart:] + ')'
+    if dec_part[repeat_start:] != '0':
+        output = str(int_part) + '.' + dec_part[:repeat_start] + '(' + dec_part[repeat_start:] + ')'
     else:
-        if not decPart[:-1]:  # add a zero to prevent outputs like 3.
-            decPart += '0'
-        output = str(intPart) + '.' + decPart[:-1]
+        if not dec_part[:-1]:  # add a zero to prevent outputs like 3.
+            dec_part += '0'
+        output = str(int_part) + '.' + dec_part[:-1]
     for l in chunks(output, 76):
         written.write(l + '\n')

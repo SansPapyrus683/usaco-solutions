@@ -26,67 +26,68 @@ with open('holyMusicStops.txt') as read:
                     elif w == 8:
                         walls[(v, x)].add((v + 1, x))  # zeroes mean they're on the border or smth like that
         else:
-            maxWidth, maxHeight = [int(i) + 1 for i in row.rstrip().split()]
+            max_width, max_height = [int(i) + 1 for i in row.rstrip().split()]
 
 
-def findRoomNeighbors(cell):
+def room_neighbors(cell):
     poss = {c for c in
             [(cell[0] - 1, cell[1]), (cell[0] + 1, cell[1]), (cell[0], cell[1] - 1), (cell[0], cell[1] + 1)]
             if c not in walls[cell]}
     return poss
 
 
-biggestSize = 0
+biggest = 0
 color = 1
-paintedCastle = {i:None for i in castle}
-sizePaints = {}
-for mini in paintedCastle:
-    if not paintedCastle[mini]:
+painted = {i: None for i in castle}
+size_paints = {}
+for mini in painted:
+    if not painted[mini]:
         frontier = [mini]
-        paintedCastle[mini] = color
-        sizeCount = 1
+        painted[mini] = color
+        size_count = 1
         visited = {mini}
         while frontier:
-            inLine = []
+            in_line = []
             for c in frontier:
-                for n in findRoomNeighbors(c):
+                for n in room_neighbors(c):
                     if n not in visited:
-                        inLine.append(n)
+                        in_line.append(n)
                         visited.add(n)
-                        paintedCastle[n] = color
-                        sizeCount += 1
-            frontier = inLine
-        if sizeCount > biggestSize:
-            biggestSize = sizeCount
-        sizePaints[color] = sizeCount
+                        painted[n] = color
+                        size_count += 1
+            frontier = in_line
+        if size_count > biggest:
+            biggest = size_count
+        size_paints[color] = size_count
         color += 1
 
-written.write(str(color - 1) + '\n' + str(biggestSize) + '\n')  # color - 1 because after the last room, it's still +1
-bigRooms = {}
-for cellWalls in walls.items():
-    for pair in [(cellWalls[0], w) for w in cellWalls[1]]:
-        if not {maxWidth, 0}.intersection({i[1] for i in pair}) and not{maxHeight, 0}.intersection({i[0] for i in pair}):
-            if paintedCastle[pair[0]] != paintedCastle[pair[1]]:
-                bigRooms[pair] = sizePaints[paintedCastle[pair[0]]] + sizePaints[paintedCastle[pair[1]]]
+written.write(str(color - 1) + '\n' + str(biggest) + '\n')  # color - 1 because after the last room, it's still +1
+big_rooms = {}
+for cell_walls in walls.items():
+    for pair in [(cell_walls[0], w) for w in cell_walls[1]]:
+        if not {max_width, 0}.intersection({i[1] for i in pair}) and \
+                not {max_height, 0}.intersection({i[0] for i in pair}):
+            if painted[pair[0]] != painted[pair[1]]:
+                big_rooms[pair] = size_paints[painted[pair[0]]] + size_paints[painted[pair[1]]]
 
-optimalSize = max(i for i in bigRooms.values())
-written.write(str(max(i for i in bigRooms.values())) + '\n')
-optimalWalls = [p for p in bigRooms if bigRooms[p] == optimalSize]
-wallCells = set()  # cells that have an optimal wall next to them
-primeForOutput = {}
-for w in optimalWalls:
+optimal_size = max(i for i in big_rooms.values())
+written.write(str(max(i for i in big_rooms.values())) + '\n')
+optimal_walls = [p for p in big_rooms if big_rooms[p] == optimal_size]
+wall_cells = set()  # cells that have an optimal wall next to them
+prime_for_output = {}
+for w in optimal_walls:
     if w[0][1] != w[1][1]:  # the cells are in a other-right orientation
-        wallCells.add(w[0])
-        primeForOutput[w[0]] = 'E'
+        wall_cells.add(w[0])
+        prime_for_output[w[0]] = 'E'
     else:  # the cells are in a top-down orientation
-        wallCells.add(w[1])
-        primeForOutput[w[1]] = 'N'
+        wall_cells.add(w[1])
+        prime_for_output[w[1]] = 'N'
 
-for x in range(1, maxWidth):
-    for y in range(maxHeight - 1, 0, -1):
-        if (y, x) in wallCells:
-            if ((y, x), (y-1, x)) in optimalWalls:  # might, just might it be a top-down? we prioritize those
+for x in range(1, max_width):
+    for y in range(max_height - 1, 0, -1):
+        if (y, x) in wall_cells:
+            if ((y, x), (y - 1, x)) in optimal_walls:  # might, just might it be a top-down? we prioritize those
                 written.write(str(y) + ' ' + str(x) + ' N\n')
                 exit()
-            written.write(str(y) + ' ' + str(x) + ' ' + primeForOutput[(y, x)] + '\n')
+            written.write(str(y) + ' ' + str(x) + ' ' + prime_for_output[(y, x)] + '\n')
             exit()
