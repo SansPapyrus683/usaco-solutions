@@ -4,14 +4,14 @@ with open('breedflip.in') as read:
         if v == 1:
             needed = tuple(c == 'H' for c in line.rstrip())  # holsteins be false, guernseys be true
         elif v == 2:
-            haveRN = tuple(c == 'H' for c in line.rstrip())
+            have_rn = tuple(c == 'H' for c in line.rstrip())
 
-differenceList = [v for v, c in enumerate(haveRN) if needed[v] != c]  # true if different, false it not
+diff_list = [v for v, c in enumerate(have_rn) if needed[v] != c]  # true if different, false it not
 
 consec = []
 curr = []
 firstTime = True
-for v, b in enumerate(differenceList):
+for v, b in enumerate(diff_list):
     if firstTime:
         curr.append(b)
         firstTime = False

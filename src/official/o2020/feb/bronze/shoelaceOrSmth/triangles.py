@@ -21,7 +21,7 @@ def slope(p1, p2):
     return s
 
 
-maxArea = 0
+max_area = 0
 for (a, b, c) in combinations(coordinates, 3):
     if slope(a, b) == slope(b, c):  # if they're collinear don't even bother
         continue
@@ -43,7 +43,7 @@ for (a, b, c) in combinations(coordinates, 3):
             secondLen = abs(a[0] - c[0])
         possArea = firstLen * secondLen
 
-    maxArea = max(maxArea, possArea)
+    max_area = max(max_area, possArea)
 
-with open('triangles.out', 'w') as written:
-    written.write(str(maxArea) + '\n')
+print(max_area)
+print(max_area, file=open('triangles.out', 'w'))

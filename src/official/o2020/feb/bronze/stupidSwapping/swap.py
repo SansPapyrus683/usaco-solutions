@@ -4,25 +4,25 @@ with open('swap.in') as read:
         if v == 0:
             cowNumber, swapTimes = tuple(int(i) for i in line.rstrip().split())
         elif v == 1:
-            ASlice = tuple(int(i) for i in line.rstrip().split())
+            a_slice = tuple(int(i) for i in line.rstrip().split())
         elif v == 2:
-            BSlice = tuple(int(i) for i in line.rstrip().split())
+            b_slice = tuple(int(i) for i in line.rstrip().split())
 
-afterPos = [None for _ in range(cowNumber)]
+after_pos = [None for _ in range(cowNumber)]
 for i in range(1, cowNumber + 1):
     positions = []
-    currPos = i  # this position starts at 1, not 0
+    curr_pos = i  # this position starts at 1, not 0
     while True:
-        if ASlice[0] <= currPos <= ASlice[1]:
-            currPos = ASlice[1] - (currPos - ASlice[0])
-        if BSlice[0] <= currPos <= BSlice[1]:
-            currPos = BSlice[1] - (currPos - BSlice[0])
-        positions.append(currPos)
-        if positions.count(currPos) == 2:  # we've reached a cycle
+        if a_slice[0] <= curr_pos <= a_slice[1]:
+            curr_pos = a_slice[1] - (curr_pos - a_slice[0])
+        if b_slice[0] <= curr_pos <= b_slice[1]:
+            curr_pos = b_slice[1] - (curr_pos - b_slice[0])
+        positions.append(curr_pos)
+        if positions.count(curr_pos) == 2:  # we've reached a cycle
             del positions[-1]
-            afterPos[positions[swapTimes % len(positions) - 1] - 1] = i  # the two minus one's are bc of array indexes
+            after_pos[positions[swapTimes % len(positions) - 1] - 1] = i  # the two minus one's are bc of array indexes
             break
 
 with open('swap.out', 'w') as written:
-    for pos in afterPos:
+    for pos in after_pos:
         written.write(str(pos) + '\n')

@@ -2,41 +2,41 @@
 with open('berries.in') as read:
     for v, l in enumerate(read):
         if v == 0:
-            basketNum = int(l.split()[1])
+            basket_num = int(l.split()[1])
         else:
             trees = [int(i) for i in l.split()]
-            bestTree = max(trees)
+            best_tree = max(trees)
             trees.sort(reverse=True)
-            trees = trees[:basketNum]  # bessie can only fill so many baskets anyways
+            trees = trees[:basket_num]  # bessie can only fill so many baskets anyways
 
-maxBerries = 0
-for b in range(1, bestTree + 1):  # just try to give elsie no more than bessie bc why would we do that
-    tempTrees = trees.copy()
-    basketsLeft = basketNum
-    gottenBerries = 0
-    for v, t in enumerate(tempTrees):
-        if not basketsLeft:  # ran out of baskets to fill with just b berries
+max_berries = 0
+for b in range(1, best_tree + 1):  # just try to give elsie no more than bessie bc why would we do that
+    temp_trees = trees.copy()
+    baskets_left = basket_num
+    gotten_berries = 0
+    for v, t in enumerate(temp_trees):
+        if not baskets_left:  # ran out of baskets to fill with just b berries
             break
 
         for _ in range(t // b):
-            if not basketsLeft:
+            if not baskets_left:
                 break
 
-            if basketsLeft <= basketNum // 2:
-                gottenBerries += b
-            tempTrees[v] -= b
-            basketsLeft -= 1
+            if baskets_left <= basket_num // 2:
+                gotten_berries += b
+            temp_trees[v] -= b
+            baskets_left -= 1
     else:
-        if basketsLeft:
-            tempTrees.sort(reverse=True)
-            for t in tempTrees:
-                if not basketsLeft:
+        if baskets_left:
+            temp_trees.sort(reverse=True)
+            for t in temp_trees:
+                if not baskets_left:
                     break
-                if basketsLeft <= basketNum // 2:
-                    gottenBerries += t
-                basketsLeft -= 1
+                if baskets_left <= basket_num // 2:
+                    gotten_berries += t
+                baskets_left -= 1
 
-    maxBerries = max(maxBerries, gottenBerries)
+    max_berries = max(max_berries, gotten_berries)
 
-print(maxBerries)
-print(maxBerries, file=open('berries.out', 'w'))
+print(max_berries)
+print(max_berries, file=open('berries.out', 'w'))

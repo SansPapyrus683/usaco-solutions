@@ -8,7 +8,7 @@ with open('dishes.in') as read:
 # something like:
 # 1 5
 # 2 7 9, so that it can be made into an increasing subsequence
-lastFinished = -1
+last_finished = -1
 stacks = deque([deque([dishes[0]])])
 washed = 1
 for i in range(1, len(dishes)):
@@ -17,7 +17,7 @@ for i in range(1, len(dishes)):
         stacks.append(deque([dish]))
 
     elif dish < stacks[0][0]:
-        if dish < lastFinished:  # oh crap, we can't insert this dish anywhere
+        if dish < last_finished:  # oh crap, we can't insert this dish anywhere
             break
         stacks[0].appendleft(dish)  # i know i could use a LifoQueue or some other stuff but this seems more intuitive
 
@@ -32,15 +32,15 @@ for i in range(1, len(dishes)):
             else:
                 hi = mid
 
-        insertInd = bisect(stacks[lo], dish)
-        if insertInd == 0:
+        insert_ind = bisect(stacks[lo], dish)
+        if insert_ind == 0:
             stacks[lo].appendleft(dish)
         else:
-            lastFinished = stacks[lo - 1][-1]
+            last_finished = stacks[lo - 1][-1]
             for _ in range(lo):
                 stacks.popleft()
-            lastFinished = stacks[0][insertInd - 1]
-            for _ in range(insertInd):
+            last_finished = stacks[0][insert_ind - 1]
+            for _ in range(insert_ind):
                 stacks[0].popleft()
             stacks[0].appendleft(dish)
     washed += 1

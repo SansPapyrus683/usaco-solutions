@@ -8,7 +8,8 @@ with open('gymnastics.in') as read:
 consistent = 0
 for c1, c2 in combinations(range(cowNum), 2):
     # this is really inefficient but given the bounds, it doesn't really matter
-    consistent += all(s.index(c1) < s.index(c2) for s in sessions) or all(s.index(c1) > s.index(c2) for s in sessions)
+    consistent += all(s.index(c1) < s.index(c2) for s in sessions) or \
+                  all(s.index(c1) > s.index(c2) for s in sessions)
 
 print(consistent)
 print(consistent, file=open('gymnastics.out', 'w'))
