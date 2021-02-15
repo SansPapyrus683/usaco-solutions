@@ -75,7 +75,9 @@ public final class LightsOut {
                 {p2[0] == p3[0], (p2[0] - p3[0]) + (p2[1] - p3[1]) < 0}
         };
         // hahahaha (there probably is a better way to do this but it works so idc [and tbh it isn't even that bad])
-        return Arrays.deepEquals(changes, new boolean[][] {{true, true}, {false, true}}) || Arrays.deepEquals(changes, new boolean[][] {{false, true}, {true, false}}) || 
-                Arrays.deepEquals(changes, new boolean[][] {{true, false}, {false, false}}) || Arrays.deepEquals(changes, new boolean[][] {{false, false}, {true, true}});
+        return Arrays.deepEquals(changes, new boolean[][] {{true, true}, {false, true}})
+                || Arrays.deepEquals(changes, new boolean[][] {{false, true}, {true, false}})
+                || Arrays.deepEquals(changes, new boolean[][] {{true, false}, {false, false}})
+                || Arrays.deepEquals(changes, new boolean[][] {{false, false}, {true, true}});
     }
 }
