@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2018 dec gold
-public class Cowpatibility {
+public final class Cowpatibility {
     // sauce: https://www.geeksforgeeks.org/print-all-possible-combinations-of-r-elements-in-a-given-array-of-size-n/
     private static final class Combo {
         private static ArrayList<int[]> combos = new ArrayList<>();

@@ -3,7 +3,7 @@ package official.o2017.dec.gold.tenseExchange;
 import java.io.*;
 import java.util.*;
 
-public class PiePie {
+public final class PiePie {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("piepie.in"));
