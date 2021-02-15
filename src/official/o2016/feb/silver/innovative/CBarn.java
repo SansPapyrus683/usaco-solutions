@@ -1,4 +1,4 @@
-package official.o2016.feb.silver.whyCirclesTho;
+package official.o2016.feb.silver.innovative;
 
 import java.io.*;
 import java.util.*;
@@ -16,7 +16,6 @@ public final class CBarn {
             barn[i] = new int[] {Integer.parseInt(read.readLine()), 0};
         }
 
-        
         long energy = 0;  // long for gold accommodation
         while (Arrays.stream(barn).anyMatch(i -> i[0] == 0)) {
             // keep on going around the barn counterclockwise until we get no 0's (which means every room's filled)
