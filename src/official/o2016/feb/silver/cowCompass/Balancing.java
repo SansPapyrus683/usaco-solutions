@@ -4,11 +4,13 @@ import java.io.*;
 import java.util.*;
 
 // 2016 feb silver (this is REALLY inefficient but what can you do about it lol)
+// TODO: make a better sol for this jesus christ it's horrid
 public final class Balancing {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("balancing.in"));
-        int cowNum = Integer.parseInt(read.readLine());
+        // stringtokenizer for bronze accommodation
+        int cowNum = Integer.parseInt(new StringTokenizer(read.readLine()).nextToken());
         int[][] cows = new int[cowNum][2];
         for (int c = 0; c < cowNum; c++) {
             cows[c] = Arrays.stream(read.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
