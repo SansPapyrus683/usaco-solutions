@@ -68,7 +68,6 @@ int main() {
     for (auto ending : frontier) {
         poss_readings.insert(ending.second.first);
     }
-    std::ofstream written("backforth.out");
-    written << poss_readings.size() << endl;
+    std::ofstream("backforth.out") << poss_readings.size() << endl;
     cout << poss_readings.size() << endl;
 }

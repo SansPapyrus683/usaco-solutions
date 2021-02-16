@@ -108,7 +108,6 @@ int main() {
     }
     long long min_path_sum = FileSys(contains, file_dir_lens).min_total_path();
 
-    std::ofstream written("dirtraverse.out");
-    written << min_path_sum << endl;
+    std::ofstream("dirtraverse.out") << min_path_sum << endl;
     cout << min_path_sum << endl;
 }

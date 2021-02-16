@@ -83,7 +83,6 @@ int main() {
     WireSystem system(friends);
     int min_cost = system.min_cost();
 
-    std::ofstream written("haywire.out");
-    written << min_cost << endl;
+    std::ofstream("haywire.out") << min_cost << endl;
     cout << min_cost << endl;
 }

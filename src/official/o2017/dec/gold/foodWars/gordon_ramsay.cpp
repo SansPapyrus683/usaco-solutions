@@ -43,7 +43,6 @@ int main() {
         }
     }
 
-    std::ofstream written("hayfeast.out");
-    written << min_spiciness << endl;
+    std::ofstream("hayfeast.out") << min_spiciness << endl;
     cout << min_spiciness << endl;
 }

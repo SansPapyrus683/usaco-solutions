@@ -52,7 +52,6 @@ int main() {
             break;
         }
     }
-    std::ofstream written("factory.out");
-    written << valid << endl;
+    std::ofstream("factory.out") << valid << endl;
     cout << valid << endl;
 }

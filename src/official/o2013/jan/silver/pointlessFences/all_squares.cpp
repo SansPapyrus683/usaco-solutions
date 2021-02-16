@@ -130,7 +130,6 @@ int main() {
                                            Point(p.second.x + half_width, p.second.y + half_width));
         }
     }
-    std::ofstream written("squares.out");
-    written << inter_area << endl;
+    std::ofstream("squares.out") << inter_area << endl;
     cout << inter_area << endl;
 }

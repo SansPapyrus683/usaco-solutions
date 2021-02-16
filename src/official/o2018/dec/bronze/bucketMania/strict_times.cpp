@@ -43,7 +43,6 @@ int main() {
             idle_buckets += info.second;
         }
     }
-    std::ofstream written("blist.out");
-    written << total_buckets << endl;
+    std::ofstream("blist.out") << total_buckets << endl;
     cout << total_buckets << endl;
 }
