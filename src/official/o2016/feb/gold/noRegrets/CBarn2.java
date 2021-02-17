@@ -5,22 +5,6 @@ import java.util.*;
 
 // 2016 feb gold (goddamn this solution is extremely convoluted)
 public final class CBarn2 {
-    private static class ConsecQueries {
-        private long[] prefArr;
-        private long[] consecPrefArr;
-        public ConsecQueries(int[] arr) {
-            prefArr = new long[arr.length + 1];
-            consecPrefArr = new long[arr.length + 1];
-            for (int i = 0; i < arr.length; i++) {
-                prefArr[i + 1] = prefArr[i] + arr[i];
-                consecPrefArr[i + 1] = consecPrefArr[i] + (long) (i + 1) * arr[i];
-            }
-        }
-
-        public long query(int start, int end) {  // bounds'll be inclusive
-            return (consecPrefArr[end + 1] - consecPrefArr[start]) - start * (prefArr[end + 1] - prefArr[start]);
-        }
-    }
     public static void main(String[] args) throws IOException {
         long timeStart = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("cbarn2.in"));
@@ -89,5 +73,23 @@ public final class CBarn2 {
             result[i] = arr[(i + dist) % arr.length];
         }
         return result;
+    }
+}
+
+class ConsecQueries {
+    private long[] prefArr;
+    private long[] consecPrefArr;
+
+    public ConsecQueries(int[] arr) {
+        prefArr = new long[arr.length + 1];
+        consecPrefArr = new long[arr.length + 1];
+        for (int i = 0; i < arr.length; i++) {
+            prefArr[i + 1] = prefArr[i] + arr[i];
+            consecPrefArr[i + 1] = consecPrefArr[i] + (long) (i + 1) * arr[i];
+        }
+    }
+
+    public long query(int start, int end) {  // bounds'll be inclusive
+        return (consecPrefArr[end + 1] - consecPrefArr[start]) - start * (prefArr[end + 1] - prefArr[start]);
     }
 }

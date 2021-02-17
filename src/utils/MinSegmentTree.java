@@ -5,7 +5,8 @@ import java.util.Collections;
 import java.util.Comparator;
 
 /**
- * this does pretty much the same thing as the sum segment tree<br>
+ * A data structure that allows for efficient answering of range minimum queries.
+ * explanation here: https://cp-algorithms.com/data_structures/segment_tree.html
  * except for this one it returns the min or max of a range (updates are still a thing, don't worry)
  */
 public final class MinSegmentTree {

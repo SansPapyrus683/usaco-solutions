@@ -4,37 +4,6 @@ import java.io.*;
 import java.util.*;
 
 public final class Sort {
-    /**
-     * sauce is over at {@link utils.BinaryIndexedTree} and there's also a bad explanation
-     */
-    private static class BITree {
-        private final int[] treeThing;
-        private final int[] actualArr;
-        private final int size;
-        public BITree(int size) {
-            treeThing = new int[size + 1];  // to make stuff easier we'll just make it 1-indexed
-            actualArr = new int[size];
-            this.size = size;
-        }
-
-        public void increment(int ind, int val) {
-            actualArr[ind] += val;
-            ind++;  // have the driver code not worry about 1-indexing
-            for (; ind <= size; ind += ind & -ind) {
-                treeThing[ind] += val;
-            }
-        }
-
-        public int query(int ind) {  // the bound is inclusive i think (returns sum of everything from 0 to ind)
-            ind++;
-            int sum = 0;
-            for (; ind > 0; ind -= ind & -ind) {
-                sum += treeThing[ind];
-            }
-            return sum;
-        }
-    }
-
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("sort.in"));
@@ -58,5 +27,33 @@ public final class Sort {
         written.close();
         System.out.println(mooTimes);
         System.out.printf("why do you do this to me bessie: %d ms%n", System.currentTimeMillis() - start);
+    }
+}
+
+class BITree {
+    private final int[] treeThing;
+    private final int[] actualArr;
+    private final int size;
+    public BITree(int size) {
+        treeThing = new int[size + 1];  // to make stuff easier we'll just make it 1-indexed
+        actualArr = new int[size];
+        this.size = size;
+    }
+
+    public void increment(int ind, int val) {
+        actualArr[ind] += val;
+        ind++;  // have the driver code not worry about 1-indexing
+        for (; ind <= size; ind += ind & -ind) {
+            treeThing[ind] += val;
+        }
+    }
+
+    public int query(int ind) {  // the bound is inclusive i think (returns sum of everything from 0 to ind)
+        ind++;
+        int sum = 0;
+        for (; ind > 0; ind -= ind & -ind) {
+            sum += treeThing[ind];
+        }
+        return sum;
     }
 }

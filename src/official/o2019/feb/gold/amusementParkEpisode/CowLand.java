@@ -45,121 +45,6 @@ public final class CowLand {
         System.out.printf("WOOOOOASDPOFIJASDFIOJASPODI it took %d ms%n", System.currentTimeMillis() - start);
     }
 
-    /**
-     * see {@link utils.SumSegmentTree} for explanation ok?
-     */
-    private static final class MinSegTree {
-        private final int[] segtree;
-        private final int arrSize;
-        private final int size;
-        private final Comparator<Integer> cmp;
-
-        public MinSegTree(int len, Comparator<Integer> comp) {
-            int size = 1;
-            while (size < len) {
-                size *= 2;
-            }
-            this.size = size;
-            cmp = comp;
-            arrSize = len;
-            segtree = new int[size * 2];
-        }
-
-        public MinSegTree(int[] arr, Comparator<Integer> comp) {
-            this(arr.length, comp);
-            for (int i = 0; i < arr.length; i++) {
-                set(i, arr[i]);
-            }
-        }
-
-        public void set(int index, int element) {
-            if (index < 0 || index > arrSize) {
-                throw new IllegalArgumentException(String.format("%s should be out of bounds lol", index));
-            }
-            set(index, element, 0, 0, size);
-        }
-
-        private void set(int index, int element, int currNode, int left, int right) {
-            if (right - left == 1) {
-                segtree[currNode] = element;
-            } else {
-                int mid = (left + right) / 2;
-                if (index < mid) {
-                    set(index, element, 2 * currNode + 1, left, mid);
-                } else {
-                    set(index, element, 2 * currNode + 2, mid, right);
-                }
-                segtree[currNode] = Collections.min(Arrays.asList(segtree[2 * currNode + 1], segtree[2 * currNode + 2]), cmp);
-            }
-        }
-
-        public int min(int from, int to) {
-            if (from < 0 || to > arrSize) {
-                throw new IllegalArgumentException(String.format("the bounds %s and %s are out of bounds i think", from, to));
-            }
-            return min(from, to, 0, 0, size);
-        }
-
-        private int min(int from, int to, int currNode, int left, int right) {
-            if (right <= from || to <= left) {
-                return Integer.MAX_VALUE;
-            }
-            if (from <= left && right <= to) {
-                return segtree[currNode];
-            }
-            int middle = (left + right) / 2;
-            int leftPart = min(from, to, 2 * currNode + 1, left, middle);
-            int rightPart = min(from, to, 2 * currNode + 2, middle, right);
-            if (leftPart == Integer.MAX_VALUE) {
-                return rightPart;
-            } else if (rightPart == Integer.MAX_VALUE) {
-                return leftPart;
-            }
-            return cmp.compare(leftPart, rightPart) < 0 ? leftPart : rightPart;
-        }
-    }
-
-    /**
-     * see {@link utils.BinaryIndexedTree} for the explanation ok bye
-     */
-    private static final class XORBIT {
-        private final int[] treeThing;
-        private final int[] actualArr;
-        private final int size;
-        public XORBIT(int size) {
-            treeThing = new int[size + 1];  // to make stuff easier we'll just make it 1-indexed
-            actualArr = new int[size];
-            this.size = size;
-        }
-
-        public int get(int ind) {
-            return actualArr[ind];
-        }
-
-        public void set(int ind, int val) {
-            increment(ind, actualArr[ind] ^ val);
-        }
-
-        public void increment(int ind, int val) {
-            actualArr[ind] ^= val;
-            ind++;  // have the driver code not worry about 1-indexing
-            // that bitwise thing returns the greatest power of two that's less than i
-            for (; ind <= size; ind += ind & -ind) {
-                treeThing[ind] ^= val;
-            }
-        }
-
-        public int xor(int ind) {  // the bound is inclusive i think (returns sum of everything from 0 to ind)
-            ind++;
-            int sum = 0;
-            for (; ind > 0; ind -= ind & -ind) {
-                sum ^= treeThing[ind];
-            }
-            return sum;
-        }
-    }
-
-
     private static final class AmusementPark {
         private final List<Integer>[] neighbors;
         private final ArrayList<Integer> eulerTour = new ArrayList<>();
@@ -246,5 +131,113 @@ public final class CowLand {
                 }
             }
         }
+    }
+}
+
+class MinSegTree {
+    private final int[] segtree;
+    private final int arrSize;
+    private final int size;
+    private final Comparator<Integer> cmp;
+
+    public MinSegTree(int len, Comparator<Integer> comp) {
+        int size = 1;
+        while (size < len) {
+            size *= 2;
+        }
+        this.size = size;
+        cmp = comp;
+        arrSize = len;
+        segtree = new int[size * 2];
+    }
+
+    public MinSegTree(int[] arr, Comparator<Integer> comp) {
+        this(arr.length, comp);
+        for (int i = 0; i < arr.length; i++) {
+            set(i, arr[i]);
+        }
+    }
+
+    public void set(int index, int element) {
+        if (index < 0 || index > arrSize) {
+            throw new IllegalArgumentException(String.format("%s should be out of bounds lol", index));
+        }
+        set(index, element, 0, 0, size);
+    }
+
+    private void set(int index, int element, int currNode, int left, int right) {
+        if (right - left == 1) {
+            segtree[currNode] = element;
+        } else {
+            int mid = (left + right) / 2;
+            if (index < mid) {
+                set(index, element, 2 * currNode + 1, left, mid);
+            } else {
+                set(index, element, 2 * currNode + 2, mid, right);
+            }
+            segtree[currNode] = Collections.min(Arrays.asList(segtree[2 * currNode + 1], segtree[2 * currNode + 2]), cmp);
+        }
+    }
+
+    public int min(int from, int to) {
+        if (from < 0 || to > arrSize) {
+            throw new IllegalArgumentException(String.format("the bounds %s and %s are out of bounds i think", from, to));
+        }
+        return min(from, to, 0, 0, size);
+    }
+
+    private int min(int from, int to, int currNode, int left, int right) {
+        if (right <= from || to <= left) {
+            return Integer.MAX_VALUE;
+        }
+        if (from <= left && right <= to) {
+            return segtree[currNode];
+        }
+        int middle = (left + right) / 2;
+        int leftPart = min(from, to, 2 * currNode + 1, left, middle);
+        int rightPart = min(from, to, 2 * currNode + 2, middle, right);
+        if (leftPart == Integer.MAX_VALUE) {
+            return rightPart;
+        } else if (rightPart == Integer.MAX_VALUE) {
+            return leftPart;
+        }
+        return cmp.compare(leftPart, rightPart) < 0 ? leftPart : rightPart;
+    }
+}
+
+class XORBIT {
+    private final int[] treeThing;
+    private final int[] actualArr;
+    private final int size;
+    public XORBIT(int size) {
+        treeThing = new int[size + 1];  // to make stuff easier we'll just make it 1-indexed
+        actualArr = new int[size];
+        this.size = size;
+    }
+
+    public int get(int ind) {
+        return actualArr[ind];
+    }
+
+    public void set(int ind, int val) {
+        increment(ind, actualArr[ind] ^ val);
+    }
+
+    public void increment(int ind, int val) {
+        actualArr[ind] ^= val;
+        ind++;  // have the driver code not worry about 1-indexing
+        // that bitwise thing returns the greatest power of two that's less than i
+        for (; ind <= size; ind += ind & -ind) {
+            treeThing[ind] ^= val;
+        }
+    }
+
+    public int xor(int ind) {  // the bound is inclusive i think (returns sum of everything from 0 to ind)
+        ind++;
+        int sum = 0;
+        for (; ind > 0; ind -= ind & -ind) {
+            sum ^= treeThing[ind];
+        }
+        return sum;
     }
 }

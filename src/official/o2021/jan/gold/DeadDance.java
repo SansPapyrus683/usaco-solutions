@@ -13,34 +13,6 @@ import java.util.*;
  * (jesus christ this solution is convoluted as all hell)
  */
 public final class DeadDance {
-    /**
-     * see {@link utils.BinaryIndexedTree} for a crap explanation
-     */
-    private static class BITree {
-        private final int[] treeThing;
-        private final int size;
-        public BITree(int size) {
-            treeThing = new int[size + 1];
-            this.size = size;
-        }
-
-        public void increment(int updateAt, int val) {
-            updateAt++;  // have the driver code not worry about 1-indexing
-            for (; updateAt <= size; updateAt += updateAt & -updateAt) {
-                treeThing[updateAt] += val;
-            }
-        }
-
-        public int query(int ind) {  // the bound is inclusive i think
-            ind++;
-            int sum = 0;
-            for (; ind > 0; ind -= ind & -ind) {
-                sum += treeThing[ind];
-            }
-            return sum;
-        }
-    }
-
     private static final long[] INVALID = new long[] {-1, -1};
     public static void main(String[] args) throws IOException {
         BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
@@ -181,5 +153,30 @@ public final class DeadDance {
             else hi = mid;
         }
         return lo;
+    }
+}
+
+class BITree {
+    private final int[] treeThing;
+    private final int size;
+    public BITree(int size) {
+        treeThing = new int[size + 1];
+        this.size = size;
+    }
+
+    public void increment(int updateAt, int val) {
+        updateAt++;  // have the driver code not worry about 1-indexing
+        for (; updateAt <= size; updateAt += updateAt & -updateAt) {
+            treeThing[updateAt] += val;
+        }
+    }
+
+    public int query(int ind) {  // the bound is inclusive i think
+        ind++;
+        int sum = 0;
+        for (; ind > 0; ind -= ind & -ind) {
+            sum += treeThing[ind];
+        }
+        return sum;
     }
 }

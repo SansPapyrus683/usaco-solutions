@@ -5,65 +5,6 @@ import java.util.*;
 
 // 2013 dec silver (just used a segment tree and binary search to absolutely cheese this problem)
 public final class Crowded {
-    private static final class MaxSegTree {
-        private final int[] segtree;
-        private final int arrSize;
-        private final int size;
-        public MaxSegTree(int len) {
-            int size = 1;
-            while (size < len) {
-                size *= 2;
-            }
-            this.size = size;
-            arrSize = len;
-            segtree = new int[size * 2];  // we won't necessarily use all of the element but that doesn't really matter
-        }
-
-        public void set(int index, int element) {
-            if (index < 0 || index > arrSize) {
-                throw new IllegalArgumentException(String.format("%s should be out of bounds lol", index));
-            }
-            set(index, element, 0, 0, size);
-        }
-
-        private void set(int index, int element, int currNode, int left, int right) {
-            if (right - left == 1) {
-                segtree[currNode] = element;
-            } else {
-                int mid = (left + right) / 2;
-                if (index < mid) {
-                    set(index, element, 2 * currNode + 1, left, mid);
-                } else {
-                    set(index, element, 2 * currNode + 2, mid, right);
-                }
-                segtree[currNode] = Math.max(segtree[2 * currNode + 1], segtree[2 * currNode + 2]);
-            }
-        }
-
-        // for this one, from and to follow "normal" slicing rules - left bound is inclusive, right bound isn't
-        public int max(int from, int to) {
-            if (from < 0 || to > arrSize) {
-                throw new IllegalArgumentException(String.format("the bounds %s and %s are out of bounds i think", from, to));
-            } else if (to <= from) {
-                throw new IllegalArgumentException(String.format("the bounds %s and %s don't make sense bro", from, to));
-            }
-            return max(from, to, 0, 0, size);
-        }
-
-        private int max(int from, int to, int currNode, int left, int right) {
-            if (right <= from || to <= left) {
-                return Integer.MIN_VALUE;
-            }
-            if (from <= left && right <= to) {
-                return segtree[currNode];
-            }
-            int middle = (left + right) / 2;
-            int leftPart = max(from, to, 2 * currNode + 1, left, middle);
-            int rightPart = max(from, to, 2 * currNode + 2, middle, right);
-            return Math.max(leftPart, rightPart);
-        }
-    }
-
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("crowded.in"));
@@ -123,5 +64,64 @@ public final class Crowded {
             else lo = mid + 1;
         }
         return lo;
+    }
+}
+
+class MaxSegTree {
+    private final int[] segtree;
+    private final int arrSize;
+    private final int size;
+    public MaxSegTree(int len) {
+        int size = 1;
+        while (size < len) {
+            size *= 2;
+        }
+        this.size = size;
+        arrSize = len;
+        segtree = new int[size * 2];  // we won't necessarily use all of the element but that doesn't really matter
+    }
+
+    public void set(int index, int element) {
+        if (index < 0 || index > arrSize) {
+            throw new IllegalArgumentException(String.format("%s should be out of bounds lol", index));
+        }
+        set(index, element, 0, 0, size);
+    }
+
+    private void set(int index, int element, int currNode, int left, int right) {
+        if (right - left == 1) {
+            segtree[currNode] = element;
+        } else {
+            int mid = (left + right) / 2;
+            if (index < mid) {
+                set(index, element, 2 * currNode + 1, left, mid);
+            } else {
+                set(index, element, 2 * currNode + 2, mid, right);
+            }
+            segtree[currNode] = Math.max(segtree[2 * currNode + 1], segtree[2 * currNode + 2]);
+        }
+    }
+
+    // for this one, from and to follow "normal" slicing rules - left bound is inclusive, right bound isn't
+    public int max(int from, int to) {
+        if (from < 0 || to > arrSize) {
+            throw new IllegalArgumentException(String.format("the bounds %s and %s are out of bounds i think", from, to));
+        } else if (to <= from) {
+            throw new IllegalArgumentException(String.format("the bounds %s and %s don't make sense bro", from, to));
+        }
+        return max(from, to, 0, 0, size);
+    }
+
+    private int max(int from, int to, int currNode, int left, int right) {
+        if (right <= from || to <= left) {
+            return Integer.MIN_VALUE;
+        }
+        if (from <= left && right <= to) {
+            return segtree[currNode];
+        }
+        int middle = (left + right) / 2;
+        int leftPart = max(from, to, 2 * currNode + 1, left, middle);
+        int rightPart = max(from, to, 2 * currNode + 2, middle, right);
+        return Math.max(leftPart, rightPart);
     }
 }

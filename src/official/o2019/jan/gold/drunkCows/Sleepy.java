@@ -5,35 +5,6 @@ import java.util.*;
 
 // 2019 jan gold
 public final class Sleepy {
-    /**
-     * see {@link utils.BinaryIndexedTree} if you want an explanation for how this works
-     */
-    private static final class BITree {
-        private final int[] treeThing;
-        private final int size;
-
-        public BITree(int size) {
-            treeThing = new int[size + 1];
-            this.size = size;
-        }
-
-        public void increment(int updateAt, int val) {
-            updateAt++;  // have the driver code not worry about 1-indexing
-            for (; updateAt <= size; updateAt += updateAt & -updateAt) {
-                treeThing[updateAt] += val;
-            }
-        }
-
-        public int query(int ind) {  // the bound is inclusive i think
-            ind++;
-            int sum = 0;
-            for (; ind > 0; ind -= ind & -ind) {
-                sum += treeThing[ind];
-            }
-            return sum;
-        }
-    }
-
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("sleepy.in"));
@@ -74,5 +45,30 @@ public final class Sleepy {
         System.out.println(badUpTo);
         System.out.println(moves);
         System.out.printf("damit fj don't let your cows near vodka: %d ms%n", System.currentTimeMillis() - start);
+    }
+}
+
+class BITree {
+    private final int[] treeThing;
+    private final int size;
+    public BITree(int size) {
+        treeThing = new int[size + 1];
+        this.size = size;
+    }
+
+    public void increment(int updateAt, int val) {
+        updateAt++;  // have the driver code not worry about 1-indexing
+        for (; updateAt <= size; updateAt += updateAt & -updateAt) {
+            treeThing[updateAt] += val;
+        }
+    }
+
+    public int query(int ind) {  // the bound is inclusive i think
+        ind++;
+        int sum = 0;
+        for (; ind > 0; ind -= ind & -ind) {
+            sum += treeThing[ind];
+        }
+        return sum;
     }
 }

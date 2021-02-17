@@ -5,41 +5,6 @@ import java.util.*;
 
 // 2020 jan gold
 public final class Boards {
-    private static class MinMap {
-        private final TreeMap<Integer, Integer> map = new TreeMap<>();
-        public void put(int key, int val) {
-            if (map.isEmpty()) {
-                map.put(key, val);
-                return;
-            }
-
-            // try to keep a steadily decreasing list of values
-            // if this one is greater than a previous one, there's no point in putting it in
-            if (key >= firstKey() && val > minLower(key)) {
-                return;
-            }
-            // ok, let's see how many other values this eliminates (curse you java for not having iterators)
-            map.put(key, val);
-            int nextUp;
-            while (key != map.lastKey() && map.get(nextUp = map.higherKey(key)) >= val) {
-                map.remove(nextUp);
-            }
-        }
-
-        // returns the minimum value whose corresponding key is <= threshold
-        public int minLower(int threshold) {
-            return map.get(map.floorKey(threshold));
-        }
-
-        public int firstKey() {
-            return map.firstKey();
-        }
-
-        public boolean isEmpty() {
-            return map.isEmpty();
-        }
-    }
-
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("boards.in"));
@@ -73,5 +38,40 @@ public final class Boards {
         written.close();
         System.out.println(minMovement);
         System.out.printf("%d ms :)%n", System.currentTimeMillis() - start);
+    }
+}
+
+class MinMap {
+    private final TreeMap<Integer, Integer> map = new TreeMap<>();
+    public void put(int key, int val) {
+        if (map.isEmpty()) {
+            map.put(key, val);
+            return;
+        }
+
+        // try to keep a steadily decreasing list of values
+        // if this one is greater than a previous one, there's no point in putting it in
+        if (key >= firstKey() && val > minLower(key)) {
+            return;
+        }
+        // ok, let's see how many other values this eliminates (curse you java for not having iterators)
+        map.put(key, val);
+        int nextUp;
+        while (key != map.lastKey() && map.get(nextUp = map.higherKey(key)) >= val) {
+            map.remove(nextUp);
+        }
+    }
+
+    // returns the minimum value whose corresponding key is <= threshold
+    public int minLower(int threshold) {
+        return map.get(map.floorKey(threshold));
+    }
+
+    public int firstKey() {
+        return map.firstKey();
+    }
+
+    public boolean isEmpty() {
+        return map.isEmpty();
     }
 }

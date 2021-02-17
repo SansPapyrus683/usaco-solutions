@@ -4,35 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2017 jan gold
-public class BPhoto {
-    /**
-     * see {@link utils.BinaryIndexedTree} if you want an explanation for how this works
-     */
-    private static final class BITree {
-        private final int[] treeThing;
-        private final int size;
-        public BITree(int size) {
-            treeThing = new int[size + 1];
-            this.size = size;
-        }
-
-        public void increment(int updateAt, long val) {
-            updateAt++;  // have the driver code not worry about 1-indexing
-            for (; updateAt <= size; updateAt += updateAt & -updateAt) {
-                treeThing[updateAt] += val;
-            }
-        }
-
-        public int query(int ind) {  // the bound is inclusive i think
-            ind++;
-            int sum = 0;
-            for (; ind > 0; ind -= ind & -ind) {
-                sum += treeThing[ind];
-            }
-            return sum;
-        }
-    }
-
+public final class BPhoto {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("bphoto.in"));
@@ -76,5 +48,30 @@ public class BPhoto {
         written.close();
         System.out.println(unbalanced);
         System.out.printf("how many photos has fj taken jesus christ: %d ms%n", System.currentTimeMillis() - start);
+    }
+}
+
+class BITree {
+    private final int[] treeThing;
+    private final int size;
+    public BITree(int size) {
+        treeThing = new int[size + 1];
+        this.size = size;
+    }
+
+    public void increment(int updateAt, long val) {
+        updateAt++;  // have the driver code not worry about 1-indexing
+        for (; updateAt <= size; updateAt += updateAt & -updateAt) {
+            treeThing[updateAt] += val;
+        }
+    }
+
+    public int query(int ind) {  // the bound is inclusive i think
+        ind++;
+        int sum = 0;
+        for (; ind > 0; ind -= ind & -ind) {
+            sum += treeThing[ind];
+        }
+        return sum;
     }
 }

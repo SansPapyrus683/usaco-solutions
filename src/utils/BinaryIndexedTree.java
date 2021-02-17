@@ -1,16 +1,9 @@
 package utils;
 
 /**
- * <a href="https://www.geeksforgeeks.org/binary-indexed-tree-or-fenwick-tree-2/">src is copied from here lol</a><br>
- * if you're too lazy to click that link i can just try really badly to explain it here<br>
- * but anyways a binary indexed tree is smth that can have O(log n) updating and O(log n) sum querying from 0 to n<br>
- * it stores the elements in it's array through powers of two<br>
- * each index stores the previous n elements, where n is the greatest power of 2 that can divide into that number<br>
- * and then when querying the data structure just takes up the largest power of two
- * (it's based on the binary representation of the number), adds it to the total, and then keeps on adding and adding
- * until it's reached the actual number<br>
- * say we wanted to query for 25<br>
- * the algo would first take 16, then 8, then 1, and accumulate all the values at those indices (16, 24, and 25)
+ * A data structure that supports point updates and range sum queries in O(log n).
+ * explanation here: https://cp-algorithms.com/data_structures/fenwick.html
+ * i'm too lazy to explain it
  */
 public final class BinaryIndexedTree {
     private final int[] treeThing;

@@ -6,30 +6,6 @@ import java.util.stream.Stream;
 
 // 2016 usopen gold
 public final class Split {
-    private static // copied from: https://cp-algorithms.com/data_structures/stack_queue_modification.html
-    final class MinMaxStack {
-        private final Stack<int[]> stack = new Stack<>();
-        public void add(int toAdd) {
-            if (stack.isEmpty()) {
-                stack.add(new int[] {toAdd, toAdd, toAdd});
-                return;
-            }
-            stack.add(new int[] {toAdd, Math.min(toAdd, min()), Math.max(toAdd, max())});
-        }
-
-        public int poll() {
-            return stack.pop()[0];
-        }
-
-        public int min() {
-            return stack.peek()[1];
-        }
-
-        public int max() {
-            return stack.peek()[2];
-        }
-    }
-
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("split.in"));
@@ -106,5 +82,29 @@ public final class Split {
         written.close();
         System.out.println(maxSaved);
         System.out.printf("i blame the lag for the runtime of %d ms%n", System.currentTimeMillis() - start);
+    }
+}
+
+// sauce: // copied from: https://cp-algorithms.com/data_structures/stack_queue_modification.html
+class MinMaxStack {
+    private final Stack<int[]> stack = new Stack<>();
+    public void add(int toAdd) {
+        if (stack.isEmpty()) {
+            stack.add(new int[] {toAdd, toAdd, toAdd});
+            return;
+        }
+        stack.add(new int[] {toAdd, Math.min(toAdd, min()), Math.max(toAdd, max())});
+    }
+
+    public int poll() {
+        return stack.pop()[0];
+    }
+
+    public int min() {
+        return stack.peek()[1];
+    }
+
+    public int max() {
+        return stack.peek()[2];
     }
 }
