@@ -4,7 +4,6 @@ import java.io.*;
 import java.util.*;
 
 // 2016 feb silver (this is REALLY inefficient but what can you do about it lol)
-// TODO: make a better sol for this jesus christ it's horrid
 public final class Balancing {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
@@ -20,74 +19,59 @@ public final class Balancing {
         }
         Arrays.sort(cows, Comparator.comparingInt(c -> c[0]));
 
-        int lowerBound = 1;
-        int upperBound = cowNum;
-        int validSoFar = -1;
-        while (lowerBound <= upperBound) {
-            int toSearch = (lowerBound + upperBound) / 2;
-            if (partitionPossible(cows, toSearch)) {
-                upperBound = toSearch - 1;
-                validSoFar = toSearch;
-            } else {
-                lowerBound = toSearch + 1;
+        int mostEqual = Integer.MAX_VALUE;
+        int vertLineAt = 0;  // these "at" variables are the closest point that's still ahead of the line
+        while (vertLineAt < cowNum) {
+            int xLine = cows[vertLineAt][0] + 1;
+            mostEqual = Math.min(mostEqual, minPartition(xLine, cows));
+            while (vertLineAt < cowNum && xLine > cows[vertLineAt][0]) {
+                vertLineAt++;
             }
         }
 
         PrintWriter written = new PrintWriter("balancing.out");
-        written.println(validSoFar);
+        written.println(mostEqual);
         written.close();
-        System.out.println(validSoFar);
+        System.out.println(mostEqual);
         System.out.printf("What did it cost?... %d milliseconds.%n", System.currentTimeMillis() - start);
     }
 
-    // this assumes the cows are sorted by x value (and it just assumes fences can be placed literally anywhere)
-    private static boolean partitionPossible(int[][] cows, int maxCows) {
-        int cowAt = 0;
-        int cowsOnLeft = 0;
-        while (cowAt < cows.length) {  // would this be a sweepline approach? idk
-            cowsOnLeft++;
-            int fenceAt = cows[cowAt++][0];  // set the fence to well, just in front of this (sorry for the kinda misleading name)
-            while (cowAt < cows.length && cows[cowAt][0] <= fenceAt) {
-                cowsOnLeft++;
-                cowAt++;
-            }
-            if (cowsOnLeft <= 2 * maxCows && cows.length - cowsOnLeft <= 2 * maxCows &&
-                    partitionByY(cows, fenceAt + 1, maxCows)) {
-                return true;
-            }
-        }
-        return false;
-    }
+    // given a vertical line, this find the optimal horizontal line
+    private static int minPartition(int xLine, int[][] cows) {
+        int[][] byY = cows.clone();
+        Arrays.sort(byY, Comparator.comparingInt(c -> c[1]));
 
-    private static boolean partitionByY(int[][] cows, int xLine, int maxCows) {
-        cows = cows.clone();
-        Arrays.sort(cows, Comparator.comparingInt(c -> c[1]));
-        int leftSide = (int) Arrays.stream(cows).filter(c -> c[0] < xLine).count();
-        int rightSide = cows.length - leftSide;
-        int cowAt = 0;
-        int leftDownSide = 0;
-        int rightDownSide = 0;
-        while (cowAt < cows.length) {  // ok if we have a defined x line, now let's see if it's possible with the y val
-            int yFence = cows[cowAt][1];
-            if (cows[cowAt][0] < xLine) {
-                leftDownSide++;
+        ArrayList<int[]> leftSide = new ArrayList<>();
+        ArrayList<int[]> rightSide = new ArrayList<>();
+        for (int[] c : byY) {
+            if (c[0] < xLine) {
+                leftSide.add(c);
+            } else if (c[0] > xLine) {
+                rightSide.add(c);
             } else {
-                rightDownSide++;
-            }
-            cowAt++;
-            while (cowAt < cows.length && cows[cowAt][1] <= yFence) {
-                if (cows[cowAt][0] < xLine) {
-                    leftDownSide++;
-                } else {
-                    rightDownSide++;
-                }
-                cowAt++;
-            }
-            if (leftDownSide <= maxCows && rightDownSide <= maxCows &&
-                    leftSide - leftDownSide <= maxCows && rightSide - rightDownSide <= maxCows) {
-                return true;
+                throw new IllegalArgumentException("don't think cows can be on fences in this problem");
             }
         }
-        return false;
+
+        int mostEqual = Integer.MAX_VALUE;
+        int leftAt = 0;
+        int rightAt = 0;
+        int totalAt = 0;
+        while (totalAt < cows.length) {
+            int yLine = byY[totalAt][1] + 1;
+            while (totalAt < cows.length && yLine > byY[totalAt][1]) {
+                totalAt++;
+            }
+            while (leftAt < leftSide.size() && yLine > leftSide.get(leftAt)[1]) {
+                leftAt++;
+            }
+            while (rightAt < rightSide.size() && yLine > rightSide.get(rightAt)[1]) {
+                rightAt++;
+            }
+            int belowMax = Math.max(leftAt, rightAt);
+            int aboveMax = Math.max(leftSide.size() - leftAt, rightSide.size() - rightAt);
+            mostEqual = Math.min(mostEqual, Math.max(belowMax, aboveMax));
+        }
+        return mostEqual;
     }
 }
