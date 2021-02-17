@@ -5,8 +5,8 @@ import java.util.*;
 
 // 2017 usopen silver
 public final class Where {
-    static final int[] R_CHANGE = new int[] {1, -1, 0, 0};
-    static final int[] C_CHANGE = new int[] {0, 0, 1, -1};
+    static final int[] CHANGE_R = new int[] {1, -1, 0, 0};
+    static final int[] CHANGE_C = new int[] {0, 0, 1, -1};
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("where.in"));
@@ -75,8 +75,8 @@ public final class Where {
                 while (!frontier.isEmpty()) {
                     int[] curr = frontier.poll();
                     for (int i = 0; i < 4; i++) {
-                        int r = curr[0] + R_CHANGE[i];
-                        int c = curr[1] + C_CHANGE[i];
+                        int r = curr[0] + CHANGE_R[i];
+                        int c = curr[1] + CHANGE_C[i];
                         // check if it's in the bounds, hasn't been visited before, and is consistent w/ the regions
                         if (topLeft[0] <= r && r <= bottomRight[0] && topLeft[1] <= c && c <= bottomRight[1]
                                 && !visited[r][c] && field[r][c] == target) {

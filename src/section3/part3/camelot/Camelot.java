@@ -4,141 +4,92 @@ ID: kevinsh4
 LANG: JAVA
 TASK: camelot
 */
-
 import java.io.*;
 import java.util.*;
 
-// TODO: refactor this absolute abomination of a program
 public final class Camelot {
-    private static final int[] R_CHANGE = new int[] {-2, -2, -1, 1, 2, 2, 1, -1};
-    private static final int[] C_CHANGE = new int[] {-1, 1, 2, 2, 1, -1, -2, -2};
-
-    private static int[][][][] distances;
-    private static int[][] cachedKing;
-    private static int[][][][] cachedNeighbors;
-    private static int rows, cols;
-    private static int[] kingPos;
-    private static int kingPickupDist = 2;
-
+    private static final int INVALID = 4206969;  // to avoid overflow
+    private static final int[] CHANGE_R = new int[] {-2, -2, -1, 1, 2, 2, 1, -1};
+    private static final int[] CHANGE_C = new int[] {-1, 1, 2, 2, 1, -1, -2, -2};
+    // it's only optimal for the king to move at most 2 spaces
+    // bc if he moves 3 a knight can always do it in 3 or less steps as well
+    private static final int KING_MOVE = 2;
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("camelot.in"));
-        int[] dimensions = Arrays.stream(read.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
-        rows = dimensions[0];
-        cols = dimensions[1];
-        distances = new int[rows][cols][rows][cols];
-        cachedKing = new int[rows][cols];
-        cachedNeighbors = new int[rows][cols][][];
+        StringTokenizer initial = new StringTokenizer(read.readLine());
+        int colNum = Integer.parseInt(initial.nextToken());
+        int rowNum = Integer.parseInt(initial.nextToken());
 
-        for (int[] r : cachedKing) {
-            Arrays.fill(r, Integer.MAX_VALUE);
-        }
-
-        ArrayList<int[]> knightPos = new ArrayList<>();
+        ArrayList<int[]> knights = new ArrayList<>();
         String line;
         while ((line = read.readLine()) != null) {
-            String[] splitLine = line.split(" ");
+            String[] splitLine = line.toUpperCase().split(" ");
             for (int i = 0; i < splitLine.length / 2; i++) {
-                String[] stringPos = Arrays.copyOfRange(splitLine, i * 2, i * 2 + 2);
-                knightPos.add(new int[] {(int) stringPos[0].charAt(0) - 65, Integer.parseInt(stringPos[1]) - 1});
+                knights.add(new int[] {splitLine[i * 2].charAt(0) - 'A', Integer.parseInt(splitLine[i * 2 + 1]) - 1});
             }
         }
-        read.close();
-        kingPos = knightPos.remove(0);
+        int[] kingPos = knights.remove(0);
 
-        for (int c = 0; c < cols; c++) {  // calculate all distances (through a knight) too all other distances
-            for (int r = 0; r < rows; r++) {
-                knightExpand(new int[] {c, r});
-            }
-        }
-
-        // note that it always isn't worth it for the king to travel like more than 2 distances
-        // if it did then a knight can always to the job in equal or lesser moves
-        int kingColStart = Math.max(kingPos[0] - kingPickupDist, 0);
-        int kingColEnd = Math.min(kingPos[0] + kingPickupDist, cols);
-        int kingRowStart = Math.max(kingPos[1] - kingPickupDist, 0);
-        int kingRowEnd = Math.min(kingPos[1] + kingPickupDist, rows);
-
-        int best = Integer.MAX_VALUE;
-        for (int c = 0; c < cols; c++) {  // go through all meeting positions
-            for (int r = 0; r < rows; r++) {
-                int haveToTravel = 0;
-                for (int[] kn : knightPos) {
-                    haveToTravel += distances[kn[1]][kn[0]][r][c];
+        int[][][][] knightDists = new int[rowNum][colNum][rowNum][colNum];
+        for (int i = 0; i < rowNum; i++) {
+            for (int j = 0; j < colNum; j++) {
+                for (int k = 0; k < rowNum; k++) {
+                    Arrays.fill(knightDists[i][j][k], INVALID);
                 }
-                // cp and rp are column pickup and row pickup respectively
-                int minDetour = kingCalc(kingPos, new int[] {c, r});
-                for (int cp = kingColStart; cp < kingColEnd; cp++) {  // go through all pickup positions
-                    for (int rp = kingRowStart; rp < kingRowEnd; rp++) {
-                        for (int[] kn : knightPos) {
-                            int detour = distances[kn[1]][kn[0]][rp][cp] + kingCalc(kingPos, new int[] {cp, rp}) +
-                                         distances[rp][cp][r][c] - distances[kn[1]][kn[0]][r][c];
-                            minDetour = Math.min(minDetour, detour);
+            }
+        }
+        for (int r = 0; r < rowNum; r++) {
+            for (int c = 0; c < colNum; c++) {
+                int[][] thisDists = knightDists[r][c];
+                thisDists[r][c] = 0;
+                ArrayDeque<int[]> frontier = new ArrayDeque<>(Collections.singletonList(new int[] {r, c}));
+                while (!frontier.isEmpty()) {
+                    int[] curr = frontier.poll();
+                    int newCost = thisDists[curr[0]][curr[1]] + 1;
+                    for (int i = 0; i < 8; i++) {
+                        int newR = curr[0] + CHANGE_R[i];
+                        int newC = curr[1] + CHANGE_C[i];
+                        if (0 <= newR && newR < rowNum && 0 <= newC && newC < colNum && newCost < thisDists[newR][newC]) {
+                            thisDists[newR][newC] = newCost;
+                            frontier.add(new int[] {newR, newC});
                         }
                     }
                 }
-                best = Math.min(best, haveToTravel + minDetour);
             }
         }
 
-        PrintWriter written = new PrintWriter("camelot.out");
-        written.println(best);
-        written.close();
-        System.out.println(best);
-        System.out.printf("time taken (ms): %s%n", System.currentTimeMillis() - start);
-    }
+        int KRStart = Math.max(kingPos[0] - KING_MOVE, 0);
+        int KREnd = Math.min(kingPos[0] + KING_MOVE, rowNum - 1);
+        int KCStart = Math.max(kingPos[1] - KING_MOVE, 0);
+        int KCEnd = Math.min(kingPos[1] + KING_MOVE, colNum - 1);
 
-    private static int kingCalc(int[] kingPos, int[] goToPos) {
-        if (cachedKing[goToPos[1]][goToPos[0]] != Integer.MAX_VALUE) {
-            return cachedKing[goToPos[1]][goToPos[0]];
-        }
-        return cachedKing[goToPos[1]][goToPos[0]] =  Math.max(Math.abs(kingPos[0]- goToPos[0]),
-                Math.abs(kingPos[1] - goToPos[1]));
-    }
-
-    private static int[][] knightNeighbors(int[] pos) {
-        if (cachedNeighbors[pos[1]][pos[0]] != null) {
-            return cachedNeighbors[pos[1]][pos[0]];
-        }
-
-        // given a knight's position and whether they have the king or not, returns possible neighbors
-        int col  = pos[0];
-        int row = pos[1];
-        ArrayList<int[]> actualNeighbors = new ArrayList<>();
-        for (int i = 0; i < 8; i++) {
-            int newCol = col + C_CHANGE[i];
-            int newRow = row + R_CHANGE[i];
-            if (0 <= newCol && newCol < cols && 0 <= newRow && newRow < rows) {
-                actualNeighbors.add(new int[] {newCol, newRow});
-            }
-        }
-        int[][] toReturn = new int[actualNeighbors.size()][2];
-        actualNeighbors.toArray(toReturn);
-        cachedNeighbors[pos[1]][pos[0]] = toReturn;
-        return toReturn;
-    }
-
-    static void knightExpand(int[] pos) {  // calculates distances & updates the distances variable w/ it
-        int[] nPos = Arrays.copyOf(pos, 3);
-        Queue<int[]> frontier = new LinkedList<>();
-        int[][] costs = new int[rows][cols];
-        for (int[] r : costs) {
-            Arrays.fill(r, 42069);  // can't do Integer.MAX_VALUE bc of overflowing
-        }
-        frontier.add(nPos);
-        costs[nPos[1]][nPos[0]] = 0;
-
-        while (!frontier.isEmpty()) {  // just a simple bfs expansion
-            int[] current = frontier.poll();
-            int rnCost = costs[current[1]][current[0]];
-            for (int[] n : knightNeighbors(current)) {
-                int newCost = rnCost + 1;
-                if (costs[n[1]][n[0]] > newCost) {
-                    costs[n[1]][n[0]] = newCost;
-                    frontier.add(n);
+        int minMeetingDist = Integer.MAX_VALUE;
+        for (int mr = 0; mr < rowNum; mr++) {
+            for (int mc = 0; mc < colNum; mc++) {
+                int knightCosts = 0;
+                for (int[] kn : knights) {
+                    knightCosts += knightDists[kn[0]][kn[1]][mr][mc];
                 }
+                int kingCost = Math.max(Math.abs(kingPos[0] - mr), Math.abs(kingPos[1] - mc));
+                for (int kr = KRStart; kr <= KREnd; kr++) {
+                    for (int kc = KCStart; kc <= KCEnd; kc++) {
+                        for (int[] kn : knights) {
+                            int carryExtra = knightDists[kn[0]][kn[1]][kr][kc]
+                                    + knightDists[kr][kc][mr][mc]
+                                    - knightDists[kn[0]][kn[1]][mr][mc]
+                                    + Math.max(Math.abs(kingPos[0] - kr), Math.abs(kingPos[1] - kc));
+                            kingCost = Math.min(kingCost, carryExtra);
+                        }
+                    }
+                }
+                minMeetingDist = Math.min(minMeetingDist, knightCosts + kingCost);
             }
         }
-        distances[pos[1]][pos[0]] = costs;
+        PrintWriter written = new PrintWriter("camelot.out");
+        written.println(minMeetingDist);
+        written.close();
+        System.out.println(minMeetingDist);
+        System.out.printf("time taken (ms): %s%n", System.currentTimeMillis() - start);
     }
 }
