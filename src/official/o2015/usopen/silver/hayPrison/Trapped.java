@@ -6,7 +6,7 @@ import java.util.stream.Stream;
 
 // 2015 us open silver (solution shamelessly copied)
 public final class Trapped {
-    private static final class Bale {  // makes reading the code much more easier
+    private static class Bale {  // makes reading the code much more easier
         int size;
         int pos;
         public Bale(int size, int pos) {
@@ -42,21 +42,23 @@ public final class Trapped {
         }
 
         int best = Integer.MAX_VALUE;
-        int farthest = insertPos;
+        int otherSide = insertPos;
         for (int i = insertPos - 1; i >= 0; i--) {
-            // the second inequality tells if the hay bale at farthest CAN'T be broken down when we're at i
-            while (farthest < bales.length && bales[farthest].pos <= bales[i].size + bales[i].pos) {
+            // while our bale at i holds strong, see what the repair costs for the other sides are
+            while (otherSide < bales.length && bales[otherSide].pos - bales[i].pos <= bales[i].size) {
                 // if it can, then we calculate the "repair costs"- the cost to make it so bes can't break through
-                best = Math.min(best, bales[farthest].pos - bales[i].pos - bales[farthest].size);
-                farthest++;
+                best = Math.min(best, bales[otherSide].pos - bales[i].pos - bales[otherSide].size);
+                otherSide++;
             }
         }
-        farthest = insertPos - 1;
+
+        // do the same thing but in reverse
+        otherSide = insertPos - 1;
         for (int i = insertPos; i < bales.length; i++) {
             // the ineq is the same but in reverse
-            while (farthest >= 0 && bales[farthest].pos >= bales[i].pos - bales[i].size) {
-                best = Math.min(best, bales[i].pos - bales[farthest].size - bales[farthest].pos);
-                farthest--;
+            while (otherSide >= 0 && bales[i].size >= bales[i].pos - bales[otherSide].pos) {
+                best = Math.min(best, bales[i].pos - bales[otherSide].size - bales[otherSide].pos);
+                otherSide--;
             }
         }
 
