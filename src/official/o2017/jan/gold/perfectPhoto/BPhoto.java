@@ -32,6 +32,7 @@ public class BPhoto {
             return sum;
         }
     }
+
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("bphoto.in"));
