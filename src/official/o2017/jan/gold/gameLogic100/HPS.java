@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2017 jan gold
-public class HPS {
+public final class HPS {
     private static final HashMap<String, Integer> MOVES = new HashMap<String, Integer>() {{
         put("P", 0);
         put("H", 1);

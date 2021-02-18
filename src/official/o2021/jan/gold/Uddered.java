@@ -17,6 +17,7 @@ public final class Uddered {
             throw new IllegalArgumentException("woah since when did the cowphabet have such weird characters");
         }
 
+        // compress the characters (not even sure if this is necessary)
         char charAt = 'a';
         char[] testament = rawTestament.toCharArray();
         char[] encoding = new char[ALPH_NUM];
