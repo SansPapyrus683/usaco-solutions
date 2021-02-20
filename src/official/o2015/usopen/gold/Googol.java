@@ -12,7 +12,6 @@ public final class Googol {
         HashMap<String, String[]> children = new HashMap<String, String[]>() {{
             put(NONE, new String[] {NONE, NONE});
         }};
-
         String[] children(String node) throws IOException {
             if (children.containsKey(node)) {
                 return children.get(node);
@@ -27,6 +26,7 @@ public final class Googol {
                 return BigInteger.ZERO;
             }
             ArrayList<String> leftSide = new ArrayList<>(Collections.singletonList(node));
+            // go all the way down to the left until there's no more
             while (true) {
                 String[] children = children(leftSide.get(leftSide.size() - 1));
                 if (children[0].equals(NONE)) {
@@ -46,15 +46,15 @@ public final class Googol {
                     BigInteger rightLeft = total.divide(BigInteger.TWO);
                     total = total.add(rightLeft).add(totalChildren(rightGrandchildren[1]));
                 } else {  // even
-                    // same goes for the right one
+                    // same goes for the right one if the left subtree total is even
                     BigInteger rightRight = total.divide(BigInteger.TWO).subtract(BigInteger.ONE);
                     total = total.add(rightRight).add(totalChildren(rightGrandchildren[0]));
                 }
-                if (!rightChild.equals(NONE)) {
+                if (!rightChild.equals(NONE)) {  // don't forget to add the right child itself
                     total = total.add(BigInteger.ONE);
                 }
             }
-            return total.add(BigInteger.ONE);
+            return total.add(BigInteger.ONE);  // add the root node
         }
     }
     
