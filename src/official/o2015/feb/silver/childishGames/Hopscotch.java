@@ -1,4 +1,4 @@
-package official.o2015.feb.silver.jumpingTheScotch;
+package official.o2015.feb.silver.childishGames;
 
 import java.io.*;
 import java.util.*;

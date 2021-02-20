@@ -1,4 +1,4 @@
-package official.o2015.feb.silver.howDoCowsThrow;
+package official.o2015.feb.silver.cowBrady;
 
 import java.io.*;
 import java.util.*;
