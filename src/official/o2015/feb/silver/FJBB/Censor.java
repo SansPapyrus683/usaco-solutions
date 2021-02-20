@@ -8,13 +8,13 @@ public final class Censor {
     private static final int MAX_LEN = (int) Math.pow(10, 6);
     private static final long MOD = (long) Math.pow(10, 9) + 9;
     private static final long POWER = 31;  // some website told me to do this (https://cp-algorithms.com/string/string-hashing.html)
-    private static final long[] hashPowers = new long[MAX_LEN];
+    private static final long[] HASH_POWERS = new long[MAX_LEN];
 
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         long nowPower = 1;
         for (int i = 0; i < MAX_LEN; i++) {  // precompute powers (takes surprisingly little time)
-            hashPowers[i] = nowPower;
+            HASH_POWERS[i] = nowPower;
             nowPower = (nowPower * POWER) % MOD;
         }
 
@@ -34,7 +34,7 @@ public final class Censor {
     }
 
     private static long hashConcat(long rnHashVal, int nowStrLen, long toAdd) {
-        return (rnHashVal + toAdd * hashPowers[nowStrLen]) % MOD;
+        return (rnHashVal + toAdd * HASH_POWERS[nowStrLen]) % MOD;
     }
 
     private static String clean(String toCensor, String badWord) {
@@ -56,7 +56,7 @@ public final class Censor {
             hashesSoFar[index] = hashConcat(hashesSoFar[index - 1], index - 1, c - 'a' + 1);
             long currViewHash = (hashesSoFar[index] - hashesSoFar[headIndex]) % MOD;
             currViewHash += currViewHash >= 0 ? 0 : MOD;  // let's make it positive
-            if (currViewHash == (badHashCode * hashPowers[headIndex]) % MOD) {  // no divisibility issues now ha
+            if (currViewHash == (badHashCode * HASH_POWERS[headIndex]) % MOD) {  // no divisibility issues now ha
                 index -= badWord.length();  // reset the pointer back to "checkpoint"? idk
             }
         }
