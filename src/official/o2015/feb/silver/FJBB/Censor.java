@@ -48,7 +48,7 @@ public final class Censor {
         }
 
         char[] all = new char[toCensor.length()];
-        long[] hashesSoFar = new long[toCensor.length() + 1];  // + 1 for the empty string, which has a has of 0
+        long[] hashesSoFar = new long[toCensor.length() + 1];  // + 1 for the empty string, which has a hash of 0
         int index = 0;
         for (char c : toCensor.toCharArray()) {
             all[index++] = c;
