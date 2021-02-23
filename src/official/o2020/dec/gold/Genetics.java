@@ -59,7 +59,11 @@ public final class Genetics {
                                 splitsPossible[i][lastStart][start][newT] %= MOD;
                             }
                             if (end == lastStart) {
-                                // transition to a new streak only if the streak we have rn is valid
+                                /*
+                                 * transition to a new streak only if the streak we have rn is valid
+                                 * aka if we reversed it, the streak rn and the prev one meet with the same elements
+                                 * so that fj could have conceivably split them at that point
+                                 */
                                 splitsPossible[i][start][newT][newT] +=
                                         splitsPossible[i - 1][lastStart][start][end];
                                 splitsPossible[i][start][newT][newT] %= MOD;

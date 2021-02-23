@@ -14,8 +14,8 @@ import java.util.*;
 public final class RPasture {
     public static void main(String[] args) throws IOException {
         BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
-        int cowNum = Integer.parseInt(read.readLine());
 
+        int cowNum = Integer.parseInt(read.readLine());
         HashSet<Integer> seenX = new HashSet<>();
         HashSet<Integer> seenY = new HashSet<>();
         int[][] cows = new int[cowNum][2];
