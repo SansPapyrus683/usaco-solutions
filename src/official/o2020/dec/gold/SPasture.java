@@ -1,4 +1,4 @@
-// package official.o2020.dec.gold;
+package official.o2020.dec.gold;
 
 import java.io.*;
 import java.util.*;
@@ -33,6 +33,8 @@ public class SPasture {
         System.err.printf("why do you need it to be a square of all things: %d ms%n", System.currentTimeMillis() - start);
     }
 
+    // "horizontal" squares are pastures where initially it's a rectangle
+    // where width > height, so you have to expand it upwards so it's a sqaure
     private static int validHorizontalSquares(int[][] cows, boolean countEqual) {
         Arrays.sort(cows, Comparator.comparingInt(c -> c[0]));
         int enclosable = 0;
@@ -51,6 +53,7 @@ public class SPasture {
                 int highestLo = Math.min(leftCow[1], rightCow[1]);
 
                 ArrayList<Integer> ysBetween = new ArrayList<>(seenYs);
+                // use 2 pointers to count the amount of distinct squares with these 2 at the very edge
                 int bottom = 0;
                 int top = -1;
                 for (; bottom < ysBetween.size() && ysBetween.get(bottom) < lowestLo; bottom++);
@@ -64,6 +67,7 @@ public class SPasture {
                             Math.max(leftCow[1], rightCow[1]),
                             bottom <= top ? ysBetween.get(top) : Integer.MIN_VALUE
                     );
+                    // if they get bounded the same, then we count it conditionally
                     if (highest - lowest != width || countEqual) {
                         enclosable++;
                     }
