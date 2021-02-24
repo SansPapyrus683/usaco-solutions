@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 
 // 2015 usopen gold
-public class Trapped {
+public final class Trapped {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("trapped.in"));

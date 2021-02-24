@@ -11,7 +11,7 @@ import java.util.*;
  * 3 1
  * 1 0 should output 14
  */
-public class SPasture {
+public final class SPasture {
     public static void main(String[] args) throws IOException {
         BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
         int cowNum = Integer.parseInt(read.readLine());  // io is exactly the same as silver lol
@@ -56,16 +56,17 @@ public class SPasture {
                 // use 2 pointers to count the amount of distinct squares with these 2 at the very edge
                 int bottom = 0;
                 int top = -1;
+                // get the lowest and highest y value in the current sqaure
                 for (; bottom < ysBetween.size() && ysBetween.get(bottom) < lowestLo; bottom++);
                 for (; top + 1 < ysBetween.size() && ysBetween.get(top + 1) <= Math.max(leftCow[1], rightCow[1]); top++);
                 while (true) {
                     int lowest = Math.min(
                             Math.min(leftCow[1], rightCow[1]),
-                            bottom <= top ? ysBetween.get(bottom) : Integer.MAX_VALUE
+                            bottom < ysBetween.size() ? ysBetween.get(bottom) : Integer.MAX_VALUE
                     );
                     int highest = Math.max(
                             Math.max(leftCow[1], rightCow[1]),
-                            bottom <= top ? ysBetween.get(top) : Integer.MIN_VALUE
+                            0 <= top && top < ysBetween.size() ? ysBetween.get(top) : Integer.MIN_VALUE
                     );
                     // if they get bounded the same, then we count it conditionally
                     if (highest - lowest != width || countEqual) {

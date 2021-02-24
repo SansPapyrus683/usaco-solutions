@@ -54,8 +54,7 @@ public final class Genetics {
                         for (int end = 0; end < TYPE_NUM; end++) {
                             if (newT != end) {
                                 // we can't have 2 consec types in a split, so extend the previous streak only if it isn't the same
-                                splitsPossible[i][lastStart][start][newT] +=
-                                        splitsPossible[i - 1][lastStart][start][end];
+                                splitsPossible[i][lastStart][start][newT] += splitsPossible[i - 1][lastStart][start][end];
                                 splitsPossible[i][lastStart][start][newT] %= MOD;
                             }
                             if (end == lastStart) {
@@ -64,8 +63,7 @@ public final class Genetics {
                                  * aka if we reversed it, the streak rn and the prev one meet with the same elements
                                  * so that fj could have conceivably split them at that point
                                  */
-                                splitsPossible[i][start][newT][newT] +=
-                                        splitsPossible[i - 1][lastStart][start][end];
+                                splitsPossible[i][start][newT][newT] += splitsPossible[i - 1][lastStart][start][end];
                                 splitsPossible[i][start][newT][newT] %= MOD;
                             }
                         }
