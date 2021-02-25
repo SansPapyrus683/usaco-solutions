@@ -5,7 +5,7 @@ import java.util.*;
 
 // 2013 silver usopen
 public final class Fuel {
-    private static final long start = System.currentTimeMillis();
+    private static long start = System.currentTimeMillis();
     public static void main(String[] args) throws IOException {
         BufferedReader read = new BufferedReader(new FileReader("fuel.in"));
         StringTokenizer initial = new StringTokenizer(read.readLine());
