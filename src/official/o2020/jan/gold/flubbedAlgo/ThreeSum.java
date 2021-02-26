@@ -16,11 +16,10 @@ public final class ThreeSum {
         int[] numbers = Arrays.stream(read.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
 
         long[][] rangeValid = new long[numNum][numNum];
-
         /*
          * this for loop first fills the array with i...j
          * with how many numbers between i...j sum with numbers[i] and numbers[j]
-         * to fill the target
+         * to fill the target (which in this case is 0)
          */
         int[] leftovers = new int[2 * MAX + 1];
         for (int i = 0; i < numNum; i++) {
@@ -51,9 +50,9 @@ public final class ThreeSum {
         PrintWriter written = new PrintWriter("threesum.out");
         for (int q = 0; q < queryNum; q++) {
             StringTokenizer query = new StringTokenizer(read.readLine());
-            written.println(rangeValid
-                    [Integer.parseInt(query.nextToken()) - 1]
-                    [Integer.parseInt(query.nextToken()) - 1]);
+            written.println(
+                    rangeValid[Integer.parseInt(query.nextToken()) - 1][Integer.parseInt(query.nextToken()) - 1]
+            );
         }
         written.close();
         System.out.printf("i'm not mad, i'm just disappointed that you code took %d ms%n", System.currentTimeMillis() - start);

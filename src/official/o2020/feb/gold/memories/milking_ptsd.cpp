@@ -27,6 +27,7 @@ int main() {
         int after;
         int difference;
         read >> before >> after >> difference;
+        // milking sessions are 1-indexed which is stupid imo
         sessions_after[before - 1].push_back({after - 1, difference});
     }
     
