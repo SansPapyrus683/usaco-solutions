@@ -3,74 +3,84 @@ package official.o2016.jan.gold.madAndGolden;
 import java.io.*;
 import java.util.*;
 
-// 2016 jan gold (this is really horrid but it works lol)
+// 2016 jan gold
 public final class GoldenFury {
     private static final int MAX = 420696969;
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("angry.in"));
         int hayNum = Integer.parseInt(read.readLine());
-        int[] haybales = new int[hayNum];
+        TreeSet<Double> haybales = new TreeSet<>();
         for (int h = 0; h < hayNum; h++) {
-            haybales[h] = Integer.parseInt(read.readLine());
+            haybales.add(Double.parseDouble(read.readLine()));
         }
-        Arrays.sort(haybales);
 
-        double validSoFar = -1;  // not taking any chances with floating point (greater precision)
-        long lowerBound = 0;
-        long upperBound = (long) Math.pow(10, 9) * 10;  // * 10 for the decimal precision
-        while (lowerBound <= upperBound) {
-            long toSearch = (lowerBound + upperBound) / 2;
-            if (canKillAll(toSearch / 10.0, haybales)) {
-                upperBound = toSearch - 1;
-                validSoFar = toSearch / 10.0;
+        double valid = -1;  // not taking any chances with floating point (greater precision)
+        long loPower = 0;
+        long hiPower = (long) (haybales.last() - haybales.first()) * 10L;
+        while (loPower <= hiPower) {
+            long midPower = (loPower + hiPower) / 2;
+            if (canKillAll(midPower / 10.0, haybales)) {
+                hiPower = midPower - 1;
+                valid = midPower / 10.0;
             } else {
-                lowerBound = toSearch + 1;
+                loPower = midPower + 1;
             }
         }
 
         PrintWriter written = new PrintWriter("angry.out");
-        written.printf("%.1f%n", validSoFar);
+        written.printf("%.1f%n", valid);
         written.close();
-        System.out.printf("%.1f%n", validSoFar);
+        System.out.printf("%.1f%n", valid);
         System.out.printf("%d ms. boom.%n", System.currentTimeMillis() - start);
     }
 
-    static boolean canKillAll(double power, int[] haybales) {  // assumes haybales is sorted, which we did do above
-        int[] leftPowers = new int[haybales.length];  // min amt of power we have to launch at haybale h to destroy everything to the left
-        int[] rightPowers = new int[haybales.length];  // and everything to the right
-        int startIndex = 0;
-        Arrays.fill(leftPowers, MAX);  // not MAX_VALUE because of overflow
-        leftPowers[0] = 0;
-        for (int h = 1; h < haybales.length; h++) {
-            // move up the explosion start to a place where the leftPower index can cover it
-            while (startIndex + 1 < h &&
-                    haybales[h] - haybales[startIndex + 1] > leftPowers[startIndex + 1] + 1) {
-                startIndex++;
+    private static boolean canKillAll(double power, TreeSet<Double> haybales) {
+        long lowerLoc = (long) ((double) haybales.first()) * 10L;
+        long upperLoc = (long) ((double) haybales.last()) * 10L;
+        while (lowerLoc <= upperLoc) {
+            long mid = (lowerLoc + upperLoc) / 2;
+            boolean leftValid = leftWipeout(power, mid / 10.0, haybales);
+            boolean rightValid = rightWipeout(power, mid / 10.0, haybales);
+            if (leftValid && rightValid) {
+                return true;
+            } else if (!leftValid) {
+                upperLoc = mid - 1;
+            } else {
+                lowerLoc = mid + 1;
             }
-            leftPowers[h] = Math.min(Math.abs(haybales[startIndex] - haybales[h]), leftPowers[startIndex + 1] + 1);
         }
-        // now basically do the exact same thing for moving to the right
-        startIndex = haybales.length - 1;
-        Arrays.fill(rightPowers, MAX);
-        rightPowers[haybales.length - 1] = 0;
-        for (int h = haybales.length - 2; h >= 0; h--) {
-            while (startIndex - 1 > h &&
-                    haybales[startIndex - 1] - haybales[h] > rightPowers[startIndex - 1] + 1) {
-                startIndex--;
-            }
-            rightPowers[h] = Math.min(Math.abs(haybales[startIndex] - haybales[h]), rightPowers[startIndex - 1] + 1);
-        }
+        return false;
+    }
 
-        int endIndex = 0;
-        for (int explosionStart = 0; explosionStart < haybales.length; explosionStart++) {
-            while (endIndex + 1 < haybales.length && haybales[endIndex + 1] - haybales[explosionStart] <= 2 * power) {
-                endIndex++;
-            }
-            // if this can explode everything to the left and to the right
-            if (leftPowers[explosionStart] <= power - 1 && rightPowers[endIndex] <= power - 1) {
+    private static boolean leftWipeout(double power, double pos, TreeSet<Double> haybales) {
+        double firstBale = haybales.first();
+        while (power > 0) {
+            double leftest = haybales.ceiling(pos - power);
+            if (leftest == firstBale) {
                 return true;
             }
+            if (pos <= leftest) {
+                return false;
+            }
+            pos = leftest;
+            power--;
+        }
+        return false;
+    }
+
+    private static boolean rightWipeout(double power, double pos, TreeSet<Double> haybales) {
+        double lastBale = haybales.last();
+        while (power > 0) {
+            double righest = haybales.floor(pos + power);
+            if (righest == lastBale) {
+                return true;
+            }
+            if (righest <= pos) {
+                return false;
+            }
+            pos = righest;
+            power--;
         }
         return false;
     }
