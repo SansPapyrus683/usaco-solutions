@@ -21,22 +21,25 @@ public final class SPainting {
         int stampLen = Integer.parseInt(info.nextToken());
 
         long[] totalInvalid = new long[canvasLen + 1];
+        totalInvalid[0] = 1;  // not necessary, just gives me closure
+        long prevLenTotal = 0;
         long base = 1;
         for (int i = 1; i < stampLen; i++) {
             base = (base * typeNum) % MOD;
-            totalInvalid[i] = (base + totalInvalid[i - 1]) % MOD;
+            totalInvalid[i] = base;
+            prevLenTotal = (prevLenTotal + totalInvalid[i]) % MOD;
         }
 
         for (int i = stampLen; i <= canvasLen; i++) {
-            totalInvalid[i] = ((typeNum * totalInvalid[i - 1]) % MOD
-                    - ((typeNum - 1) * totalInvalid[i - stampLen]) % MOD) % MOD;
+            totalInvalid[i] = ((typeNum - 1) * prevLenTotal) % MOD;
+            prevLenTotal = (prevLenTotal - totalInvalid[i - stampLen + 1] + totalInvalid[i]) % MOD;
         }
 
         long valid = 1;
         for (int i = 0; i < canvasLen; i++) {
             valid = (valid * typeNum) % MOD;
         }
-        valid -= totalInvalid[canvasLen] - totalInvalid[canvasLen - 1];
+        valid -= totalInvalid[canvasLen];
         valid = (valid + MOD) % MOD;  // make the result positive (stupid modulus function)
 
         PrintWriter written = new PrintWriter("spainting.out");
