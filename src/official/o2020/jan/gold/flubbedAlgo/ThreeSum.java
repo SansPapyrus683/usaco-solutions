@@ -11,19 +11,19 @@ public final class ThreeSum {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("threesum.in"));
         StringTokenizer initial = new StringTokenizer(read.readLine());
-        int numNum = Integer.parseInt(initial.nextToken());
+        int size = Integer.parseInt(initial.nextToken());
         int queryNum = Integer.parseInt(initial.nextToken());
         int[] numbers = Arrays.stream(read.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
 
-        long[][] rangeValid = new long[numNum][numNum];
+        long[][] rangeValid = new long[size][size];
         /*
          * this for loop first fills the array with i...j
          * with how many numbers between i...j sum with numbers[i] and numbers[j]
          * to fill the target (which in this case is 0)
          */
         int[] leftovers = new int[2 * MAX + 1];
-        for (int i = 0; i < numNum; i++) {
-            for (int j = i + 1; j < numNum; j++) {
+        for (int i = 0; i < size; i++) {
+            for (int j = i + 1; j < size; j++) {
                 int supposed = TARGET - numbers[i] - numbers[j] + MAX;
                 if (0 <= supposed && supposed <= 2 * MAX) {
                     rangeValid[i][j] = leftovers[supposed];
@@ -31,7 +31,7 @@ public final class ThreeSum {
                 leftovers[numbers[j] + MAX]++;
             }
             // revert the changes and stuff
-            for (int j = i + 1; j < numNum; j++) {
+            for (int j = i + 1; j < size; j++) {
                 leftovers[numbers[j] + MAX]--;
             }
         }
@@ -41,8 +41,8 @@ public final class ThreeSum {
          * it's almost prefix-sum esque, like first take 1 to the left,
          * then take one to the right, then take out the duplicate middle
          */
-        for (int i = numNum - 1; i >= 0; i--) {
-            for (int j = i + 1; j < numNum; j++) {
+        for (int i = size - 1; i >= 0; i--) {
+            for (int j = i + 1; j < size; j++) {
                 rangeValid[i][j] += rangeValid[i + 1][j] + rangeValid[i][j - 1] - rangeValid[i + 1][j - 1];
             }
         }
