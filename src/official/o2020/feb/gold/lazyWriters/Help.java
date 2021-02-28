@@ -3,7 +3,7 @@ package official.o2020.feb.gold.lazyWriters;
 import java.io.*;
 import java.util.*;
 
-public class Help {
+public final class Help {
     private static final int MOD = (int) Math.pow(10, 9) + 7;
     public static void main(String[] args) throws IOException {
         long timeStart = System.currentTimeMillis();
