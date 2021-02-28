@@ -5,27 +5,6 @@ import java.util.*;
 
 // 2018 dec gold
 public final class Cowpatibility {
-    // sauce: https://www.geeksforgeeks.org/print-all-possible-combinations-of-r-elements-in-a-given-array-of-size-n/
-    private static final class Combo {
-        private static ArrayList<int[]> combos = new ArrayList<>();
-        private static void combos(int[] arr, int[] soFar, int start, int end, int at, int n) {
-            if (at == n) {
-                combos.add(soFar.clone());
-                return;
-            }
-            for (int i = start; i <= end && end - i + 1 >= n - at; i++) {
-                soFar[at] = arr[i];
-                combos(arr, soFar, i + 1, end, at + 1, n);
-            }
-        }
-
-        public static ArrayList<int[]> combos(int[] arr, int n) {
-            combos = new ArrayList<>();
-            combos(arr, new int[n], 0, arr.length - 1, 0, n);
-            return combos;
-        }
-    }
-
     private static class Liked {  // lmao this is just an array with a hashcode method
         public int[] iceCream;
         public Liked(int[] like) {
@@ -50,13 +29,11 @@ public final class Cowpatibility {
             return Arrays.equals(iceCream, ((Liked) obj).iceCream);
         }
     }
-
     private static final int FAVE_NUM = 5;
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("cowpatibility.in"));
         int cowNum = Integer.parseInt(read.readLine());
-
         HashMap<Liked, Integer>[] faveSubsets = new HashMap[FAVE_NUM];
         for (int i = 0; i < FAVE_NUM; i++) {
             faveSubsets[i] = new HashMap<>();
@@ -101,5 +78,26 @@ public final class Cowpatibility {
 
     private static long pairings(int n) {  // given n things, how many ways can we choose 2 things from it?
         return n * ((long) n - 1) / 2;
+    }
+}
+
+// sauce: https://www.geeksforgeeks.org/print-all-possible-combinations-of-r-elements-in-a-given-array-of-size-n/
+class Combo {
+    private static ArrayList<int[]> combos = new ArrayList<>();
+    private static void combos(int[] arr, int[] soFar, int start, int end, int at, int n) {
+        if (at == n) {
+            combos.add(soFar.clone());
+            return;
+        }
+        for (int i = start; i <= end && end - i + 1 >= n - at; i++) {
+            soFar[at] = arr[i];
+            combos(arr, soFar, i + 1, end, at + 1, n);
+        }
+    }
+
+    public static ArrayList<int[]> combos(int[] arr, int n) {
+        combos = new ArrayList<>();
+        combos(arr, new int[n], 0, arr.length - 1, 0, n);
+        return combos;
     }
 }
