@@ -106,7 +106,7 @@ class MaxSegTree {
     public int max(int from, int to) {
         if (from < 0 || to > arrSize) {
             throw new IllegalArgumentException(String.format("the bounds %s and %s are out of bounds i think", from, to));
-        } else if (to <= from) {
+        } else if (to < from) {
             throw new IllegalArgumentException(String.format("the bounds %s and %s don't make sense bro", from, to));
         }
         return max(from, to, 0, 0, size);
