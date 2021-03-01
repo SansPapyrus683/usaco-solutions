@@ -78,7 +78,7 @@ int main() {
     }
     std::ofstream written("closing.out");
     for (bool status : still_linked) {
-        // no printing to cout
+        // no printing to cout bc that would be way too slow
         written << (status ? "YES" : "NO") << '\n';
     }
 }

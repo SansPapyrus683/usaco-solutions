@@ -1,7 +1,6 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
-#include <unordered_set>
 
 using std::cout;
 using std::endl;
@@ -10,50 +9,61 @@ using std::vector;
 class Farm {
     private:
         vector<vector<int>> neighbors;
-        int root;
-        int path_divisible(int at, int parent, int split_len) {
-            std::unordered_multiset<int> leftover_paths;
-            for (int c : neighbors[at]) {
-                if (c != parent) {
-                    leftover_paths.insert(path_divisible(c, at, split_len) + 1);
+        // the sizes of all the individual subtrees and the top part
+        vector<vector<int>> partitioned_sizes;
+        int deepest;
+        int process_pastures(int at, int parent) {
+            int subtree_size = 1;
+            for (int n : neighbors[at]) {
+                if (n != parent) {
+                    int child_size = process_pastures(n, at);
+                    subtree_size += child_size;
+                    partitioned_sizes[at].push_back(child_size);
                 }
             }
-            if (leftover_paths.empty()) {
-                return 0;
+            // add the top part with the parent and stuff
+            if (subtree_size != neighbors.size()) {
+                partitioned_sizes[at].push_back(neighbors.size() - subtree_size);
             }
-            if (leftover_paths.find(0) != leftover_paths.end()) {
-                return -1;
-            }
-            leftover_paths.erase(split_len);
-            int remaining = -1;
-            while (!leftover_paths.empty()) {
-                int curr = *leftover_paths.begin();
-                leftover_paths.erase(leftover_paths.begin());
-                std::unordered_multiset<int>::iterator other = leftover_paths.find(split_len - curr);
-                if (other == leftover_paths.end()) {
-                    if (remaining != -1) {
-                        return -1;
-                    }
-                    remaining = curr;
-                } else {
-                    leftover_paths.erase(other);
-                }
-            }
-            return remaining == -1 ? 0 : remaining;
+            return subtree_size;
         }
     public:
-        Farm(vector<vector<int>> neighbors, int root=0) : neighbors(neighbors), root(root) { }
+        Farm(vector<vector<int>> neighbors)
+                : neighbors(neighbors),
+                  partitioned_sizes(neighbors.size()) {
+            process_pastures(0, 0);
+        }
 
-        bool path_divisible(int split_len) {
+        bool splittable(int split_len) {
+            // TODO: figure out how this stuff works later and comment the code
             if ((neighbors.size() - 1) % split_len != 0) {
                 return false;
             }
-            return path_divisible(root, root, split_len) == 0;
+            vector<int> leftovers(split_len);
+            for (int i = 0; i < neighbors.size(); i++) {
+                int cnt = 0;
+                for (int size : partitioned_sizes[i]) {
+                    int remainder = size % split_len;
+                    if (remainder == 0) {
+                        continue;
+                    }
+                    if (leftovers[split_len - remainder] != 0) {
+                        leftovers[split_len - remainder]--;
+                        cnt--;
+                    } else {
+                        leftovers[remainder]++;
+                        cnt++;
+                    }
+                }
+                if (cnt != 0) {
+                    return false;
+                }
+            }
+            return true;
         }
 };
 
 // 2020 feb gold
-// TODO: somehow optimize this crap idk
 int main() {
     std::ifstream read("deleg.in");
     int pasture_num;
@@ -69,9 +79,11 @@ int main() {
 
     Farm farm(neighbors);
     std::ofstream written("deleg.out");
-    for (int split_len = 1; split_len < pasture_num; split_len++) {
-        int divisible = farm.path_divisible(split_len);
-        written << divisible;
+    for (int s = 1; s < neighbors.size(); s++) {
+        bool splittable = farm.splittable(s);
+        written << splittable;
+        cout << splittable;
     }
     written << endl;
+    cout << endl;
 }
