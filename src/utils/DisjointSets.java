@@ -7,38 +7,25 @@ package utils;
 public final class DisjointSets {
     private final int[] parents;
     private final int[] sizes;
-    private final boolean compressPaths;
-    public DisjointSets(int size, boolean compressPaths) {
+    public DisjointSets(int size) {
         parents = new int[size];
         sizes = new int[size];
-        this.compressPaths = compressPaths;
         for (int i = 0; i < size; i++) {
             parents[i] = i;
             sizes[i] = 1;
         }
     }
 
-    public boolean sameSet(int n1, int n2) {
-        return getUltimate(n1) == getUltimate(n2);
-    }
-
     public int getUltimate(int n) {
-        if (parents[n] == n) {
-            return n;
-        }
-        if (compressPaths) {
-            return parents[n] = getUltimate(parents[n]);
-        } else {
-            return getUltimate(parents[n]);
-        }
+        return parents[n] == n ? n : (parents[n] = getUltimate(parents[n]));
     }
 
     public void link(int e1, int e2) {
-        if (sameSet(e1, e2)) {
-            return;
-        }
         e1 = getUltimate(e1);
         e2 = getUltimate(e2);
+        if (e1 == e2) {
+            return;
+        }
         if (sizes[e2] > sizes[e1]) {
             int temp = e1;
             e1 = e2;
