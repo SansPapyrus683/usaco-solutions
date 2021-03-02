@@ -8,6 +8,7 @@ public final class Replication {
     private static final char START = 'S';
     private static final char ROCK = '#';
     public static void main(String[] args) throws IOException {
+        long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer initial = new StringTokenizer(read.readLine());
         int width = Integer.parseInt(initial.nextToken());
@@ -17,7 +18,6 @@ public final class Replication {
         for (int r = 0; r < width; r++) {
             farm[r] = read.readLine().toCharArray();
         }
-        long start = System.currentTimeMillis();
 
         int[][] closestRockDist = new int[width][width];
         ArrayList<int[]> rockFrontier = new ArrayList<>();

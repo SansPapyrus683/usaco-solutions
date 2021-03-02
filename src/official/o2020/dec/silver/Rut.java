@@ -15,6 +15,7 @@ import java.util.*;
  */
 public final class Rut {
     public static void main(String[] args) throws IOException {
+        long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
         int cowNum = Integer.parseInt(read.readLine());
         int[][] cows = new int[cowNum][2];
@@ -33,7 +34,6 @@ public final class Rut {
             }
             cows[c] = new int[] {Integer.parseInt(cowInfo[1]), Integer.parseInt(cowInfo[2])};
         }
-        long start = System.currentTimeMillis();
         eastCowIndices.sort(Comparator.comparingInt(i -> cows[i][1]));  // sort east cows by y
         northCowIndices.sort(Comparator.comparingInt(i -> cows[i][0]));  // sort north cows by x
 

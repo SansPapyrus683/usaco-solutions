@@ -15,6 +15,7 @@ import java.util.*;
 public final class DeadDance {
     private static final long[] INVALID = new long[] {-1, -1};
     public static void main(String[] args) throws IOException {
+        long startTime = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer initial = new StringTokenizer(read.readLine());
         int cowNum = Integer.parseInt(initial.nextToken());
@@ -25,7 +26,6 @@ public final class DeadDance {
             moves[m] = Arrays.stream(read.readLine().split(" ")).mapToInt(p -> Integer.parseInt(p) - 1).toArray();
         }
 
-        long startTime = System.currentTimeMillis();
         ArrayList<int[]>[] swapWith = new ArrayList[cowNum];
         for (int c = 0; c < cowNum; c++) {
             swapWith[c] = new ArrayList<>();

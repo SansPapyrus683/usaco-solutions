@@ -20,11 +20,10 @@ public final class Genetics {
     private static final int MOD = (int) Math.pow(10, 9) + 7;
 
     public static void main(String[] args) throws IOException {
+        long timeStart = System.currentTimeMillis();
         int[] corrupted = new BufferedReader(new InputStreamReader(System.in))
                 .readLine().toUpperCase()
                 .chars().map(i -> GENOME_MAPPING.get((char) i)).toArray();
-
-        long timeStart = System.currentTimeMillis();
 
         /*
          * this[i][lastStart][start][end]

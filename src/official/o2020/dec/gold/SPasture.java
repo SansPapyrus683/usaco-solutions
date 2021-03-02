@@ -13,6 +13,7 @@ import java.util.*;
  */
 public final class SPasture {
     public static void main(String[] args) throws IOException {
+        long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
         int cowNum = Integer.parseInt(read.readLine());  // io is exactly the same as silver lol
         int[][] cows = new int[cowNum][2];
@@ -20,7 +21,6 @@ public final class SPasture {
             cows[c] = Arrays.stream(read.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
         }
 
-        long start = System.currentTimeMillis();
         // 1 for the null subset
         int totalValid = 1 + validHorizontalSquares(cows, true);
         for (int[] c : cows) {

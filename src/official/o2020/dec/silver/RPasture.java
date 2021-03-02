@@ -13,6 +13,7 @@ import java.util.*;
  */
 public final class RPasture {
     public static void main(String[] args) throws IOException {
+        long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
 
         int cowNum = Integer.parseInt(read.readLine());
@@ -28,7 +29,6 @@ public final class RPasture {
             seenY.add(cows[c][1]);
         }
 
-        long start = System.currentTimeMillis();
         // because all the x's and y's are distinct, we can just sort of "compress" them into just 1, 2, 3, etc...
         Arrays.sort(cows, Comparator.comparingInt(c -> c[1]));
         HashMap<Integer, Integer> reducedY = new HashMap<>();

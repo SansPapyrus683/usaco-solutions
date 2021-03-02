@@ -11,8 +11,8 @@ public final class Uddered {
     private static final int ALPH_NUM = 26;
     private static final char REDACTED = '█';
     public static void main(String[] args) throws IOException {
-        String rawTestament = new BufferedReader(new InputStreamReader(System.in)).readLine().toLowerCase();
         long start = System.currentTimeMillis();
+        String rawTestament = new BufferedReader(new InputStreamReader(System.in)).readLine().toLowerCase();
         if (!rawTestament.matches("[a-z]*")) {
             throw new IllegalArgumentException("woah since when did the cowphabet have such weird characters");
         }

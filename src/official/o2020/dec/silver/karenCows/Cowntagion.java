@@ -12,6 +12,7 @@ import java.util.*;
  */
 public final class Cowntagion {
     public static void main(String[] args) throws IOException {
+        long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
         int farmNum  = Integer.parseInt(read.readLine());
         ArrayList<Integer>[] neighbors = new ArrayList[farmNum];
@@ -25,8 +26,6 @@ public final class Cowntagion {
             neighbors[farm1].add(farm2);
             neighbors[farm2].add(farm1);
         }
-
-        long start = System.currentTimeMillis();  // because it's stdin, i'm just going to neglect input parsing
 
         int minDays = 0;
         boolean[] visited = new boolean[farmNum];

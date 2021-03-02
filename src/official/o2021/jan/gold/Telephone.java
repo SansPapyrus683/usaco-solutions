@@ -14,6 +14,7 @@ import java.util.*;
  */
 public final class Telephone {
     public static void main(String[] args) throws IOException {
+        long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer initial = new StringTokenizer(read.readLine());
         int cowNum = Integer.parseInt(initial.nextToken());
@@ -32,7 +33,6 @@ public final class Telephone {
                 }
             }
         }
-        long start = System.currentTimeMillis();
 
         int movesTaken = 0;
         boolean reachedEnd = false;
