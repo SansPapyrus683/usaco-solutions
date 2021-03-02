@@ -1,10 +1,10 @@
-package official.o2014.jan.silver.fjGetTheCamera;
+package official.o2014.jan.silver.getTheCamera;
 
 import java.io.*;
 import java.util.*;
 import java.util.stream.Stream;
 
-// 2014 jan silver
+// 2014 jan silver (goddamn this one is convoluted)
 public final class Recording {
     private static final class PArrangement {  // i could just make a generic Pair<> final class but screw it
         public ArrayList<Integer> first;
@@ -32,10 +32,8 @@ public final class Recording {
         for (int i = 1; i < events.length; i++) {
             events[i] = Stream.of(read.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
         }
-        Arrays.sort(events, (a, b) -> {
-            if (a[1] != b[1]) return a[1] - b[1];  // compare ending times first then compare starting
-            return a[0] - b[0];
-        });
+        // sort by ending time
+        Arrays.sort(events, (a, b) -> a[1] != b[1] ? a[1] - b[1] : a[0] - b[0]);
         events[0] = null;  // just making it explicit here (events start at 1 to accommodate the dp array)
 
         PArrangement[] optimal = new PArrangement[events.length];
@@ -74,7 +72,6 @@ public final class Recording {
                     best = recorded;
                     soFar = ours;
                 } else if (recorded == best) {  // if it's the same but it makes more efficient use of space, replace the old one
-                    assert soFar != null;
                     int ourOtherEnd = events[ours.first.get(ours.first.size() - 1)][1] != toAdd[1] ? events[ours.first.get(ours.first.size() - 1)][1]
                             : events[ours.second.get(ours.second.size() - 1)][1];
                     int theirOtherEnd = events[soFar.first.get(soFar.first.size() - 1)][1] != toAdd[1] ? events[soFar.first.get(soFar.first.size() - 1)][1]
