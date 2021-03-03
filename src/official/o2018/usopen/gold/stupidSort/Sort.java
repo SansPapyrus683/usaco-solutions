@@ -32,16 +32,13 @@ public final class Sort {
 
 class BITree {
     private final int[] treeThing;
-    private final int[] actualArr;
     private final int size;
     public BITree(int size) {
         treeThing = new int[size + 1];  // to make stuff easier we'll just make it 1-indexed
-        actualArr = new int[size];
         this.size = size;
     }
 
     public void increment(int ind, int val) {
-        actualArr[ind] += val;
         ind++;  // have the driver code not worry about 1-indexing
         for (; ind <= size; ind += ind & -ind) {
             treeThing[ind] += val;
