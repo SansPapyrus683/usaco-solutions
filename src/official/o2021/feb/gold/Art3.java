@@ -28,8 +28,8 @@ public class Art3 {
             for (int start = 0; start + paintLen <= canvasLen; start++) {
                 int end = start + paintLen - 1;
                 for (int splitAt = start; splitAt < end; splitAt++) {
-                    // see if we can extend one of the strokes from the left to the right
-                    if (canvas[start] == canvas[splitAt] && canvas[start] == canvas[end]) {
+                    // see if we can extend one of the strokes from the left to the right (no real clue why this works lol)
+                    if (canvas[splitAt] == canvas[end]) {
                         minStrokes[start][end] = Math.min(
                                 minStrokes[start][end],
                                 minStrokes[start][splitAt] + minStrokes[splitAt + 1][end] - 1
