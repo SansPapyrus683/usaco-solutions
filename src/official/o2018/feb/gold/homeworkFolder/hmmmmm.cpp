@@ -34,7 +34,7 @@ class FileSys {
 
         // minimum cost if we only use nodes STRICTLY below that "at" node
         long long min_total_path(int at, long long at_cost) {
-            long long best = 9223372036854775807L;
+            long long best = (1L << 63) - 1;
             for (int f : children[at]) {
                 // we're going to have to add an extra "../" to all the ones that aren't children of our directory
                 long long farther_amt = (file_num - files_contained[f]) * PARENT_LEN;

@@ -64,7 +64,7 @@ int main() {
     for (vector<int> f : farms) {
         std::unordered_map<int, std::pair<long long, long long>> farm_paths;
         for (int i = 0; i < f.size(); i++) {
-            for (int j = i + 1; j < f.size(); j++) {  // first don't care about which direction the paths go
+            for (int j = i + 1; j < f.size(); j++) {
                 int len = dists[f[i]][f[j]] + added_len;
                 // += 2 because it can go either way (no idea why i have to have the "first" check but it makes it work)
                 farm_paths[std::min(len, threshold)].first += first ? 1 : 2;
