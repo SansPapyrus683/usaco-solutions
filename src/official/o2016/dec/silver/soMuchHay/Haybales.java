@@ -27,54 +27,26 @@ public final class Haybales {
         System.out.printf("bruh %d ms you're so bad%n", System.currentTimeMillis() - start);
     }
 
-    // straight from https://stackoverflow.com/questions/2945017/javas-equivalent-to-bisect-in-python
-    public static int bisectRight(int[] searchOn, int x) {
+    // these two are right from python's bisect module: https://github.com/python/cpython/blob/master/Lib/bisect.py
+    private static int bisectLeft(int[] arr, int elem) {
         int lo = 0;
-        int hi = searchOn.length;
-        if (hi == 0) {
-            return 0;
+        int hi = arr.length;
+        while (lo < hi) {
+            int mid = (lo + hi) / 2;
+            if (arr[mid] < elem) lo = mid + 1;
+            else hi = mid;
         }
-        if (x < searchOn[lo]) {
-            return lo;
-        }
-        if (x > searchOn[hi - 1]) {
-            return hi;
-        }
-        while (true) {
-            if (lo + 1 == hi) {
-                return lo + 1;
-            }
-            int mi = (hi + lo) / 2;
-            if (x < searchOn[mi]) {
-                hi = mi;
-            } else {
-                lo = mi;
-            }
-        }
+        return lo;
     }
 
-    public static int bisectLeft(int[] searchOn, int x) {
+    private static int bisectRight(int[] arr, int elem) {
         int lo = 0;
-        int hi = searchOn.length;
-        if (hi == 0) {
-            return 0;
+        int hi = arr.length;
+        while (lo < hi) {
+            int mid = (lo + hi) / 2;
+            if (elem < arr[mid]) hi = mid;
+            else lo = mid + 1;
         }
-        if (x < searchOn[lo]) {
-            return lo;
-        }
-        if (x > searchOn[hi - 1]) {
-            return hi;
-        }
-        while (true) {
-            if (lo + 1 == hi) {
-                return x == searchOn[lo] ? lo : (lo + 1);
-            }
-            int mi = (hi + lo) / 2;
-            if (x <= searchOn[mi]) {
-                hi = mi;
-            } else {
-                lo = mi;
-            }
-        }
+        return lo;
     }
 }

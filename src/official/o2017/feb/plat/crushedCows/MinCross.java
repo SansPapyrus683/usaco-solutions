@@ -3,7 +3,7 @@ package official.o2017.feb.plat.crushedCows;
 import java.io.*;
 
 // 2017 feb plat
-public class MinCross {
+public final class MinCross {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("mincross.in"));

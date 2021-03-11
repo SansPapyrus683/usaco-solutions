@@ -89,18 +89,13 @@ public final class CowJump {
     }
 
     // equality for these 2 final classes aren't based on their actual info, but id numbers they're given
-    private static final class IDPoint {
+    private static class IDPoint {
         public int x;
         public int y;
         public int id = 0;
-
-        public IDPoint(int x, int y) {
+        public IDPoint(int x, int y, int id) {
             this.x = x;
             this.y = y;
-        }
-
-        public IDPoint(int x, int y, int id) {
-            this(x, y);
             this.id = id;
         }
 
@@ -115,18 +110,13 @@ public final class CowJump {
         }
     }
 
-    private static final class IDSeg {
+    private static class IDSeg {
         public IDPoint start;
         public IDPoint end;
         public int id = 0;
-
-        public IDSeg(IDPoint start, IDPoint end) {
+        public IDSeg(IDPoint start, IDPoint end, int id) {
             this.start = start;
             this.end = end;
-        }
-
-        public IDSeg(IDPoint start, IDPoint end, int id) {
-            this(start, end);
             this.id = id;
         }
 

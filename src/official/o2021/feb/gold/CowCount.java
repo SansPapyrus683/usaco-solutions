@@ -14,7 +14,7 @@ import java.util.*;
  * 1 1 7
  * 2 1 7 should output 11, 0, 4, 3, 1, 2, and 2, each on a newline
  */
-public class CowCount {
+public final class CowCount {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new InputStreamReader(System.in));

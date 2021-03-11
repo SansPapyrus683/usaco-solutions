@@ -8,7 +8,7 @@ import java.util.*;
  * 10
  * 1 2 3 4 1 4 3 2 1 6 should output 6
  */
-public class Art3 {
+public final class Art3 {
     public static void main(String[] args) throws IOException {
         long timeStart = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
