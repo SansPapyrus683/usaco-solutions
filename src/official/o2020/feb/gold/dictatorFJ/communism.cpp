@@ -35,27 +35,29 @@ class Farm {
         }
 
         bool splittable(int split_len) {
-            // TODO: figure out how this stuff works later and comment the code
             if ((neighbors.size() - 1) % split_len != 0) {
                 return false;
             }
+            // i would reset this across all loops but it's supposed to stay all 0's
             vector<int> leftovers(split_len);
             for (int i = 0; i < neighbors.size(); i++) {
-                int cnt = 0;
+                int unmatched = 0;
                 for (int size : partitioned_sizes[i]) {
                     int remainder = size % split_len;
                     if (remainder == 0) {
                         continue;
                     }
+                    // see if we can match this remainder with anything else
                     if (leftovers[split_len - remainder] != 0) {
                         leftovers[split_len - remainder]--;
-                        cnt--;
-                    } else {
+                        unmatched--;
+                    } else {  // if we can't, oh well, let's put it in the backlog
                         leftovers[remainder]++;
-                        cnt++;
+                        unmatched++;
                     }
                 }
-                if (cnt != 0) {
+                // we still have stuff in the backlog? oh crap
+                if (unmatched != 0) {
                     return false;
                 }
             }
