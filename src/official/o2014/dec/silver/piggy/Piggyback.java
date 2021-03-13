@@ -1,4 +1,4 @@
-package official.o2014.dec.silver.piggypiggypiggy;
+package official.o2014.dec.silver.piggy;
 
 import java.io.*;
 import java.util.*;
