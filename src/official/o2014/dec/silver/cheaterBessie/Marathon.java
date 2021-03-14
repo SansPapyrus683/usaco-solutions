@@ -1,4 +1,4 @@
-package official.o2014.dec.silver.chadBessie;
+package official.o2014.dec.silver.cheaterBessie;
 
 import java.io.*;
 import java.util.*;
