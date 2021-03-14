@@ -14,8 +14,8 @@ class FileSys {
     private:
         const int PARENT_LEN = 3;  // "../"
         
-        vector<vector<int>> children;
-        vector<int> lengths;
+        const vector<vector<int>> children;
+        const vector<int> lengths;
         vector<int> files_contained;
         int root = -1;
         int file_dir_num;

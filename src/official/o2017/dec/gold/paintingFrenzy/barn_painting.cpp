@@ -13,8 +13,8 @@ class Farm {
     const int COLOR_NUM = 3;
     private:
         std::map<std::pair<int, int>, int> cached_poss;
-        vector<int> painted_alr;
-        vector<vector<int>> neighbors;
+        const vector<int> painted_alr;
+        const vector<vector<int>> neighbors;
         // # of ways we can paint the tree with at given that it has to be painted root_color
         long long paint_poss(int at, int parent, int root_color) {
             // don't go calculating the same thing multiple times

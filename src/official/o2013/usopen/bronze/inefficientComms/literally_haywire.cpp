@@ -12,10 +12,10 @@ constexpr int FRIEND_NUM = 3;
 
 class WireSystem {
     private:
-        vector<vector<int>> friendly;
+        const vector<vector<int>> friendly;
         vector<int> cow_pos;  // this[i] = the stall number of cow i (everything's 0-indexed)
-        int cow_num;
-        int best = std::numeric_limits<int>::max();
+        const int cow_num;
+        int best = INT_MAX;
 
         void calc_min(int arranged_alr, int cost_so_far, int dangling_num, int dangling_cost) {
             if (arranged_alr == cow_num) {
@@ -50,9 +50,7 @@ class WireSystem {
             }
         }
     public:
-        WireSystem(vector<vector<int>> friends) {
-            friendly = friends;
-            cow_num = friends.size();
+        WireSystem(vector<vector<int>> friends) : friendly(friends), cow_num(friends.size()) {
             cow_pos = vector<int>(cow_num, -1);
         }
 
@@ -82,7 +80,6 @@ int main() {
 
     WireSystem system(friends);
     int min_cost = system.min_cost();
-
     std::ofstream("haywire.out") << min_cost << endl;
     cout << min_cost << endl;
 }

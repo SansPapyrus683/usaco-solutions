@@ -8,7 +8,7 @@ using std::vector;
 
 class Farm {
     private:
-        vector<vector<int>> neighbors;
+        const vector<vector<int>> neighbors;
         // the sizes of all the individual subtrees and the top part
         vector<vector<int>> partitioned_sizes;
         int deepest;
