@@ -12,8 +12,8 @@ public final class CowJog {
         int cowNum = Integer.parseInt(initial.nextToken());
         int[][] cows = new int[cowNum][2];
         int time = Integer.parseInt(initial.nextToken());
-        for (int i = 0; i < cows.length; i++) {
-            cows[i] = Arrays.stream(read.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
+        for (int c = 0; c < cows.length; c++) {
+            cows[c] = Arrays.stream(read.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
         }
         Arrays.sort(cows, Comparator.comparingInt(c -> c[0]));
         // the position that the cow will finish at if it has no obstructions

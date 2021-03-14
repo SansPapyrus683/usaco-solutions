@@ -6,6 +6,7 @@ import java.util.*;
 /*
  * 2014 dec silver
  * somehow even though this should take smth like n^2 operations it still worked
+ * what it does is that it simulates >= 1 joinings at a time, so it's a bit better than raw brute force
  */
 public final class CowJogSim {
     public static void main(String[] args) throws IOException {
@@ -14,14 +15,14 @@ public final class CowJogSim {
         StringTokenizer initial = new StringTokenizer(read.readLine());
         int[][] cows = new int[Integer.parseInt(initial.nextToken())][2];
         int time = Integer.parseInt(initial.nextToken());
-        for (int i = 0; i < cows.length; i++) {
-            cows[i] = Arrays.stream(read.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();  // they're alr sorted, just so you know
+        for (int c = 0; c < cows.length; c++) {
+            cows[c] = Arrays.stream(read.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();  // they're alr sorted, just so you know
         }
         Arrays.sort(cows, Comparator.comparingInt(c -> c[0]));
 
         int[][] simulationCows = new int[cows.length][2];  // stupid pass-by-reference
-        for (int i = 0; i < cows.length; i++) {
-            simulationCows[i] = cows[i].clone();
+        for (int c = 0; c < cows.length; c++) {
+            simulationCows[c] = cows[c].clone();
         }
         ArrayList<int[]> groups = new ArrayList<>(Arrays.asList(simulationCows.clone()));  // why the heck not
 
