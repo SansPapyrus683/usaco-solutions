@@ -96,6 +96,7 @@ class CityRoute {  // custom segtree or smth idk
         }
 };
 
+// 2014 dec gold
 int main() {
     std::ifstream read("marathon.in");
     int checkpt_num;
