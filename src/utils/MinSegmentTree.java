@@ -7,7 +7,7 @@ import java.util.Comparator;
 /**
  * A data structure that allows for efficient answering of range minimum queries.
  * explanation here: https://cp-algorithms.com/data_structures/segment_tree.html
- * except for this one it returns the min or max of a range (updates are still a thing, don't worry)
+ * except for this one it returns the min of a range (updates are still a thing, don't worry)
  */
 public final class MinSegmentTree {
     private final int[] segtree;
@@ -78,9 +78,9 @@ public final class MinSegmentTree {
         if (from <= left && right <= to) {
             return segtree[currNode];
         }
-        int middle = (left + right) / 2;
-        int leftPart = rangeMin(from, to, 2 * currNode + 1, left, middle);
-        int rightPart = rangeMin(from, to, 2 * currNode + 2, middle, right);
+        int mid = (left + right) / 2;
+        int leftPart = rangeMin(from, to, 2 * currNode + 1, left, mid);
+        int rightPart = rangeMin(from, to, 2 * currNode + 2, mid, right);
         return min(leftPart, rightPart);
     }
 
