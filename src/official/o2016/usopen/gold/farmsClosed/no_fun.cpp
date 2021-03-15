@@ -1,11 +1,8 @@
-#include <iostream>
 #include <fstream>
 #include <vector>
 #include <set>
 #include <algorithm>
 
-using std::cout;
-using std::endl;
 using std::vector;
 
 class DisjointSets {
