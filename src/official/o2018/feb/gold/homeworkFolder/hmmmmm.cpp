@@ -21,6 +21,7 @@ class FileSys {
         int file_dir_num;
         int file_num = 0;
 
+        // uses dfs to calculate all the files that are at or below a single thing
         int calc_file_num(int at) {
             if (children[at].size() == 0) {
                 return files_contained[at] = 1;
