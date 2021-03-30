@@ -16,5 +16,6 @@ and snake_case for python and c++ (though there's like basically no c++ solution
 
 * there might be some debug prints left in the files, but that shouldn't affect anything
 * the package names are there so vs code doesn't have a meltdown with the files lol (the thing is intellij handles them just fine)
-* so i learned that asserts for input validation are somehow *bad*, but that probably won't affect anything -usaco does give perfect input anyways
+* i have some weak input validation, but that's just for my debugging, you don't have to worry about it
 * i also learned that java package names can't have capital letters, but it's not like anyone's using this lol
+* another thing i realized after coding a ton of dijkstra's sols is that my priority queues are coded wrong, but they still get ac'd

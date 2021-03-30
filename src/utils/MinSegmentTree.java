@@ -6,23 +6,16 @@ import java.util.Comparator;
 
 /**
  * A data structure that allows for efficient answering of range minimum queries.
- * explanation here: https://cp-algorithms.com/data_structures/segment_tree.html
- * except for this one it returns the min of a range (updates are still a thing, don't worry)
+ * followed the explanation here: https://codeforces.com/blog/entry/18051
  */
 public final class MinSegmentTree {
     private final int[] segtree;
-    private final int arrSize;
-    private final int size;
+    private final int len;
     private final Comparator<Integer> cmp;
     public MinSegmentTree(int len, Comparator<Integer> cmp) {  // constructs the thing kinda like an array
-        int size = 1;
-        while (size < len) {
-            size *= 2;
-        }
-        this.size = size;
+        this.len = len;
         this.cmp = cmp;
-        arrSize = len;
-        segtree = new int[size * 2];  // we won't necessarily use all of the element but that doesn't really matter
+        segtree = new int[len * 2];  // note: we won't use index 0
     }
 
     public MinSegmentTree(int[] arr, Comparator<Integer> cmp) {  // constructs the thing with initial elements as well
@@ -40,48 +33,24 @@ public final class MinSegmentTree {
         this(len, Comparator.naturalOrder());
     }
 
-    public void set(int index, int element) {
-        if (index < 0 || index > arrSize) {
-            throw new IllegalArgumentException(String.format("%s should be out of bounds lol", index));
+    void set(int ind, int val) {
+        for (segtree[ind += len] = val; ind > 1; ind >>= 1) {
+            segtree[ind >> 1] = min(segtree[ind], segtree[ind ^ 1]);
         }
-        set(index, element, 0, 0, size);
+        System.out.println(Arrays.toString(segtree));
     }
 
-    private void set(int index, int element, int currNode, int left, int right) {
-        if (right - left == 1) {
-            segtree[currNode] = element;
-        } else {
-            int mid = (left + right) / 2;
-            if (index < mid) {
-                set(index, element, 2 * currNode + 1, left, mid);
-            } else {
-                set(index, element, 2 * currNode + 2, mid, right);
+    int rangeMin(int from, int to) {  // minimum from [from, to)
+        int min = Integer.MAX_VALUE;
+        for (from += len, to += len; from < to; from >>= 1, to >>= 1) {
+            if ((from & 1) != 0) {
+                min = min(min, segtree[from++]);
             }
-            segtree[currNode] = min(segtree[2 * currNode + 1], segtree[2 * currNode + 2]);
+            if ((to & 1) != 0) {
+                min = min(min, segtree[--to]);
+            }
         }
-    }
-
-    // for this one, from and to follow "normal" slicing rules - left bound is inclusive, right bound isn't
-    public int rangeMin(int from, int to) {
-        if (from < 0 || to > arrSize) {
-            throw new IllegalArgumentException(String.format("the bounds %s and %s are out of bounds i think", from, to));
-        } else if (to <= from) {
-            throw new IllegalArgumentException(String.format("the bounds %s and %s don't make sense bro", from, to));
-        }
-        return rangeMin(from, to, 0, 0, size);
-    }
-
-    private int rangeMin(int from, int to, int currNode, int left, int right) {
-        if (right <= from || to <= left) {
-            return Integer.MIN_VALUE;
-        }
-        if (from <= left && right <= to) {
-            return segtree[currNode];
-        }
-        int mid = (left + right) / 2;
-        int leftPart = rangeMin(from, to, 2 * currNode + 1, left, mid);
-        int rightPart = rangeMin(from, to, 2 * currNode + 2, mid, right);
-        return min(leftPart, rightPart);
+        return min;
     }
 
     private int min(int x, int y) {
