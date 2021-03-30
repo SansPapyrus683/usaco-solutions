@@ -80,7 +80,7 @@ public final class CowLand {
                 queryTree.set(firstOcc[n], enjoyment[n]);
                 queryTree.set(lastOcc[n], enjoyment[n]);
             }
-            LCATree = new MinSegTree(eulerTour.stream().mapToInt(i -> i).toArray(), Comparator.comparingInt(n -> height[n]));
+            LCATree = new MinSegTree(eulerTour.stream().mapToInt(i -> i).toArray(), Comparator.comparingInt(n -> height[(int) n]));
         }
 
         public int query(int n1, int n2) {
@@ -99,7 +99,7 @@ public final class CowLand {
             if (p1 > p2) {  // see which one occurs first because of the minimum thing
                 return LCA(n2, n1);
             }
-            return LCATree.min(p1, p2 + 1);  // + 1 because of the bounds of min()
+            return LCATree.rangeMin(p1, p2 + 1);  // + 1 because of the bounds of min()
         }
 
         private void eulerTour() {  // i could just put this in the constructor but this makes it look better
@@ -134,78 +134,55 @@ public final class CowLand {
     }
 }
 
-class MinSegTree {
+final class MinSegTree {
     private final int[] segtree;
-    private final int arrSize;
-    private final int size;
+    private final int len;
     private final Comparator<Integer> cmp;
-
-    public MinSegTree(int len, Comparator<Integer> comp) {
-        int size = 1;
-        while (size < len) {
-            size *= 2;
-        }
-        this.size = size;
-        cmp = comp;
-        arrSize = len;
-        segtree = new int[size * 2];
-    }
-
-    public MinSegTree(int[] arr, Comparator<Integer> comp) {
-        this(arr.length, comp);
+    public MinSegTree(int[] arr, Comparator<Integer> cmp) {  // constructs the thing with initial elements as well
+        this.len = arr.length;
+        this.cmp = cmp;
+        segtree = new int[len * 2];  // note: we won't use index 0
         for (int i = 0; i < arr.length; i++) {
             set(i, arr[i]);
         }
     }
 
-    public void set(int index, int element) {
-        if (index < 0 || index > arrSize) {
-            throw new IllegalArgumentException(String.format("%s should be out of bounds lol", index));
+    public void set(int ind, int val) {
+        if (ind < 0 || ind >= len) {
+            throw new IllegalArgumentException(String.format("the index %d is OOB", ind));
         }
-        set(index, element, 0, 0, size);
+        for (segtree[ind += len] = val; ind > 1; ind >>= 1) {
+            segtree[ind >> 1] = min(segtree[ind], segtree[ind ^ 1]);
+        }
     }
 
-    private void set(int index, int element, int currNode, int left, int right) {
-        if (right - left == 1) {
-            segtree[currNode] = element;
-        } else {
-            int mid = (left + right) / 2;
-            if (index < mid) {
-                set(index, element, 2 * currNode + 1, left, mid);
-            } else {
-                set(index, element, 2 * currNode + 2, mid, right);
+    public int rangeMin(int from, int to) {  // minimum from [from, to)
+        if (from > to || from < 0 || from >= len || to <= 0 || to > len) {
+            throw new IllegalArgumentException(String.format("the query [%d, %d) is invalid just sayin'", from, to));
+        }
+        int min = Integer.MAX_VALUE;
+        for (from += len, to += len; from < to; from >>= 1, to >>= 1) {
+            if ((from & 1) != 0) {
+                min = min(min, segtree[from++]);
             }
-            segtree[currNode] = Collections.min(Arrays.asList(segtree[2 * currNode + 1], segtree[2 * currNode + 2]), cmp);
+            if ((to & 1) != 0) {
+                min = min(min, segtree[--to]);
+            }
         }
+        return min;
     }
 
-    public int min(int from, int to) {
-        if (from < 0 || to > arrSize) {
-            throw new IllegalArgumentException(String.format("the bounds %s and %s are out of bounds i think", from, to));
+    private int min(int x, int y) {
+        if (x == Integer.MAX_VALUE) {
+            return y;
+        } else if (y == Integer.MAX_VALUE) {
+            return x;
         }
-        return min(from, to, 0, 0, size);
-    }
-
-    private int min(int from, int to, int currNode, int left, int right) {
-        if (right <= from || to <= left) {
-            return Integer.MAX_VALUE;
-        }
-        if (from <= left && right <= to) {
-            return segtree[currNode];
-        }
-        int middle = (left + right) / 2;
-        int leftPart = min(from, to, 2 * currNode + 1, left, middle);
-        int rightPart = min(from, to, 2 * currNode + 2, middle, right);
-        if (leftPart == Integer.MAX_VALUE) {
-            return rightPart;
-        } else if (rightPart == Integer.MAX_VALUE) {
-            return leftPart;
-        }
-        return cmp.compare(leftPart, rightPart) < 0 ? leftPart : rightPart;
+        return Collections.min(Arrays.asList(x, y), cmp);
     }
 }
 
-class XORBIT {
+final class XORBIT {
     private final int[] treeThing;
     private final int[] actualArr;
     private final int size;
