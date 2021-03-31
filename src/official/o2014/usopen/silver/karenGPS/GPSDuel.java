@@ -5,18 +5,15 @@ import java.util.*;
 
 // 2014 us open silver
 public final class GPSDuel {
-    static int intNum;
-    static ArrayList<int[]>[] neighbors;
-    static ArrayList<int[]>[] reverseNeighbors;
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("gpsduel.in"));
         StringTokenizer initial = new StringTokenizer(read.readLine());
-        intNum = Integer.parseInt(initial.nextToken());  // intersection num, not like integer num or something
+        int intNum = Integer.parseInt(initial.nextToken());  // intersection num,
         int roadNum = Integer.parseInt(initial.nextToken());
 
-        neighbors = new ArrayList[intNum];
-        reverseNeighbors = new ArrayList[intNum];
+        ArrayList<int[]>[] neighbors = new ArrayList[intNum];
+        ArrayList<int[]>[] reverseNeighbors = new ArrayList[intNum];
         for (int i = 0; i < intNum; i++) {
             neighbors[i] = new ArrayList<>();
             reverseNeighbors[i] = new ArrayList<>();
@@ -24,65 +21,69 @@ public final class GPSDuel {
 
         for (int r = 0; r < roadNum; r++) {
             StringTokenizer road = new StringTokenizer(read.readLine());
-            int from = Integer.parseInt(road.nextToken()) - 1, to = Integer.parseInt(road.nextToken()) - 1;
+            int from = Integer.parseInt(road.nextToken()) - 1;
+            int to = Integer.parseInt(road.nextToken()) - 1;
             int firstDist = Integer.parseInt(road.nextToken());
             int secondDist = Integer.parseInt(road.nextToken());
-            neighbors[from].add(new int[] {to, firstDist, secondDist});  // if i try to use a 2d array it's too slow (initialization time)
+            neighbors[from].add(new int[] {to, firstDist, secondDist});
             reverseNeighbors[to].add(new int[] {from, firstDist, secondDist});
         }
 
-        int[] gps1Dist = fromBarn(true);
-        int[] gps2Dist = fromBarn(false);
-        int[] complaintNum = new int[intNum];
-        PriorityQueue<Integer> frontier = new PriorityQueue<>(Comparator.comparingInt(i -> complaintNum[i]));
-        Arrays.fill(complaintNum, Integer.MAX_VALUE);
-        complaintNum[0] = 0;
-        frontier.add(0);
-        while (!frontier.isEmpty()) {  // another dijkstra's lol
-            int current = frontier.poll();
-            if (current == intNum - 1) {
+        int[] firstDists = minDists(intNum - 1, reverseNeighbors, 1);
+        int[] secondDists = minDists(intNum - 1, reverseNeighbors, 2);
+
+        int[] minComplaints = new int[intNum];
+        Arrays.fill(minComplaints, Integer.MAX_VALUE);
+        PriorityQueue<int[]> frontier = new PriorityQueue<>(Comparator.comparingInt(p -> p[0]));
+        frontier.add(new int[] {0, 0});
+        minComplaints[0] = 0;
+        while (!frontier.isEmpty()) {  // run a dijkstra's using the complaints as the costs
+            int[] top = frontier.poll();
+            int currComplaints = top[0];
+            int curr = top[1];
+            if (minComplaints[curr] != currComplaints) {
+                continue;
+            }
+            if (curr == intNum - 1) {  // we've arrived at our destination!
                 break;
             }
-            int rnComplaints = complaintNum[current];
-            int rnGPS1Dist = gps1Dist[current];
-            int rnGPS2Dist = gps2Dist[current];
-            for (int[] n : neighbors[current]) {
-                int realN = n[0];
-                int newComplaints = rnComplaints;
-                // add a (karen) complaint if the dist(current, neighbor) + shortestdist(neighbor, end) isn't the supposed optimal
-                newComplaints += (rnGPS1Dist < n[1] + gps1Dist[realN] ? 1 : 0) +
-                        (rnGPS2Dist < n[2] + gps2Dist[realN] ? 1 : 0);
-                if (newComplaints < complaintNum[realN]) {
-                    complaintNum[realN] = newComplaints;
-                    frontier.add(realN);
+            for (int[] n : neighbors[curr]) {
+                boolean firstShortest = n[1] + firstDists[n[0]] == firstDists[curr];
+                boolean secondShortest = n[2] + secondDists[n[0]] == secondDists[curr];
+                int nCost = currComplaints + (firstShortest ? 0 : 1) + (secondShortest ? 0 : 1);
+                if (nCost < minComplaints[n[0]]) {
+                    minComplaints[n[0]] = nCost;
+                    frontier.add(new int[] {nCost, n[0]});
                 }
             }
         }
 
-        PrintWriter written = new PrintWriter(new FileOutputStream("gpsduel.out"));
-        written.println(complaintNum[intNum - 1]);
+        PrintWriter written = new PrintWriter("gpsduel.out");
+        written.println(minComplaints[intNum - 1]);
         written.close();
-        System.out.println(complaintNum[intNum - 1]);
-        System.out.printf("how does just pressing submit twice get you 2 gps's- it took %d ms anyways%n", System.currentTimeMillis() - start);
+        System.out.println(minComplaints[intNum - 1]);
+        System.out.printf("my man you don't just casually get a time of %d ms%n", System.currentTimeMillis() - start);
     }
 
-    static int[] fromBarn(boolean useGPS1) {  // dijkstra's to find the shortest path from the barn to each of the intersections
-        int[] distances = new int[intNum];
-        PriorityQueue<Integer> frontier = new PriorityQueue<>(Comparator.comparingInt(i -> distances[i]));
-        Arrays.fill(distances, Integer.MAX_VALUE);
-        distances[intNum - 1] = 0;
-        frontier.add(intNum - 1);
+    private static int[] minDists(int start, List<int[]>[] neighbors, int costInd) {
+        int[] minDist = new int[neighbors.length];
+        Arrays.fill(minDist, Integer.MAX_VALUE);
+        PriorityQueue<int[]> frontier = new PriorityQueue<>(Comparator.comparingInt(p -> p[0]));
+        frontier.add(new int[] {0, start});
+        minDist[start] = 0;
         while (!frontier.isEmpty()) {
-            int current = frontier.poll();
-            int rnCost = distances[current];
-            for (int[] n : reverseNeighbors[current]) {
-                int newCost = useGPS1 ? rnCost + n[1] : rnCost + n[2];
-                if (newCost < distances[n[0]]) {
-                    distances[n[0]] = newCost;
-                    frontier.add(n[0]);
+            int[] top = frontier.poll();  // the current cost and the positition
+            if (minDist[top[1]] != top[0]) {
+                continue;
+            }
+            for (int[] n : neighbors[top[1]]) {
+                int nCost = top[0] + n[costInd];
+                if (nCost < minDist[n[0]]) {
+                    minDist[n[0]] = nCost;
+                    frontier.add(new int[] {nCost, n[0]});
                 }
             }
         }
-        return distances;
+        return minDist;
     }
 }
