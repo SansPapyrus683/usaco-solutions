@@ -33,7 +33,7 @@ public final class MinSegmentTree {
         this(len, Comparator.naturalOrder());
     }
 
-    void set(int ind, int val) {
+    public void set(int ind, int val) {
         if (ind < 0 || ind >= len) {
             throw new IllegalArgumentException(String.format("the index %d is OOB", ind));
         }
@@ -43,8 +43,8 @@ public final class MinSegmentTree {
         System.out.println(Arrays.toString(segtree));
     }
 
-    int rangeMin(int from, int to) {  // minimum from [from, to)
-        if (from >= to || from <= 0 || from > len || to < 0 || to >= len) {
+    public int rangeMin(int from, int to) {  // minimum from [from, to)
+        if (from > to || from < 0 || from >= len || to <= 0 || to > len) {
             throw new IllegalArgumentException(String.format("the query [%d, %d) is invalid just sayin'", from, to));
         }
         int min = Integer.MAX_VALUE;

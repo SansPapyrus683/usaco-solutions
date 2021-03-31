@@ -33,13 +33,13 @@ public final class NoCross {
             }
             matchable.sort(Comparator.comparingInt(f -> -f));  // sort so we don't have any interference between the updates
             for (int m : matchable) {
-                int previous = maxWithEnd.max(m, m + 1);
-                int drawNew = maxWithEnd.max(0, m) + 1;
+                int previous = maxWithEnd.rangeMax(m, m + 1);
+                int drawNew = maxWithEnd.rangeMax(0, m) + 1;
                 maxWithEnd.set(m, Math.max(previous, drawNew));
             }
         }
 
-        int max = maxWithEnd.max(0, fieldNum);
+        int max = maxWithEnd.rangeMax(0, fieldNum);
         PrintWriter written = new PrintWriter("nocross.out");
         written.println(max);
         written.close();
@@ -48,61 +48,36 @@ public final class NoCross {
     }
 }
 
-class MaxSegTree {
+final class MaxSegTree {
     private final int[] segtree;
-    private final int arrSize;
-    private final int size;
-    public MaxSegTree(int len) {
-        int size = 1;
-        while (size < len) {
-            size *= 2;
-        }
-        this.size = size;
-        arrSize = len;
-        segtree = new int[size * 2];  // we won't necessarily use all of the element but that doesn't really matter
+    private final int len;
+    public MaxSegTree(int len) {  // constructs the thing kinda like an array
+        this.len = len;
+        segtree = new int[len * 2];  // note: we won't use index 0
     }
 
-    public void set(int index, int element) {
-        if (index < 0 || index > arrSize) {
-            throw new IllegalArgumentException(String.format("%s should be out of bounds lol", index));
+    public void set(int ind, int val) {
+        if (ind < 0 || ind >= len) {
+            throw new IllegalArgumentException(String.format("the index %d is OOB", ind));
         }
-        set(index, element, 0, 0, size);
+        for (segtree[ind += len] = val; ind > 1; ind >>= 1) {
+            segtree[ind >> 1] = Math.max(segtree[ind], segtree[ind ^ 1]);
+        }
     }
 
-    private void set(int index, int element, int currNode, int left, int right) {
-        if (right - left == 1) {
-            segtree[currNode] = element;
-        } else {
-            int mid = (left + right) / 2;
-            if (index < mid) {
-                set(index, element, 2 * currNode + 1, left, mid);
-            } else {
-                set(index, element, 2 * currNode + 2, mid, right);
+    int rangeMax(int from, int to) {  // minimum from [from, to)
+        if (from > to || from < 0 || from >= len || to <= 0 || to > len) {
+            throw new IllegalArgumentException(String.format("the query [%d, %d) is invalid just sayin'", from, to));
+        }
+        int max = Integer.MIN_VALUE;
+        for (from += len, to += len; from < to; from >>= 1, to >>= 1) {
+            if ((from & 1) != 0) {
+                max = Math.max(max, segtree[from++]);
             }
-            segtree[currNode] = Math.max(segtree[2 * currNode + 1], segtree[2 * currNode + 2]);
+            if ((to & 1) != 0) {
+                max = Math.max(max, segtree[--to]);
+            }
         }
-    }
-
-    // for this one, from and to follow "normal" slicing rules - left bound is inclusive, right bound isn't
-    public int max(int from, int to) {
-        if (from < 0 || to > arrSize) {
-            throw new IllegalArgumentException(String.format("the bounds %s and %s are out of bounds i think", from, to));
-        } else if (to < from) {
-            throw new IllegalArgumentException(String.format("the bounds %s and %s don't make sense bro", from, to));
-        }
-        return max(from, to, 0, 0, size);
-    }
-
-    private int max(int from, int to, int currNode, int left, int right) {
-        if (right <= from || to <= left) {
-            return Integer.MIN_VALUE;
-        }
-        if (from <= left && right <= to) {
-            return segtree[currNode];
-        }
-        int middle = (left + right) / 2;
-        int leftPart = max(from, to, 2 * currNode + 1, left, middle);
-        int rightPart = max(from, to, 2 * currNode + 2, middle, right);
-        return Math.max(leftPart, rightPart);
+        return max;
     }
 }
