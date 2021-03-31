@@ -6,8 +6,8 @@ import java.util.*;
 // 2017 feb gold
 public final class VisitFJ {
     // we count bessie's moves as "3 jumps", and that's why these arrays are so huge
-    private static final int[] CHANGE_R = new int[] {0, 0, 0,  0,  1,  1, 1, -1, -1, -1, 2,  2, -2, -2, 3, 3, -3, -3};
-    private static final int[] CHANGE_C = new int[] {-3, 3, 1, -1, -2, 0, 2, -2, 0,  2,  -1, 1, -1, 1,  0, 0, 0,  0};
+    private static final int[] CHANGE_R = new int[] {0, 0, 0, 0, 1, 1, 1, -1, -1, -1, 2, 2, -2, -2, 3, 3, -3, -3};
+    private static final int[] CHANGE_C = new int[] {-3, 3, 1, -1, -2, 0, 2, -2, 0, 2, -1, 1, -1, 1,  0, 0, 0, 0};
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("visitfj.in"));
@@ -20,26 +20,29 @@ public final class VisitFJ {
         }
 
         int[][] distances = new int[side][side];  // dijkstra's with those 3 jumps
-        PriorityQueue<int[]> frontier = new PriorityQueue<>(Comparator.comparingInt(p -> distances[p[0]][p[1]]));
+        PriorityQueue<int[]> frontier = new PriorityQueue<>(Comparator.comparingInt(p -> p[0]));
         for (int i = 0; i < side; i++) {
             Arrays.fill(distances[i], Integer.MAX_VALUE);
         }
         distances[0][0] = 0;
-        frontier.add(new int[] {0, 0});
+        frontier.add(new int[] {0, 0, 0});
         while (!frontier.isEmpty()) {
             int[] curr = frontier.poll();
-            int rnCost = distances[curr[0]][curr[1]];
+            if (distances[curr[1]][curr[2]] != curr[0]) {
+                continue;
+            }
+            int rnCost = distances[curr[1]][curr[2]];  // 1 and 2 because ind 0 contains the cost
             int distToEnd;
-            // ok so probably because of the weird change_r and change_c, the algorithm sometimes produces an incorrect answer
-            if ((distToEnd = Math.abs((side - 1) - curr[0]) + Math.abs((side - 1) - curr[1])) < 3) {
+
+            if ((distToEnd = Math.abs((side - 1) - curr[1]) + Math.abs((side - 1) - curr[2])) < 3) {
                 distances[side - 1][side - 1] = Math.min(distances[side - 1][side - 1], rnCost + distToEnd * roadTime);
                 continue;
             }
-            for (int[] n : squareNeighbors(curr[0], curr[1], side)) {
-                int newCost = rnCost + 3 * roadTime + fields[n[0]][n[1]];
-                if (distances[n[0]][n[1]] > newCost) {
-                    distances[n[0]][n[1]] = newCost;
-                    frontier.add(n);
+            for (int[] n : squareNeighbors(curr[1], curr[2], side)) {
+                int nCost = rnCost + 3 * roadTime + fields[n[0]][n[1]];
+                if (distances[n[0]][n[1]] > nCost) {
+                    distances[n[0]][n[1]] = nCost;
+                    frontier.add(new int[] {nCost, n[0], n[1]});
                 }
             }
         }
@@ -51,9 +54,9 @@ public final class VisitFJ {
         System.out.printf("it finished in a jiffy, if by jiffy you mean %d ms%n", System.currentTimeMillis() - start);
     }
 
-    static ArrayList<int[]> squareNeighbors(int r, int c, int side) {
+    private static ArrayList<int[]> squareNeighbors(int r, int c, int side) {
         ArrayList<int[]> neighbors = new ArrayList<>();
-        for (int i = 0; i < 18; i++) {
+        for (int i = 0; i < CHANGE_R.length; i++) {
             int newR = r + CHANGE_R[i];
             int newC = c + CHANGE_C[i];
             if (0 <= newR && newR < side && 0 <= newC && newC < side) {  // it just has to be in the bounds
