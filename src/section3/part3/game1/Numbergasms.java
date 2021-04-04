@@ -9,11 +9,10 @@ import java.io.*;
 import java.util.*;
 
 public final class Numbergasms {
-    private static int[][] cachedFromTos;
     public static void main(String[] args) throws IOException {
-        long start = System.currentTimeMillis();
+        long timeStart = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("game1.in"));
-        read.readLine();
+        int size = Integer.parseInt(read.readLine());
         StringBuilder allNums = new StringBuilder();
         String rnLine;
         while ((rnLine = read.readLine()) != null) {
@@ -21,38 +20,34 @@ public final class Numbergasms {
             allNums.append(" ");
         }
         read.close();
-        int[] numbers = Arrays.stream(allNums.toString().split(" ")).mapToInt(Integer::parseInt).toArray();
+        int[] board = Arrays.stream(allNums.toString().split(" ")).mapToInt(Integer::parseInt).toArray();
+        if (board.length != size) {
+            throw new IllegalArgumentException("inconsistent array sizes so screw you");
+        }
 
-        int player1 = p1BestScore(numbers);
-        int totalScore = Arrays.stream(numbers).sum();
+        int[][] maxScores = new int[size][size];
+        // handle sub-boards of length 1 and 2
+        for (int i = 0; i < size; i++) {
+            maxScores[i][i] = board[i];
+        }
+        for (int i = 0; i <= size - 2; i++) {
+            maxScores[i][i + 1] = Math.max(board[i], board[i + 1]);
+        }
+        for (int subLen = 3; subLen <= size; subLen++) {
+            for (int from = 0; from <= size - subLen; from++) {
+                int to = from + subLen - 1;
+                maxScores[from][to] = Math.max(
+                        Math.min(maxScores[from + 1][to - 1] + board[from], maxScores[from + 2][to] + board[from]),
+                        Math.min(maxScores[from + 1][to - 1] + board[to], maxScores[from][to - 2] + board[to])
+                );
+            }
+        }
+        int p1Score = maxScores[0][size - 1];
+        int p2Score = Arrays.stream(board).sum() - p1Score;
         PrintWriter written = new PrintWriter("game1.out");
-        written.printf("%s %s%n", player1, totalScore - player1);
+        written.printf("%d %d%n", p1Score, p2Score);
         written.close();
-        System.out.printf("%s %s%n", player1, totalScore - player1);
-        System.out.printf("%d ms! ok... well imma go now%n", System.currentTimeMillis() - start);
-    }
-
-    static int p1BestScore(int[] board) {
-        cachedFromTos = new int[board.length][board.length];
-        for (int i = 0; i < board.length; i++) {
-            Arrays.fill(cachedFromTos[i], -1);
-        }
-        return p1BestScore(board, 0, board.length - 1);
-    }
-
-    // gives the best score with the board (and it's p1's turn) and only pieces from board[from: to + 1] are there
-    private static int p1BestScore(int[] board, int from, int to) {
-        if (cachedFromTos[from][to] != -1) {
-            return cachedFromTos[from][to];
-        }
-        if (to - from <= 1) {
-            return Math.max(board[from], board[to]);
-        }
-        cachedFromTos[from + 2][to] = p1BestScore(board, from + 2, to);
-        cachedFromTos[from + 1][to - 1] = p1BestScore(board, from + 1, to - 1);
-        cachedFromTos[from][to - 2] = p1BestScore(board, from, to - 2);
-        // it's math.min because p2 will always try to screw up p1, so we assume worst case
-        return Math.max(board[from] + Math.min(cachedFromTos[from + 2][to], cachedFromTos[from + 1][to - 1]),
-                board[to] + Math.min(cachedFromTos[from][to - 2], cachedFromTos[from + 1][to - 1]));
+        System.out.printf("%d %d%n", p1Score, p2Score);
+        System.out.printf("ok it took %d ms!! well... imma go now%n", System.currentTimeMillis() - timeStart);
     }
 }
