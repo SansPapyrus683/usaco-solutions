@@ -11,7 +11,7 @@ with open('fence9.in') as read:
     assert x >= 0 and y > 0 and end > 0
 
 total_cows = 0
-height = Fraction(0) if x != 0 else Fraction(y)  # use decimal bc the normal floating point is dumb
+height = Fraction(0) if x != 0 else Fraction(y)  # use fractions bc the normal floating point is dumb
 if x != 0:
     first_slope = Fraction(y, x)
     for i in range(x):
