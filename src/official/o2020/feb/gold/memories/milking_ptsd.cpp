@@ -1,7 +1,8 @@
 #include <iostream>
 #include <fstream>
+#include <cassert>
 #include <vector>
-#include <stack>
+#include <queue>
 #include <algorithm>
 
 using std::cout;
@@ -30,33 +31,35 @@ int main() {
         // milking sessions are 1-indexed which is stupid imo
         sessions_after[before - 1].push_back({after - 1, difference});
     }
-    
-    // sauce for toposort: https://stackoverflow.com/questions/20153488/topological-sort-using-dfs-without-recursion
-    vector<bool> visited(session_num);
-    vector<int> relative_order;
+
+    // sauce for toposort: https://www.geeksforgeeks.org/topological-sorting-indegree-based-solution/
+    vector<int> come_before(session_num);
     for (int s = 0; s < session_num; s++) {
-        if (visited[s]) {
-            continue;
+        for (const pair<int, int>& after : sessions_after[s]) {
+            come_before[after.first]++;
         }
-        std::stack<pair<bool, int>> frontier;
-        frontier.push({false, s});
-        while (!frontier.empty()) {
-            pair<bool, int> curr = frontier.top();
-            frontier.pop();
-            if (curr.first) {
-                relative_order.push_back(curr.second);
-                continue;
-            }
-            visited[curr.second] = true;
-            frontier.push({true, curr.second});
-            for (pair<int, int> after : sessions_after[curr.second]) {
-                if (!visited[after.first]) {
-                    frontier.push({false, after.first});
-                }
+    }
+    std::queue<int> frontier;
+    for (int s = 0; s < session_num; s++) {
+        if (come_before[s] == 0) {
+            frontier.push(s);
+        }
+    }
+    
+    int visited_num = 0;
+    vector<int> relative_order;
+    while (!frontier.empty()) {
+        int curr = frontier.front();
+        frontier.pop();
+        relative_order.push_back(curr);
+        visited_num++;
+        for (const pair<int, int>& after : sessions_after[curr]) {
+            if (--come_before[after.first] == 0) {
+                frontier.push(after.first);
             }
         }
     }
-    std::reverse(relative_order.begin(), relative_order.end());
+    assert(visited_num == session_num);
 
     for (int s : relative_order) {
         // given the date of the current one, let's see how this affects the ones it's before
