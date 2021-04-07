@@ -5,7 +5,6 @@ import java.util.*;
 
 // 2016 jan gold
 public final class GoldenFury {
-    private static final int MAX = 420696969;
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("angry.in"));
