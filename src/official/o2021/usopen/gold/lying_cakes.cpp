@@ -10,7 +10,7 @@ using std::endl;
 using std::vector;
 using std::pair;
 
-class DisjointSets {
+class DisjointSets {  // DSU for kruskal's
     private:
         vector<int> parents;
         vector<int> sizes;
@@ -40,6 +40,7 @@ class DisjointSets {
         }
 };
 
+// finds first occurrence of x in arr (returning -1 if it doesn't exit)
 int index(const vector<int>& arr, int x) {
     auto it = std::find(arr.begin(), arr.end(), x);
     return it == arr.end() ? -1 : it - arr.begin();
@@ -64,6 +65,7 @@ int main() {
         assert(p.size() == 2);
     }
 
+    // turn the horrid input format into something we can actually use
     vector<vector<vector<pair<int, int>>>> neighbors(node_num, vector<vector<pair<int, int>>>(2));
     for (int n = 0; n < node_num; n++) {
         for (int p_ind = 0; p_ind < 4; p_ind++) {
@@ -76,7 +78,7 @@ int main() {
     }
 
     vector<std::set<pair<int, int>>> components;
-    vector<vector<int>> bridges(node_num);
+    vector<vector<int>> bridges(node_num);  // each node when swapped can connect at most 2 components
     vector<vector<bool>> visited(node_num, vector<bool>(2));
     for (int n = 0; n < node_num; n++) {
         for (int seg = 0; seg < 2; seg++) {

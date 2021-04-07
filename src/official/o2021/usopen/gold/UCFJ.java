@@ -26,6 +26,7 @@ public final class UCFJ {
         long validDelegs = 0;
         for (int i = 0; i < cowNum; i++) {
             int c = cows[i];
+            // for the prevoius elements, see which ones can be a valid delegation end leader
             if (lastSeen[c] != -1) {
                 validDelegs += uniqueBreeds.query(i - 1) - uniqueBreeds.query(lastSeen[c]);
                 uniqueBreeds.increment(lastSeen[c], -1);
