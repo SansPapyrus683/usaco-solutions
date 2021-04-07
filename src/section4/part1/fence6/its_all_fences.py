@@ -3,7 +3,7 @@ ID: kevinsh4
 TASK: fence6
 LANG: PYTHON3
 """
-from heapq import heappush
+from heapq import heappush, heappop
 
 fences = []
 neighbors = {}
@@ -39,12 +39,13 @@ for p1, edges1 in points_edges.items():
 
 min_perimeter = float('inf')
 for p, n_list in neighbors.items():
+    # for each of the neighbors run a dijkstra's to find the shortest path back home (if possible)
     for adj, dist in n_list:
         neighbors[adj].remove((p, dist))  # prevent the algorithm from just going back without a cycle
         distances = {adj: dist}
         frontier = [(dist, adj)]
         while frontier:  # simple dijkstra's to find the shortest path back to the start
-            current = frontier.pop(0)[1]
+            current = heappop(frontier)[1]
             if current == p:
                 continue
             rnCost = distances[current]

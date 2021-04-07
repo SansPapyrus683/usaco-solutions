@@ -61,8 +61,8 @@ public final class MilkOrder {
     private static int[] milkingOrder(List<Integer>[] milkAfter) {
         int cowNum = milkAfter.length;
         int[] milkBefore = new int[cowNum];
-        for (int c = 0; c < cowNum; c++) {
-            for (int ac : milkAfter[c]) {
+        for (List<Integer> after : milkAfter) {
+            for (int ac : after) {
                 milkBefore[ac]++;
             }
         }
