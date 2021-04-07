@@ -9,13 +9,14 @@ public final class SCode {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         String encrypted =  new BufferedReader(new FileReader("scode.in")).readLine();
+
         // go through the strings by decreasing length (so we don't process any dupes at all)
         PriorityQueue<String> frontier = new PriorityQueue<>(Comparator.comparingInt(s -> -s.length()));
         HashMap<String, Integer> waysToGet = new HashMap<>();  // keep track of the ways to decrypt to the hashmap key
-
         frontier.add(encrypted);
         waysToGet.put(encrypted, 1);  // yea only 1 way to get from the encrypted to the encrypted lol
         int opWays = 0;
+        // do a sort of bfs/dp or something, keeping track of the ways to get each string
         while (!frontier.isEmpty()) {
             String current = frontier.poll();
             int currMultiplier = waysToGet.get(current);
