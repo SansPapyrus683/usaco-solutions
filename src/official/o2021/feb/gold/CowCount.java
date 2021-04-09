@@ -62,6 +62,7 @@ public final class CowCount {
         }
     }
 
+    // returns the number of cows in a square of size 3^powWidth in the diagNum
     private static long squareCowNum(int powWidth, long diagNum) {
         if (diagNum % 2 == 1 || diagNum >= pow(3, powWidth) || diagNum < 0) {
             return 0;

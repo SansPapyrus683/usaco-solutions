@@ -20,11 +20,11 @@ public final class DisjointSets {
         return parents[n] == n ? n : (parents[n] = getUltimate(parents[n]));
     }
 
-    public void link(int e1, int e2) {
+    public boolean link(int e1, int e2) {
         e1 = getUltimate(e1);
         e2 = getUltimate(e2);
         if (e1 == e2) {
-            return;
+            return false;
         }
         if (sizes[e2] > sizes[e1]) {
             int temp = e1;
@@ -33,5 +33,6 @@ public final class DisjointSets {
         }
         parents[e2] = e1;
         sizes[e1] += sizes[e2];
+        return true;
     }
 }
