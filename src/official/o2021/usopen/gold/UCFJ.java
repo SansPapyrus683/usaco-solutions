@@ -56,7 +56,7 @@ class BITree {
         }
     }
 
-    public int query(int ind) {  // returns from of [0, ind]
+    public int query(int ind) {  // returns sum of [0, ind]
         ind++;
         int sum = 0;
         for (; ind > 0; ind -= ind & -ind) {
