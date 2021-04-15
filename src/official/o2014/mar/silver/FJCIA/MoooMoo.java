@@ -8,7 +8,6 @@ public final class MoooMoo {
     private static final int INVALID = 420696969;  // MAX_VALUE can result in an overflow -> min() always selects those values
     static int[] breedVolumes;
     static long start;
-
     public static void main(String[] args) throws IOException {
         start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("mooomoo.in"));
@@ -45,7 +44,7 @@ public final class MoooMoo {
         writeOutput(minCows);
     }
 
-    static void writeOutput(Object toWrite) throws IOException {
+    private static void writeOutput(Object toWrite) throws IOException {
         PrintWriter written = new PrintWriter("mooomoo.out");  // oh wow you can just straight up do the filename
         written.println(toWrite);
         written.close();
@@ -54,7 +53,7 @@ public final class MoooMoo {
         System.exit(0);
     }
 
-    static int sumToVol(int volume) throws IOException {
+    private static int sumToVol(int volume) throws IOException {
         int[][] dp = new int[breedVolumes.length + 1][volume + 1];  // this[i][j] = min value for first i breeds mooing at j volume
         Arrays.fill(dp[0], INVALID);
         dp[0][0] = 0;
