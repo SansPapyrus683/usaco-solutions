@@ -5,8 +5,6 @@ import java.util.*;
 
 // 2020 dec gold (no sample input bc it's so frickin huge)
 public final class Replication {
-    private static final char START = 'S';
-    private static final char ROCK = '#';
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
@@ -24,7 +22,7 @@ public final class Replication {
         for (int r = 0; r < width; r++) {
             Arrays.fill(closestRockDist[r], -1);
             for (int c = 0; c < width; c++) {
-                if (farm[r][c] == ROCK) {
+                if (farm[r][c] == '#') {
                     rockFrontier.add(new int[] {r, c});
                     closestRockDist[r][c] = 0;
                 }
@@ -48,7 +46,7 @@ public final class Replication {
         ArrayList<int[]> frontier = new ArrayList<>();
         for (int r = 0; r < width; r++) {
             for (int c = 0; c < width; c++) {
-                if (farm[r][c] == START) {
+                if (farm[r][c] == 'S') {
                     visited[r][c] = true;
                     frontier.add(new int[] {r, c});
                 }

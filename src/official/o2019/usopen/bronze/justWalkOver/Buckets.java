@@ -8,9 +8,6 @@ public final class Buckets {
     private static final int[] CHANGE_R = {0, 0, 1, -1};
     private static final int[] CHANGE_C = {1, -1, 0, 0};
     private static final int WIDTH = 10;
-    private static final char LAKE = 'L';
-    private static final char BARN = 'B';
-    private static final char ROCK = 'R';
 
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
@@ -21,7 +18,7 @@ public final class Buckets {
             int col = 0;
             for (char c : read.readLine().toCharArray()) {
                 c = Character.toUpperCase(c);
-                if (c == LAKE) {
+                if (c == 'L') {
                     lake = new int[] {r, col};
                 }
                 grid[r][col++] = c;
@@ -39,12 +36,13 @@ public final class Buckets {
         while (!frontier.isEmpty()) {
             ArrayList<int[]> inLine = new ArrayList<>();
             for (int[] p : frontier) {
-                if (grid[p[0]][p[1]] == BARN) {
+                if (grid[p[0]][p[1]] == 'B') {
                     break expansion;
                 }
                 for (int i = 0; i < 4; i++) {
                     int[] n = new int[] {p[0] + CHANGE_R[i], p[1] + CHANGE_C[i]};  // n for neighbor
-                    if (0 <= n[0] && n[0] < WIDTH && 0 <= n[1] && n[1] < WIDTH && grid[n[0]][n[1]] != ROCK && !visited[n[0]][n[1]]) {
+                    if (0 <= n[0] && n[0] < WIDTH && 0 <= n[1] && n[1] < WIDTH
+                            && grid[n[0]][n[1]] != 'R' && !visited[n[0]][n[1]]) {
                         inLine.add(n);
                         visited[n[0]][n[1]] = true;
                     }

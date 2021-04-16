@@ -11,8 +11,6 @@ import java.util.*;
  */
 public final class Gravity {
     private static final char WALL = '#';
-    private static final char CAP = 'C';
-    private static final char DOC = 'D';
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("gravity.in"));
@@ -26,9 +24,9 @@ public final class Gravity {
         for (int r = 0; r < rowNum; r++) {
             int col = 0;
             for (char c : read.readLine().toUpperCase().toCharArray()) {
-                if (c == CAP) {
-                    capState = new int[] {r, col, 0};
-                } else if (c == DOC) {
+                if (c == 'C') {
+                    capState = new int[] {0, r, col, 0};
+                } else if (c == 'D') {
                     docPos = new int[] {r, col};
                 }
                 grid[r][col++] = c;
@@ -41,12 +39,17 @@ public final class Gravity {
                 Arrays.fill(minFlips[r][c], Integer.MAX_VALUE);
             }
         }
-        minFlips[capState[0]][capState[1]][capState[2]] = 0;
-        PriorityQueue<int[]> frontier = new PriorityQueue<>(Comparator.comparingInt(s -> minFlips[s[0]][s[1]][s[2]]));
+        minFlips[capState[1]][capState[2]][capState[3]] = 0;
+        PriorityQueue<int[]> frontier = new PriorityQueue<>(Comparator.comparingInt(s -> s[0]));
         frontier.add(capState);
         while (!frontier.isEmpty()) {
             int[] curr = frontier.poll();
-            int rnCost = minFlips[curr[0]][curr[1]][curr[2]];
+            int rnCost = minFlips[curr[1]][curr[2]][curr[3]];
+            if (curr[0] != rnCost) {
+                continue;
+            }
+            curr = Arrays.copyOfRange(curr, 1, curr.length);
+
             // apply the gravity for this square, sort of "distributing" the costs across all the squares
             if (curr[2] == 0) {  // gravity's normal, start falling down
                 while (curr[0] + 1 < rowNum && grid[curr[0] + 1][curr[1]] != WALL) {
@@ -64,21 +67,23 @@ public final class Gravity {
             }
 
             // try moving to the right
-            if (curr[1] + 1 < colNum && grid[curr[0]][curr[1] + 1] != WALL && rnCost < minFlips[curr[0]][curr[1] + 1][curr[2]]) {
+            if (curr[1] + 1 < colNum && grid[curr[0]][curr[1] + 1] != WALL
+                    && rnCost < minFlips[curr[0]][curr[1] + 1][curr[2]]) {
                 minFlips[curr[0]][curr[1] + 1][curr[2]] = rnCost;
-                frontier.add(new int[] {curr[0], curr[1] + 1, curr[2]});
+                frontier.add(new int[] {rnCost, curr[0], curr[1] + 1, curr[2]});
             }
             // try moving to the lleft
-            if (curr[1] - 1 >= 0 && grid[curr[0]][curr[1] - 1] != WALL && rnCost < minFlips[curr[0]][curr[1] - 1][curr[2]]) {
+            if (curr[1] - 1 >= 0 && grid[curr[0]][curr[1] - 1] != WALL
+                    && rnCost < minFlips[curr[0]][curr[1] - 1][curr[2]]) {
                 minFlips[curr[0]][curr[1] - 1][curr[2]] = rnCost;
-                frontier.add(new int[] {curr[0], curr[1] - 1, curr[2]});
+                frontier.add(new int[] {rnCost, curr[0], curr[1] - 1, curr[2]});
             }
 
             // flip the gravity
             int otherSide = curr[2] == 0 ? 1 : 0;
             if (rnCost + 1 < minFlips[curr[0]][curr[1]][otherSide]) {
                 minFlips[curr[0]][curr[1]][otherSide] = rnCost + 1;
-                frontier.add(new int[] {curr[0], curr[1], otherSide});
+                frontier.add(new int[] {rnCost + 1, curr[0], curr[1], otherSide});
             }
         }
 
