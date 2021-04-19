@@ -40,10 +40,14 @@ public final class Dining {
         }
         barnDist[pastureNum - 1][0] = 0;
         // do a dijkstra's
-        PriorityQueue<int[]> frontier = new PriorityQueue<>(Comparator.comparingInt(p -> barnDist[p[0]][p[1]]));
-        frontier.add(new int[] {pastureNum - 1, 0});
+        PriorityQueue<int[]> frontier = new PriorityQueue<>(Comparator.comparingInt(p -> p[0]));
+        frontier.add(new int[] {0, pastureNum - 1, 0});
         while (!frontier.isEmpty()) {
             int[] curr = frontier.poll();
+            if (curr[0] != barnDist[curr[1]][curr[2]]) {
+                continue;
+            }
+            curr = Arrays.copyOfRange(curr, 1, curr.length);
             int currCost = barnDist[curr[0]][curr[1]];
             for (int[] n : neighbors[curr[0]]) {
                 // if we haven't eaten hay yet but there's one here now, maybe we can eat the hay here? depends
@@ -51,13 +55,13 @@ public final class Dining {
                     int baleCost = currCost + n[1] - hay[n[0]];
                     if (baleCost < barnDist[n[0]][1]) {
                         barnDist[n[0]][1] = baleCost;
-                        frontier.add(new int[] {n[0], 1});
+                        frontier.add(new int[] {baleCost, n[0], 1});
                     }
                 }
                 int newCost = currCost + n[1];
                 if (newCost < barnDist[n[0]][curr[1]]) {
                     barnDist[n[0]][curr[1]] = newCost;
-                    frontier.add(new int[] {n[0], curr[1]});
+                    frontier.add(new int[] {newCost, n[0], curr[1]});
                 }
             }
         }

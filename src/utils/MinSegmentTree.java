@@ -40,7 +40,6 @@ public final class MinSegmentTree {
         for (segtree[ind += len] = val; ind > 1; ind >>= 1) {
             segtree[ind >> 1] = min(segtree[ind], segtree[ind ^ 1]);
         }
-        System.out.println(Arrays.toString(segtree));
     }
 
     public int rangeMin(int from, int to) {  // minimum from [from, to)

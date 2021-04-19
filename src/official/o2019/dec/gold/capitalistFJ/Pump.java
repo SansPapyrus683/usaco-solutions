@@ -32,28 +32,31 @@ public final class Pump {
             maxScore = Math.max(maxScore, ((float) r) / minCostWithFlow(r, neighbors));
         }
 
-        int ans = (int) (maxScore * Math.pow(10, 6));
         PrintWriter written = new PrintWriter("pump.out");
-        written.println(ans);
+        written.println((int) (maxScore * Math.pow(10, 6)));
         written.close();
-        System.out.println(ans);
+        System.out.println(maxScore);
         System.out.printf("%d ms bruh you're so bad git gud%n", System.currentTimeMillis() - start);
     }
 
     private static int minCostWithFlow(int flowReq, ArrayList<int[]>[] neighbors) {
         // run dijkstra's twice to find the shortest dist from start & dist from end
         int[] forwardCosts = new int[neighbors.length];
-        Arrays.fill(forwardCosts, INVALID);
+        Arrays.fill(forwardCosts, INVALID);  // not MAX_VALUE because overflow is a possibility
         forwardCosts[0] = 0;
-        PriorityQueue<Integer> frontier = new PriorityQueue<>(Comparator.comparingInt(j -> forwardCosts[j]));
-        frontier.add(0);
+        PriorityQueue<int[]> frontier = new PriorityQueue<>(Comparator.comparingInt(j -> j[0]));
+        frontier.add(new int[] {0, 0});
         while (!frontier.isEmpty()) {
-            int curr = frontier.poll();
+            int[] top = frontier.poll();
+            if (top[0] != forwardCosts[top[1]]) {
+                continue;
+            }
+            int curr = top[1];
             int rnCost = forwardCosts[curr];
             for (int[] n : neighbors[curr]) {
                 if (rnCost + n[1] < forwardCosts[n[0]] && n[2] >= flowReq) {
                     forwardCosts[n[0]] = rnCost + n[1];
-                    frontier.add(n[0]);
+                    frontier.add(new int[] {rnCost + n[1], n[0]});
                 }
             }
         }
@@ -61,15 +64,19 @@ public final class Pump {
         int[] backwardCosts = new int[neighbors.length];
         Arrays.fill(backwardCosts, INVALID);
         backwardCosts[neighbors.length - 1] = 0;
-        frontier = new PriorityQueue<>(Comparator.comparingInt(j -> backwardCosts[j]));
-        frontier.add(neighbors.length - 1);
+        // dw the frontier will always be empty by this point
+        frontier.add(new int[] {0, neighbors.length - 1});
         while (!frontier.isEmpty()) {
-            int curr = frontier.poll();
+            int[] top = frontier.poll();
+            if (top[0] != backwardCosts[top[1]]) {
+                continue;
+            }
+            int curr = top[1];
             int rnCost = backwardCosts[curr];
             for (int[] n : neighbors[curr]) {
                 if (rnCost + n[1] < backwardCosts[n[0]] && n[2] >= flowReq) {
                     backwardCosts[n[0]] = rnCost + n[1];
-                    frontier.add(n[0]);
+                    frontier.add(new int[] {rnCost + n[1], n[0]});
                 }
             }
         }
