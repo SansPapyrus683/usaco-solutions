@@ -15,6 +15,9 @@ public final class Radio {
         int[] bessiePos = Arrays.stream(read.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
         char[] fjMovements = read.readLine().toCharArray();
         char[] bessieMovements = read.readLine().toCharArray();
+        if (fjAmt != fjPos.length || bessieAmt != bessiePos.length) {
+            throw new IllegalArgumentException("uh invalid array lengths given buddy");
+        }
 
         int[][] fjAfter = new int[fjAmt + 1][2];  // precalculate the positions after each step in the movement
         int[][] bessieAfter = new int[bessieAmt + 1][2];
@@ -42,19 +45,22 @@ public final class Radio {
             // see all the states we can move to and also calculate if they're even worth it
             // fj moves up one
             if (curr[0] < fjAmt && 
-                    (newCost = rnCost + batteryCost(fjAfter[curr[0] + 1], bessieAfter[curr[1]])) < minBattery[curr[0] + 1][curr[1]]) {
+                    (newCost = rnCost + batteryCost(fjAfter[curr[0] + 1], bessieAfter[curr[1]]))
+                            < minBattery[curr[0] + 1][curr[1]]) {
                 minBattery[curr[0] + 1][curr[1]] = newCost;
                 frontier.add(new int[] {curr[0] + 1, curr[1]});
             }
             // bessie moves up one
             if (curr[1] < bessieAmt && 
-                    (newCost = rnCost + batteryCost(fjAfter[curr[0]], bessieAfter[curr[1] + 1])) < minBattery[curr[0]][curr[1] + 1]) {
+                    (newCost = rnCost + batteryCost(fjAfter[curr[0]], bessieAfter[curr[1] + 1]))
+                            < minBattery[curr[0]][curr[1] + 1]) {
                 minBattery[curr[0]][curr[1] + 1] = newCost;
                 frontier.add(new int[] {curr[0], curr[1] + 1});
             }
             // both move up one
             if (curr[0] < fjAmt && curr[1] < bessieAmt && 
-                    (newCost = rnCost + batteryCost(fjAfter[curr[0] + 1], bessieAfter[curr[1] + 1])) < minBattery[curr[0] + 1][curr[1] + 1]) {
+                    (newCost = rnCost + batteryCost(fjAfter[curr[0] + 1], bessieAfter[curr[1] + 1]))
+                            < minBattery[curr[0] + 1][curr[1] + 1]) {
                 minBattery[curr[0] + 1][curr[1] + 1] = newCost;
                 frontier.add(new int[] {curr[0] + 1, curr[1] + 1});
             }
@@ -85,7 +91,7 @@ public final class Radio {
                 break;
             case 'W':
                 x--;
-                break;    
+                break;
         }
         return new int[] {x, y};
     }

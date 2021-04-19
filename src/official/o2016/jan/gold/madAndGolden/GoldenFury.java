@@ -14,7 +14,7 @@ public final class GoldenFury {
             haybales.add(Double.parseDouble(read.readLine()));
         }
 
-        double valid = -1;  // not taking any chances with floating point (greater precision)
+        double valid = -1;
         long loPower = 0;
         long hiPower = (long) (haybales.last() - haybales.first()) * 10L;
         while (loPower <= hiPower) {
@@ -53,6 +53,12 @@ public final class GoldenFury {
     }
 
     private static boolean leftWipeout(double power, double pos, TreeSet<Double> haybales) {
+        if (haybales.isEmpty()) {
+            return true;
+        }
+        if (haybales.last() < pos - power) {
+            return false;
+        }
         double firstBale = haybales.first();
         while (power > 0) {
             double leftest = haybales.ceiling(pos - power);
@@ -69,6 +75,12 @@ public final class GoldenFury {
     }
 
     private static boolean rightWipeout(double power, double pos, TreeSet<Double> haybales) {
+        if (haybales.isEmpty()) {
+            return true;
+        }
+        if (pos + power < haybales.first()) {
+            return false;
+        }
         double lastBale = haybales.last();
         while (power > 0) {
             double righest = haybales.floor(pos + power);
