@@ -1,4 +1,4 @@
-// package official.o2014.feb.bronze.mirrorHell;
+package official.o2014.feb.bronze.mirrorHell;
 
 import java.io.*;
 import java.util.*;

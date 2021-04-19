@@ -17,7 +17,7 @@ public class FortMoo {
         for (int r = 0; r < rowNum; r++) {
             String row = read.readLine();
             for (int c = 0; c < colNum; c++) {
-                rowBadNums[r][c + 1] = (c > 0 ? rowBadNums[r][c] : 0) + (row.charAt(c) == BAD ? 1 : 0);
+                rowBadNums[r][c + 1] = rowBadNums[r][c] + (row.charAt(c) == BAD ? 1 : 0);
                 sturdy[r][c] = row.charAt(c) != BAD;
             }
         }

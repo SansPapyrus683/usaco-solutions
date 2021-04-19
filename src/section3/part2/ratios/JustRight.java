@@ -6,21 +6,21 @@ LANG: JAVA
 */
 import java.io.*;
 import java.util.Arrays;
-import java.util.stream.Stream;
 
 public final class JustRight {
     private static final int FEED_NUM = 3;
     private static final int NUTRIENT_NUM = 3;
     private static final int MAX_RATIO = 100;
-    static int[] goal = new int[FEED_NUM];
-    static int[][] mixes = new int[FEED_NUM][NUTRIENT_NUM];
+    // 4/19/2021- i don't know what made me think global variables were a good idea
+    private static int[] goal = new int[FEED_NUM];
+    private static int[][] mixes = new int[FEED_NUM][NUTRIENT_NUM];
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
-        BufferedReader read = new BufferedReader(new FileReader("theCowsDontCare.txt"));
-        goal = Stream.of(read.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
-        mixes = new int[FEED_NUM][3];
+        BufferedReader read = new BufferedReader(new FileReader("ratios.in"));
+        goal = Arrays.stream(read.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
+        mixes = new int[FEED_NUM][NUTRIENT_NUM];
         for (int f = 0; f < FEED_NUM; f++) {
-            mixes[f] = Stream.of(read.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
+            mixes[f] = Arrays.stream(read.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
         }
 
         int[] answer = null;
@@ -52,7 +52,7 @@ public final class JustRight {
     }
 
     // this function returns -1 for invalid ratios
-    static int goalRatio(int[] amounts) {
+    private static int goalRatio(int[] amounts) {
         assert amounts.length == FEED_NUM;
         int[] totalAmount = new int[NUTRIENT_NUM];
         for (int a = 0; a < FEED_NUM; a++) {  // calculate how much feed this would give
