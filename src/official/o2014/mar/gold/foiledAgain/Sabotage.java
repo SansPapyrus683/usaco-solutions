@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2014 mar gold
-public class Sabotage {
+public final class Sabotage {
     private static final int PRECISION = (int) Math.pow(10, 5);  // be a bit more precise just in case
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();

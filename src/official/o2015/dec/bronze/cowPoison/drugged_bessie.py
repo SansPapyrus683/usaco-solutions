@@ -19,6 +19,7 @@ with open('badmilk.in') as read:
         assert 1 <= friend <= friend_num
         events.append([False, time, friend - 1])
 
+# first sort time, then have all the sick people come first
 cmp = lambda e1, e2: e1[1] - e2[1] if e1[1] != e2[1] else e1[0] - e2[0]
 events.sort(key=cmp_to_key(cmp))
 

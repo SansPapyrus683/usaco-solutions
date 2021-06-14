@@ -3,7 +3,7 @@ package official.o2016.jan.plat.fortSiege;
 import java.io.*;
 import java.util.*;
 
-public class FortMoo {
+public final class FortMoo {
     private static final char BAD = 'X';
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
