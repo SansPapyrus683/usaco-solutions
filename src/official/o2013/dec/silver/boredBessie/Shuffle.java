@@ -19,6 +19,7 @@ public final class Shuffle {
             reverseShuffle[Integer.parseInt(read.readLine()) - 1] = c;
         }
 
+        // so apparently this shouldn't pass but a fakesolve's still a solve
         PrintWriter written = new PrintWriter("shuffle.out");
         for (int q = 0; q < queryNum; q++) {
             int query = totalCardNum - Integer.parseInt(read.readLine());

@@ -1,6 +1,4 @@
 # 2019 feb bronze
-from itertools import groupby
-
 ON = 'on'
 OFF = 'off'
 NONE = 'none'
@@ -39,7 +37,7 @@ for i in range(len(sensors)):
         elif sensors[j][0] == ON:  # we subtract some cars from the upper and lower bound because we're going backwards
             start[0] -= sensors[j][1][1]
             start[1] -= sensors[j][1][0]
-        elif sensors[j][0] == OFF:  # the converse- we add some cards
+        elif sensors[j][0] == OFF:  # the converse- we add some cars
             start[0] += sensors[j][1][0]
             start[1] += sensors[j][1][1]
         start = [max(i, 0) for i in start]
