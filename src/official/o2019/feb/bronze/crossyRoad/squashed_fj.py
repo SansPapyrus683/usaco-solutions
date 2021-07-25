@@ -30,6 +30,7 @@ for i in range(len(sensors)):
     if sensors[i][0] != NONE:
         continue
 
+    # calculate the bounds for the very start of the highway
     start = sensors[i][1].copy()
     for j in range(i - 1, -1, -1):
         if sensors[j][0] == NONE:  # just take the intersection, nothing too difficult
@@ -43,6 +44,7 @@ for i in range(len(sensors)):
         start = [max(i, 0) for i in start]
     start_poss.append(start)
 
+    # and then do the same for the very end
     end = sensors[i][1].copy()
     for j in range(i + 1, len(sensors)):  # do pretty much the same thing for the end
         if sensors[j][0] == NONE:

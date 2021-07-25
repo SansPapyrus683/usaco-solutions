@@ -34,16 +34,16 @@ public final class Shortcut {
         Arrays.fill(cameFrom, -1);
         cameFrom[0] = 0;
         // use cost as the primary comparator, breaking ties with the lowest field num if they occur
-        PriorityQueue<Integer> frontier = new PriorityQueue<>((a, b) -> minDist[a] != minDist[b] ? minDist[a] - minDist[b] : a - b);
-        frontier.add(0);
+        PriorityQueue<int[]> frontier = new PriorityQueue<>((a, b) -> a[0] != b[0] ? a[0] - b[0] : a[1] - b[1]);
+        frontier.add(new int[] {0, 0});
         while (!frontier.isEmpty()) {
-            int curr = frontier.poll();
+            int curr = frontier.poll()[1];
             int rnCost = minDist[curr];
             for (int[] n : neighbors[curr]) {
                 if (rnCost + n[1] < minDist[n[0]] || (rnCost + n[1] == minDist[n[0]]) && curr < cameFrom[n[0]]) {
                     minDist[n[0]] = rnCost + n[1];
                     cameFrom[n[0]] = curr;
-                    frontier.add(n[0]);
+                    frontier.add(new int[] {rnCost + n[1], n[0]});
                 }
             }
         }
@@ -53,6 +53,7 @@ public final class Shortcut {
             int at = f;
             while (at != 0) {
                 int timeLeft = minDist[at];  // if we're at this field, we still have to travel this much
+                // so for some reason this works w/o the if statement, but i'm just leaving it here lmao
                 if (addedLen < timeLeft) {
                     // if the cows'll actually take this, we add the dist saved to the total
                     savedDist[at] += (long) cowAmts[f] * (timeLeft - addedLen);
