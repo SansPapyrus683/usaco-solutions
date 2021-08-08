@@ -2,13 +2,13 @@
 ID: kevinsh4
 TASK: race3
 LANG: JAVA
-this is horribly verbose but it works lol
  */
 package section4.part3.race3;
 
 import java.io.*;
 import java.util.*;
 
+// this is horribly verbose but it works lol
 public final class Race3 {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
