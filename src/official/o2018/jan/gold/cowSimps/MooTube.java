@@ -4,45 +4,6 @@ import java.io.*;
 import java.util.*;
 
 public final class MooTube {
-    /**
-     * based on {@link utils.DisjointSets} and there's also a link explaining it
-     */
-    private static final class DisjointSets {
-        private final int[] parents;
-        private final int[] sizes;
-        public DisjointSets(int size) {
-            parents = new int[size];
-            sizes = new int[size];
-            for (int i = 0; i < size; i++) {
-                parents[i] = i;
-                sizes[i] = 1;
-            }
-        }
-
-        public int getUltimate(int n) {
-            return parents[n] == n ? n : (parents[n] = getUltimate(parents[n]));
-        }
-
-        public int size(int n) {
-            return sizes[getUltimate(n)];
-        }
-
-        public void link(int e1, int e2) {
-            e1 = getUltimate(e1);
-            e2 = getUltimate(e2);
-            if (e1 == e2) {
-                return;
-            }
-            if (sizes[e2] > sizes[e1]) {
-                int temp = e1;
-                e1 = e2;
-                e2 = temp;
-            }
-            parents[e2] = e1;
-            sizes[e1] += sizes[e2];
-        }
-    }
-
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("mootube.in"));
@@ -94,5 +55,44 @@ public final class MooTube {
         written.close();
         System.out.println(Arrays.toString(relevant));
         System.out.printf("i can only imagine an onlyfans run by bessie herself: %d ms%n", System.currentTimeMillis() - start);
+    }
+}
+
+/**
+ * based on {@link utils.DisjointSets} and there's also a link explaining it
+ */
+class DisjointSets {
+    private final int[] parents;
+    private final int[] sizes;
+    public DisjointSets(int size) {
+        parents = new int[size];
+        sizes = new int[size];
+        for (int i = 0; i < size; i++) {
+            parents[i] = i;
+            sizes[i] = 1;
+        }
+    }
+
+    public int getUltimate(int n) {
+        return parents[n] == n ? n : (parents[n] = getUltimate(parents[n]));
+    }
+
+    public int size(int n) {
+        return sizes[getUltimate(n)];
+    }
+
+    public void link(int e1, int e2) {
+        e1 = getUltimate(e1);
+        e2 = getUltimate(e2);
+        if (e1 == e2) {
+            return;
+        }
+        if (sizes[e2] > sizes[e1]) {
+            int temp = e1;
+            e1 = e2;
+            e2 = temp;
+        }
+        parents[e2] = e1;
+        sizes[e1] += sizes[e2];
     }
 }

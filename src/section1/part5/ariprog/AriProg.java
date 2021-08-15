@@ -12,7 +12,9 @@ public final class AriProg {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("ariprog.in"));
-        ArrayList<int[]> progressions = allProgressions(Integer.parseInt(read.readLine()), Integer.parseInt(read.readLine()));
+        ArrayList<int[]> progressions = allProgressions(
+                Integer.parseInt(read.readLine()), Integer.parseInt(read.readLine())
+        );
         progressions.sort((a, b) -> a[1] != b[1] ? a[1] - b[1] : a[0] - b[0]);
 
         PrintWriter written = new PrintWriter("ariprog.out");
@@ -54,7 +56,6 @@ public final class AriProg {
                     }
                 }
                 if (good) {
-                    // System.out.println(elementAt + " " + commDiff);
                     valid.add(new int[] {elementAt, commDiff});
                 }
             }

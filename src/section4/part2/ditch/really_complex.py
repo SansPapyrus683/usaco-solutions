@@ -11,14 +11,14 @@ def directed_good_path(neighbors: List[List[int]], start=0, end=None) -> List[in
     came_from = {start: None}
     frontier = [start]
     while frontier:
-        current = frontier.pop(0)
-        if current == end:
+        curr = frontier.pop(0)
+        if curr == end:
             break
 
-        for n, f in enumerate(neighbors[current]):
+        for n, f in enumerate(neighbors[curr]):
             if n not in came_from and f > 0:  # if there's still some "good" flow left
                 frontier.append(n)
-                came_from[n] = current
+                came_from[n] = curr
     else:
         return []  # return empty list if no good path found
     
@@ -42,14 +42,15 @@ while True:
     path = directed_good_path(inter_neighbors)
     if not path:  # frick it, no more good paths
         break
-    flow_amt = float('inf')
+    flow = float('inf')
     for v, p in enumerate(path[:-1]):  # calc the flow for this path
-        flow_amt = min(flow_amt, inter_neighbors[p][path[v + 1]])
-    max_flow += flow_amt
+        flow = min(flow, inter_neighbors[p][path[v + 1]])
+    max_flow += flow
     # update the graph with the new flow
     for v, p in enumerate(path[:-1]):
-        inter_neighbors[p][path[v + 1]] -= flow_amt
-        inter_neighbors[path[v + 1]][p] += flow_amt  # no idea why i have to do the reverse, i'll look into it later lol
+        inter_neighbors[p][path[v + 1]] -= flow
+        # no idea why i have to do the reverse, i'll look into it later lol
+        inter_neighbors[path[v + 1]][p] += flow
 
 print(max_flow)
 with open('ditch.out', 'w') as written:

@@ -6,42 +6,6 @@ import java.util.*;
 // 2020 jan silver
 // 1/6/2021 - i was young and innocent when i wrote this code, so it's full of bad practices
 public final class Wormsort {
-    private static final class DisjointSets {
-        private final int[] parents;
-        private final int[] sizes;
-        public DisjointSets(int size) {
-            parents = new int[size];
-            sizes = new int[size];
-            for (int i = 0; i < size; i++) {
-                parents[i] = i;
-                sizes[i] = 1;
-            }
-        }
-
-        public boolean sameSet(int n1, int n2) {
-            return getUltimate(n1) == getUltimate(n2);
-        }
-
-        public int getUltimate(int n) {
-            return n == parents[n] ? n : (parents[n] = getUltimate(parents[n]));
-        }
-
-        public void link(int e1, int e2) {
-            if (sameSet(e1, e2)) {
-                return;
-            }
-            e1 = getUltimate(e1);
-            e2 = getUltimate(e2);
-            if (sizes[e2] > sizes[e1]) {
-                int temp = e1;
-                e1 = e2;
-                e2 = temp;
-            }
-            parents[e2] = e1;
-            sizes[e1] += sizes[e2];
-        }
-    }
-
     private static final long start = System.currentTimeMillis();
     public static void main(String[] args) throws IOException {
         BufferedReader read = new BufferedReader(new FileReader("wormsort.in"));
@@ -107,5 +71,48 @@ public final class Wormsort {
         System.out.println(output);
         System.out.printf("so it took about this many ms: %s%n", System.currentTimeMillis() - start);
         System.exit(0);
+    }
+}
+
+/**
+ * based on {@link utils.DisjointSets} and there's also a link explaining it
+ */
+class DisjointSets {
+    private final int[] parents;
+    private final int[] sizes;
+    public DisjointSets(int size) {
+        parents = new int[size];
+        sizes = new int[size];
+        for (int i = 0; i < size; i++) {
+            parents[i] = i;
+            sizes[i] = 1;
+        }
+    }
+
+    public boolean sameSet(int a, int b) {
+        return getUltimate(a) == getUltimate(b);
+    }
+
+    public int getUltimate(int n) {
+        return parents[n] == n ? n : (parents[n] = getUltimate(parents[n]));
+    }
+
+    public int size(int n) {
+        return sizes[getUltimate(n)];
+    }
+
+    public void link(int e1, int e2) {
+        e1 = getUltimate(e1);
+        e2 = getUltimate(e2);
+        if (e1 == e2) {
+            return;
+        }
+        if (sizes[e2] > sizes[e1]) {
+            int temp = e1;
+            e1 = e2;
+            e2 = temp;
+        }
+        parents[e2] = e1;
+        sizes[e1] += sizes[e2];
     }
 }
