@@ -12,7 +12,7 @@ using std::endl;
 using std::vector;
 using std::pair;
 
-const int SPLIT_AT = 20;
+constexpr int SPLIT_AT = 20;
 
 int main() {
     int board_len;
