@@ -34,13 +34,19 @@ int main() {
     }
     std::sort(routes.begin(), routes.end());
 
+    // the maximum val given that we land on the ith spot on the left side
     vector<int> left_best(left);
+    // and right side respectively
     vector<int> right_best(right);
+    // we sorted the routes so that we don't have to worry about intersecting
     for (const pair<int, int>& r : routes) {
+        // store the initial left value to simulate a simultaenous update
         int init_left_best = left_best[r.first];
+        // go from the right to the left (testing the new value)
         left_best[r.first] = std::max(
             left_best[r.first], right_best[r.second] + left[r.first]
         );
+        // and left to right
         right_best[r.second] = std::max(
             right_best[r.second], init_left_best + right[r.second]
         );
