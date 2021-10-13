@@ -3,7 +3,7 @@ package official.o2017.usopen.silver.lostBessie;
 import java.io.*;
 import java.util.*;
 
-// 2017 usopen silver
+// 2017 us open silver
 public final class Where {
     static final int[] CHANGE_R = new int[] {1, -1, 0, 0};
     static final int[] CHANGE_C = new int[] {0, 0, 1, -1};

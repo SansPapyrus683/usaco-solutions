@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 import java.util.stream.Stream;
 
-// 2018 usopen silver
+// 2018 us open silver
 public final class MultiMoo {
     private static  final int[] rChanges = new int[] {1, -1, 0, 0};
     private static  final int[] cChanges = new int[] {0, 0, 1, -1};

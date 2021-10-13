@@ -1,4 +1,4 @@
-# 2018 usopen bronze
+# 2018 us open bronze
 from sys import exit
 
 SICK = 0

@@ -3,7 +3,7 @@ package official.o2017.usopen.bronze.lost;
 import java.io.*;
 import java.util.*;
 
-// 2017 usopen bronze (just decided to do a java translation for fun)
+// 2017 us open bronze (just decided to do a java translation for fun)
 public final class LostCow {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
@@ -31,6 +31,6 @@ public final class LostCow {
         written.println(travelled);
         written.close();
         System.out.println(travelled);
-        System.out.printf("bruh i thought the usopen was supposed to be hard: %d ms", System.currentTimeMillis() - start);
+        System.out.printf("bruh i thought the us open was supposed to be hard: %d ms", System.currentTimeMillis() - start);
     }
 }

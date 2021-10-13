@@ -1,4 +1,4 @@
-# 2015 usopen bronze
+# 2015 us open bronze
 GAME = 'BESIGOM'
 
 letters = {c: [0, 0] for c in GAME}

@@ -1,4 +1,4 @@
-# 2021 usopen silver (input ommitted due to length)
+# 2021 us open silver (input ommitted due to length)
 from itertools import combinations_with_replacement, permutations
 
 for _ in range(int(input())):

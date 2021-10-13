@@ -38,7 +38,7 @@ class DisjointSets {
         }
 };
 
-// 2020 usopen gold
+// 2020 us open gold
 int main() {
     std::ifstream read("closing.in");
     int barn_num;

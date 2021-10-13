@@ -3,7 +3,7 @@ package official.o2016.usopen.silver.minecraftBessie;
 import java.io.*;
 import java.util.*;
 
-// 2016 usopen silver (this one's the intended sol)
+// 2016 us open silver (this one's the intended sol)
 public final class Diamonds {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();

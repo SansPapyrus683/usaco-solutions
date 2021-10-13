@@ -3,7 +3,7 @@ package official.o2015.usopen.bronze.friendPaths;
 import java.io.*;
 import java.util.*;
 
-// 2015 usopen gold
+// 2015 us open gold
 public final class PalPath {
     private static class Farm {
         public char[][] farm;

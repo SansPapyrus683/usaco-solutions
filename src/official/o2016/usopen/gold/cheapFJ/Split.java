@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 import java.util.stream.Stream;
 
-// 2016 usopen gold
+// 2016 us open gold
 public final class Split {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();

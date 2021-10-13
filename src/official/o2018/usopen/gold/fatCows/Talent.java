@@ -3,7 +3,7 @@ package official.o2018.usopen.gold.fatCows;
 import java.io.*;
 import java.util.*;
 
-// 2018 usopen gold
+// 2018 us open gold
 public final class Talent {
     private static final int PRECISION = (int) Math.pow(10, 3);
     private static class Cow {

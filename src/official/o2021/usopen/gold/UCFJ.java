@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 /**
- * 2021 usopen gold
+ * 2021 us open gold
  * 7
  * 1 2 3 4 3 2 5 should output 13
  */

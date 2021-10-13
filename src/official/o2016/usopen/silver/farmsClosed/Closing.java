@@ -3,7 +3,7 @@ package official.o2016.usopen.silver.farmsClosed;
 import java.io.*;
 import java.util.*;
 
-// 2016 usopen silver (this solution sometimes times out, sometimes it doesn't, depends on your luck)
+// 2016 us open silver (this solution sometimes times out, sometimes it doesn't, depends on your luck)
 public final class Closing {
     static boolean[] visited;  // most definitely bad practice, but it probably (?) makes it faster
     public static void main(String[] args) throws IOException {

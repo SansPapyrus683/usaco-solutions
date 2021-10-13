@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 /**
- * 2021 usopen gold
+ * 2021 us open gold
  * 5
  * 0 0
  * 0 4

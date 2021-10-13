@@ -3,7 +3,7 @@ package official.o2017.usopen.bronze.fineArt;
 import java.io.*;
 import java.util.*;
 
-// 2017 usopen bronze (copied from plat version lol)
+// 2017 us open bronze (copied from plat version lol)
 public final class Art {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();

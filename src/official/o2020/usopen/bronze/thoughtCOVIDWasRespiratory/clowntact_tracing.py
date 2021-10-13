@@ -1,4 +1,4 @@
-# 2020 usopen bronze
+# 2020 us open bronze
 def spread_sim(cow_num: int, p_zero: int, spread_times: int, handshakes):
     cows = [False for _ in range(cow_num)]
     cows[p_zero] = True

@@ -3,7 +3,7 @@ package official.o2020.usopen.silver.bigBrainTime;
 import java.io.*;
 import java.util.*;
 
-// 2020 usopen silver (copied lol)
+// 2020 us open silver (copied lol)
 public final class MooP {
     public static void main(String[] args) throws IOException {
         long timeStart = System.currentTimeMillis();

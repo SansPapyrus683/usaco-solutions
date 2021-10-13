@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 /**
- * 2014 usopen silver
+ * 2014 us open silver
  * sol sauce: https://stackoverflow.com/questions/28356453/longest-positive-sum-substring
  */
 public final class FairPhoto {

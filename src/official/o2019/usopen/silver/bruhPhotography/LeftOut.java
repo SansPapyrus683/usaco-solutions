@@ -3,7 +3,7 @@ package official.o2019.usopen.silver.bruhPhotography;
 import java.io.*;
 import java.util.*;
 
-// 2019 usopen silver
+// 2019 us open silver
 public final class LeftOut {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();

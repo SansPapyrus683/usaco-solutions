@@ -3,7 +3,7 @@ package official.o2018.usopen.gold.orderOrder;
 import java.io.*;
 import java.util.*;
 
-// 2018 usopen gold
+// 2018 us open gold
 public final class MilkOrder {
     private static final int[] INVALID = new int[] {-1};
     public static void main(String[] args) throws IOException {

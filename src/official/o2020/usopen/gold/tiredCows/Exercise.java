@@ -5,7 +5,7 @@ import java.math.BigInteger;
 import java.util.*;
 
 /**
- * 2020 usopen gold
+ * 2020 us open gold
  * so notice that like no matter what permutation, it can be split into a bunch of "cycles"
  * so the cows in, sa, 1, 4, and 5 all rotate around, and 2 and 3 rotate around
  * the cycle time is just the LCM of the cycles (in this case it'd be 6)

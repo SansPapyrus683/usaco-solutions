@@ -3,7 +3,7 @@ package official.o2017.usopen.silver.pervertedFJ;
 import java.io.*;
 import java.util.*;
 
-// 2017 usopen silver (i've watched enough hentai to know where this problem's going)
+// 2017 us open silver (i've watched enough hentai to know where this problem's going)
 public final class PairUp {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
