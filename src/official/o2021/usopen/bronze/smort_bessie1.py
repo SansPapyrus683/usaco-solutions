@@ -1,5 +1,5 @@
 """
-2021 usopen bronze
+2021 us open bronze
 4 0
 1 100 2 3 should output 2
 4 1

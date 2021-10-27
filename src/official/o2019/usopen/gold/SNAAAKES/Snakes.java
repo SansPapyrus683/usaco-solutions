@@ -3,7 +3,7 @@ package official.o2019.usopen.gold.SNAAAKES;
 import java.io.*;
 import java.util.*;
 
-// 2019 usopen gold
+// 2019 us open gold
 public final class Snakes {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();

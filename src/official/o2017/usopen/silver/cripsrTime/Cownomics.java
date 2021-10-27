@@ -3,7 +3,7 @@ package official.o2017.usopen.silver.cripsrTime;
 import java.io.*;
 import java.util.*;
 
-// 2017 usopen silver
+// 2017 us open silver
 public final class Cownomics {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();

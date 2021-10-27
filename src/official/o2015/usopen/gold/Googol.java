@@ -4,7 +4,7 @@ import java.io.*;
 import java.math.BigInteger;
 import java.util.*;
 
-// 2015 usopen gold (no problem folder because no input files lol)
+// 2015 us open gold (no problem folder because no input files lol)
 public final class Googol {
     private static class Company {
         private static final String NONE = "0";

@@ -28,7 +28,7 @@ vector<pair<int, int>> neighbor_cows(const vector<vector<char>>& field, const pa
 }
 
 /**
- * 2021 usopen bronze
+ * 2021 us open bronze
  * 4 5
  * .CGGC
  * .CGCG

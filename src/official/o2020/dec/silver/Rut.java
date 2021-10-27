@@ -25,7 +25,7 @@ public final class Rut {
         for (int c = 0; c < cowNum; c++) {
             String[] cowInfo = read.readLine().split(" ");
             if (!cowInfo[0].equalsIgnoreCase("N") && !cowInfo[0].equalsIgnoreCase("E")) {
-                throw new IllegalArgumentException("hold on i thought directions could only go N/E, what's " + cowInfo[0] + "!");
+                throw new IllegalArgumentException("wait directions could only go N/E, what's " + cowInfo[0]);
             }
             if (cowInfo[0].equalsIgnoreCase("N")) {
                 northCowIndices.add(c);
@@ -57,7 +57,7 @@ public final class Rut {
                     } else if (eCowTime > nCowTime) {  // the north cow blocked the east cow
                         deadAlr[e] = true;  // this one doesn't matter, just gives me some closure
                         blame[n] += blame[e] + 1;
-                        break;  // no point in processing any more
+                        break;  // no point in processing anymore
                     }
                 }
             }

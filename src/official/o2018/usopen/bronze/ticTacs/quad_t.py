@@ -1,4 +1,4 @@
-# 2018 usopen bronze
+# 2018 us open bronze
 from string import ascii_uppercase
 
 WIDTH = 3

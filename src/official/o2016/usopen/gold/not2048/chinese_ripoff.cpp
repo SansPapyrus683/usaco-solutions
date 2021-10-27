@@ -8,7 +8,7 @@ using std::endl;
 using std::vector;
 
 /**
- * 2016 usopen gold
+ * 2016 us open gold
  * (just notice that the answer will always be achieved by
  * merging some continuous interval of the board)
  */

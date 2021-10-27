@@ -2,7 +2,7 @@ package official.o2015.usopen.gold.friendPath;
 
 import java.io.*;
 
-// 2015 usopen gold
+// 2015 us open gold
 public final class PalPath {
     private static final int MOD = (int) Math.pow(10, 9) + 7;
     public static void main(String[] args) throws IOException {

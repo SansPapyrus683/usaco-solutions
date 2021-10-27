@@ -3,7 +3,7 @@ package official.o2020.usopen.gold.superPrecise;
 import java.io.*;
 import java.util.*;
 
-// 2020 usopen gold
+// 2020 us open gold
 // answer all the inversions number from 0 all the way to hairNum - 1
 public final class Haircut {
     public static void main(String[] args) throws IOException {

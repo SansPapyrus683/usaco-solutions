@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 import java.util.stream.Stream;
 
-// 2016 usopen silver
+// 2016 us open silver
 public final class Reduce {
     private static final int REMOVED = 3;
     private static ArrayList<int[]> leastX = new ArrayList<>();

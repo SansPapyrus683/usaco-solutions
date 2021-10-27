@@ -27,7 +27,7 @@ bool all_reachable(int start, vector<vector<int>> neighbors) {
     return std::find(visited.begin(), visited.end(), false) == visited.end();
 }
 
-// 2019 usopen bronze (screw it, i'm using c++, i need more practice with it anyways)
+// 2019 us open bronze (screw it, i'm using c++, i need more practice with it anyways)
 int main() {
     std::ifstream read("factory.in");
     int station_num;

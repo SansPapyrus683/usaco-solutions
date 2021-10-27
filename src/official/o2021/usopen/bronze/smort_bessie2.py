@@ -1,5 +1,5 @@
 """
-2021 usopen bronze
+2021 us open bronze
 2 3
 elsie mildred dean
 elsie mildred dean

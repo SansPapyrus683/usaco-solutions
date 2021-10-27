@@ -3,7 +3,7 @@ package official.o2019.usopen.gold.hugeNumbers;
 import java.io.*;
 import java.util.*;
 
-// 2019 usopen gold
+// 2019 us open gold
 public final class Walk {
     private static final long FIRST = 2019201913;
     private static final long SECOND = 2019201949;

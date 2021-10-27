@@ -3,7 +3,7 @@ package official.o2017.usopen.plat.fineArt;
 import java.io.*;
 import java.util.*;
 
-// 2017 usopen plat (don't expect more of these lol)
+// 2017 us open plat (don't expect more of these lol)
 public final class Art {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();

@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 /**
- * 2013 usopen silver
+ * 2013 us open silver
  * so the way the coordinates are represented is kinda weird
  * it's (y, x) and not (x, y), and the y coordinate increasing is actually going down
  * that's because of stupid array indexing shenanigans

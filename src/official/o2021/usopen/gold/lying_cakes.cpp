@@ -46,7 +46,7 @@ int index(const vector<int>& arr, int x) {
     return it == arr.end() ? -1 : it - arr.begin();
 }
 
-// 2021 usopen gold (sample input ommitted bc too long lmao)
+// 2021 us open gold (sample input ommitted bc too long lmao)
 int main() {
     int node_num;
     std::cin >> node_num;

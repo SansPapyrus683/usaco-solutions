@@ -1,4 +1,4 @@
-# 2017 usopen bronze
+# 2017 us open bronze
 with open('lostcow.in') as read:
     farmer_pos, bessie_pos = [int(i) for i in read.readline().split()]
 

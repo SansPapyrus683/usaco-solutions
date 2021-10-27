@@ -7,7 +7,7 @@ import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.Comparator;
 
-// 2015 usopen gold
+// 2015 us open gold
 public final class Trapped {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();

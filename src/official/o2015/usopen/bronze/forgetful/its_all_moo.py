@@ -1,4 +1,4 @@
-# 2015 usopen bronze
+# 2015 us open bronze
 from string import ascii_uppercase as letters
 
 REDACTED = '█'

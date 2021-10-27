@@ -1,4 +1,4 @@
-# 2018 usopen bronze
+# 2018 us open bronze
 from collections import deque
 
 REDACTED = '█'

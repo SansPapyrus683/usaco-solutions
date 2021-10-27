@@ -3,7 +3,7 @@ package official.o2020.usopen.gold.cyanBestColor;
 import java.io.*;
 import java.util.*;
 
-// 2020 usopen gold
+// 2020 us open gold
 public final class FColor {
     /**
      * this is based off {@link utils.DisjointSets}, go there for the link that explains this bc i sure can't<br>

@@ -1,7 +1,7 @@
 import sys
 import math
 
-# 2020 usopen bronze
+# 2020 us open bronze
 with open('socdist1.in') as read:
     read.readline()
     stalls = [s == '1' for s in read.readline().rstrip()]

@@ -3,7 +3,7 @@ package official.o2017.usopen.gold.crisprTime;
 import java.io.*;
 import java.util.*;
 
-// 2017 usopen gold
+// 2017 us open gold
 public final class Cownomics {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
