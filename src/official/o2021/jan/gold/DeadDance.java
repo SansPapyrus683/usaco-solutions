@@ -156,6 +156,9 @@ public final class DeadDance {
     }
 }
 
+/**
+ * link for explanation is at {@link utils.BinaryIndexedTree} is you wanted it
+ */
 class BITree {
     private final int[] treeThing;
     private final int size;

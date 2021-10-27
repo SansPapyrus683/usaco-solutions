@@ -21,22 +21,30 @@ bool reachable(const vector<vector<int>>& heights,
         int curr_height = heights[curr.first][curr.second];
 
         // decrease the row number (go up)
-        if (curr.first > 0 && std::abs(curr_height - heights[curr.first - 1][curr.second]) <= difficulty && !visited[curr.first - 1][curr.second]) {
+        if (curr.first > 0
+                && std::abs(curr_height - heights[curr.first - 1][curr.second]) <= difficulty
+                && !visited[curr.first - 1][curr.second]) {
             frontier.push_back({curr.first - 1, curr.second});
             visited[curr.first - 1][curr.second] = true;
         }
         // increase the row number (go down)
-        if (curr.first < heights.size() - 1 && std::abs(curr_height - heights[curr.first + 1][curr.second]) <= difficulty && !visited[curr.first + 1][curr.second]) {
+        if (curr.first < heights.size() - 1
+                && std::abs(curr_height - heights[curr.first + 1][curr.second]) <= difficulty
+                && !visited[curr.first + 1][curr.second]) {
             frontier.push_back({curr.first + 1, curr.second});
             visited[curr.first + 1][curr.second] = true;
         }
         // decrease the col number (go left)
-        if (curr.second > 0 && std::abs(curr_height - heights[curr.first][curr.second - 1]) <= difficulty && !visited[curr.first][curr.second - 1]) {
+        if (curr.second > 0
+                && std::abs(curr_height - heights[curr.first][curr.second - 1]) <= difficulty
+                && !visited[curr.first][curr.second - 1]) {
             frontier.push_back({curr.first, curr.second - 1});
             visited[curr.first][curr.second - 1] = true;
         }
         // increase the col number (go right)
-        if (curr.second < heights[0].size() - 1 && std::abs(curr_height - heights[curr.first][curr.second + 1]) <= difficulty && !visited[curr.first][curr.second + 1]) {
+        if (curr.second < heights[0].size() - 1
+                && std::abs(curr_height - heights[curr.first][curr.second + 1]) <= difficulty
+                && !visited[curr.first][curr.second + 1]) {
             frontier.push_back({curr.first, curr.second + 1});
             visited[curr.first][curr.second + 1] = true;
         }
@@ -80,7 +88,7 @@ int main() {
     }
 
     int lo = 0;
-    int hi = 1000000000;  // this should probably be big enough
+    int hi = INT32_MAX / 2;  // this should probably be big enough
     int valid = -1;
     while (lo <= hi) {  // binsearch for the lowest possible difficulty
         int mid = (lo + hi) / 2;
