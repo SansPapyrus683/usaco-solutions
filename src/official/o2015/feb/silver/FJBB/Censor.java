@@ -1,65 +1,75 @@
-package official.o2015.feb.silver.FJBB;
+// package official.o2015.feb.silver.FJBB;
 
 import java.io.*;
 import java.util.*;
 
 // 2015 feb silver
 public final class Censor {
-    private static final int MAX_LEN = (int) Math.pow(10, 6);
-    private static final long MOD = (long) Math.pow(10, 9) + 9;
-    private static final long POWER = 31;  // some website told me to do this (https://cp-algorithms.com/string/string-hashing.html)
-    private static final long[] HASH_POWERS = new long[MAX_LEN];
-
+    private static final int MOD = (int) 1e9 + 7;
+    private static final int POW = 101;
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
-        long nowPower = 1;
-        for (int i = 0; i < MAX_LEN; i++) {  // precompute powers (takes surprisingly little time)
-            HASH_POWERS[i] = nowPower;
-            nowPower = (nowPower * POWER) % MOD;
-        }
-
         BufferedReader read = new BufferedReader(new FileReader("censor.in"));
         String toCensor = read.readLine();  // remember kids, nothing happened on june 4th 1989
         String badWord = read.readLine();
-        if (toCensor.length() > MAX_LEN || badWord.length() > MAX_LEN) {
-            throw new IllegalArgumentException("look i'm sure your input is good but i can't handle strings that are too long");
+
+        long[] pows = new long[Math.max(toCensor.length(), badWord.length()) + 1];
+        pows[0] = 1;
+        for (int i = 1; i < pows.length; i++) {
+            pows[i] = (pows[i - 1] * POW) % MOD;
         }
 
-        PrintWriter written = new PrintWriter(new FileOutputStream("censor.out"));
-        String after = clean(toCensor, badWord);
-        written.println(after);
-        written.close();
-        System.out.println(after);
-        System.out.printf("our great leader fj says it took %d ms so it did%n", System.currentTimeMillis() - start);
-    }
-
-    private static long hashConcat(long rnHashVal, int nowStrLen, long toAdd) {
-        return (rnHashVal + toAdd * HASH_POWERS[nowStrLen]) % MOD;
-    }
-
-    private static String clean(String toCensor, String badWord) {
-        toCensor = toCensor.toLowerCase();
-        badWord = badWord.toLowerCase();
-
-        long badHashCode = 0;  // hashcode for the badword to censor
+        long badHash = 0;
         for (int i = 0; i < badWord.length(); i++) {
-            // - 'a' + 1 just translates a to 1, b to 2, etc...
-            badHashCode = hashConcat(badHashCode, i, badWord.charAt(i) - 'a' + 1);
+            badHash = (badHash + pows[i] * badWord.charAt(i)) % MOD;
         }
 
-        char[] all = new char[toCensor.length()];
-        long[] hashesSoFar = new long[toCensor.length() + 1];  // + 1 for the empty string, which has a hash of 0
-        int index = 0;
-        for (char c : toCensor.toCharArray()) {
-            all[index++] = c;
-            int headIndex = Math.max(index - badWord.length(), 0);
-            hashesSoFar[index] = hashConcat(hashesSoFar[index - 1], index - 1, c - 'a' + 1);
-            long currViewHash = (hashesSoFar[index] - hashesSoFar[headIndex]) % MOD;
-            currViewHash += currViewHash >= 0 ? 0 : MOD;  // let's make it positive
-            if (currViewHash == (badHashCode * HASH_POWERS[headIndex]) % MOD) {  // no divisibility issues now ha
-                index -= badWord.length();  // reset the pointer back to "checkpoint"? idk
+        char[] cleanedArr = new char[toCensor.length()];
+        long[] hashes = new long[toCensor.length() + 1];
+        int indAt = 0;
+        for (int i = 0; i < toCensor.length(); i++) {
+            char c = toCensor.charAt(i);
+            hashes[indAt + 1] = (hashes[indAt] + c * pows[indAt] + MOD) % MOD;
+            // System.out.println(Arrays.toString(hashes));
+            cleanedArr[indAt] = c;
+            if (indAt >= badWord.length() - 1) {
+                int prevInd = indAt + 1 - badWord.length();
+                long prevHash = hashes[prevInd];
+                long diff = hashes[indAt + 1] - prevHash;
+                long suffHash = (((diff * modInv(pows[prevInd])) % MOD) + MOD) % MOD;
+                // System.out.println(prevHash + " " + diff + " " + suffHash);
+                if (suffHash == badHash) {
+                    indAt -= badWord.length();
+                }
             }
+            indAt++;
         }
-        return new String(Arrays.copyOfRange(all, 0, index));
+
+        StringBuilder cleaned = new StringBuilder();
+        for (int i = 0; i < indAt; i++) {
+            cleaned.append(cleanedArr[i]);
+        }
+        System.out.println(cleaned);
+        PrintWriter written = new PrintWriter(new FileOutputStream("censor.out"));
+        written.println(cleaned);
+        written.close();
+        System.out.printf("%d ms: social credit -42069%n", System.currentTimeMillis() - start);
+    }
+
+    private static long modInv(long n) {
+        return pow(n, MOD - 2);
+    }
+
+    private static long pow(long base, long exp) {
+        base %= MOD;
+        long res = 1;
+        while (exp > 0) {
+            if (exp % 2 == 1) {
+                res = res * base % MOD;
+            }
+            base = base * base % MOD;
+            exp /= 2;
+        }
+        return res;
     }
 }

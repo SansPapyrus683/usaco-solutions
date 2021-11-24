@@ -22,17 +22,6 @@ public final class Hopscotch {
             }
         }
 
-        long[][] numWays = new long[rowNum][colNum];
-        long[][] prefWays = new long[rowNum][colNum];
-        numWays[0][0] = 1;
-        // we aren't gonna be processing the first row & column  so lemme just do it here
-        for (int r = 0; r < rowNum; r++) {
-            prefWays[r][0] = 1;
-        }
-        for (int c = 0; c < colNum; c++) {
-            prefWays[0][c] = 1;
-        }
-
         // compress the rows for which certain colors are present
         ArrayList<Integer>[] presentRows = new ArrayList[colorNum];
         for (int c = 0; c < colorNum; c++) {
@@ -46,8 +35,6 @@ public final class Hopscotch {
                 }
             }
         }
-        // System.out.println(Arrays.toString(presentRows));
-
         BITree[] colorWays = new BITree[colorNum];
         for (int c = 0; c < colorNum; c++) {
             if (presentColors[c]) {
@@ -55,6 +42,16 @@ public final class Hopscotch {
             }
         }
         colorWays[grid[0][0]].increment(0, 1);
+        long[][] numWays = new long[rowNum][colNum];
+        long[][] prefWays = new long[rowNum][colNum];
+        numWays[0][0] = 1;
+        // we aren't gonna be processing the first row & column  so lemme just do it here
+        for (int r = 0; r < rowNum; r++) {
+            prefWays[r][0] = 1;
+        }
+        for (int c = 0; c < colNum; c++) {
+            prefWays[0][c] = 1;
+        }
         for (int c = 1; c < colNum; c++) {
             for (int r = rowNum - 1; r >= 1; r--) {
                 int color = grid[r][c];
