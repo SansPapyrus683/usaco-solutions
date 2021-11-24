@@ -41,17 +41,17 @@ public final class GreenEnough {
         int[][] streakArr = rightBoolStreaks(arr);
         long allTrueNum = 0;
         for (int c = 0; c < arr[0].length; c++) {
-            ArrayDeque<int[]> relevantStreaks = new ArrayDeque<>();
+            ArrayDeque<int[]> relStreaks = new ArrayDeque<>();
             int currSum = 0;  // the current amt of valid submatrices
             // for each row in reverse, count # of valid submatrices that start at that cell
             for (int r = arr.length - 1; r >= 0; r--) {
                 int popped = 0;
-                while (!relevantStreaks.isEmpty() && relevantStreaks.peek()[0] > streakArr[r][c]) {
-                    currSum -= (relevantStreaks.peek()[1] + 1) * (relevantStreaks.peek()[0] - streakArr[r][c]);
-                    popped += relevantStreaks.peek()[1] + 1;
-                    relevantStreaks.pop();
+                while (!relStreaks.isEmpty() && relStreaks.peek()[0] > streakArr[r][c]) {
+                    currSum -= (relStreaks.peek()[1] + 1) * (relStreaks.peek()[0] - streakArr[r][c]);
+                    popped += relStreaks.peek()[1] + 1;
+                    relStreaks.pop();
                 }
-                relevantStreaks.addFirst(new int[] {streakArr[r][c], popped});
+                relStreaks.addFirst(new int[] {streakArr[r][c], popped});
                 currSum += streakArr[r][c];  // add the submatrices of height 1
                 allTrueNum += currSum;
             }
