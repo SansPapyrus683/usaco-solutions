@@ -30,14 +30,12 @@ public final class Censor {
         for (int i = 0; i < toCensor.length(); i++) {
             char c = toCensor.charAt(i);
             hashes[indAt + 1] = (hashes[indAt] + c * pows[indAt] + MOD) % MOD;
-            // System.out.println(Arrays.toString(hashes));
             cleanedArr[indAt] = c;
             if (indAt >= badWord.length() - 1) {
                 int prevInd = indAt + 1 - badWord.length();
                 long prevHash = hashes[prevInd];
                 long diff = hashes[indAt + 1] - prevHash;
                 long suffHash = (((diff * modInv(pows[prevInd])) % MOD) + MOD) % MOD;
-                // System.out.println(prevHash + " " + diff + " " + suffHash);
                 if (suffHash == badHash) {
                     indAt -= badWord.length();
                 }
