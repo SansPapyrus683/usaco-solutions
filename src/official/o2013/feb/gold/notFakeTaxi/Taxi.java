@@ -32,7 +32,6 @@ public final class Taxi {
             startEnds.add(new int[] {c[0], -1});
             startEnds.add(new int[] {c[1], 1});
         }
-
         startEnds.sort(Comparator.comparingInt(c -> c[0]));
 
         long dist = 0;
