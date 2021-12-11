@@ -27,7 +27,7 @@ vector<Pos> neighbors(const Pos& at, int side) {
 }
 
 /**
- * http://usaco.org/index.php?page=viewproblem2&cpid=1065
+ * 2020 dec gold
  * (sample input ommitted due to length)
  */
 int main() {
