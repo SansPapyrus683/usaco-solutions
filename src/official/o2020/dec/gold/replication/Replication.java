@@ -1,4 +1,4 @@
-package official.o2020.dec.gold;
+package official.o2020.dec.gold.replication;
 
 import java.io.*;
 import java.util.*;
