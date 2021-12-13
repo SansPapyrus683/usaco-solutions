@@ -30,14 +30,12 @@ public final class Uddered {
         }
 
         int charNum = charAt - 'a' + 1;
-        // this[i][j] actually means the amt to increase how many times elsie's moo'd if i comes AFTER j
         int[][] consecNum = new int[charNum][charNum];
         for (int i = 1; i < testament.length; i++) {
             consecNum[testament[i - 1] - 'a'][testament[i] - 'a']++;
         }
 
-        // each bit in the array index represents a char in the alphabet and if it's used alr
-        // this is basically the min cost if we accounted for those bits already
+        // you know what, just read the editorial lmao
         int[] cowphabetCosts = new int[1 << charNum];
         Arrays.fill(cowphabetCosts, Integer.MAX_VALUE);
         cowphabetCosts[0] = 1;  // no matter what, elsie will have to moo at least once
@@ -49,8 +47,6 @@ public final class Uddered {
                 int prev = i & ~(1 << c);  // put that letter back (make it 0)
                 int thisCost = cowphabetCosts[prev];
                 for (int pc = 0; pc < charNum; pc++) {
-                    // we slap c onto that previous optimal arrangement,
-                    // adding all the extra times that elsie will have to moo
                     if ((i & (1 << pc)) != 0) {
                         thisCost += consecNum[c][pc];
                     }
