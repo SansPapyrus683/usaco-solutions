@@ -36,7 +36,7 @@ public final class PaintBarn {
             }
         }
 
-        PrintWriter written = new PrintWriter(new FileWriter(new File("paintbarn.out")));
+        PrintWriter written = new PrintWriter("paintbarn.out");
         written.println(kAreaAmt);
         written.close();
         System.out.println(kAreaAmt);

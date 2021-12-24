@@ -14,7 +14,7 @@ ORIENTATIONS = {
 }
 
 
-# sauce: https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order
+# sauce: https://stackoverflow.com/questions/1165647
 def clockwise(point_order: List[List[int]]) -> bool:
     twice_signed_area = 0
     for p in range(len(point_order)):
