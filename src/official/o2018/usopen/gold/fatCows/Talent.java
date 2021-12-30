@@ -6,6 +6,7 @@ import java.util.*;
 // 2018 us open gold
 public final class Talent {
     private static final int PRECISION = (int) Math.pow(10, 3);
+
     private static class Cow {
         int weight;
         int talent;
@@ -14,6 +15,7 @@ public final class Talent {
             this.talent = talent;
         }
     }
+
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("talent.in"));

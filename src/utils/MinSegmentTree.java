@@ -66,4 +66,9 @@ public final class MinSegmentTree {
         }
         return Collections.min(Arrays.asList(x, y), cmp);
     }
+
+    public static void main(String[] args) {
+        MinSegmentTree st = new MinSegmentTree(9);
+        System.out.println(st.rangeMin(0, 10));
+    }
 }
