@@ -61,7 +61,7 @@ int main() {
                 }
                 range_maxes[start][end][ind] = std::max({
                     range_maxes[start][end][ind],
-                    std::max(l_seg, r_seg)
+                    l_seg, r_seg
                 });
             }
         }
