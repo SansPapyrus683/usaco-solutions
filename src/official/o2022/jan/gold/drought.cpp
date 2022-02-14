@@ -9,39 +9,41 @@ using std::pair;
 
 constexpr int MOD = 1e9 + 7;
 
-int solve(const vector<int>& cows) {
-    vector<vector<int>> dp{vector<int>(cows[0] + 1, 1)};
-    if (cows.size() >= 2) {
-        int min = std::min(cows[0], cows[1]);
-        dp.push_back({1});
-        for (int i = 1; i <= cows[1]; i++) {
-            dp[1].push_back(i <= min);
+int num_ways(const vector<int>& levels) {
+    // just handle the first two pesky cases
+    vector<vector<int>> num_ways{vector<int>(levels[0] + 1, 1)};
+    if (levels.size() >= 2) {
+        int min = std::min(levels[0], levels[1]);
+        num_ways.push_back({1});
+        for (int i = 1; i <= levels[1]; i++) {
+            num_ways[1].push_back(i <= min);
         }
     }
 
     vector<int> prefs{0};
-    for (int i : dp.back()) {
+    for (int i : num_ways.back()) {
         prefs.push_back(prefs.back() + i);  // no need for modding here
     }
-    for (int c = 2; c < cows.size(); c++) {
-        dp.push_back(vector<int>(cows[c] + 1));
-        for (int i = 0; i <= cows[c - 1]; i++) {
-            dp[c][0] = (dp[c][0] + dp[c - 1][i]) % MOD;
+    for (int c = 2; c < levels.size(); c++) {
+        num_ways.push_back(vector<int>(levels[c] + 1));
+        for (int l = 0; l <= levels[c - 1]; l++) {
+            num_ways[c][0] = (num_ways[c][0] + num_ways[c - 1][l]) % MOD;
         }
-        for (int i = 1; i <= cows[c]; i++) {
-            if (i <= cows[c - 1]) {
-                dp[c][i] = prefs[cows[c - 1] - i + 1];
+        for (int l = 1; l <= levels[c]; l++) {
+            if (l <= levels[c - 1]) {
+                num_ways[c][l] = prefs[levels[c - 1] - l + 1];
             }
         }
 
-        prefs = {0};
-        for (int i = 0; i <= cows[c]; i++) {
-            prefs.push_back((prefs.back() + dp[c][i]) % MOD);
+        prefs = {0};  // calculate prefix sums for the next iteration
+        for (int l = 0; l <= levels[c]; l++) {
+            prefs.push_back((prefs.back() + num_ways[c][l]) % MOD);
         }
     }
     
+    // sum everything up @ the end & return it
     int total = 0;
-    for (int i : dp.back()) {
+    for (int i : num_ways.back()) {
         total = (total + i) % MOD;
     }
     return total;
@@ -57,20 +59,20 @@ int solve(const vector<int>& cows) {
 int main() {
     int cow_num;
     std::cin >> cow_num;
-    vector<int> cows(cow_num);
+    vector<int> levels(cow_num);
     int min_hunger = INT32_MAX;
-    for (int& c : cows) {
+    for (int& c : levels) {
         std::cin >> c;
         min_hunger = std::min(min_hunger, c);
     }
     
-    int total = solve(cows);
+    int total = num_ways(levels);
     if (cow_num % 2 == 1) {
         for (int i = 1; i <= min_hunger; i++)  {
-            for (int& c : cows) {
+            for (int& c : levels) {
                 c--;
             }
-            total = (total + solve(cows)) % MOD;
+            total = (total + num_ways(levels)) % MOD;
         }
     }
     cout << total << endl;
