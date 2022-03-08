@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cassert>
 #include <set>
 #include <vector>
 
@@ -79,6 +80,7 @@ int main() {
         if (q.type == 'A') {
             std::cin >> q.arg1 >> q.arg2;
             edges.push_back({--q.arg1, --q.arg2});
+            assert(activated[q.arg1] && activated[q.arg2]);
             exists.push_back(true);
         } else if (q.type == 'D') {
             std::cin >> q.arg1;
