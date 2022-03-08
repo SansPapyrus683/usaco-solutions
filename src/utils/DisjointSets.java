@@ -27,9 +27,7 @@ public final class DisjointSets {
             return false;
         }
         if (sizes[e2] > sizes[e1]) {
-            int temp = e1;
-            e1 = e2;
-            e2 = temp;
+            return link(e2, e1);
         }
         parents[e2] = e1;
         sizes[e1] += sizes[e2];
