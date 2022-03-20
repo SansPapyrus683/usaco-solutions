@@ -5,7 +5,7 @@ package utils;
  * explanation here: https://cp-algorithms.com/data_structures/fenwick.html
  * i'm too lazy to explain it
  */
-public final class BinaryIndexedTree {
+public class BinaryIndexedTree {
     private final int[] treeThing;
     private final int[] actualArr;
     private final int size;

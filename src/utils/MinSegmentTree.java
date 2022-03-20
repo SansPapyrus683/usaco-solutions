@@ -8,7 +8,7 @@ import java.util.Comparator;
  * A data structure that allows for efficient answering of range minimum queries.
  * followed the explanation here: https://codeforces.com/blog/entry/18051
  */
-public final class MinSegmentTree {
+public class MinSegmentTree {
     private final int[] segtree;
     private final int len;
     private final Comparator<Integer> cmp;
