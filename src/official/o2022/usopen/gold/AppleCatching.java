@@ -27,21 +27,21 @@ public final class AppleCatching {
         Collections.sort(apples);
 
         int canEat = 0;
-        TreeSet<Event> left = new TreeSet<>((a1, a2) -> a1.loc != a2.loc ? a1.loc - a2.loc : a1.time - a2.time);
+        TreeSet<Event> available = new TreeSet<>((a1, a2) -> a1.loc != a2.loc ? a1.loc - a2.loc : a1.time - a2.time);
         int appleAt = apples.size() - 1;
         for (Event c : cows) {
             while (appleAt >= 0 && apples.get(appleAt).time >= c.time) {
-                left.add(apples.get(appleAt));
+                available.add(apples.get(appleAt));
                 appleAt--;
             }
             Event a;
-            while ((a = left.ceiling(c)) != null && c.amt > 0) {
+            while ((a = available.ceiling(c)) != null && c.amt > 0) {
                 int ate = Math.min(c.amt, a.amt);
                 a.amt -= ate;
                 c.amt -= ate;
                 canEat += ate;
                 if (a.amt == 0) {
-                    left.remove(a);
+                    available.remove(a);
                 }
             }
         }
