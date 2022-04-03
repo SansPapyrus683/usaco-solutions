@@ -13,7 +13,6 @@ public final class Art {
         int[][] canvas = new int[width][width];
         HashMap<Integer, int[]> visible = new HashMap<>();
         for (int r = 0; r < width; r++) {
-            // used this weird \\s+ regex so deubgging would be easier
             char[] row = read.readLine().toCharArray();
             if (row.length != width) {
                 throw new IllegalArgumentException("you idiot picowso only paints on square canvases");
@@ -76,4 +75,3 @@ public final class Art {
         System.out.printf("it's a bunch of squares. and it's ART. (%d ms)%n", System.currentTimeMillis() - start);
     }
 }
-

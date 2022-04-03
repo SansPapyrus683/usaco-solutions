@@ -51,8 +51,8 @@ public final class AppleCatching {
 
     // sauce: https://danceswithcode.net/engineeringnotes/rotations_in_2d/rotations_in_2d.html
     public static double[] rotate45(int x, int y) {
-        final double val = Math.sqrt(2) / 2;  // sin(45) & cos(45)
-        return new double[] {x * val - y * val, x * val + y * val};
+        final double sincos45 = Math.sqrt(2) / 2;  // sin(45) & cos(45)
+        return new double[] {x * sincos45 - y * sincos45, x * sincos45 + y * sincos45};
     }
 }
 
@@ -69,7 +69,7 @@ class Event implements Comparable<Event> {
 
     @Override
     public String toString() {
-        return String.format("(%d %d %d)", time, loc, amt);
+        return String.format("(time: %d loc: %d amt: %d)", time, loc, amt);
     }
 
     @Override
