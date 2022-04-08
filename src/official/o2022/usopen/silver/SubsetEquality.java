@@ -1,7 +1,6 @@
 package official.o2022.usopen.silver;
 
 import java.io.*;
-import java.util.*;
 
 /**
  * 2022 us open silver
