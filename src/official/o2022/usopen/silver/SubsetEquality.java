@@ -38,39 +38,28 @@ public final class SubsetEquality {
 
         boolean[] equal = new boolean[1 << charNum];
         equal[0] = true;  // just for explicitness
+        for (int c1 = 0; c1 < charNum; c1++) {
+            equal[1 << c1] = occ[c1] == 0;
+            for (int c2 = c1 + 1; c2 < charNum; c2++) {
+                char char1 = (char) ('a' + c1);
+                char char2 = (char) ('a' + c2);
+                equal[(1 << c1) + (1 << c2)] = filter(s1, char1, char2).equals(filter(s2, char1, char2));
+            }
+        }
         for (int subset = 1; subset < (1 << charNum); subset++) {
-            if (Integer.bitCount(subset) == 1) {
-                int set = 0;
-                for (; (subset & (1 << set)) == 0; set++);
-                equal[subset] = occ[set] == 0;
+            if (Integer.bitCount(subset) <= 2) {
                 continue;
             }
-
-            boolean corrupted = false;
+            equal[subset] = true;
             for (int rmv = 0; rmv < charNum; rmv++) {
                 if ((subset & (1 << rmv)) == 0) {
                     continue;
                 }
                 int prev = subset & ~(1 << rmv);
                 if (!equal[prev]) {
-                    corrupted = true;
+                    equal[subset] = false;
                     break;
                 }
-            }
-            if (corrupted) {
-                StringBuilder newS1 = new StringBuilder();
-                for (int c = 0; c < s1.length(); c++) {
-                    if ((subset & (1 << (s1.charAt(c) - 'a'))) != 0) {
-                        newS1.append(s1.charAt(c));
-                    }
-                }
-                StringBuilder newS2 = new StringBuilder();
-                for (int c = 0; c < s2.length(); c++) {
-                    if ((subset & (1 << (s2.charAt(c) - 'a'))) != 0) {
-                        newS2.append(s2.charAt(c));
-                    }
-                }
-                equal[subset] = newS1.toString().equals(newS2.toString());
             }
         }
 
@@ -85,5 +74,15 @@ public final class SubsetEquality {
             System.out.print(equal[subset] ? 'Y' : 'N');
         }
         System.out.println();
+    }
+
+    private static String filter(String s, char a, char b) {
+        StringBuilder ret = new StringBuilder();
+        for (int c = 0; c < s.length(); c++) {
+            if (s.charAt(c) == a || s.charAt(c) == b) {
+                ret.append(s.charAt(c));
+            }
+        }
+        return ret.toString();
     }
 }
