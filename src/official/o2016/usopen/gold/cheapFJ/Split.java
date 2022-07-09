@@ -51,7 +51,8 @@ public final class Split {
                 maxY = Math.max(maxY, cow[1]);
             }
             long firstArea = ((long) (x - xVals.get(0))) * (maxY - minY);
-            long secondArea = ((long) (xVals.get(xVals.size() - 1) - cows[atCow + 1][0])) * (rightSideCows.max() - rightSideCows.min());
+            long secondArea = ((long) (xVals.get(xVals.size() - 1) - cows[atCow + 1][0]))
+                    * (rightSideCows.max() - rightSideCows.min());
             maxSaved = Math.max(maxSaved, bigArea - firstArea - secondArea);
         }
 
@@ -73,7 +74,8 @@ public final class Split {
                 maxX = Math.max(maxX, cow[0]);
             }
             long firstArea = ((long) (y - yVals.get(0))) * (maxX - minX);
-            long secondArea = ((long) (yVals.get(yVals.size() - 1) - cows[atCow + 1][1])) * (aboveCows.max() - aboveCows.min());
+            long secondArea = ((long) (yVals.get(yVals.size() - 1) - cows[atCow + 1][1]))
+                    * (aboveCows.max() - aboveCows.min());
             maxSaved = Math.max(maxSaved, bigArea - firstArea - secondArea);
         }
 
