@@ -11,6 +11,7 @@ def min_steps(s: int, e: int) -> int:
     def mul_add_steps(s_: int, e_: int) -> Union[float, int]:
         if s_ > e_:
             return float('inf')
+
         if pref_diff(s_, e_) < 0:
             target_len = s_.bit_length() + 1
             start = e_.bit_length() - target_len
@@ -18,11 +19,8 @@ def min_steps(s: int, e: int) -> int:
             target = (e & mask) >> start
             remaining_len = e_.bit_length() - s_.bit_length() - 1
             remaining = e_ & ((1 << remaining_len) - 1)
-            # print(bin(s_))
-            # print(bin(e_))
-            # print(bin(target), start, target_len)
-            # print()
             return (target - s_) + remaining_len + bin(remaining).count('1')
+
         remaining_len = e_.bit_length() - s_.bit_length()
         remaining = e_ & ((1 << remaining_len) - 1)
         return pref_diff(s_, e_) + remaining_len + bin(remaining).count('1')
