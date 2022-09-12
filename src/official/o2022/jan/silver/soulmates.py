@@ -17,8 +17,10 @@ def min_steps(s: int, e: int) -> int:
             start = e_.bit_length() - target_len
             mask = ((1 << target_len) - 1) << start
             target = (e & mask) >> start
+
             remaining_len = e_.bit_length() - s_.bit_length() - 1
             remaining = e_ & ((1 << remaining_len) - 1)
+
             return (target - s_) + remaining_len + bin(remaining).count('1')
 
         remaining_len = e_.bit_length() - s_.bit_length()
