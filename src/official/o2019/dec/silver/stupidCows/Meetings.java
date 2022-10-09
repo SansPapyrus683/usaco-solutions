@@ -9,18 +9,10 @@ public final class Meetings {
         int weight;
         int pos;
         int speed;
-        public Cow(int weight, int pos, int speed) throws IllegalArgumentException {
+        public Cow(int weight, int pos, int speed) {
             this.weight = weight;
             this.pos = pos;
-            if (speed != -1 && speed != 1) {
-                throw new IllegalArgumentException("the speed can only be 1 or -1 bruh");
-            }
             this.speed = speed;
-        }
-
-        @Override
-        public String toString() {
-            return String.format("WalkingCow{weight=%s, pos=%s, speed=%s}", weight, pos, speed);
         }
     }
 

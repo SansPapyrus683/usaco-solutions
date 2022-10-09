@@ -5,14 +5,15 @@ with open('word.in') as read:
 
 formatted = ""
 rn_length = 0
-for v, w in enumerate(essay):
-    if rn_length + len(w) > max_width:  # ok, this word exceeds the limit, let's wrap it around
-        formatted += "\n"
+for w in essay:
+    # ok, this word exceeds the limit, let's wrap it around
+    if rn_length + len(w) > max_width:
+        formatted = formatted[:-1] + '\n'
         rn_length = 0
     formatted += w + ' '
     rn_length += len(w)
+formatted = formatted[:-1]
 
 with open('word.out', 'w') as written:
-    for line in formatted.split("\n"):
-        print(line.strip())
-        written.write(str(line.strip()) + '\n')
+    for line in formatted.split('\n'):
+        print(line, file=written)

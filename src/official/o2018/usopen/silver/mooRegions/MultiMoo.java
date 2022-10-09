@@ -6,15 +6,15 @@ import java.util.stream.Stream;
 
 // 2018 us open silver
 public final class MultiMoo {
-    private static  final int[] rChanges = new int[] {1, -1, 0, 0};
-    private static  final int[] cChanges = new int[] {0, 0, 1, -1};
-    private static  int side;
-    private static  int currID = 0;
-    private static  int[][] board;
-    private static  int[][] ids;  // these ids are different from cow ids
-    private static  ArrayList<Integer> regionSizes = new ArrayList<>();
-    private static  ArrayList<HashSet<ArrayList<Integer>>> adjPoints = new ArrayList<>();
-    private static  boolean[][] visited;
+    private static final int[] rChanges = new int[] {1, -1, 0, 0};
+    private static final int[] cChanges = new int[] {0, 0, 1, -1};
+    private static int side;
+    private static int currID = 0;
+    private static int[][] board;
+    private static int[][] ids;  // these ids are different from cow ids
+    private static ArrayList<Integer> regionSizes = new ArrayList<>();
+    private static ArrayList<HashSet<ArrayList<Integer>>> adjPoints = new ArrayList<>();
+    private static boolean[][] visited;
 
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();

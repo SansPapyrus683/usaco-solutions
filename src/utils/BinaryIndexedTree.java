@@ -2,7 +2,7 @@ package utils;
 
 /**
  * A data structure that supports point updates and range sum queries in O(log n).
- * explanation here: https://cp-algorithms.com/data_structures/fenwick.html
+ * explanation <a href="https://cp-algorithms.com/data_structures/fenwick.html">here</a>
  * i'm too lazy to explain it
  */
 public class BinaryIndexedTree {
