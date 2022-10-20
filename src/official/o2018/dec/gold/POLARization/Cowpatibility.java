@@ -29,6 +29,7 @@ public final class Cowpatibility {
             return Arrays.equals(iceCream, ((Liked) obj).iceCream);
         }
     }
+    
     private static final int FAVE_NUM = 5;
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();

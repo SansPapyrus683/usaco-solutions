@@ -39,21 +39,57 @@ public final class SnowCow {
             start[curr] = timer;
             frontier.add(curr);  // set a marker to record the outtime
             processed[curr] = true;
-            frontier.addAll(neighbors[curr].stream().filter(n -> !processed[n]).toList());
+            for (int n : neighbors[curr]) {
+                if (!processed[n]) {
+                    frontier.add(n);
+                }
+            }
             timer++;
         }
 
+        int[] subSize = new int[snowballNum];
+        for (int s = 0; s < snowballNum; s++) {
+            subSize[s] = (end[s] - start[s] + 1) / 2;
+        }
+
+        Map<Integer, TreeMap<Integer, Integer>> colors = new HashMap<>();
+        BITree aboveUnique = new BITree(snowballNum * 2);
+        BITree belowUnique = new BITree(snowballNum * 2);
         StringBuilder ans = new StringBuilder();
         for (int q = 0; q < queryNum; q++) {
             StringTokenizer query = new StringTokenizer(read.readLine());
             int type = Integer.parseInt(query.nextToken());
-            int snowball = Integer.parseInt(query.nextToken()) - 1;
-            int[] interval = new int[] {start[snowball], end[snowball]};
+            int sb = Integer.parseInt(query.nextToken()) - 1;  // snowball
             if (type == 1) {
                 int color = Integer.parseInt(query.nextToken());
+                if (!colors.containsKey(color)) {
+                    colors.put(color, new TreeMap<>());
+                }
 
+                TreeMap<Integer, Integer> painted = colors.get(color);
+                Map.Entry<Integer, Integer> lClosest = painted.floorEntry(start[sb]);
+                if (lClosest != null && end[sb] <= end[lClosest.getValue()]) {
+                    continue;
+                }
+                while (true) {
+                    Integer rNext = painted.higherKey(start[sb]);
+                    if (rNext == null || end[sb] <= end[painted.get(rNext)]) {
+                        break;
+                    }
+                    int rNextSB = painted.get(rNext);
+                    aboveUnique.increment(start[rNextSB], -1);
+                    aboveUnique.increment(end[rNextSB], 1);
+                    belowUnique.increment(start[rNextSB], -subSize[rNextSB]);
+                    painted.remove(rNext);
+                }
+                painted.put(start[sb], sb);
+                aboveUnique.increment(start[sb], 1);
+                aboveUnique.increment(end[sb], -1);
+                belowUnique.increment(start[sb], subSize[sb]);
             } else if (type == 2) {
-
+                long aboveColors = subSize[sb] * aboveUnique.query(start[sb]);
+                long belowColors = belowUnique.query(end[sb]) - belowUnique.query(start[sb]);
+                ans.append(aboveColors + belowColors).append('\n');
             }
         }
 

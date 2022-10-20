@@ -23,7 +23,7 @@ public final class Cownomics {
         for (int g = 0; g < genomeLen; g++) {
             allIndices[g] = g;
         }
-        // just brute force all indices lol (seriously this problem is way too ez for usopen)
+        // just brute force all indices lol (seriously this problem is way too ez for us open)
         int distinguishableGenomeNum = 0;
         for (int[] indexSet : combinations3(allIndices)) {
             if (distinguishable(spotty, plain, indexSet)) {
