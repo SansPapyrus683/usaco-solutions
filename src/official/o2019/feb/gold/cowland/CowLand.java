@@ -1,4 +1,4 @@
-package official.o2019.feb.gold.amusementParkEpisode;
+package official.o2019.feb.gold.cowland;
 
 import java.io.*;
 import java.util.*;

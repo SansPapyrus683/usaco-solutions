@@ -7,35 +7,44 @@ import static java.lang.Math.max;
 
 // 2019 feb gold (i spent an entire day debugging the array indices on this oh my fricking god)
 public final class PaintBarn {
-    private static final int BARN_WIDTH = 200;
+    static final int WIDTH = 200;
+    
+    static int[][] prefLeftovers;
+    
     public static void main(String[] args) throws IOException {
         long timeStart = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("paintbarn.in"));
         StringTokenizer initial = new StringTokenizer(read.readLine());
         int rectNum = Integer.parseInt(initial.nextToken());  // sounds like rectum ngl
         int optimalAmt = Integer.parseInt(initial.nextToken());
-        int[][] barn = new int[BARN_WIDTH][BARN_WIDTH];
+        int[][] barn = new int[WIDTH][WIDTH];
         for (int r = 0; r < rectNum; r++) {
-            int[] rect = Arrays.stream(read.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
-            for (int i = rect[1]; i < rect[3]; i++) {
-                barn[i][rect[0]]++;
-                if (rect[2] < BARN_WIDTH) {
-                    barn[i][rect[2]]--;
+            int[] rect = Arrays.stream(read.readLine().split(" "))
+                    .mapToInt(Integer::parseInt)
+                    .toArray();
+            for (int y = rect[1]; y < rect[3]; y++) {
+                barn[y][rect[0]]++;
+                if (rect[2] < WIDTH) {
+                    barn[y][rect[2]]--;
                 }
             }
         }
-        for (int r = 0; r < BARN_WIDTH; r++) {
+        for (int r = 0; r < WIDTH; r++) {
             int soFar = 0;
-            for (int c = 0; c < BARN_WIDTH; c++) {
+            for (int c = 0; c < WIDTH; c++) {
                 soFar += barn[r][c];
                 barn[r][c] = soFar;
             }
         }
 
-        int[][] leftovers = new int[BARN_WIDTH][BARN_WIDTH];
+        /*
+         * leftovers[r][c] = if we paint the cell there,
+         * gives the amount of change in optimal paint size
+         */
+        int[][] leftovers = new int[WIDTH][WIDTH];
         int rnAmt = 0;
-        for (int r = 0; r < BARN_WIDTH; r++) {
-            for (int c = 0; c < BARN_WIDTH; c++) {
+        for (int r = 0; r < WIDTH; r++) {
+            for (int c = 0; c < WIDTH; c++) {
                 if (barn[r][c] == optimalAmt) {
                     leftovers[r][c] = -1;
                     rnAmt++;
@@ -45,53 +54,63 @@ public final class PaintBarn {
             }
         }
 
-        int[][] prefixedLeftovers = new int[BARN_WIDTH + 1][BARN_WIDTH + 1];
-        for (int r = 1; r < BARN_WIDTH + 1; r++) {  // make a prefix array of the leftovers for O(1) range sums and stuff
-            for (int c = 1; c < BARN_WIDTH + 1; c++) {
-                prefixedLeftovers[r][c] = prefixedLeftovers[r - 1][c]
-                        + prefixedLeftovers[r][c - 1]
-                        - prefixedLeftovers[r - 1][c - 1]
-                        + leftovers[r - 1][c - 1];  // this time r - 1 because we started at 1 remember
+        // create a prefix sum array for easy 2d querying the leftovers array
+        prefLeftovers = new int[WIDTH + 1][WIDTH + 1];
+        for (int r = 1; r < WIDTH + 1; r++) {
+            for (int c = 1; c < WIDTH + 1; c++) {
+                prefLeftovers[r][c] = (
+                    prefLeftovers[r - 1][c]
+                    + prefLeftovers[r][c - 1]
+                    - prefLeftovers[r - 1][c - 1]
+                    + leftovers[r - 1][c - 1]
+                );
             }
         }
 
-        // these *should* be the best amt we can get by painting a rectangle adjacent to a line drawn there
-        int[] topBest = new int[BARN_WIDTH];  // like this should be the best rectangle above y=i where i is the index
-        int[] bottomBest = new int[BARN_WIDTH];
-        int[] leftBest = new int[BARN_WIDTH];
-        int[] rightBest = new int[BARN_WIDTH];
 
-        // this part is just copied right from the sol lol
-        for (int bound = 0; bound < BARN_WIDTH + 1; bound++) {
-            for (int extendBy = 0; bound + extendBy < BARN_WIDTH; extendBy++) {
+        int[] topBest = new int[WIDTH];
+        int[] bottomBest = new int[WIDTH];
+        int[] leftBest = new int[WIDTH];
+        int[] rightBest = new int[WIDTH];
+        // iterate through all pairs of columns and rows for 2d kadane's
+        for (int start = 0; start < WIDTH; start++) {
+            for (int end = start; end < WIDTH; end++) {
                 int topSum = 0;
-                int bottomSum = 0;
                 int leftSum = 0;
+                int rect;
+                for (int i = 1; i < WIDTH; i++) {
+                    rect = topSum + rectSum(i - 1, start, i - 1, end);
+                    topBest[i] = max(topBest[i], topSum = max(0, rect));
+
+                    rect = leftSum + rectSum(start, i - 1, end, i - 1);
+                    leftBest[i] = max(leftBest[i], leftSum = max(0, rect));
+                }
+
+                int bottomSum = 0;
                 int rightSum = 0;
-                for (int i = 1; i < BARN_WIDTH; i++) {  // think this is called kadane's algo or something
-                    topBest[i] = max(topBest[i],
-                            topSum = max(0, topSum + rectSum(prefixedLeftovers, i - 1, bound, i - 1, bound + extendBy)));
+                for (int i = WIDTH - 1; i >= 1; i--) {
+                    rect = bottomSum + rectSum(i, start, i, end);
+                    bottomBest[i] = max(bottomBest[i], bottomSum = max(0, rect));
 
-                    bottomBest[BARN_WIDTH - i] = max(bottomBest[BARN_WIDTH - i],
-                            bottomSum = max(0, bottomSum + rectSum(prefixedLeftovers, BARN_WIDTH - i, bound, BARN_WIDTH - i, bound + extendBy)));
-
-                    leftBest[i] = max(leftBest[i],
-                            leftSum = max(0, leftSum + rectSum(prefixedLeftovers, bound, i - 1, bound + extendBy, i - 1)));
-
-                    rightBest[BARN_WIDTH - i] = max(rightBest[BARN_WIDTH - i],
-                            rightSum = max(0, rightSum + rectSum(prefixedLeftovers, bound, BARN_WIDTH - i, bound + extendBy, BARN_WIDTH - i)));
+                    rect = rightSum + rectSum(start, i, end, i);
+                    rightBest[i] = max(rightBest[i], rightSum = max(0, rect));
                 }
             }
         }
-        // "carry" all the best ones over
-        for (int i = 1; i < BARN_WIDTH; i++) {
+
+        // run a cumulative maximum operation on these arrays
+        for (int i = 1; i < WIDTH; i++) {
             topBest[i] = max(topBest[i], topBest[i - 1]);
-            bottomBest[BARN_WIDTH - i - 1] = max(bottomBest[BARN_WIDTH - i - 1], bottomBest[BARN_WIDTH - i]);
             leftBest[i] = max(leftBest[i], leftBest[i - 1]);
-            rightBest[BARN_WIDTH - i - 1] = max(rightBest[BARN_WIDTH - i - 1], rightBest[BARN_WIDTH - i]);
         }
+        for (int i = WIDTH - 2; i >= 0; i--) {
+            bottomBest[i] = max(bottomBest[i], bottomBest[i + 1]);
+            rightBest[i] = max(rightBest[i], rightBest[i + 1]);
+        }
+
+        // and finally run through all lines for the best combination
         int maxPaintable = 0;
-        for (int i = 0; i < BARN_WIDTH; i++) {
+        for (int i = 0; i < WIDTH; i++) {
             maxPaintable = max(maxPaintable, topBest[i] + bottomBest[i]);
             maxPaintable = max(maxPaintable, leftBest[i] + rightBest[i]);
         }
@@ -100,12 +119,16 @@ public final class PaintBarn {
         written.println(rnAmt + maxPaintable);
         written.close();
         System.out.println(rnAmt + maxPaintable);
-        System.out.printf("i loathe farmer john with the passion of a million fierce suns: %d ms", System.currentTimeMillis() - timeStart);
+        System.out.printf("time: %d ms%n", System.currentTimeMillis() - timeStart);
     }
 
-    // so this takes the prefixArr (note that it's like "shifted" 1 down and 1 right)
-    // the coordinates are relative to the original array, not the prefix array and are inclusive
-    private static int rectSum(int[][] prefixArr, int fromR, int fromC, int toR, int toC) {
-        return prefixArr[toR + 1][toC + 1] - prefixArr[fromR][toC + 1] - prefixArr[toR + 1][fromC] + prefixArr[fromR][fromC];
+    // returns the sum of leftovers[from_r][from_c] to leftovers[to_r][to_c]
+    static int rectSum(int fromR, int fromC, int toR, int toC) {
+        return (
+            prefLeftovers[toR + 1][toC + 1]
+            - prefLeftovers[fromR][toC + 1]
+            - prefLeftovers[toR + 1][fromC]
+            + prefLeftovers[fromR][fromC]
+        );
     }
 }
