@@ -1,4 +1,4 @@
-package official.o2017.dec.silver.evilBessie;
+package official.o2017.dec.silver.homework;
 
 import java.io.*;
 import java.util.*;

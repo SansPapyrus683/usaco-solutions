@@ -1,4 +1,4 @@
-package official.o2017.dec.silver.cowOfTheYear;
+package official.o2017.dec.silver.measurement;
 
 import java.io.*;
 import java.util.*;

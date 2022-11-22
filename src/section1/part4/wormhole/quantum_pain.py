@@ -5,11 +5,14 @@ LANG: PYTHON3
 """
 
 
-class Wormholes:  # i don't like global variables, so i made this class lol
+# i don't like global variables, so i made this class lol
+class Wormholes:
     def __init__(self, wormholes):
         self._wormholes = wormholes
-        self._partners = [-1 for _ in range(len(wormholes))]  # the index of the wormhole that's paired up
-        self._to_the_right = [-1 for _ in range(len(wormholes))]  # the index of the next wormhole (going right)
+        # the index of the wormhole that's paired up
+        self._partners = [-1 for _ in range(len(wormholes))]
+        # the index of the next wormhole (going right)
+        self._to_the_right = [-1 for _ in range(len(wormholes))]
         self.process_wormholes()
 
     def process_wormholes(self) -> None:
