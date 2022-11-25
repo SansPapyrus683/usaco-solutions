@@ -1,4 +1,4 @@
-package official.o2016.usopen.gold.cheapFJ;
+package official.o2016.usopen.gold.split;
 
 import java.io.*;
 import java.util.*;
@@ -83,7 +83,7 @@ public final class Split {
         written.println(maxSaved);
         written.close();
         System.out.println(maxSaved);
-        System.out.printf("i blame the lag for the runtime of %d ms%n", System.currentTimeMillis() - start);
+        System.out.printf("time: %d ms%n", System.currentTimeMillis() - start);
     }
 }
 

@@ -1,4 +1,4 @@
-package official.o2017.dec.silver.chachaslide;
+package official.o2017.dec.silver.shuffle;
 
 import java.io.*;
 import java.util.*;
@@ -28,7 +28,10 @@ public final class Shuffle {
             sourceCount[moveTo[curr]]--;  // do some damage
             if (sourceCount[moveTo[curr]] <= 0) {  // see if that tile is dead
                 aliveNum--;  // DEAD BODY REPORTED
-                // it's kinda like a "chain reaction" this dependency breaks this dependency which breaks that dependency and so on
+                /*
+                 * it's kinda like a "chain reaction" this dependency breaks
+                 * this dependency which breaks that dependency and so on
+                 */
                 canKillOthers.add(moveTo[curr]);
             }
         }
@@ -37,6 +40,6 @@ public final class Shuffle {
         written.println(aliveNum);
         written.close();
         System.out.println(aliveNum);
-        System.out.printf("%d ms shall be our new unit of time measurement%n", System.currentTimeMillis() - start);
+        System.out.printf("time: %d ms%n", System.currentTimeMillis() - start);
     }
 }
