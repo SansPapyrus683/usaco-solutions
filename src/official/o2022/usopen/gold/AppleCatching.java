@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2022 us open gold (sample input omitted due to length)
-public final class AppleCatching {
+public class AppleCatching {
     public static void main(String[] args) throws IOException {
         BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
         int eventNum = Integer.parseInt(read.readLine());
@@ -28,7 +28,9 @@ public final class AppleCatching {
         Collections.sort(apples);
 
         int canEat = 0;
-        TreeSet<Event> available = new TreeSet<>((a1, a2) -> a1.loc != a2.loc ? a1.loc - a2.loc : a1.time - a2.time);
+        TreeSet<Event> available = new TreeSet<>(
+                (a1, a2) -> a1.loc != a2.loc ? a1.loc - a2.loc : a1.time - a2.time
+        );
         int appleAt = apples.size() - 1;
         for (Event c : cows) {
             while (appleAt >= 0 && apples.get(appleAt).time >= c.time) {
@@ -46,6 +48,7 @@ public final class AppleCatching {
                 }
             }
         }
+
         System.out.println(canEat);
     }
 

@@ -3,7 +3,7 @@ package official.o2019.dec.gold.FATALITY;
 import java.io.*;
 import java.util.*;
 
-public final class Cowmbat {
+public class Cowmbat {
     private static final int INVALID = 420696969;
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
@@ -60,9 +60,6 @@ public final class Cowmbat {
     }
 
     static int[][] actualMinTimes(int[][] times) {
-        if (times.length != times[0].length) {
-            throw new IllegalArgumentException("wait something's wrong with your distance matrix (thought it should be a square)");
-        }
         int nodeNum = times.length;
         int[][] minTimes = new int[nodeNum][nodeNum];
         for (int i = 0; i < nodeNum; i++) {

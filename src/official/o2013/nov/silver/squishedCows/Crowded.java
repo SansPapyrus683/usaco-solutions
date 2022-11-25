@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2013 nov silver (just used a segment tree and binary search to absolutely cheese this problem)
-public final class Crowded {
+public class Crowded {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("crowded.in"));
@@ -76,18 +76,14 @@ final class MaxSegTree {
     }
 
     public void set(int ind, int val) {
-        if (ind < 0 || ind >= len) {
-            throw new IllegalArgumentException(String.format("the index %d is OOB", ind));
-        }
+        assert 0 <= ind && ind < len;
         for (segtree[ind += len] = val; ind > 1; ind >>= 1) {
             segtree[ind >> 1] = Math.max(segtree[ind], segtree[ind ^ 1]);
         }
     }
 
     int rangeMax(int from, int to) {  // minimum from [from, to)
-        if (from > to || from < 0 || from >= len || to <= 0 || to > len) {
-            throw new IllegalArgumentException(String.format("the query [%d, %d) is invalid just sayin'", from, to));
-        }
+        assert from <= to && 0 <= from && from < len && 0 < to && to <= len;
         int max = Integer.MIN_VALUE;
         for (from += len, to += len; from < to; from >>= 1, to >>= 1) {
             if ((from & 1) != 0) {

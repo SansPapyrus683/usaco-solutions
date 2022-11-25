@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2016 jan gold
-public final class Radio {
+public class Radio {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("radio.in"));
@@ -15,9 +15,7 @@ public final class Radio {
         int[] bessiePos = Arrays.stream(read.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
         char[] fjMovements = read.readLine().toCharArray();
         char[] bessieMovements = read.readLine().toCharArray();
-        if (fjAmt != fjPos.length || bessieAmt != bessiePos.length) {
-            throw new IllegalArgumentException("uh invalid array lengths given buddy");
-        }
+        assert fjPos.length == fjAmt && bessiePos.length == bessieAmt;
 
         int[][] fjAfter = new int[fjAmt + 1][2];  // precalculate the positions after each step in the movement
         int[][] bessieAfter = new int[bessieAmt + 1][2];

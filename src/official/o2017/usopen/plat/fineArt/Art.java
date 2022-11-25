@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2017 us open plat (don't expect more of these lol)
-public final class Art {
+public class Art {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("art.in"));
@@ -15,9 +15,8 @@ public final class Art {
         for (int r = 0; r < width; r++) {
             // used this weird \\s+ regex so deubgging would be easier
             canvas[r] = Arrays.stream(read.readLine().split("\\s+")).mapToInt(Integer::parseInt).toArray();
-            if (canvas[r].length != width) {
-                throw new IllegalArgumentException("you idiot picowso only paints on square canvases");
-            }
+            assert canvas[r].length == width;
+
             for (int c = 0; c < width; c++) {
                 int[] bounds;
                 if (!visible.containsKey(canvas[r][c])) {

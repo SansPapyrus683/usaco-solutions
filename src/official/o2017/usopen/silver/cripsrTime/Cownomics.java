@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2017 us open silver
-public final class Cownomics {
+public class Cownomics {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("cownomics.in"));
@@ -52,9 +52,8 @@ public final class Cownomics {
     }
 
     static boolean distinguishable(String[] spotty, String[] plain, int[] indices) {
-        if (indices.length != 3) {
-            throw new IllegalArgumentException("yeah the problem said only 3 genomes");
-        }
+        assert indices.length == 3;
+
         HashSet<String> spottySet = new HashSet<>();
         for (String s : spotty) {
             spottySet.add(String.valueOf(s.charAt(indices[0])) + s.charAt(indices[1]) + s.charAt(indices[2]));

@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2016 dec gold
-public final class Lasers {
+public class Lasers {
     // 0 means that the beam is coming from left or right, and 1 means it's coming from up or down
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
@@ -87,9 +87,7 @@ final class LaserState {
     public int dir;
 
     public LaserState(int x, int y, int dir) {
-        if (dir != 0 && dir != 1) {
-            throw new IllegalArgumentException("the direction arg is invalid bruh");
-        }
+        assert dir == 0 || dir == 1;
         this.x = x;
         this.y = y;
         this.dir = dir;

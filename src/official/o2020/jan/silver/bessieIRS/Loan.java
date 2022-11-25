@@ -4,16 +4,14 @@ import java.io.*;
 import java.util.*;
 
 // 2020 jan silver
-public final class Loan {
+public class Loan {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         StringTokenizer initial = new StringTokenizer(new BufferedReader(new FileReader("loan.in")).readLine());
         long milkOwed = Long.parseLong(initial.nextToken());
         long deadline = Long.parseLong(initial.nextToken());
         long dayReq = Long.parseLong(initial.nextToken());
-        if (deadline * dayReq >= milkOwed) {
-            throw new IllegalArgumentException("invalid input (according to the problem)");
-        }
+        assert deadline * dayReq < milkOwed;
 
         long validSoFar = -1;
         long lowerBound = 1;

@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2014 us open silver
-public final class Odometer {
+public class Odometer {
     static final long[] powers = new long[19];
     public static void main(String[] args) throws IOException {
         long timeStart = System.currentTimeMillis();
@@ -46,10 +46,9 @@ public final class Odometer {
         return ans;
     }
 
-    static long interestingNum(long start, long end) {  // find all interesting numbers from start to end (inclusive i think)
-        if (!(100 <= start && start <= end)) {
-            throw new IllegalArgumentException("idk man according to the problem your input's wrong");
-        }
+    // find all interesting numbers from start to end (inclusive i think)
+    static long interestingNum(long start, long end) {
+        assert 100 <= start && start <= end;
 
         if (!allZeroes(end)) {
             long upper = round(end, (int) Math.log10(end));

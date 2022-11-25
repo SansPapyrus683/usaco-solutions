@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2022 feb gold
-public final class MooNetwork {
+public class MooNetwork {
     private static final int MAX_X = (int) Math.pow(10, 6);
     private static final int MAX_Y = 10;
 
@@ -15,10 +15,7 @@ public final class MooNetwork {
         for (int p = 0; p < pointNum; p++) {
             StringTokenizer pt = new StringTokenizer(read.readLine());
             points[p] = new int[] {Integer.parseInt(pt.nextToken()), Integer.parseInt(pt.nextToken())};
-            if (!(0 <= points[p][0] && points[p][0] <= MAX_X && 0 <= points[p][1] && points[p][1] <= MAX_Y)) {
-                System.out.println(Arrays.toString(points[p]));
-                throw new IllegalArgumentException("you have a point that's out of bounds");
-            }
+            assert 0 <= points[p][0] && points[p][0] <= MAX_X && 0 <= points[p][1] && points[p][1] <= MAX_Y;
         }
 
         Arrays.sort(points, Comparator.comparingInt(p -> p[0]));

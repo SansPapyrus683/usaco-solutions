@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2017 feb gold (also works for the plat version)
-public final class NoCross {
+public class NoCross {
     private static final int THRESHOLD = 4;
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
@@ -57,18 +57,14 @@ final class MaxSegTree {
     }
 
     public void set(int ind, int val) {
-        if (ind < 0 || ind >= len) {
-            throw new IllegalArgumentException(String.format("the index %d is OOB", ind));
-        }
+        assert 0 <= ind && ind < len;
         for (segtree[ind += len] = val; ind > 1; ind >>= 1) {
             segtree[ind >> 1] = Math.max(segtree[ind], segtree[ind ^ 1]);
         }
     }
 
     int rangeMax(int from, int to) {  // minimum from [from, to)
-        if (from > to || from < 0 || from >= len || to <= 0 || to > len) {
-            throw new IllegalArgumentException(String.format("the query [%d, %d) is invalid just sayin'", from, to));
-        }
+        assert from <= to && 0 <= from && from < len && 0 < to && to <= len;
         int max = Integer.MIN_VALUE;
         for (from += len, to += len; from < to; from >>= 1, to >>= 1) {
             if ((from & 1) != 0) {

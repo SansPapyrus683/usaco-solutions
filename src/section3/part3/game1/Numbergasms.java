@@ -8,7 +8,7 @@ TASK: game1
 import java.io.*;
 import java.util.*;
 
-public final class Numbergasms {
+public class Numbergasms {
     public static void main(String[] args) throws IOException {
         long timeStart = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("game1.in"));
@@ -21,9 +21,7 @@ public final class Numbergasms {
         }
         read.close();
         int[] board = Arrays.stream(allNums.toString().split(" ")).mapToInt(Integer::parseInt).toArray();
-        if (board.length != size) {
-            throw new IllegalArgumentException("inconsistent array sizes so screw you");
-        }
+        assert board.length == size;
 
         int[][] maxScores = new int[size][size];
         // handle sub-boards of length 1 and 2

@@ -7,14 +7,14 @@ import java.io.*;
  * 14
  * GGGHGHHGHHHGHG should output 1
  */
-public final class Photoshoot {
+public class Photoshoot {
     public static void main(String[] args) throws IOException {
         BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
         int cowNum = Integer.parseInt(read.readLine());
         String cows = read.readLine();
-        if (cows.length() != cowNum || !cows.replaceAll("[GH]", "").isEmpty() || cowNum % 2 != 0) {
-            throw new IllegalArgumentException("invalid input");
-        }
+        assert cows.length() == cowNum &&
+                cows.replaceAll("[GH]", "").isEmpty() &&
+                cowNum % 2 == 0;
 
         int flips = 0;
         for (int c = cowNum - 2; c >= 0; c -= 2) {

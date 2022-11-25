@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2013 feb gold
-public final class Taxi {
+public class Taxi {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("taxi.in"));
@@ -16,12 +16,8 @@ public final class Taxi {
         HashMap<Integer, Integer> endingNum = new HashMap<>();
         for (int c = 0; c < cowNum; c++) {
             cows[c] = Arrays.stream(read.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
-            if (cows[c].length != 2) {
-                throw new IllegalArgumentException("what kind of start/end position is this");
-            }
-            if ((cows[c][0] < 0 || fenceLen < cows[c][0]) || (cows[c][1] < 0 || fenceLen < cows[c][1])) {
-                throw new IllegalArgumentException("the positions this cow will be in is invalid");
-            }
+            assert cows[c].length == 2;
+            assert 0 <= cows[c][0] && cows[c][0] <= fenceLen && 0 <= cows[c][1] && cows[c][1] <= fenceLen;
             startingNum.put(cows[c][0], startingNum.getOrDefault(cows[c][0], 0) + 1);
             endingNum.put(cows[c][1], endingNum.getOrDefault(cows[c][1], 0) + 1);
         }

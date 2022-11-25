@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2016 jan gold
-public final class LightsOut {
+public class LightsOut {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("lightsout.in"));
@@ -66,9 +66,8 @@ public final class LightsOut {
     }
 
     static boolean rightTurn(int[] p1, int[] p2, int[] p3) {
-        if ((p1[0] != p2[0] && p1[1] != p2[1]) || (p2[0] != p3[0] && p2[1] != p3[1])) {
-            throw new IllegalArgumentException("ok uh the points are invalid (they have to be || to the x axis)");
-        }
+        assert !((p1[0] != p2[0] && p1[1] != p2[1]) || (p2[0] != p3[0] && p2[1] != p3[1]));
+
         // for the first element, true = y change, false = x change, and the second is true = positive, false = negative
         boolean[][] changes = new boolean[][] {
                 {p1[0] == p2[0], (p1[0] - p2[0]) + (p1[1] - p2[1]) < 0}, 

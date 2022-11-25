@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2016 feb silver (this is REALLY inefficient but what can you do about it lol)
-public final class Balancing {
+public class Balancing {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("balancing.in"));
@@ -13,9 +13,7 @@ public final class Balancing {
         int[][] cows = new int[cowNum][2];
         for (int c = 0; c < cowNum; c++) {
             cows[c] = Arrays.stream(read.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
-            if (cows[c][0] % 2 == 0 || cows[c][1] % 2 == 0) {
-                throw new IllegalArgumentException("cow locations have to be odd my buddy chum pal");
-            }
+            assert cows[c][0] % 2 == 1 && cows[c][1] % 2 == 1;
         }
         Arrays.sort(cows, Comparator.comparingInt(c -> c[0]));
 
@@ -47,12 +45,11 @@ public final class Balancing {
         ArrayList<int[]> leftSide = new ArrayList<>();
         ArrayList<int[]> rightSide = new ArrayList<>();
         for (int[] c : cows) {
+            assert c[0] != xLine;
             if (c[0] < xLine) {
                 leftSide.add(c);
-            } else if (c[0] > xLine) {
-                rightSide.add(c);
             } else {
-                throw new IllegalArgumentException("don't think cows can be on fences in this problem");
+                rightSide.add(c);
             }
         }
 

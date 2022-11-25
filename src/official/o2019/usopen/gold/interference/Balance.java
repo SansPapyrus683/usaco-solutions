@@ -4,15 +4,14 @@ import java.io.*;
 import java.util.*;
 
 // 2019 us open gold
-public final class Balance {
+public class Balance {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("balance.in"));
         int boardLen = Integer.parseInt(read.readLine());
         int[] rawBoard = Arrays.stream(read.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
-        if (rawBoard.length != boardLen * 2) {
-            throw new IllegalArgumentException("hey uh the board's don't seem to match up");
-        }
+        assert rawBoard.length == boardLen * 2;
+
         boolean[] board = new boolean[boardLen * 2];
         for (int i = 0; i < boardLen * 2; i++) {
             board[i] = rawBoard[i] != 0;  // going with standard int -> bool truthiness

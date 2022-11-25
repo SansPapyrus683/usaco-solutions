@@ -15,7 +15,7 @@ import java.util.*;
  * 1. already be inside the big giant triangle that's already been formed by the 3 current outermost points or
  * 2. it has to be able to reach all the other vertices of the triangle from the outside
  */
-public final class Permutations {
+public class Permutations {
     private static final int MOD = (int) Math.pow(10, 9) + 7;
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
@@ -33,9 +33,7 @@ public final class Permutations {
         for (int p1 = 0; p1 < pointNum; p1++) {
             for (int p2 = p1 + 1; p2 < pointNum; p2++) {
                 for (int p3 = p2 + 1; p3 < pointNum; p3++) {
-                    if (signArea(points[p1], points[p2], points[p3]) == 0) {
-                        throw new IllegalArgumentException("no 3 of the points should be collinear");
-                    }
+                    assert signArea(points[p1], points[p2], points[p3]) != 0;
                     triangles.add(new int[] {p1, p2, p3});
                 }
             }

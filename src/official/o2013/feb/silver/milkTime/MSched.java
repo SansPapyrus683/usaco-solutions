@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2013 feb silver
-public final class MSched {
+public class MSched {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("msched.in"));
@@ -48,9 +48,7 @@ public final class MSched {
         int cowAt = 0;
         while (!frontier.isEmpty()) {
             int curr = frontier.poll();
-            if (cowAt == cowNum) {
-                throw new IllegalArgumentException("these requirements are rigged bruh");
-            }
+            assert cowAt != cowNum;
             order[cowAt++] = curr;
             for (int ac : milkAfter[curr]) {
                 if (--milkBeforeNum[ac] == 0) {
@@ -59,9 +57,7 @@ public final class MSched {
             }
             visitedNum++;
         }
-        if (visitedNum != cowNum) {
-            throw new IllegalArgumentException("these requirements are rigged bruh");
-        }
+        assert visitedNum == cowNum;
 
         // this[i] = min time (globally) to milk cow i
         int[] minTimes = new int[cowNum];

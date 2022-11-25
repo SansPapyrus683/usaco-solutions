@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2013 silver us open
-public final class Fuel {
+public class Fuel {
     private static long start = System.currentTimeMillis();
     public static void main(String[] args) throws IOException {
         BufferedReader read = new BufferedReader(new FileReader("fuel.in"));
@@ -13,9 +13,7 @@ public final class Fuel {
         int fuelCap = Integer.parseInt(initial.nextToken());
         int startingFuel = Integer.parseInt(initial.nextToken());
         int dist = Integer.parseInt(initial.nextToken());
-        if (startingFuel > fuelCap) {
-            throw new IllegalArgumentException(String.format("how can you fit %s amt of fuel into a tank that only stores %s units lol", startingFuel, fuelCap));
-        }
+        assert startingFuel <= fuelCap;
 
         int[][] stations = new int[stationNum][2];  // their position and the amt they charge for a single unit of fuel
         for (int s = 0; s < stationNum; s++) {

@@ -3,7 +3,7 @@ package official.o2017.feb.plat.crushedCows;
 import java.io.*;
 
 // 2017 feb plat
-public final class MinCross {
+public class MinCross {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("mincross.in"));
@@ -29,9 +29,8 @@ public final class MinCross {
     }
 
     private static long leftShiftMinCross(int[] toShift, int[] otherSide) {
-        if (toShift.length != otherSide.length) {
-            throw new IllegalArgumentException(String.format("the lengths %d and %d should be equal", toShift.length, otherSide.length));
-        }
+        assert toShift.length == otherSide.length;
+
         int pastureNum = toShift.length;
         int[] idToInd = new int[pastureNum];
         for (int i = 0; i < pastureNum; i++) {

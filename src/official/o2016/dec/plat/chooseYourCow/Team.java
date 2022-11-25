@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2016 dec plat
-public final class Team {
+public class Team {
     private static final int MOD = (int) Math.pow(10, 9) + 9;
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
@@ -15,9 +15,7 @@ public final class Team {
         int teamReq = Integer.parseInt(initial.nextToken());
         int[] johnCows = Arrays.stream(read.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
         int[] paulCows = Arrays.stream(read.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
-        if (johnNum != johnCows.length || paulNum != paulCows.length || teamReq > Math.min(johnNum, paulNum)) {
-            throw new IllegalArgumentException("invalid input that i'm not going to bother explaining lol");
-        }
+        assert johnNum == johnCows.length && paulNum == paulCows.length;
 
         /*
          * this[t][j][p] = winnable outcomes given that
@@ -43,10 +41,10 @@ public final class Team {
                      * line 3: finally if this cow beat paul's cow, we can slap it onto a previous arrangement
                      * where we're confident they aren't already used
                      */
-                    winnablePairings[t][j][p] =
-                            winnablePairings[t][j - 1][p] + winnablePairings[t][j][p - 1]
-                                    - winnablePairings[t][j - 1][p - 1]
-                                    + (johnCows[j - 1] > paulCows[p - 1] ? winnablePairings[t - 1][j - 1][p - 1] : 0);
+                    long prev = winnablePairings[t][j - 1][p] + winnablePairings[t][j][p - 1];
+                    long over = winnablePairings[t][j - 1][p - 1];
+                    long addOn = johnCows[j - 1] > paulCows[p - 1] ? winnablePairings[t - 1][j - 1][p - 1] : 0;
+                    winnablePairings[t][j][p] = prev - over + addOn;
                     winnablePairings[t][j][p] = (winnablePairings[t][j][p] + MOD) % MOD;
                 }
             }

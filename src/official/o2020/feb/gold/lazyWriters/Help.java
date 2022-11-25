@@ -3,7 +3,7 @@ package official.o2020.feb.gold.lazyWriters;
 import java.io.*;
 import java.util.*;
 
-public final class Help {
+public class Help {
     private static final int MOD = (int) Math.pow(10, 9) + 7;
     public static void main(String[] args) throws IOException {
         long timeStart = System.currentTimeMillis();
@@ -20,9 +20,7 @@ public final class Help {
         for (int i = 0; i < intervalNum; i++) {
             intervals[i] = Arrays.stream(read.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
             start = Math.min(start, intervals[i][0]);
-            if (intervals[i][0] >= intervals[i][1]) {
-                throw new IllegalArgumentException(String.format("the interval %s is invalid", Arrays.toString(intervals[i])));
-            }
+            assert intervals[i][0] < intervals[i][1];
         }
         for (int[] i : intervals) {  // have the intervals start from 1
             i[0] -= start - 1;

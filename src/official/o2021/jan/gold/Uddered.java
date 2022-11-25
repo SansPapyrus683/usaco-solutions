@@ -7,15 +7,12 @@ import java.util.*;
  * 2021 jan gold
  * mildredree should output 3
  */
-public final class Uddered {
+public class Uddered {
     private static final int ALPH_NUM = 26;
     private static final char REDACTED = '█';
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         String rawTestament = new BufferedReader(new InputStreamReader(System.in)).readLine().toLowerCase();
-        if (!rawTestament.matches("[a-z]*")) {
-            throw new IllegalArgumentException("woah since when did the cowphabet have such weird characters");
-        }
 
         // compress the characters (not even sure if this is necessary)
         char charAt = 'a';

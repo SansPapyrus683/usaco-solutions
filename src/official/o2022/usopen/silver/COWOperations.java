@@ -14,7 +14,7 @@ import java.util.*;
  * 2 3
  * 3 3 should output YNNNYN
  */
-public final class COWOperations {
+public class COWOperations {
     private static final HashMap<Character, Integer> code = new HashMap<>() {{
         put('C', 0);
         put('O', 1);
@@ -24,9 +24,7 @@ public final class COWOperations {
     public static void main(String[] args) throws IOException {
         BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
         String str = read.readLine();
-        if (!str.replaceAll("[COW]", "").isEmpty()) {
-            throw new IllegalArgumentException("only COWs please");
-        }
+        assert str.replaceAll("[COW]", "").isEmpty();
 
         int[][] charPrefs = new int[str.length() + 1][code.size()];
         for (int c = 0; c < str.length(); c++) {

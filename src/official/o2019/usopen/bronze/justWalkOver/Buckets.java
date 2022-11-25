@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2019 us open bronze (no idea why i decided to use java, force of habit i guess)
-public final class Buckets {
+public class Buckets {
     private static final int[] CHANGE_R = {0, 0, 1, -1};
     private static final int[] CHANGE_C = {1, -1, 0, 0};
     private static final int WIDTH = 10;
@@ -24,9 +24,7 @@ public final class Buckets {
                 grid[r][col++] = c;
             }
         }
-        if (lake[0] == -1) {
-            throw new IllegalArgumentException("bro there should be a lake i mean where you gon get your water from");
-        }
+        assert lake[0] != -1;
 
         ArrayList<int[]> frontier = new ArrayList<>(Collections.singletonList(lake));
         boolean[][] visited = new boolean[WIDTH][WIDTH];

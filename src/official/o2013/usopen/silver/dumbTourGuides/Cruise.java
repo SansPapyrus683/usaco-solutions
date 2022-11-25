@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2013 us open silver
-public final class Cruise {
+public class Cruise {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("cruise.in"));
@@ -17,10 +17,9 @@ public final class Cruise {
         for (int i = 0; i < portNum; i++) {
             neighbors[i] = Arrays.stream(read.readLine().split(" ")).mapToInt(p -> Integer.parseInt(p) - 1).toArray();
         }
-        String[] dirs = read.readLine().toUpperCase().split(" ");  // screw it, i'm too lazy to parse it to a char[]
-        if (dirs.length != repeatSeq) {
-            throw new IllegalArgumentException("uh the length for the amount of directions is inconsistent");
-        }
+        // screw it, i'm too lazy to parse it to a char[]
+        String[] dirs = read.readLine().toUpperCase().split(" ");
+        assert dirs.length == repeatSeq;
 
         int at = 0;
         int dirAt = 0;
@@ -37,8 +36,6 @@ public final class Cruise {
                 at = neighbors[at][0];
             } else if (dirs[dirAt].equals("R")) {
                 at = neighbors[at][1];
-            } else {
-                throw new IllegalArgumentException(String.format("what kind of direction is %s i mean...", dirs[dirAt]));
             }
             dirAt = (dirAt + 1) % dirs.length;
         }

@@ -11,7 +11,7 @@ import java.util.*;
  * 2 3
  * 3 5 should output 13
  */
-public final class RPasture {
+public class RPasture {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
@@ -22,9 +22,7 @@ public final class RPasture {
         int[][] cows = new int[cowNum][2];
         for (int c = 0; c < cowNum; c++) {
             cows[c] = Arrays.stream(read.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
-            if (seenX.contains(cows[c][0]) || seenY.contains(cows[c][1])) {
-                throw new IllegalArgumentException("coordinates have to be distinct");
-            }
+            assert !seenX.contains(cows[c][0]) && !seenY.contains(cows[c][1]);
             seenX.add(cows[c][0]);
             seenY.add(cows[c][1]);
         }

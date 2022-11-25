@@ -8,15 +8,14 @@ import java.util.*;
  * 10
  * 1 2 3 4 1 4 3 2 1 6 should output 6
  */
-public final class Art3 {
+public class Art3 {
     public static void main(String[] args) throws IOException {
         long timeStart = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
         int canvasLen = Integer.parseInt(read.readLine());
         int[] canvas = Arrays.stream(read.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
-        if (canvas.length != canvasLen) {
-            throw new IllegalArgumentException(String.format("the lengths %d and %d are different", canvasLen, canvas.length));
-        }
+        assert canvas.length == canvasLen;
+
         // this[i][j] = min strokes to paint i to j, inclusive
         int[][] minStrokes = new int[canvasLen][canvasLen];
         for (int i = 0; i < canvasLen; i++) {

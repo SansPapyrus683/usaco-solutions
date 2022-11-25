@@ -8,7 +8,7 @@ import java.util.*;
  * 4 4 1
  * 1 100 1 1 should output 3
  */
-public final class Acowdemia {
+public class Acowdemia {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
@@ -17,9 +17,8 @@ public final class Acowdemia {
         int surveyNum = Integer.parseInt(initial.nextToken());
         int surveyCitations = Integer.parseInt(initial.nextToken());
         int[] papers = Arrays.stream(read.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
-        if (papers.length != paperNum) {
-            throw new IllegalArgumentException("the amount of papers you gave me is inconsistent frick you");
-        }
+        assert papers.length == paperNum;
+
         int lo = 0;
         int hi = paperNum;
         int valid = 0;

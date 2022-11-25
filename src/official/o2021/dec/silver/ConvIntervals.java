@@ -11,7 +11,7 @@ import java.util.*;
  * should output these numbers, each on a new line:
  * [0, 0, 1, 3, 4, 4, 4, 3, 3, 1, 1]
  */
-public final class ConvIntervals {
+public class ConvIntervals {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
@@ -22,9 +22,7 @@ public final class ConvIntervals {
         int[] endNum = new int[maxMag + 1];
         for (int i = 0; i < intervalNum; i++) {
             int[] interval = Arrays.stream(read.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
-            if (interval[0] > interval[1]) {
-                throw new IllegalArgumentException("invalid interval i hate you");
-            }
+            assert interval[0] <= interval[1];
             startNum[interval[0]]++;
             endNum[interval[1]]++;
         }

@@ -11,7 +11,7 @@ import java.util.*;
  * 3 = blue, only walkable if oranges
  * 4 = purple, slides (each slide counts as a move) and removes smell
  */
-public final class Dream {
+public class Dream {
     private static final int[] CHANGE_R = new int[]{1, -1, 0, 0};
     private static final int[] CHANGE_C = new int[]{0, 0, 1, -1};
 
@@ -102,9 +102,7 @@ public final class Dream {
         int height = grid.length;
         int width = grid[0].length;
         int[] rnPos = rn.first;
-        if (grid[rnPos[0]][rnPos[1]] != 4) {
-            throw new IllegalArgumentException("bruh if you start sliding shouldn't you be on a purple tile lol");
-        }
+        assert grid[rnPos[0]][rnPos[1]] == 4;
         int distance = 0;
         while (true) {
             int[] nextPos = new int[] {rnPos[0] + CHANGE_R[direction], rnPos[1] + CHANGE_C[direction]};

@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2022 us open bronze (input omitted due to length)
-public final class Alchemy {
+public class Alchemy {
     // global variables used because i can't be bothered to make a separate class
     private static int[] metals;
     private static int[][] recipes;
@@ -27,17 +27,12 @@ public final class Alchemy {
             int ingredientNum = Integer.parseInt(recipe.nextToken());
 
             // some rudimentary input validation
-            if (recipes[outType] != null) {
-                throw new IllegalArgumentException("at most 1 recipe per metal");
-            }
+            assert recipes[outType] == null;
 
             recipes[outType] = new int[ingredientNum];
             for (int i = 0; i < ingredientNum; i++) {
                 recipes[outType][i] = Integer.parseInt(recipe.nextToken()) - 1;
-
-                if (recipes[outType][i] >= outType) {
-                    throw new IllegalArgumentException("metals must be made up of prev ones");
-                }
+                assert recipes[outType][i] < outType;
             }
         }
 

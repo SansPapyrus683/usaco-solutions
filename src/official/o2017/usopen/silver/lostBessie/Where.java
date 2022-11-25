@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2017 us open silver
-public final class Where {
+public class Where {
     static final int[] CHANGE_R = new int[] {1, -1, 0, 0};
     static final int[] CHANGE_C = new int[] {0, 0, 1, -1};
     public static void main(String[] args) throws IOException {
@@ -57,9 +57,7 @@ public final class Where {
 
     // the coordinates are from the top right but the corners are described using "normal" terms
     static boolean validCorners(int[][] field, int[] topLeft, int[] bottomRight) {
-        if (topLeft[0] > bottomRight[0] || topLeft[1] > bottomRight[1]) {
-            throw new IllegalArgumentException("the corners are wrong buddy");
-        }
+        assert topLeft[0] <= bottomRight[0] && topLeft[1] <= bottomRight[1];
 
         HashMap<Integer, Integer> regionCounts = new HashMap<>();
         boolean[][] visited = new boolean[field.length][field[0].length];

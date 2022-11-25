@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2016 dec silver (bruh this problem ez as frick)
-public final class MooCast {
+public class MooCast {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("moocast.in"));
@@ -27,9 +27,8 @@ public final class MooCast {
     }
 
     static int broadcastSize(int startCow, int[][] all) {
-        if (startCow >= all.length || startCow < 0) {
-            throw new IllegalArgumentException("hol up here your start is invalid");
-        }
+        assert 0 <= startCow && startCow < all.length;
+
         // just do a simple bfs to see how many cows we can reach
         ArrayDeque<Integer> frontier = new ArrayDeque<>(Collections.singletonList(startCow));
         boolean[] reached = new boolean[all.length];

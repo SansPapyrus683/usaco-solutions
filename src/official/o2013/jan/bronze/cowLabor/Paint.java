@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2013 jan bronze (basically copied from silver lol)
-public final class Paint {
+public class Paint {
     private static final int PAINT_REQ = 2;
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
@@ -16,9 +16,8 @@ public final class Paint {
         for (int m = 0; m < moveNum; m++) {
             StringTokenizer move = new StringTokenizer(read.readLine());
             int magnitude = Integer.parseInt(move.nextToken());
-            if (magnitude < 0) {
-                throw new IllegalArgumentException("magnitude should always be positive ok?");
-            }
+            assert magnitude >= 0;
+
             String dir = move.nextToken().toUpperCase();
             int from = pos;
             if (dir.equals("L")) {
@@ -29,8 +28,6 @@ public final class Paint {
                 pos += magnitude;
                 fenceStartEnds.put(from, fenceStartEnds.getOrDefault(from, 0) + 1);
                 fenceStartEnds.put(pos, fenceStartEnds.getOrDefault(pos, 0) - 1);
-            } else {
-                throw new IllegalArgumentException(String.format("what kind of direction is %s", dir));
             }
         }
 

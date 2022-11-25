@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2018 dec gold
-public final class Cowpatibility {
+public class Cowpatibility {
     private static class Liked {  // lmao this is just an array with a hashcode method
         public int[] iceCream;
         public Liked(int[] like) {
@@ -41,9 +41,8 @@ public final class Cowpatibility {
         }
         for (int c = 0; c < cowNum; c++) {
             int[] cow = Arrays.stream(read.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
-            if (cow.length != FAVE_NUM) {
-                throw new IllegalArgumentException("blasphemy- each cow should like only 5 ice creams");
-            }
+            assert cow.length == FAVE_NUM;
+
             Arrays.sort(cow);
             for (int ics = 1; ics <= FAVE_NUM; ics++) {  // ics stands for "ice cream size"
                 // add all the subsets to the liked subset

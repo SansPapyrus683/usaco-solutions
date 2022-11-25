@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2018 feb gold
-public final class Taming {
+public class Taming {
     // i swear one day the test cases will catch up to me using this variable
     private static final int INVALID = 420696969;
     public static void main(String[] args) throws IOException {
@@ -12,9 +12,7 @@ public final class Taming {
         BufferedReader read = new BufferedReader(new FileReader("taming.in"));
         int dayNum = Integer.parseInt(read.readLine());
         int[] log = Arrays.stream(read.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
-        if (dayNum != log.length) {
-            throw new IllegalArgumentException(String.format("bro you said there were %d days but you gave me %d days", dayNum, dayNum));
-        }
+        assert log.length == dayNum;
 
         // this[i][j] = the cost to change nums between i and j inclusive to the format 0,1,...
         int[][] changeRangeCosts = new int[dayNum][dayNum];

@@ -4,15 +4,13 @@ import java.io.*;
 import java.util.*;
 
 // 2019 jan bronze
-public final class Sleepy {
+public class Sleepy {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("sleepy.in"));
         int cowNum = Integer.parseInt(read.readLine());
         int[] cows = Arrays.stream(read.readLine().split(" ")).mapToInt(c -> Integer.parseInt(c) - 1).toArray();
-        if (cows.length != cowNum) {
-            throw new IllegalArgumentException("look man the cow numbers you're giving me are inconsistent");
-        }
+        assert cows.length == cowNum;
 
         int last = Integer.MAX_VALUE;
         int badUpTo = cowNum - 1;

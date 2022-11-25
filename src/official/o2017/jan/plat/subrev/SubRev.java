@@ -3,7 +3,7 @@ package official.o2017.jan.plat.subrev;
 import java.io.*;
 
 // 2017 jan plat
-public final class SubRev {
+public class SubRev {
     private static final int MAX_HEIGHT = 50;
     public static void main(String[] args) throws IOException {
         BufferedReader read = new BufferedReader(new FileReader("subrev.in"));
@@ -11,9 +11,7 @@ public final class SubRev {
         int[] heights = new int[cowNum];
         for (int c = 0; c < cowNum; c++) {
             heights[c] = Integer.parseInt(read.readLine()) - 1;
-            if (heights[c] < 0 || heights[c] >= MAX_HEIGHT) {
-                throw new IllegalArgumentException("yeah...");
-            }
+            assert 0 <= heights[c] && heights[c] < MAX_HEIGHT;
         }
 
         int[][][][] longest = new int[cowNum][cowNum][MAX_HEIGHT][MAX_HEIGHT];

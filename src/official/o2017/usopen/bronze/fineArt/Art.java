@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2017 us open bronze (copied from plat version lol)
-public final class Art {
+public class Art {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("art.in"));
@@ -14,9 +14,8 @@ public final class Art {
         HashMap<Integer, int[]> visible = new HashMap<>();
         for (int r = 0; r < width; r++) {
             char[] row = read.readLine().toCharArray();
-            if (row.length != width) {
-                throw new IllegalArgumentException("you idiot picowso only paints on square canvases");
-            }
+            assert row.length == width;
+
             for (int c = 0; c < width; c++) {
                 canvas[r][c] = Character.getNumericValue(row[c]);
                 int[] bounds;

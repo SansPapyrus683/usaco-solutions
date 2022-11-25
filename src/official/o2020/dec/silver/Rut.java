@@ -13,7 +13,7 @@ import java.util.*;
  * N 11 1
  * E 9 2 should output 0, 0, 1, 2, 1, and 0, each on a newline
  */
-public final class Rut {
+public class Rut {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
@@ -24,12 +24,9 @@ public final class Rut {
 
         for (int c = 0; c < cowNum; c++) {
             String[] cowInfo = read.readLine().split(" ");
-            if (!cowInfo[0].equalsIgnoreCase("N") && !cowInfo[0].equalsIgnoreCase("E")) {
-                throw new IllegalArgumentException("wait directions could only go N/E, what's " + cowInfo[0]);
-            }
             if (cowInfo[0].equalsIgnoreCase("N")) {
                 northCowIndices.add(c);
-            } else {
+            } else if (cowInfo[0].equalsIgnoreCase("E")) {
                 eastCowIndices.add(c);
             }
             cows[c] = new int[] {Integer.parseInt(cowInfo[1]), Integer.parseInt(cowInfo[2])};

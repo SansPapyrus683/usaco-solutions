@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2019 feb gold
-public final class CowLand {
+public class CowLand {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("cowland.in"));
@@ -34,8 +34,6 @@ public final class CowLand {
                     int happiness = park.query(query[1] - 1, query[2] - 1);
                     enjoyment.append(happiness).append('\n');
                     break;
-                default:
-                    throw new IllegalArgumentException("what kind of query is " + Arrays.toString(query) + " lol");
             }
         }
         PrintWriter written = new PrintWriter("cowland.out");
@@ -148,18 +146,14 @@ final class MinSegTree {
     }
 
     public void set(int ind, int val) {
-        if (ind < 0 || ind >= len) {
-            throw new IllegalArgumentException(String.format("the index %d is OOB", ind));
-        }
+        assert 0 <= ind && ind < len;
         for (segtree[ind += len] = val; ind > 1; ind >>= 1) {
             segtree[ind >> 1] = min(segtree[ind], segtree[ind ^ 1]);
         }
     }
 
     public int rangeMin(int from, int to) {  // minimum from [from, to)
-        if (from > to || from < 0 || from >= len || to <= 0 || to > len) {
-            throw new IllegalArgumentException(String.format("the query [%d, %d) is invalid just sayin'", from, to));
-        }
+        assert from <= to && 0 <= from && from < len && 0 < to && to <= len;
         int min = Integer.MAX_VALUE;
         for (from += len, to += len; from < to; from >>= 1, to >>= 1) {
             if ((from & 1) != 0) {

@@ -8,16 +8,14 @@ import java.util.*;
  * 7
  * 1 2 3 4 3 2 5 should output 13
  */
-public final class UCFJ {
+public class UCFJ {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
         int cowNum = Integer.parseInt(read.readLine());
         // make the cow breeds start from 0 instead of 1
         int[] cows = Arrays.stream(read.readLine().split(" ")).mapToInt(c -> Integer.parseInt(c) - 1).toArray();
-        if (cows.length != cowNum) {
-            throw new IllegalArgumentException("inconsistent cow number given screw you");
-        }
+        assert cows.length == cowNum;
 
         BITree uniqueBreeds = new BITree(cowNum);
         int[] lastSeen = new int[cowNum];  // breeds can only be [0, cowNum) so it's your fault if this errors
