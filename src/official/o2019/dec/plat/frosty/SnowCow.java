@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2019 dec plat
-public final class SnowCow {
+public class SnowCow {
     public static void main(String[] args) throws IOException {
         long timeStart = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("snowcow.in"));

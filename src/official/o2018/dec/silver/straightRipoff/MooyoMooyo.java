@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2018 dec silver
-public final class MooyoMooyo {
+public class MooyoMooyo {
     private static final int WIDTH = 10;
     private static final int[] X_CHANGE = new int[] {1, -1, 0, 0};
     private static final int[] Y_CHANGE = new int[] {0, 0, 1, -1};

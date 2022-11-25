@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2022 feb gold (input omitted due to length)
-public final class RedistGifts {
+public class RedistGifts {
     public static void main(String[] args) throws IOException {
         BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
         int cowNum = Integer.parseInt(read.readLine());

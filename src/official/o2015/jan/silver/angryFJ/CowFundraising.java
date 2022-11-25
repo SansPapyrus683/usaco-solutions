@@ -5,7 +5,7 @@ import java.util.*;
 
 // 2015 jan silver
 // for some reason with i name it Stampede.java intellij seizure salds
-public final class CowFundraising {
+public class CowFundraising {
     private static final class Cow {
         public int speed;
         public int x;

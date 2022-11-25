@@ -9,7 +9,7 @@ import java.util.*;
  * it's (y, x) and not (x, y), and the y coordinate increasing is actually going down
  * that's because of stupid array indexing shenanigans
  */
-public final class Gravity {
+public class Gravity {
     private static final char WALL = '#';
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();

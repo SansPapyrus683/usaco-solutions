@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2014 us open silver
-public final class GPSDuel {
+public class GPSDuel {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("gpsduel.in"));

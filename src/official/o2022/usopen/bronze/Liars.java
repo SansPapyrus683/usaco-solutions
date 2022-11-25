@@ -12,7 +12,7 @@ import java.util.*;
  * G 3
  * L 2 should output 1
  */
-public final class Liars {
+public class Liars {
     public static void main(String[] args) throws IOException {
         BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
         int cowNum = Integer.parseInt(read.readLine());

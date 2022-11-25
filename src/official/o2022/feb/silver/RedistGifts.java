@@ -11,7 +11,7 @@ import java.util.*;
  * 1 2 3 4
  * 1 2 3 4 should output 1, 3, 2, and 4, each on a new line
  */
-public final class RedistGifts {
+public class RedistGifts {
     public static void main(String[] args) throws IOException {
         BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
         int cowNum = Integer.parseInt(read.readLine());

@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2014 dec gold
-public final class CowJog {
+public class CowJog {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("cowjog.in"));

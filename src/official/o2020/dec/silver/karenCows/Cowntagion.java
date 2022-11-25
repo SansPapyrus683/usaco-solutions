@@ -10,7 +10,7 @@ import java.util.*;
  * 1 3
  * 1 4 should output 5
  */
-public final class Cowntagion {
+public class Cowntagion {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new InputStreamReader(System.in));

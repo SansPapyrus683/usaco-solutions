@@ -7,7 +7,7 @@ import java.util.*;
 import java.io.*;
 import java.util.*;
 
-public final class Herding {
+public class Herding {
     public static void main(String[] args) throws IOException{
         BufferedReader read = new BufferedReader(new FileReader("herding.in"));
 

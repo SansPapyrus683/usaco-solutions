@@ -12,7 +12,7 @@ import java.util.*;
  * 0110
  * 0100 should output 6
  */
-public final class Telephone {
+public class Telephone {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new InputStreamReader(System.in));

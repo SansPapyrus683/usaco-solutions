@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2020 dec gold (no sample input bc it's so frickin huge)
-public final class Replication {
+public class Replication {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new InputStreamReader(System.in));

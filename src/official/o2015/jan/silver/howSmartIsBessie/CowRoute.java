@@ -5,7 +5,7 @@ import java.util.*;
 import java.util.stream.Stream;
 
 // 2015 jan silver
-public final class CowRoute {
+public class CowRoute {
     private static final int CITY_NUM = 1000;
     public static void main(String[] args) throws IOException {
         long timeStart = System.currentTimeMillis();

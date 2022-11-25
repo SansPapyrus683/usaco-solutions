@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2017 jan gold
-public final class BPhoto {
+public class BPhoto {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("bphoto.in"));

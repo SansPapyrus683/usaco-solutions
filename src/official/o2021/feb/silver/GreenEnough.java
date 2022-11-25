@@ -10,7 +10,7 @@ import java.util.*;
  * 200 100 150
  * 2 141 135 should output 8
  */
-public final class GreenEnough {
+public class GreenEnough {
     private static final int MIN = 100;
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();

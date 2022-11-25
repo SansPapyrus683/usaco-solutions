@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2013 dec silver
-public final class Vacation {
+public class Vacation {
     // i think this is a reasonable upper bound on a singular distance, right?
     private static final int INVALID = 420696969;
     public static void main(String[] args) throws IOException {

@@ -8,7 +8,7 @@ package section3.part1.inflate;
 import java.io.*;
 import java.util.*;
 
-public final class Inflate {
+public class Inflate {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("loScores.txt"));

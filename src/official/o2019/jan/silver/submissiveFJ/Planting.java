@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2019 jan silver (all the fields form a tree if you didn't know bc of the n-1 edges)
-public final class Planting {
+public class Planting {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("planting.in"));

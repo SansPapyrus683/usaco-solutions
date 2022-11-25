@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2018 dec silver
-public final class Convention {
+public class Convention {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("convention.in"));

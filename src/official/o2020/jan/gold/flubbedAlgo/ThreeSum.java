@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2020 jan gold
-public final class ThreeSum {
+public class ThreeSum {
     private static final int TARGET = 0;
     private static final int MAX = (int) Math.pow(10, 6);
     public static void main(String[] args) throws IOException {

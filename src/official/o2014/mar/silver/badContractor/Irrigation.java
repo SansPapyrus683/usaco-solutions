@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2014 mar silver
-public final class Irrigation {
+public class Irrigation {
     private static final int MAX_BOUND = 1001;
     public static void main(String[] args) throws IOException {
         long timeStart = System.currentTimeMillis();

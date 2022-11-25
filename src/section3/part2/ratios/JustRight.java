@@ -7,7 +7,7 @@ LANG: JAVA
 import java.io.*;
 import java.util.Arrays;
 
-public final class JustRight {
+public class JustRight {
     private static final int FEED_NUM = 3;
     private static final int NUTRIENT_NUM = 3;
     private static final int MAX_RATIO = 100;

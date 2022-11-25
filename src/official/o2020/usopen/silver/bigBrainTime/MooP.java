@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2020 us open silver (copied lol)
-public final class MooP {
+public class MooP {
     public static void main(String[] args) throws IOException {
         long timeStart = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("moop.in"));

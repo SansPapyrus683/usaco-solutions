@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 202 feb silver (gave up and copied from sol oof)
-public final class ClockTree {
+public class ClockTree {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("clocktree.in"));

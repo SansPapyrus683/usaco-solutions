@@ -5,7 +5,7 @@ import java.util.*;
 
 // 2020 jan silver
 // 1/6/2021 - i was young and innocent when i wrote this code, so it's full of bad practices
-public final class Wormsort {
+public class Wormsort {
     private static final long start = System.currentTimeMillis();
     public static void main(String[] args) throws IOException {
         BufferedReader read = new BufferedReader(new FileReader("wormsort.in"));

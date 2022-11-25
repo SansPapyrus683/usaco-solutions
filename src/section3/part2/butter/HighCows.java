@@ -7,7 +7,7 @@ LANG: JAVA
 import java.io.*;
 import java.util.*;
 
-public final class HighCows {
+public class HighCows {
     public static void main(String[] args) throws IOException {
         BufferedReader read = new BufferedReader(new FileReader("butter.in"));
         StringTokenizer initial = new StringTokenizer(read.readLine());

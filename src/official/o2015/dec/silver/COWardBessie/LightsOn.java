@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 import java.util.stream.Stream;
 
-public final class LightsOn {
+public class LightsOn {
     static int barnSide;
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();

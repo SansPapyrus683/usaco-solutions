@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2018 us open gold
-public final class MilkOrder {
+public class MilkOrder {
     private static final int[] INVALID = new int[] {-1};
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();

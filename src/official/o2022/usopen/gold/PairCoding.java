@@ -3,7 +3,7 @@ package official.o2022.usopen.gold;
 import java.io.*;
 
 // 2022 us open gold (input omitted due to length)
-public final class PairCoding {
+public class PairCoding {
     private static final int MOD = (int) 1e9 + 7;
 
     public static void main(String[] args) throws IOException {

@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2015 us open silver
-public final class BGM {
+public class BGM {
     private static final Map<Character, Integer> CHAR_TO_NUM = Map.ofEntries(
             Map.entry('B', 0),
             Map.entry('E', 1),

@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2016 feb gold (goddamn this solution is extremely convoluted)
-public final class CBarn2 {
+public class CBarn2 {
     public static void main(String[] args) throws IOException {
         long timeStart = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("cbarn2.in"));

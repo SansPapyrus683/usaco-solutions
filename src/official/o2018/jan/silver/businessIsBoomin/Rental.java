@@ -5,7 +5,7 @@ import java.util.*;
 import java.util.stream.IntStream;
 
 // 2018 jan silver
-public final class Rental {
+public class Rental {
     private static int[] cows;
     private static int[][] stores;
     public static void main(String[] args) throws IOException {

@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2017 feb silver
-public final class CountCross {
+public class CountCross {
     private static final int[] CHANGE_X = new int[]{1, -1, 0, 0};
     private static final int[] CHANGE_Y = new int[]{0, 0, 1, -1};
 

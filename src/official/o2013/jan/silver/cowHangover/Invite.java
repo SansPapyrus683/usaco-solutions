@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2013 jan silver
-public final class Invite {
+public class Invite {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("invite.in"));

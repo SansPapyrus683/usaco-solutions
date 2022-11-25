@@ -5,7 +5,7 @@ import java.util.*;
 
 // 2020 us open gold
 // answer all the inversions number from 0 all the way to hairNum - 1
-public final class Haircut {
+public class Haircut {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("haircut.in"));

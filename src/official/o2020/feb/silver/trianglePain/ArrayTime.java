@@ -5,7 +5,7 @@ import java.util.*;
 import java.util.stream.Stream;
 
 // an alternate implementation with arrays (a bit faster- maybe like 10 to 20%)
-public final class ArrayTime {
+public class ArrayTime {
     private static final int MOD = (int) Math.pow(10, 9) + 7;
     private static final int LEN = (int) Math.pow(10, 4);
 

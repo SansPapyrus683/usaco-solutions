@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2014 feb silver (and yes i realize that duck is bc of autoCORRECT, not autoCOMPLETE)
-public final class Auto {
+public class Auto {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("auto.in"));

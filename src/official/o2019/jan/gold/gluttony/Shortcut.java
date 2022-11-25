@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2019 jan gold
-public final class Shortcut {
+public class Shortcut {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("shortcut.in"));

@@ -8,7 +8,7 @@ import java.util.*;
  * somehow even though this should take smth like n^2 operations it still worked
  * what it does is that it simulates >= 1 joinings at a time, so it's a bit better than raw brute force
  */
-public final class CowJogSim {
+public class CowJogSim {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("cowjog.in"));

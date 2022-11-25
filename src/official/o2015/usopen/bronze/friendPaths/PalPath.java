@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2015 us open gold
-public final class PalPath {
+public class PalPath {
     private static class Farm {
         public char[][] farm;
         private HashSet<String> possPaths = new HashSet<>();

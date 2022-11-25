@@ -5,7 +5,7 @@ import java.util.*;
 import java.util.stream.Stream;
 
 // 2016 us open gold
-public final class Split {
+public class Split {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("split.in"));

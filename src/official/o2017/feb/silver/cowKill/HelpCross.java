@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2017 feb silver
-public final class HelpCross {
+public class HelpCross {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("helpcross.in"));

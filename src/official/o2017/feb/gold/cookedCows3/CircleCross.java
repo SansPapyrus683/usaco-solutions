@@ -5,7 +5,7 @@ import java.util.*;
 
 // 2017 feb gold
 // for naming, i'm going to assume the first occurrence as the entrance and the second occurrence as the exit
-public final class CircleCross {
+public class CircleCross {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("circlecross.in"));

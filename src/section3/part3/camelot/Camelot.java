@@ -7,7 +7,7 @@ TASK: camelot
 import java.io.*;
 import java.util.*;
 
-public final class Camelot {
+public class Camelot {
     private static final int INVALID = 4206969;  // to avoid overflow
     private static final int[] CHANGE_R = new int[] {-2, -2, -1, 1, 2, 2, 1, -1};
     private static final int[] CHANGE_C = new int[] {-1, 1, 2, 2, 1, -1, -2, -2};

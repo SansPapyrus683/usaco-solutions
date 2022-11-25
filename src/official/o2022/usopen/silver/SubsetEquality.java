@@ -12,7 +12,7 @@ import java.io.*;
  * abd
  * abcd should output YNYN
  */
-public final class SubsetEquality {
+public class SubsetEquality {
     public static void main(String[] args) throws IOException {
         BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
         // assuming valid input, if anything goes wrong it's on you

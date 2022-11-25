@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2019 us open gold
-public final class Snakes {
+public class Snakes {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("snakes.in"));

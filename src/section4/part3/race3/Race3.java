@@ -9,7 +9,7 @@ import java.io.*;
 import java.util.*;
 
 // this is horribly verbose but it works lol
-public final class Race3 {
+public class Race3 {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("race3.in"));

@@ -11,7 +11,7 @@ import java.util.*;
  * 4 30
  * 1 40 should output 90
  */
-public final class Visits {
+public class Visits {
     public static void main(String[] args) throws IOException {
         BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
         int cowNum = Integer.parseInt(read.readLine());

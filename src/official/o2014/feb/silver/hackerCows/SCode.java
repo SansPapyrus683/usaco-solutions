@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2014 feb silver
-public final class SCode {
+public class SCode {
     private static final int MOD = 2014;
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();

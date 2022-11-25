@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2017 jan plat
-public final class Promote {
+public class Promote {
     private static final int PRES = 0;
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();

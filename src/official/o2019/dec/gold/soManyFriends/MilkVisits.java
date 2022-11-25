@@ -9,7 +9,7 @@ import java.util.stream.Stream;
  * and even then this is rife of bad practices but it works so screw it
  * 1/22/2021- oh my god looking back at this this is even worse than i first thought
  */
-public final class MilkVisits {
+public class MilkVisits {
     private static final long MAX_DEPTH = 100000;
 
     public static void main(String[] args) throws IOException {

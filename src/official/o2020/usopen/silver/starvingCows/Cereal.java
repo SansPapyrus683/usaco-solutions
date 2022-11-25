@@ -5,7 +5,7 @@ import java.util.*;
 import java.util.stream.Stream;
 
 // 2020 us open silver
-public final class Cereal {
+public class Cereal {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("cereal.in"));

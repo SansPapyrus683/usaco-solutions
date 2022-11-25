@@ -3,7 +3,7 @@ package official.o2020.feb.silver.stupiderSwapping;
 import java.io.*;
 import java.util.*;
 
-public final class Swap {
+public class Swap {
     private static final class Pair <T1, T2> {  // frick you java for not having a pair final class
         public T1 first;
         public T2 second;

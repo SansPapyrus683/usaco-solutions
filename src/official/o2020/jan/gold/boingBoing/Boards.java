@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2020 jan gold
-public final class Boards {
+public class Boards {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("boards.in"));

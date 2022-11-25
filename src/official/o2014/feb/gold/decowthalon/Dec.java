@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2014 feb gold
-public final class Dec {
+public class Dec {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("dec.in"));

@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2017 us open gold
-public final class Cownomics {
+public class Cownomics {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("cownomics.in"));

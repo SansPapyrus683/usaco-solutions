@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2013 feb silver
-public final class Tractor {
+public class Tractor {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("tractor.in"));

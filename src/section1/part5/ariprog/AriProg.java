@@ -8,7 +8,7 @@ package section1.part5.ariprog;
 import java.io.*;
 import java.util.*;
 
-public final class AriProg {
+public class AriProg {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("ariprog.in"));

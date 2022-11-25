@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2014 mar silver
-public final class MoooMoo {
+public class MoooMoo {
     private static final int INVALID = 420696969;  // MAX_VALUE can result in an overflow -> min() always selects those values
     static int[] breedVolumes;
     static long start;

@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2014 feb bronze
-public final class Mirror {
+public class Mirror {
     private enum Dir { UP, DOWN, LEFT, RIGHT }
 
     public static void main(String[] args) throws IOException {

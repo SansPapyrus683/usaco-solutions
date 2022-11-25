@@ -3,7 +3,7 @@ package official.o2013.nov.silver.pogchampCow;
 import java.io.*;
 import java.util.*;
 
-public final class Pogocow {
+public class Pogocow {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("pogocow.in"));

@@ -3,7 +3,7 @@ package official.o2014.dec.silver.piggy;
 import java.io.*;
 import java.util.*;
 
-public final class Piggyback {
+public class Piggyback {
     static int farmNum;
     static ArrayList<Integer>[] neighbors;
 

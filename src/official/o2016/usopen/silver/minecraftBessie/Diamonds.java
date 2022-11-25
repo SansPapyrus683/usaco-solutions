@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2016 us open silver (this one's the intended sol)
-public final class Diamonds {
+public class Diamonds {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("diamond.in"));

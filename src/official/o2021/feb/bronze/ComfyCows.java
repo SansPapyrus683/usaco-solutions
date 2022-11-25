@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2021 feb bronze (input omitted due to length)
-public final class ComfyCows {
+public class ComfyCows {
     private static final int COMFORT_THRESHOLD = 3;
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();

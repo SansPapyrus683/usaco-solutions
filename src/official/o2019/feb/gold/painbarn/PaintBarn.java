@@ -6,7 +6,7 @@ import java.util.*;
 import static java.lang.Math.max;
 
 // 2019 feb gold (i spent an entire day debugging the array indices on this oh my fricking god)
-public final class PaintBarn {
+public class PaintBarn {
     static final int WIDTH = 200;
     
     static int[][] prefLeftovers;

@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2019 dec silver
-public final class SilverVisits {
+public class SilverVisits {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("milkvisits.in"));

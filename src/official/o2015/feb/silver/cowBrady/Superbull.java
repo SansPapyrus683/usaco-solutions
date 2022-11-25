@@ -10,7 +10,7 @@ import java.util.*;
  * node's parent = what they lose to, so a node beats all it's children
  * so then prim's ez clap
  * */
-public final class Superbull {
+public class Superbull {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("superbull.in"));

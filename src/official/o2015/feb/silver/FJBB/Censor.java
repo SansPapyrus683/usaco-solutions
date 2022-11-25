@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2015 feb silver
-public final class Censor {
+public class Censor {
     private static final int MOD = (int) 1e9 + 7;
     private static final int POW = 101;
     public static void main(String[] args) throws IOException {

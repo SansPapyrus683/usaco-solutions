@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2021 feb silver (input omitted due to length)
-public final class Comfort {
+public class Comfort {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new InputStreamReader(System.in));

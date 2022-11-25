@@ -11,7 +11,7 @@ import java.util.*;
  * 3 1
  * 1 0 should output 14
  */
-public final class SPasture {
+public class SPasture {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new InputStreamReader(System.in));

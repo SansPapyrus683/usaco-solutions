@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2015 feb silver
-public final class Hopscotch {
+public class Hopscotch {
     private static final long MOD = (long) 1e9 + 7;  // idk why they chose this number i mean
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();

@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2018 us open silver
-public final class Sort {
+public class Sort {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("sort.in"));

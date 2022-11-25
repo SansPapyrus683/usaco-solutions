@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2016 jan silver
-public final class Angry {
+public class Angry {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("angry.in"));

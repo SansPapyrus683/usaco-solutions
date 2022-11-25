@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2016 jan silver (this code is an entire soup of bad practices lol)
-public final class Gates {
+public class Gates {
     private static final int BOUNDS = 2004;
     private static final int TRUE_BOUNDS = 2 * BOUNDS + 1;
     public static void main(String[] args) throws IOException {

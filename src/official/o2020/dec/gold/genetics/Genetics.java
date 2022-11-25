@@ -8,7 +8,7 @@ import java.util.*;
  * ? should output 4
  * GAT?GTT should output 3
  */
-public final class Genetics {
+public class Genetics {
     private static final HashMap<Character, Integer> GENOME_MAPPING = new HashMap<Character, Integer>() {{
         put('?', -1);
         put('A', 0);

@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2020 us open gold
-public final class FColor {
+public class FColor {
     /**
      * this is based off {@link utils.DisjointSets}, go there for the link that explains this bc i sure can't<br>
      * so this final class represents all the cows- when merging two cows, not only does it put them into the same set,

@@ -3,7 +3,7 @@ package official.o2018.jan.gold.cowSimps;
 import java.io.*;
 import java.util.*;
 
-public final class MooTube {
+public class MooTube {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("mootube.in"));

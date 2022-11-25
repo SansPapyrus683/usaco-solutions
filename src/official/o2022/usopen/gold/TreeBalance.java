@@ -3,7 +3,7 @@ package official.o2022.usopen.gold;
 import java.io.*;
 import java.util.*;
 
-public final class TreeBalance {
+public class TreeBalance {
     public static void main(String[] args) throws IOException {
         BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer initial = new StringTokenizer(read.readLine());

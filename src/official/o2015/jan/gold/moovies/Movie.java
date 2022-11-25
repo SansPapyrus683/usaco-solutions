@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2915 jan gold
-public final class Movie {
+public class Movie {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("movie.in"));

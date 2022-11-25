@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2019 jan gold (i'd use biginteger but it makes the calculations too slow)
-public final class Poetry {
+public class Poetry {
     private static final long MOD = (long) Math.pow(10, 9) + 7;
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();

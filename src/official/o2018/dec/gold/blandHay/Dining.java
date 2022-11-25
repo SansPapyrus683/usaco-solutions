@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2018 dec gold
-public final class Dining {
+public class Dining {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("dining.in"));

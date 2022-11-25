@@ -5,7 +5,7 @@ import java.util.*;
 import java.util.stream.Stream;
 
 // 2014 mar silver
-public final class Lazy {
+public class Lazy {
     private static int side;
     private static int[][] soFar;
     private static int walkingDist;

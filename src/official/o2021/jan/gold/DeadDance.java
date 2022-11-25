@@ -12,7 +12,7 @@ import java.util.*;
  * 4 5 should output 5, 4, 3, 3, 3, and 1, each on a newline
  * (jesus christ this solution is convoluted as all hell)
  */
-public final class DeadDance {
+public class DeadDance {
     private static final long[] INVALID = new long[] {-1, -1};
     public static void main(String[] args) throws IOException {
         long startTime = System.currentTimeMillis();

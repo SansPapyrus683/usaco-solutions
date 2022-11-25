@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2014 feb silver
-public final class SCode {
+public class SCode {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         String encrypted =  new BufferedReader(new FileReader("scode.in")).readLine();

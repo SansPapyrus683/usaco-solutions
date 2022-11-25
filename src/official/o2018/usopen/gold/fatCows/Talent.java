@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2018 us open gold
-public final class Talent {
+public class Talent {
     private static final int PRECISION = (int) Math.pow(10, 3);
 
     private static class Cow {

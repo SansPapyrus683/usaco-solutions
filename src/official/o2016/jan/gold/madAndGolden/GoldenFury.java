@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2016 jan gold
-public final class GoldenFury {
+public class GoldenFury {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("angry.in"));

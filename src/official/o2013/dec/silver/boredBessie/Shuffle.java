@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2013 dec silver
-public final class Shuffle {
+public class Shuffle {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("shuffle.in"));

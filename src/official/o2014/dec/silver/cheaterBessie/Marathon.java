@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2014 dec silver (shamelessly copied from the official solution)
-public final class Marathon {
+public class Marathon {
     static int[][] distances;
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();

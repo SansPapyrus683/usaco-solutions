@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2018 jan gold
-public final class AtLarge {
+public class AtLarge {
     public static void main(String[] args) throws IOException {
         long timeStart = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("atlarge.in"));

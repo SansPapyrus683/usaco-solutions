@@ -5,7 +5,7 @@ import java.math.BigInteger;
 import java.util.*;
 
 // 2015 us open gold (no problem folder because no input files lol)
-public final class Googol {
+public class Googol {
     private static class Company {
         private static final String NONE = "0";
         BufferedReader read = new BufferedReader(new InputStreamReader(System.in));

@@ -7,7 +7,7 @@ import java.util.*;
  * 2014 us open silver
  * sol sauce: https://stackoverflow.com/questions/28356453/longest-positive-sum-substring
  */
-public final class FairPhoto {
+public class FairPhoto {
     public static void main(String[] args) throws IOException {
         long timeStart = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("fairphoto.in"));

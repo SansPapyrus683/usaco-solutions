@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2018 feb gold
-public final class GoldBoots {
+public class GoldBoots {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("snowboots.in"));

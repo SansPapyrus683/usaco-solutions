@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2013 feb bronze
-public final class Relay {
+public class Relay {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("relay.in"));

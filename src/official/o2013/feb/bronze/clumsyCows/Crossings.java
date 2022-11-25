@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // most of my sols are structured like this (bare bones)
-public final class Crossings {
+public class Crossings {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("crossings.in"));

@@ -12,7 +12,7 @@ import java.util.*;
  * 46
  * 95 should output 36
  */
-public final class CowYear {
+public class CowYear {
     private static final int JUMP_MUL = 12;
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();

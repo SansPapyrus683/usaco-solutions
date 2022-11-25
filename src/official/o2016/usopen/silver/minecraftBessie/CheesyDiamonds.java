@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2016 us open silver
-public final class CheesyDiamonds {
+public class CheesyDiamonds {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("diamond.in"));

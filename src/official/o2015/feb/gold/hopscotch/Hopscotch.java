@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2015 feb gold (aka the better solution to the silver version)
-public final class Hopscotch {
+public class Hopscotch {
     private static final int MOD = (int) 1e9 + 7;
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();

@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2017 us open silver (i've watched enough hentai to know where this problem's going)
-public final class PairUp {
+public class PairUp {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("pairup.in"));

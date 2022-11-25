@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 // 2014 jan silver (this one uses the greedy approach also described in the sol)
-public final class RecordingGreedy {
+public class RecordingGreedy {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("recording.in"));
