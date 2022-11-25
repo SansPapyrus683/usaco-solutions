@@ -118,7 +118,7 @@ class BITree {
         }
     }
 
-    public long query(int ind) {  // the bound is inclusive i think
+    public long query(int ind) {  // the bound's inclusive
         ind++;
         long sum = 0;
         for (; ind > 0; ind -= ind & -ind) {
