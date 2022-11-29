@@ -26,8 +26,8 @@ public class Mountains {
             boolean covered = false;
             for (int j = 0; j < i; j++) {
                 int[] upperMountain = mountains[j];
-                if (upperMountain[0] - upperMountain[1] <= groundArea[0] &&
-                        groundArea[1] <= upperMountain[0] + upperMountain[1]) {
+                if (upperMountain[0] - upperMountain[1] <= groundArea[0]
+                        && groundArea[1] <= upperMountain[0] + upperMountain[1]) {
                     covered = true;
                     break;
                 }

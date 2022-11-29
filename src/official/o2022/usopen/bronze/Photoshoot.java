@@ -12,9 +12,9 @@ public class Photoshoot {
         BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
         int cowNum = Integer.parseInt(read.readLine());
         String cows = read.readLine();
-        assert cows.length() == cowNum &&
-                cows.replaceAll("[GH]", "").isEmpty() &&
-                cowNum % 2 == 0;
+        assert cows.length() == cowNum
+                && cows.replaceAll("[GH]", "").isEmpty()
+                && cowNum % 2 == 0;
 
         int flips = 0;
         for (int c = cowNum - 2; c >= 0; c -= 2) {

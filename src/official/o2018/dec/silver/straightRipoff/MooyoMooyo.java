@@ -65,8 +65,9 @@ public class MooyoMooyo {
                     size++;
                     for (int i_ = 0; i_ < 4; i_++) {
                         int[] n = new int[] {current[0] + X_CHANGE[i_], current[1] + Y_CHANGE[i_]};
-                        if (0 <= n[0] && n[0] < board.length && 0 <= n[1] && n[1] < board[0].length &&
-                                board[n[0]][n[1]] == target && !processed[n[0]][n[1]]) {
+                        if (0 <= n[0] && n[0] < board.length && 0 <= n[1] && n[1] < board[0].length
+                                && board[n[0]][n[1]] == target
+                                && !processed[n[0]][n[1]]) {
                             processed[n[0]][n[1]] = true;
                             frontier.add(n);
                         }

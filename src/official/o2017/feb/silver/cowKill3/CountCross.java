@@ -84,8 +84,8 @@ public class CountCross {
                 int r = current[0] + CHANGE_X[i];
                 int c = current[1] + CHANGE_Y[i];
                 // has to be within bounds, not visited, and we have to NOT cross a road to get here
-                if (0 <= r && r < roadedAdjacents.length && 0 <= c && c < roadedAdjacents[0].length &&
-                        !visited[r][c] && !arrayInArrayList(roaded, new int[] {r, c})) {
+                if (0 <= r && r < roadedAdjacents.length && 0 <= c && c < roadedAdjacents[0].length
+                        && !visited[r][c] && !arrayInArrayList(roaded, new int[] {r, c})) {
                     visited[r][c] = true;
                     frontier.add(new int[] {r, c});
                 }

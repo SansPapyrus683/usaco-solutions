@@ -110,8 +110,8 @@ public class MultiMoo {
             int current = frontier.poll();
             for (ArrayList<Integer> n : adjPoints.get(current)) {
                 int neighborID = ids[n.get(0)][n.get(1)];
-                if (!doneIDs.contains(neighborID) &&
-                        (board[n.get(0)][n.get(1)] == type1 || board[n.get(0)][n.get(1)] == type2)) {
+                if (!doneIDs.contains(neighborID)
+                        && (board[n.get(0)][n.get(1)] == type1 || board[n.get(0)][n.get(1)] == type2)) {
                     doneIDs.add(neighborID);
                     frontier.add(neighborID);
                     totalSize += regionSizes.get(neighborID);

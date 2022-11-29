@@ -54,8 +54,8 @@ public class Gates {
                     for (int i = 0; i < 4; i++) {
                         int newX = currX + changeX[i];
                         int newY = currY + changeY[i];
-                        if (0 <= newX && newX < TRUE_BOUNDS && 0 <= newY && newY < TRUE_BOUNDS &&
-                                !walls[newX][newY] && !processed[newX][newY]) {
+                        if (0 <= newX && newX < TRUE_BOUNDS && 0 <= newY && newY < TRUE_BOUNDS
+                                && !walls[newX][newY] && !processed[newX][newY]) {
                             frontier.add(new int[] {newX, newY});
                             processed[newX][newY] = true;
                         }

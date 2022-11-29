@@ -34,8 +34,8 @@ public class Where {
         int ans = regions.size();
         for (int[][] r : regions) {
             for (int[][] checkAgainst : regions) {
-                if (!Arrays.deepEquals(r, checkAgainst) &&
-                        subregion(checkAgainst[0], checkAgainst[1], r[0], r[1])) {
+                if (!Arrays.deepEquals(r, checkAgainst)
+                        && subregion(checkAgainst[0], checkAgainst[1], r[0], r[1])) {
                     ans--;
                     break;
                 }
@@ -51,8 +51,8 @@ public class Where {
 
     // checks whether 2 is within 1 (boundaries count as being within)
     static boolean subregion(int[] topLeft1, int[] bottomRight1, int[] topLeft2, int[] bottomRight2) {
-        return topLeft1[0] <= topLeft2[0] && bottomRight2[0] <= bottomRight1[0] &&
-                topLeft1[1] <= topLeft2[1] && bottomRight2[1] <= bottomRight1[1];
+        return topLeft1[0] <= topLeft2[0] && bottomRight2[0] <= bottomRight1[0]
+                && topLeft1[1] <= topLeft2[1] && bottomRight2[1] <= bottomRight1[1];
     }
 
     // the coordinates are from the top right but the corners are described using "normal" terms
