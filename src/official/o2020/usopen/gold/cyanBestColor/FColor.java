@@ -7,11 +7,11 @@ import java.util.*;
 public class FColor {
     /**
      * this is based off {@link utils.DisjointSets}, go there for the link that explains this bc i sure can't<br>
-     * so this final class represents all the cows- when merging two cows, not only does it put them into the same set,
+     * so this class represents all the cows- when merging two cows, not only does it put them into the same set,
      * but it also merges the stans into the top-level cow
      * also this class is very delicate if you do anything wrong it will explode
      */
-    private static final class DisjointCows {
+    private static class DisjointCows {
         private final int[] parents;
         private final int[] sizes;
         private final ArrayList<Integer>[] stans;

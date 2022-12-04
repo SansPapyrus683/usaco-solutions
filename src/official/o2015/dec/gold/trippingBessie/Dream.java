@@ -15,8 +15,8 @@ public class Dream {
     private static final int[] CHANGE_R = new int[]{1, -1, 0, 0};
     private static final int[] CHANGE_C = new int[]{0, 0, 1, -1};
 
-    // i swear i will go to james gosling's house and personally beg him to implement a pair final class
-    private static final class Pair<T1, T2> {
+    // i swear i will go to james gosling's house and personally beg him to implement a pair class
+    private static class Pair<T1, T2> {
         public T1 first;
         public T2 second;
 

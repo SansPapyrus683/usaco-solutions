@@ -81,7 +81,7 @@ public class Lasers {
     }
 }
 
-final class LaserState {
+class LaserState {
     public int x;
     public int y;
     public int dir;

@@ -6,7 +6,7 @@ import java.util.*;
 // 2015 jan silver
 // for some reason with i name it Stampede.java intellij seizure salds
 public class CowFundraising {
-    private static final class Cow {
+    private static class Cow {
         public int speed;
         public int x;
         public int y;
@@ -25,7 +25,7 @@ public class CowFundraising {
 
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
-        BufferedReader read = new BufferedReader(new FileReader(new File("stampede.in")));
+        BufferedReader read = new BufferedReader(new FileReader("stampede.in"));
         int cowNum = Integer.parseInt(read.readLine());
         Cow[] cows = new Cow[cowNum];
         for (int i = 0; i < cows.length; i++) {

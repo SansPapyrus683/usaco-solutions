@@ -5,7 +5,7 @@ import java.util.*;
 
 // 2019 dec silver
 public class Meetings {
-    private static final class Cow {
+    private static class Cow {
         int weight;
         int pos;
         int speed;

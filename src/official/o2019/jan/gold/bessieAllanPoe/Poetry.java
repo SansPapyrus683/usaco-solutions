@@ -47,7 +47,7 @@ public class Poetry {
             }
         }
 
-        // contains the number of ways to make a line end with a certain rhyme final class
+        // contains the number of ways to make a line end with a certain rhyme class
         long[] rhymeAmts = new long[rhymeClasses.size()];
         int ind = 0;
         for (ArrayList<Integer> similar : rhymeClasses.values()) {

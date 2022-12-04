@@ -88,11 +88,11 @@ public class CowJump {
         System.out.printf("%d ms is an ok time? you could've done better lol%n", System.currentTimeMillis() - start);
     }
 
-    // equality for these 2 final classes aren't based on their actual info, but id numbers they're given
+    // equality for these 2 classes aren't based on their actual info, but id numbers they're given
     private static class IDPoint {
         public int x;
         public int y;
-        public int id = 0;
+        public int id;
         public IDPoint(int x, int y, int id) {
             this.x = x;
             this.y = y;

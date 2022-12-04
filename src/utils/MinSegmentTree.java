@@ -6,7 +6,7 @@ import java.util.Comparator;
 
 /**
  * A data structure that allows for efficient answering of range minimum queries.
- * followed the explanation here: https://codeforces.com/blog/entry/18051
+ * followed the explanation here: <a href="https://codeforces.com/blog/entry/18051">...</a>
  */
 public class MinSegmentTree {
     private final int[] segtree;
@@ -41,7 +41,7 @@ public class MinSegmentTree {
     }
 
     public int rangeMin(int from, int to) {  // minimum from [from, to)
-        assert from <= to && 0 <= from && from < len && 0 < to && to <= len;
+        assert from <= to && 0 <= from && from <= len && 0 < to && to <= len;
         int min = Integer.MAX_VALUE;
         for (from += len, to += len; from < to; from >>= 1, to >>= 1) {
             if ((from & 1) != 0) {

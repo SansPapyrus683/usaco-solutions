@@ -31,11 +31,11 @@ dual_pals = []
 while len(dual_pals) < first_n:
     number_at += 1
     reprs = [int2base(number_at, b) for b in range(2, 10 + 1)]
-    palCount = 0
+    pal_count = 0
     for r in reprs:
         if not r.endswith('0') and r[::-1] == r:
-            palCount += 1
-    if palCount >= 2:
+            pal_count += 1
+    if pal_count >= 2:
         dual_pals.append(number_at)
 
 print(dual_pals)

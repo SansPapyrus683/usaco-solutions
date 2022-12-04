@@ -67,7 +67,7 @@ public class Crowded {
     }
 }
 
-final class MaxSegTree {
+class MaxSegTree {
     private final int[] segtree;
     private final int len;
     public MaxSegTree(int len) {  // constructs the thing kinda like an array
@@ -83,7 +83,7 @@ final class MaxSegTree {
     }
 
     int rangeMax(int from, int to) {  // minimum from [from, to)
-        assert from <= to && 0 <= from && from < len && 0 < to && to <= len;
+        assert from <= to && 0 <= from && from <= len && 0 < to && to <= len;
         int max = Integer.MIN_VALUE;
         for (from += len, to += len; from < to; from >>= 1, to >>= 1) {
             if ((from & 1) != 0) {

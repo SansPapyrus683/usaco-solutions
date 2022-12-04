@@ -61,7 +61,7 @@ public class Race3 {
     }
 }
 
-final class RaceTrack {
+class RaceTrack {
     private final ArrayList<int[]> neighbors;
     private final HashSet<Integer> allPoints;
     public RaceTrack(ArrayList<int[]> neighbors) {

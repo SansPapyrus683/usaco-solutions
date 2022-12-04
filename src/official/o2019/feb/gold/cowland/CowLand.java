@@ -43,7 +43,7 @@ public class CowLand {
         System.out.printf("WOOOOOASDPOFIJASDFIOJASPODI it took %d ms%n", System.currentTimeMillis() - start);
     }
 
-    private static final class AmusementPark {
+    private static class AmusementPark {
         private final List<Integer>[] neighbors;
         private final ArrayList<Integer> eulerTour = new ArrayList<>();
         private final int[] firstOcc;
@@ -78,7 +78,7 @@ public class CowLand {
                 queryTree.set(firstOcc[n], enjoyment[n]);
                 queryTree.set(lastOcc[n], enjoyment[n]);
             }
-            LCATree = new MinSegTree(eulerTour.stream().mapToInt(i -> i).toArray(), Comparator.comparingInt(n -> height[(int) n]));
+            LCATree = new MinSegTree(eulerTour.stream().mapToInt(i -> i).toArray(), Comparator.comparingInt(n -> height[n]));
         }
 
         public int query(int n1, int n2) {
@@ -132,7 +132,7 @@ public class CowLand {
     }
 }
 
-final class MinSegTree {
+class MinSegTree {
     private final int[] segtree;
     private final int len;
     private final Comparator<Integer> cmp;
@@ -153,7 +153,7 @@ final class MinSegTree {
     }
 
     public int rangeMin(int from, int to) {  // minimum from [from, to)
-        assert from <= to && 0 <= from && from < len && 0 < to && to <= len;
+        assert from <= to && 0 <= from && from <= len && 0 < to && to <= len;
         int min = Integer.MAX_VALUE;
         for (from += len, to += len; from < to; from >>= 1, to >>= 1) {
             if ((from & 1) != 0) {
@@ -176,7 +176,7 @@ final class MinSegTree {
     }
 }
 
-final class XORBIT {
+class XORBIT {
     private final int[] treeThing;
     private final int[] actualArr;
     private final int size;

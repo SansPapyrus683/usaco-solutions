@@ -6,7 +6,7 @@ import java.util.stream.Stream;
 
 // 2014 jan silver (goddamn this one is convoluted)
 public class Recording {
-    private static final class PArrangement {  // i could just make a generic Pair<> final class but screw it
+    private static class PArrangement {  // i could just make a generic Pair<> class but screw it
         public ArrayList<Integer> first;
         public ArrayList<Integer> second;
         public PArrangement(ArrayList<Integer> first, ArrayList<Integer> second) {

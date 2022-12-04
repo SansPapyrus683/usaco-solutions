@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 public class Swap {
-    private static final class Pair <T1, T2> {  // frick you java for not having a pair final class
+    private static class Pair <T1, T2> {  // frick you java for not having a pair class
         public T1 first;
         public T2 second;
         public Pair(T1 first, T2 second) {

@@ -5,7 +5,7 @@ import java.util.*;
 
 // 2019 jan silver
 public class Perimeter {
-    private static final class Blob {
+    private static class Blob {
         private final int[] rChange = new int[] {1, -1, 0, 0};
         private final int[] cChange = new int[] {0, 0, 1, -1};
 
@@ -80,7 +80,6 @@ public class Perimeter {
 
     static Blob expand(int[] from) {  // just a simple bfs, with some extra stuff to keep track of the points added
         // start with that one "from" blob
-        long start = System.nanoTime();
         Blob blob = new Blob(1, side, iceCream);
         blob.points.add(from);
         Queue<int[]> frontier = new ArrayDeque<>(Collections.singletonList(from));

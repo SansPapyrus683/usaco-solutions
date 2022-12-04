@@ -9,7 +9,7 @@ public class ArrayTime {
     private static final int MOD = (int) Math.pow(10, 9) + 7;
     private static final int LEN = (int) Math.pow(10, 4);
 
-    private static final class Pair {
+    private static class Pair {
         public long first;
         public long second;
         public Pair(long first, long second) {
