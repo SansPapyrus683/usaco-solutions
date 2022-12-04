@@ -1,4 +1,4 @@
-package official.o2016.dec.gold.caramelldansenCows;
+package official.o2016.dec.gold.lasers;
 
 import java.io.*;
 import java.util.*;

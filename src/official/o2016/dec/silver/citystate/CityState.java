@@ -1,4 +1,4 @@
-package official.o2016.dec.silver.MURICA;
+package official.o2016.dec.silver.citystate;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

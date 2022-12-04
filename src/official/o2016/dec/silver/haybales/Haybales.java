@@ -1,4 +1,4 @@
-package official.o2016.dec.silver.soMuchHay;
+package official.o2016.dec.silver.haybales;
 
 import java.io.*;
 import java.util.*;

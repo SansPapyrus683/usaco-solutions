@@ -1,4 +1,4 @@
-package official.o2015.dec.silver.countingCows;
+package official.o2015.dec.silver.bcount;
 
 import java.io.*;
 import java.util.*;

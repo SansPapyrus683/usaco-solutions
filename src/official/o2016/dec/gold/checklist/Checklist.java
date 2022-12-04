@@ -1,4 +1,4 @@
-package official.o2016.dec.gold.corpseCheck;
+package official.o2016.dec.gold.checklist;
 
 import java.io.*;
 import java.util.*;
