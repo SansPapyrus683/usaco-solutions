@@ -6,7 +6,7 @@ import java.util.Comparator;
 
 /**
  * A data structure that allows for efficient answering of range minimum queries.
- * followed the explanation here: <a href="https://codeforces.com/blog/entry/18051">...</a>
+ * followed the explanation <a href="https://codeforces.com/blog/entry/18051">here</a>
  */
 public class MinSegmentTree {
     private final int[] segtree;
@@ -61,10 +61,5 @@ public class MinSegmentTree {
             return x;
         }
         return Collections.min(Arrays.asList(x, y), cmp);
-    }
-
-    public static void main(String[] args) {
-        MinSegmentTree st = new MinSegmentTree(9);
-        System.out.println(st.rangeMin(0, 10));
     }
 }
