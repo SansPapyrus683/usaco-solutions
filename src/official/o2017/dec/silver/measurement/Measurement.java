@@ -11,9 +11,12 @@ public class Measurement {
         StringTokenizer initial = new StringTokenizer(read.readLine());
         int measurementNum = Integer.parseInt(initial.nextToken());
         int initialMilk = Integer.parseInt(initial.nextToken());
+
         int[][] measurements = new int[measurementNum][3];
-        HashMap<Integer, Integer> cowToMilk = new HashMap<>();  // this.get(i) = the milk that cow i is producing
-        TreeMap<Integer, HashSet<Integer>> milkToCows = new TreeMap<>();  // this.get(i) = the set of cows that are producing i milk
+        // this.get(i) = the milk that cow i is producing
+        HashMap<Integer, Integer> cowToMilk = new HashMap<>();
+        // this.get(i) = the set of cows that are producing i milk
+        TreeMap<Integer, HashSet<Integer>> milkToCows = new TreeMap<>();
         milkToCows.put(initialMilk, new HashSet<>());
         for (int m = 0; m < measurementNum; m++) {
             // time taken, cow id, milk change
@@ -44,7 +47,9 @@ public class Measurement {
         System.out.printf("and it took %d ms- that's the highest time we have so far! (jk)%n", System.currentTimeMillis() - start);
     }
 
-    private static void processMeasurement(int[] m, Map<Integer, Integer> cows, Map<Integer, HashSet<Integer>> milkCows) {
+    private static void processMeasurement(
+            int[] m, Map<Integer, Integer> cows, Map<Integer, HashSet<Integer>> milkCows
+    ) {
         int oldMilk = cows.get(m[1]);
         milkCows.get(oldMilk).remove(m[1]);
         if (milkCows.get(oldMilk).isEmpty()) {
