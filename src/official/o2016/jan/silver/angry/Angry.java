@@ -1,4 +1,4 @@
-package official.o2016.jan.silver.triggeredCows;
+package official.o2016.jan.silver.angry;
 
 import java.io.*;
 import java.util.*;

@@ -1,4 +1,4 @@
-package official.o2016.jan.gold.bodyInElectric;
+package official.o2016.jan.gold.lightsout;
 
 import java.io.*;
 import java.util.*;

@@ -1,4 +1,4 @@
-package official.o2016.jan.silver.FJPTSD;
+package official.o2016.jan.silver.div7;
 
 import java.io.*;
 import java.util.*;

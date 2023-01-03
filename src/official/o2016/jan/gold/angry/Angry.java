@@ -1,10 +1,10 @@
-package official.o2016.jan.gold.madAndGolden;
+package official.o2016.jan.gold.angry;
 
 import java.io.*;
 import java.util.*;
 
 // 2016 jan gold
-public class GoldenFury {
+public class Angry {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
         BufferedReader read = new BufferedReader(new FileReader("angry.in"));
