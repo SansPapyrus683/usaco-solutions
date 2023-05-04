@@ -2,6 +2,7 @@
 ID: kevinsh4
 TASK: milk6
 LANG: PYTHON3
+
 bruh 70% of this is copied right from ditch what
 just w/ this: https://pinkpurplepineapples.wordpress.com/2016/11/08/min-cut-with-minimal-edge-count/
 and this actually fails a tc (#11), but i'm blaming that on the problem lmao
