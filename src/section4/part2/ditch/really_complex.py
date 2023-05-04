@@ -2,21 +2,26 @@
 ID: kevinsh4
 TASK: ditch
 LANG: PYTHON3
+bruh moment
 """
-from typing import List
+from typing import List, Optional
+from collections import deque
 
 
-def directed_good_path(neighbors: List[List[int]], start=0, end=None) -> List[int]:
+def directed_good_path(
+        neighbors: List[List[int]], start: int = 0, end: Optional[int] = None
+) -> List[int]:
     end = len(neighbors) - 1 if end is None else end
     came_from = {start: None}
-    frontier = [start]
+    frontier = deque([start])
     while frontier:
-        curr = frontier.pop(0)
+        curr = frontier.pop()
         if curr == end:
             break
 
         for n, f in enumerate(neighbors[curr]):
-            if n not in came_from and f > 0:  # if there's still some "good" flow left
+            # if there's still some "good" flow left
+            if n not in came_from and f > 0:
                 frontier.append(n)
                 came_from[n] = curr
     else:
@@ -31,26 +36,27 @@ def directed_good_path(neighbors: List[List[int]], start=0, end=None) -> List[in
 
 
 with open('ditch.in') as read:
-    path_num, intersection_num = [int(i) for i in read.readline().split()]
-    inter_neighbors = [[0 for _ in range(intersection_num)] for _ in range(intersection_num)]
+    path_num, int_num = [int(i) for i in read.readline().split()]
+    graph = [[0 for _ in range(int_num)] for _ in range(int_num)]
     for _ in range(path_num):
-        path = [int(i) for i in read.readline().split()]
-        inter_neighbors[path[0] - 1][path[1] - 1] += path[2]  # += for possibly multiple pipes from same locations
+        start, end, flow = [int(i) for i in read.readline().split()]
+        # += for possibly multiple pipes from same locations
+        graph[start - 1][end - 1] += flow
 
 max_flow = 0
 while True:
-    path = directed_good_path(inter_neighbors)
+    path = directed_good_path(graph)
     if not path:  # frick it, no more good paths
         break
     flow = float('inf')
     for v, p in enumerate(path[:-1]):  # calc the flow for this path
-        flow = min(flow, inter_neighbors[p][path[v + 1]])
+        flow = min(flow, graph[p][path[v + 1]])
     max_flow += flow
     # update the graph with the new flow
     for v, p in enumerate(path[:-1]):
-        inter_neighbors[p][path[v + 1]] -= flow
+        graph[p][path[v + 1]] -= flow
         # no idea why i have to do the reverse, i'll look into it later lol
-        inter_neighbors[path[v + 1]][p] += flow
+        graph[path[v + 1]][p] += flow
 
 print(max_flow)
 with open('ditch.out', 'w') as written:

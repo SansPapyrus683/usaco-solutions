@@ -1,6 +1,6 @@
 /*
 ID: kevinsh4
-TASK: shuttle
+TASK: milk6
 LANG: C++
 */
 #include <iostream>
@@ -18,7 +18,7 @@ int main() {
     int board_len;
     std::ifstream("shuttle.in") >> board_len;
 
-    int pos = true;
+    bool pos = true;
     vector<int> diffs;
     for (int i = 1; i <= board_len; i++) {
         for (int j = 0; j < i; j++) {
