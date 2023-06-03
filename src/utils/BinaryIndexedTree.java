@@ -9,6 +9,7 @@ public class BinaryIndexedTree {
     private final int[] treeThing;
     private final int[] actualArr;
     private final int size;
+
     public BinaryIndexedTree(int size) {
         treeThing = new int[size + 1];  // to make stuff easier we'll just make it 1-indexed
         actualArr = new int[size];

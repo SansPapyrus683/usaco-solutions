@@ -1,4 +1,4 @@
-package official.o2013.jan.bronze.cowLabor;
+package official.o2013.jan.bronze.paint;
 
 import java.io.*;
 import java.util.*;

@@ -12,6 +12,7 @@ public class MinSegmentTree {
     private final int[] segtree;
     private final int len;
     private final Comparator<Integer> cmp;
+
     public MinSegmentTree(int len, Comparator<Integer> cmp) {  // constructs the thing kinda like an array
         this.len = len;
         this.cmp = cmp;
