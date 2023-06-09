@@ -60,7 +60,7 @@ class DisjointSets {
 
 /**
  * 2022 jan gold
- * (input omitted due to length)
+ * (input omitted bc length)
  */
 int main() {
     int farm_num;

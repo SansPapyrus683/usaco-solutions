@@ -1,4 +1,4 @@
-# 2021 us open silver (input ommitted due to length)
+# 2021 us open silver (input ommitted bc length)
 from itertools import combinations_with_replacement, permutations
 
 for _ in range(int(input())):
@@ -9,11 +9,9 @@ for _ in range(int(input())):
     """
     so like the editorial says
     we can put 0 in the things and then organize the numbers as follows
-    0 -> 0 + A
-    B -> B + A
-    C -> C + A
-    B + C -> A + B + C
-    notice that like we can get A if we have any pair (which we do because we have at least 5 numbers w/ the 0)
+    0 -> 0 + A, B -> B + A, C -> C + A, and B + C -> A + B + C
+    notice that like we can get A if we have any pair
+    like B -> B + A -> we get A, yeah yeah
     we can deduce a possibility for the individual variables through pure brute force
     """
     arr = sorted([0] + arr)

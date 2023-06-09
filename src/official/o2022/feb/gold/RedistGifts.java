@@ -3,7 +3,7 @@ package official.o2022.feb.gold;
 import java.io.*;
 import java.util.*;
 
-// 2022 feb gold (input omitted due to length)
+// 2022 feb gold (input omitted bc length)
 public class RedistGifts {
     public static void main(String[] args) throws IOException {
         BufferedReader read = new BufferedReader(new InputStreamReader(System.in));

@@ -9,7 +9,7 @@ using std::vector;
 
 constexpr int MAX_COWS = 5e6;
 
-/** 2022 dec silver (sample input omitted due to length) */
+/** 2022 dec silver (sample input omitted bc length) */
 int main() {
     vector<bool> is_prime(MAX_COWS + 1, true);
     is_prime[0] = false;  // for purposes of this problem, 1 can be a prime

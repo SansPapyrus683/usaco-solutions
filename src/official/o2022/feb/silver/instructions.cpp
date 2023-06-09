@@ -25,7 +25,7 @@ vector<pair<Point, int>> subset_sums(const vector<Point>& points) {
     return all_points;
 }
 
-// 2022 feb gold (input ommitted due to length)
+// 2022 feb gold (input ommitted bc length)
 int main() {
     int instruction_num;
     std::cin >> instruction_num;

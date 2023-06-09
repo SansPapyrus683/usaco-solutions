@@ -28,7 +28,7 @@ vector<Pos> neighbors(const Pos& at, int side) {
 
 /**
  * 2020 dec gold
- * (sample input ommitted due to length)
+ * (sample input ommitted bc length)
  */
 int main() {
     int side;

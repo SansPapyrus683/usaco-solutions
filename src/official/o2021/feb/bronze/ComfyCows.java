@@ -3,7 +3,7 @@ package official.o2021.feb.bronze;
 import java.io.*;
 import java.util.*;
 
-// 2021 feb bronze (input omitted due to length)
+// 2021 feb bronze (input omitted bc length)
 public class ComfyCows {
     private static final int COMFORT_THRESHOLD = 3;
     public static void main(String[] args) throws IOException {

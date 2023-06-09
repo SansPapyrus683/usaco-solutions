@@ -3,7 +3,7 @@ package official.o2022.usopen.gold;
 import java.io.*;
 import java.util.*;
 
-// 2022 us open gold (sample input omitted due to length)
+// 2022 us open gold (sample input omitted bc length)
 public class AppleCatching {
     public static void main(String[] args) throws IOException {
         BufferedReader read = new BufferedReader(new InputStreamReader(System.in));

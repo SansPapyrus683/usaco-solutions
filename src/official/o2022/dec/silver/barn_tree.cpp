@@ -8,7 +8,7 @@ using std::cout;
 using std::endl;
 using std::vector;
 
-/** 2022 dec silver (input omitted due to length) */
+/** 2022 dec silver (input omitted bc length) */
 int main() {
     int barn_num;
     std::cin >> barn_num;

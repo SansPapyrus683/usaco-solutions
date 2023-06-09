@@ -3,7 +3,7 @@ package official.o2021.feb.silver;
 import java.io.*;
 import java.util.*;
 
-// 2021 feb silver (input omitted due to length)
+// 2021 feb silver (input omitted bc length)
 public class Comfort {
     public static void main(String[] args) throws IOException {
         long start = System.currentTimeMillis();
