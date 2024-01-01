@@ -37,7 +37,7 @@ def directed_good_path(
     return full_path[::-1]
 
 
-with open('milk6.in') as read:
+with open("milk6.in") as read:
     house_num, truck_num = [int(i) for i in read.readline().split()]
     graph = [[0 for _ in range(house_num)] for _ in range(house_num)]
     routes = []
@@ -52,7 +52,7 @@ while True:
     path = directed_good_path(graph)
     if not path:
         break
-    flow = float('inf')
+    flow = float("inf")
     for v, p in enumerate(path[:-1]):
         flow = min(flow, graph[p][path[v + 1]])
     max_flow += flow
@@ -76,7 +76,7 @@ for v, r in enumerate(routes):
         shutdown.append(v)
 
 actual_flow = (max_flow - len(shutdown)) // truck_num
-with open('milk6.out', 'w') as written:
+with open("milk6.out", "w") as written:
     print(actual_flow, len(shutdown), file=written)
     if shutdown:
-        print('\n'.join(str(i + 1) for i in shutdown), file=written)
+        print("\n".join(str(i + 1) for i in shutdown), file=written)
