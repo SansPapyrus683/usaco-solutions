@@ -3,6 +3,7 @@ package official.o2023.dec.bronze;
 import java.io.*;
 import java.util.*;
 
+/** 2023 dec bronze (sample input omitted due to length) */
 public class FJFarms {
     static class Plant {
         public int height;

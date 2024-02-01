@@ -3,7 +3,7 @@ package official.o2022.usopen.bronze;
 import java.io.*;
 import java.util.*;
 
-// 2022 us open bronze (input omitted bc length)
+/** 2022 us open bronze (input omitted bc length) */
 public class Alchemy {
     // global variables used because i can't be bothered to make a separate class
     private static int[] metals;

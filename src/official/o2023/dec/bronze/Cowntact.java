@@ -3,6 +3,13 @@ package official.o2023.dec.bronze;
 import java.io.*;
 import java.util.*;
 
+/**
+ * 2023 dec bronze
+ * 5
+ * 11111 should output 1
+ * 6
+ * 011101 should output 4
+ */
 public class Cowntact {
     public static void main(String[] args) throws IOException {
         BufferedReader read = new BufferedReader(new InputStreamReader(System.in));

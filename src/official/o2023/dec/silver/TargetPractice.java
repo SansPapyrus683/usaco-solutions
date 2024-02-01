@@ -3,6 +3,12 @@ package official.o2023.dec.silver;
 import java.io.*;
 import java.util.*;
 
+/**
+ * 2023 dec silver
+ * 3 7
+ * 0 -1 1
+ * LFFRFRR should output 3
+ */
 public class TargetPractice {
     public static void main(String[] args) throws IOException {
         BufferedReader read = new BufferedReader(new InputStreamReader(System.in));

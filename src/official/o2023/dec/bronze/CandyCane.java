@@ -2,6 +2,13 @@ package official.o2023.dec.bronze;
 
 import java.io.*;
 import java.util.*;
+
+/**
+ * 2023 dec bronze
+ * 3 2
+ * 3 2 5
+ * 6 1 should output 7, 2, and 7, each on a new line
+ */
 public class CandyCane {
     public static void main(String[] args) throws IOException {
         BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
