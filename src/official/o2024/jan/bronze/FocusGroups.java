@@ -44,7 +44,7 @@ public class FocusGroups {
                 }
             }
 
-            if (likeable.isEmpty()) {
+            if (likeable.length() == 0) {
                 System.out.println(-1);
             } else {
                 likeable.setLength(likeable.length() - 1);

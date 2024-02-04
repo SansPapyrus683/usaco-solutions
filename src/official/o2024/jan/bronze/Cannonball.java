@@ -31,6 +31,8 @@ public class Cannonball {
         int at = start;
         int vel = 1;
         Set<Integer> broken = new HashSet<>();
+        int[] prevVels = new int[locNum];
+        Arrays.fill(prevVels, Integer.MAX_VALUE);
         while (0 <= at && at < locNum) {
             if (types[at]) {
                 if (Math.abs(vel) >= strength[at]) {
@@ -39,6 +41,11 @@ public class Cannonball {
             } else {
                 vel = -vel + strength[at] * (vel < 0 ? 1 : -1);
             }
+            // not sure if checking before or after is more correct
+            if (prevVels[at] == vel) {
+                break;
+            }
+            prevVels[at] = vel;
             at += vel;
         }
 
