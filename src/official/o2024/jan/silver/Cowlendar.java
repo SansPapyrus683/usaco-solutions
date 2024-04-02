@@ -29,7 +29,7 @@ public class Cowlendar {
         List<Long> firstFour = new ArrayList<>();
         TreeSet<Long> candidates = new TreeSet<>();
         for (long m : months) {
-            firstFour.add(m - months.first());
+            firstFour.add(m);
             if (firstFour.size() == 4) {
                 break;
             }
