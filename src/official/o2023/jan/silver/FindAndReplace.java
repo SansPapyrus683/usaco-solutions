@@ -3,6 +3,7 @@ package official.o2023.jan.silver;
 import java.io.*;
 import java.util.*;
 
+/** 2023 jan silver (input omitted due to length */
 public class FindAndReplace {
     public static void main(String[] args) throws IOException {
         BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
