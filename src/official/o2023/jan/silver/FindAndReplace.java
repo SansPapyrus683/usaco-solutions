@@ -67,20 +67,16 @@ public class FindAndReplace {
                 compSize[id]++;
             }
 
-            Set<Integer> fromChars = new HashSet<>();
-            for (int c : from) {
-                fromChars.add(c);
-            }
             int minReplaces = 0;
+            boolean pureCycle = false;
+            boolean cycleWithEnds = false;
             for (int i = 0; i < cycSize.size(); i++) {
                 if (cycSize.get(i) > 1) {
                     if (compSize[i] == cycSize.get(i)) {
-                        if (fromChars.size() >= mappings.length) {
-                            valid = false;
-                            break;
-                        }
+                        pureCycle = true;
                         minReplaces += cycSize.get(i) + 1;
                     } else {
+                        cycleWithEnds = true;
                         minReplaces += compSize[i];
                     }
                 } else {
@@ -88,6 +84,11 @@ public class FindAndReplace {
                 }
             }
 
+            Set<Integer> fromChars = new HashSet<>();
+            for (int c : from) {
+                fromChars.add(c);
+            }
+            valid = fromChars.size() < mappings.length || !pureCycle || cycleWithEnds;
             System.out.println(valid ? minReplaces : -1);
         }
     }
