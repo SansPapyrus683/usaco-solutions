@@ -8,6 +8,7 @@ using std::cout;
 using std::endl;
 using std::vector;
 
+/** 2020 feb bronze */
 int main() {
     std::ifstream read("breedflip.in");
     int cow_num;

@@ -2,6 +2,7 @@ package official.o2020.feb.bronze.billNyeFam;
 
 import java.io.*;
 
+/** 2020 feb bronze */
 public class BreedFlip {
     public static void main(String[] args) throws IOException {
         BufferedReader read = new BufferedReader(new FileReader("breedflip.in"));
