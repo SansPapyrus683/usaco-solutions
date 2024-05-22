@@ -2,8 +2,6 @@
 #include <vector>
 #include <algorithm>
 
-// #include "debugging.h"
-
 using std::cout;
 using std::endl;
 using std::vector;
@@ -60,5 +58,6 @@ int main() {
             valid_moves += odd_amts[1].second;
         }
     }
+
     cout << valid_moves << endl;
 }
