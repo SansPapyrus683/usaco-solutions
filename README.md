@@ -1,4 +1,4 @@
-# USACOSols
+# usaco solutions
 
 so this is my USACO repo with all the solutions that i've either finished or just given up on
 and copied the solution lol  
