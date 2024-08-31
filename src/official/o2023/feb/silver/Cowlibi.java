@@ -3,6 +3,7 @@ package official.o2023.feb.silver;
 import java.io.*;
 import java.util.*;
 
+// 2023 feb silver
 public class Cowlibi {
     private static class Loc implements Comparable<Loc> {
         public int x;

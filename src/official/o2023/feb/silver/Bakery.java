@@ -3,6 +3,7 @@ package official.o2023.feb.silver;
 import java.io.*;
 import java.util.*;
 
+// 2023 feb silver
 public class Bakery {
     private static class Friend {
         public int cookieNum;
