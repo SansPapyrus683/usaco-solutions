@@ -50,10 +50,10 @@ public class MooRouteII {
 
         final int start = 0;
         Set<Pair<Integer, Integer>> visited = new HashSet<>();
-        ArrayDeque<Pair<Integer, Integer>> queue = new ArrayDeque<>();
-        queue.add(new Pair<>(start, -layovers[start]));  // hack to get past the no initial layover thing
-        while (!queue.isEmpty()) {
-            Pair<Integer, Integer> curr = queue.poll();
+        ArrayDeque<Pair<Integer, Integer>> frontier = new ArrayDeque<>();
+        frontier.add(new Pair<>(start, -layovers[start]));  // hack to get past the no initial layover thing
+        while (!frontier.isEmpty()) {
+            Pair<Integer, Integer> curr = frontier.poll();
             int at = curr.first;
             int time = curr.second;
             // lol.
@@ -64,7 +64,7 @@ public class MooRouteII {
                 for (Pair<Integer, Integer> f : fLists) {
                     if (!visited.contains(f)) {
                         visited.add(f);
-                        queue.add(f);
+                        frontier.add(f);
                     }
                 }
             }
