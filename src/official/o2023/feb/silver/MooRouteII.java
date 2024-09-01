@@ -45,7 +45,8 @@ public class MooRouteII {
             }
             flights.get(from).get(fromTime).add(new Pair<>(to, toTime));
         }
-        int[] layovers = Arrays.stream(read.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
+        int[] layovers = Arrays.stream(read.readLine().split(" "))
+                .mapToInt(Integer::parseInt).toArray();
         assert layovers.length == airportNum;
 
         final int start = 0;
