@@ -13,13 +13,15 @@ public class MinSegmentTree {
     private final int len;
     private final Comparator<Integer> cmp;
 
-    public MinSegmentTree(int len, Comparator<Integer> cmp) {  // constructs the thing kinda like an array
+    // constructs the thing kinda like an array
+    public MinSegmentTree(int len, Comparator<Integer> cmp) {
         this.len = len;
         this.cmp = cmp;
         segtree = new int[len * 2];  // note: we won't use index 0
     }
 
-    public MinSegmentTree(int[] arr, Comparator<Integer> cmp) {  // constructs the thing with initial elements as well
+    // constructs the thing with initial elements as well
+    public MinSegmentTree(int[] arr, Comparator<Integer> cmp) {
         this(arr.length, cmp);
         for (int i = 0; i < arr.length; i++) {
             set(i, arr[i]);
