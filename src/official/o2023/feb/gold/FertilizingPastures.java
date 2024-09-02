@@ -31,81 +31,85 @@ public class FertilizingPastures {
 class Pastures {
     private final List<Integer>[] neighbors;
     private final int[] growthRates;
-    private final int start;
 
-    private final int[] subSizes;
-    private final int[] deepest;
-    private final long[] subSums;
-    private final long[][] minFertilizer;
+    private static class PastureData {
+        public long[] minFertilizer;
+        public long fertSum;
+        public int subPastureNum;
+        public int deepest;
+
+        public PastureData(long[] minFertilizer, long fertSum, int subPastureNum, int deepest) {
+            this.minFertilizer = minFertilizer;
+            this.fertSum = fertSum;
+            this.subPastureNum = subPastureNum;
+            this.deepest = deepest;
+        }
+    }
+    private final PastureData rootData;
 
     public Pastures(List<Integer>[] neighbors, int[] growthRates, int start) {
         this.neighbors = neighbors;
         this.growthRates = growthRates;
-        this.start = start;
 
-        this.subSizes = new int[neighbors.length];
-        this.deepest = new int[neighbors.length];
-        this.subSums = new long[neighbors.length];
-        this.minFertilizer = new long[neighbors.length][2];
-        processPastures(start, -1, 0);
+        rootData = processPastures(start, -1, 0);
     }
 
-    private void processPastures(int at, int prev, int depth) {
-        subSums[at] = growthRates[at];
-        subSizes[at] = 1;
-        deepest[at] = depth;
-        List<Integer> kids = new ArrayList<>();
+    private PastureData processPastures(int at, int prev, int depth) {
+        PastureData pasture = new PastureData(new long[2], growthRates[at], 1, depth);
+        List<PastureData> kids = new ArrayList<>();
         for (int n : neighbors[at]) {
             if (n != prev) {
-                processPastures(n, at, depth + 1);
-                subSums[at] += subSums[n];
-                subSizes[at] += subSizes[n];
-                kids.add(n);
-                deepest[at] = Math.max(deepest[at], deepest[n]);
+                PastureData kid = processPastures(n, at, depth + 1);
+                pasture.fertSum += kid.fertSum;
+                pasture.subPastureNum += kid.subPastureNum;
+                pasture.deepest = Math.max(pasture.deepest, kid.deepest);
+                kids.add(kid);
             }
         }
         if (kids.isEmpty()) {
-            return;
+            return pasture;
         }
 
         // WHAT?????????
-        kids.sort(Comparator.comparingDouble(k -> -(double) subSums[k] / subSizes[k]));
+        kids.sort(Comparator.comparingDouble(k -> -(double) k.fertSum / k.subPastureNum));
         int time = 1;
         long[] sumSuff = new long[kids.size()];
         int ind = 0;
-        for (int k : kids) {
-            sumSuff[ind++] = subSums[k];
-            minFertilizer[at][0] += minFertilizer[k][0] + subSums[k] * time;
-            time += (subSizes[k] - 1) * 2 + 2;
+        for (PastureData k : kids) {
+            sumSuff[ind++] = k.fertSum;
+            pasture.minFertilizer[0] += k.minFertilizer[0] + k.fertSum * time;
+            time += (k.subPastureNum - 1) * 2 + 2;
         }
         for (int i = kids.size() - 2; i >= 0; i--) {
             sumSuff[i] += sumSuff[i + 1];
         }
 
-        minFertilizer[at][1] = Long.MAX_VALUE;
+        pasture.minFertilizer[1] = Long.MAX_VALUE;
         int finalTime = time;
         time = 1;
         for (int i = 0; i < kids.size(); i++) {
-            int k = kids.get(i);
-            int travTime = (subSizes[k] - 1) * 2 + 2;
-            if (deepest[k] != deepest[at]) {
+            PastureData k = kids.get(i);
+            int travTime = (k.subPastureNum - 1) * 2 + 2;
+            if (k.deepest != pasture.deepest) {
                 time += travTime;
                 continue;
             }
-            long val = minFertilizer[at][0] - minFertilizer[k][0] + minFertilizer[k][1];
-            val -= travTime * (sumSuff[i] - subSums[k]) + subSums[k] * time;
-            val += (finalTime - travTime) * subSums[k];
-            minFertilizer[at][1] = Math.min(minFertilizer[at][1], val);
+            long val = pasture.minFertilizer[0] - k.minFertilizer[0] + k.minFertilizer[1];
+            val -= travTime * (sumSuff[i] - k.fertSum) + k.fertSum * time;
+            val += (finalTime - travTime) * k.fertSum;
+            pasture.minFertilizer[1] = Math.min(pasture.minFertilizer[1], val);
             time += travTime;
         }
+
+        return pasture;
     }
 
     public int minTime(boolean mustLoop) {
-        int rawAmt = 2 * (subSizes[start] - 1);
-        return mustLoop ? rawAmt : rawAmt - Arrays.stream(deepest).max().getAsInt();
+        int rawAmt = 2 * (rootData.subPastureNum - 1);
+        return mustLoop ? rawAmt : rawAmt - rootData.deepest;
     }
 
     public long minFertilizer(boolean mustLoop) {
-        return minFertilizer[start][mustLoop ? 0 : 1];
+        return rootData.minFertilizer[mustLoop ? 0 : 1];
     }
 }
