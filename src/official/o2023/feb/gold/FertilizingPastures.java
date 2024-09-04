@@ -3,6 +3,7 @@ package official.o2023.feb.gold;
 import java.io.*;
 import java.util.*;
 
+// 2023 feb gold
 public class FertilizingPastures {
     public static void main(String[] args) throws IOException {
         BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
