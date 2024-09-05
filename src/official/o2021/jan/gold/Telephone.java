@@ -21,7 +21,8 @@ public class Telephone {
         int typeNum = Integer.parseInt(initial.nextToken());
 
         // all types are 1-indexed
-        int[] types = Arrays.stream(read.readLine().split(" ")).mapToInt(t -> Integer.parseInt(t) - 1).toArray();
+        int[] types = Arrays.stream(read.readLine().split(" "))
+                .mapToInt(t -> Integer.parseInt(t) - 1).toArray();
 
         HashSet<Integer>[] communicatable = new HashSet[typeNum];
         for (int t = 0; t < typeNum; t++) {
