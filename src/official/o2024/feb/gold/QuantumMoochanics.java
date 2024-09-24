@@ -3,6 +3,7 @@ package official.o2024.feb.gold;
 import java.io.*;
 import java.util.*;
 
+/** 2024 feb gold */
 public class QuantumMoochanics {
     private static class CollideTime implements Comparable<CollideTime> {
         public long time;
