@@ -3,7 +3,7 @@ package official.o2013.usopen.silver.cowClownCar;
 import java.io.*;
 import java.util.*;
 
-// 2013 silver us open
+/** 2013 silver us open */
 public class Fuel {
     private static long start = System.currentTimeMillis();
     public static void main(String[] args) throws IOException {
