@@ -3,6 +3,7 @@ package official.o2024.usopen.bronze;
 import java.io.*;
 import java.util.*;
 
+/** 2024 us open bronze */
 public class FavPerm {
     public static void main(String[] args) throws IOException {
         BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
