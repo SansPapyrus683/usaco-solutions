@@ -1,4 +1,4 @@
-package official.o2017.feb.plat.crushedCows;
+package official.o2017.feb.plat.minCross;
 
 import java.io.*;
 
