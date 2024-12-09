@@ -9,10 +9,6 @@ LANG: C++
 #include <set>
 #include <vector>
 
-#if __has_include("debugging.hpp")
-#include "debugging.hpp"
-#endif
-
 using std::cout;
 using std::endl;
 using std::vector;
