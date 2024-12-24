@@ -3,6 +3,7 @@ package official.o2024.dec.silver;
 import java.io.*;
 import java.util.Arrays;
 
+/** 2024 dec silver */
 public class CakeGame {
     public static void main(String[] args) throws IOException {
         BufferedReader read = new BufferedReader(new InputStreamReader(System.in));

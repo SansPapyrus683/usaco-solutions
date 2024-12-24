@@ -9,6 +9,7 @@ using std::endl;
 using std::pair;
 using std::vector;
 
+/** 2024 dec silver */
 int main() {
     int test_num;
     std::cin >> test_num;
