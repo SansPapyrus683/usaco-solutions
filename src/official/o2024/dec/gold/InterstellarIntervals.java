@@ -15,15 +15,12 @@ public class InterstellarIntervals {
 
         TreeSet<Integer> blue = new TreeSet<>(Collections.singletonList(-1));
         TreeSet<Integer> red = new TreeSet<>(Collections.singletonList(-1));
-        int[] blueNum = new int[len + 1];
         for (int i = 0; i < len; i++) {
             if (must.charAt(i) == 'B') {
                 blue.add(i);
-                blueNum[i + 1]++;
             } else if (must.charAt(i) == 'R') {
                 red.add(i);
             }
-            blueNum[i + 1] += blueNum[i];
         }
 
         long[] dp = new long[len + 1];
