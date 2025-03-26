@@ -1,3 +1,5 @@
+package official.o2025.feb.silver;
+
 import java.io.*;
 import java.util.*;
 
