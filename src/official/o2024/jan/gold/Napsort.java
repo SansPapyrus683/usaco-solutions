@@ -37,23 +37,16 @@ public class Napsort {
                 }
                 Arrays.sort(events, Arrays::compare);
 
-                Deque<Integer> bessie = new ArrayDeque<>();
-                Deque<Integer> helper = new ArrayDeque<>();
-                for (int i = 0; i < events.length; i++) {
-                    (events[i][1] == 1 ? helper : bessie).addLast(i);
-                }
-
-                while (!bessie.isEmpty()) {
-                    while (!helper.isEmpty() && bessie.peek() > helper.peek()) {
-                        helper.pop();
-                    }
-                    bessie.pop();
-                    if (!helper.isEmpty()) {
-                        helper.pop();
+                int debt = 0;
+                for (int i = 0; i < events.length - 1; i++) {
+                    if (events[i][1] == 0) {
+                        debt--;
+                    } else if (events[i][1] == 1) {
+                        debt = Math.min(debt + 1, 0);
                     }
                 }
 
-                if (helper.isEmpty()) {
+                if (debt < 0) {
                     valid = mid;
                     hi = mid - 1;
                 } else {
