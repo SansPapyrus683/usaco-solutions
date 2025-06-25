@@ -18,6 +18,7 @@ struct Path {
     int enjoyment;
 };
 
+/** 2025 us open silver */
 int main() {
     int wp_num; // short for waypoints
     std::cin >> wp_num;
