@@ -19,5 +19,3 @@ and snake_case for python and c++ (though there's like basically no c++ solution
 * i have some weak input validation, but that's just for my debugging, you don't have to worry about it
 * i also learned that java package names can't have capital letters, but it's not like anyone's using this lol
 * another thing i realized after coding a ton of dijkstra's sols is that my priority queues are coded wrong, but they still get ac'd
-
-<a href="javascript:alert(1)">Click</a>
