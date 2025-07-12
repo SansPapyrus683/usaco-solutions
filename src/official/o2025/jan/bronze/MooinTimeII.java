@@ -3,7 +3,7 @@ package official.o2025.jan.bronze;
 import java.io.*;
 import java.util.*;
 
-public class MooinTime {
+public class MooinTimeII {
     public static void main(String[] args) throws IOException {
         BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
         int len = Integer.parseInt(read.readLine());
